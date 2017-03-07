@@ -1,5 +1,11 @@
 package negozioLogika;
 
-public class Mapa {
+import java.util.ArrayList;
 
+public class Mapa {
+	//Atributoak
+	ArrayList<ArrayList<Tile>> jokMapa= new ArrayList<ArrayList<Tile>>();
+	//Eraikitzailea
+	
+	//Metodoak
 }
