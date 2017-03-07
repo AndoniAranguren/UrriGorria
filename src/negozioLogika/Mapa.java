@@ -1,11 +1,57 @@
 package negozioLogika;
 
-import java.util.ArrayList;
-
 public class Mapa {
-	//Atributoak
-	//ArrayList<ArrayList<Tile>> jokMapa= new ArrayList<ArrayList<Tile>>();
-	//Eraikitzailea
+	//Atributuak
+	private static int Tamaina=10;
+	private Tile[][] jokalariMapa;
+	String jabea;
 	
+	//Eraikitzailea
+	public Mapa(String pIzena){
+		jabea= pIzena;
+		jokalariMapa= new Tile[Tamaina][Tamaina];
+		this.urezBete(jokalariMapa);
+	}
+		
 	//Metodoak
+	private void urezBete(Tile[][] pMap){
+		for(int Y=0;Y<=Tamaina; Y++){
+			for(int X=0;X<=Tamaina; X++){
+				pMap[Y][X]= new UraTile(jabea,Y,X);
+			}
+		}
+	}
+	
+	public void itsasontziaIpiniNahiDa(Itsasontzia pOntzi, int pX, int pY, char pNorabidea){
+		if(this.posizioEgokia(pOntzi.luzeera(), pX, pY, pNorabidea)){
+			Kontsola.komandoaLortu("itsasontziaIpini").exekutatu(this, pOntzi, pX, pY, pNorabidea);
+		}//else doSomething?
+	}
+	
+	private boolean posizioEgokia(int pOntzi.luzeera, int pX, int pY, char pNorabidea){
+		int xKont,yKont,luzeeraKont;
+		xKont=pX;
+		yKont=pY;
+		luzeeraKont=pOntzi.luzeeraEman();
+		boolean egokia,konprobazioakFalta=true;
+		
+		while (konprobazioakFalta){
+			egokia=this.jokalariMapa[pY][pX].posizioEgokia(pOntzi.luzeera());
+			luzeeraKont--;
+			
+			if(egokia){
+				konprobazioakFalta= (0!=luzeeraKont);
+				this.mugituNorabidera(xKont,yKont,pNorabidea);
+			}else konprobazioakFalta=egokia;
+		}
+		return egokia;
+	}
+	private void mugituNorabidera(int pX, int pY, char pNorabidea){
+		switch (pNorabidea){
+		case 'N': pY++; break;
+		case 'E': pX++; break;
+		case 'S': pY--; break;
+		case 'W': pX--; break;
+		default: break;
+	}
 }
