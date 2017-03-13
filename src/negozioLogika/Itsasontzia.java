@@ -14,7 +14,7 @@ public abstract class Itsasontzia {
 	}
 	//repararse (devuelve la lista de damagedtiles)
 	public ArrayList<ItsasontziTile> suntsitutakoTile(){
-		ArrayList<ItsasontziTile> lst=new ArrayList<ItsasontziTile>());
+		ArrayList<ItsasontziTile> lst=new ArrayList<ItsasontziTile>();
 		for(int i=0; i<lista.size();i++){
 			if (this.lista.get(i).suntsituta()) lst.add(this.lista.get(i));
 		}
