@@ -2,31 +2,47 @@ package negozioLogika;
 
 import java.util.ArrayList;
 
-public abstract class Itsasontzia {
-	protected ArrayList<ItsasontziTile> lista=new ArrayList<ItsasontziTile>();
-	private int ezkutua=0;
-	public Itsasontzia(){	}
-	
+import negozioLogika.ItsasontziTile;
 
-	//equipar escudo
-	public void ezkutuaIpini(){
-		this.ezkutua=200;
-	}
-	//repararse (devuelve la lista de damagedtiles)
-	public ArrayList<ItsasontziTile> suntsitutakoTile(){
-		ArrayList<ItsasontziTile> lst=new ArrayList<ItsasontziTile>();
-		for(int i=0; i<lista.size();i++){
-			if (this.lista.get(i).suntsituta()) lst.add(this.lista.get(i));
+public abstract class Itsasontzia {
+	private int luzera;
+	private int prezioa;
+	private ItsasontziTile[] tileLista;
+	public Itsasontzia(int pLuzera, int pPrezioa){
+		luzera = pLuzera;
+		prezioa = pPrezioa;
+		tileLista= new ItsasontziTile[luzera];
 		}
-		return lst;
+	public void itsasontziaKokatu(int x, int y, char norabidea){
+		//Mapan jada itsasontzia kokatu ahal dela begiratu dugu
+		for (int i=0;i<luzera;i++){
+			tileLista[i] = new ItsasontziTile(x, y, this);
+			if(norabidea=='N') y--;
+			if(norabidea=='S') y++;
+			if(norabidea=='E') x++;
+			if(norabidea=='W') x--;
+		}
 	}
 	
-	public boolean damageEzkutuari(int damage){
-		if (this.ezkutua==0) return false;
-		else{
-			this.ezkutua-=damage;
-			if (this.ezkutua<0) ezkutua=0;
-			return true;
+	public int getLuzera(){
+		return luzera;
+	}
+	
+	public void erasoaJaso(int x, int y){
+		for(int i=0;i<luzera;i++){
+			if(tileLista[i].kokalekuHauDa(x, y)){
+				tileLista[i].jo();
+				luzera--;
+			}
+			if(luzera==0) System.out.println("Hondoratuta!");
 		}
 	}
+	public int getPrezioa(){
+		return prezioa;
+	}
+	
+	public abstract void informazioaInprimatu();
+
 }
+
+
