@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Kontsola {
 	//Atributuak
 	private static Kontsola neureBurua;
-	ArrayList<Commands> komandoZerrenda= new ArrayList<Commands>();
+	ArrayList<Commands> komandoZerrenda= new ArrayList<Commands>(); //GERO DATU BASERA MUGITU
 	
 	//Eraikitzailea
 	public Kontsola(){
@@ -16,5 +16,12 @@ public class Kontsola {
 			neureBurua = new Kontsola();
 		}return neureBurua;
 	}
-	public void komandoaExekutatu(String pKomandoarenIzena)
+	public Commands komandoaLortu(String pKomandoa){
+		Commands emaitzaKom;
+		switch (pKomandoa){
+			case "CommandItsasontziaIpini":
+				return new CommandItsasontziaIpini();
+		}
+			
+	}
 }

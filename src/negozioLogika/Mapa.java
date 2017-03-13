@@ -24,34 +24,11 @@ public class Mapa {
 	
 	public void itsasontziaIpiniNahiDa(Itsasontzia pOntzi, int pX, int pY, char pNorabidea){
 		if(this.posizioEgokia(pOntzi.luzeera(), pX, pY, pNorabidea)){
-			Kontsola.komandoaLortu("itsasontziaIpini").exekutatu(this, pOntzi, pX, pY, pNorabidea);
+			
 		}//else doSomething?
 	}
 	
-	private boolean posizioEgokia(int pOntzi.luzeera, int pX, int pY, char pNorabidea){
-		int xKont,yKont,luzeeraKont;
-		xKont=pX;
-		yKont=pY;
-		luzeeraKont=pOntzi.luzeeraEman();
-		boolean egokia,konprobazioakFalta=true;
-		
-		while (konprobazioakFalta){
-			egokia=this.jokalariMapa[pY][pX].posizioEgokia(pOntzi.luzeera());
-			luzeeraKont--;
-			
-			if(egokia){
-				konprobazioakFalta= (0!=luzeeraKont);
-				this.mugituNorabidera(xKont,yKont,pNorabidea);
-			}else konprobazioakFalta=egokia;
-		}
-		return egokia;
-	}
-	private void mugituNorabidera(int pX, int pY, char pNorabidea){
-		switch (pNorabidea){
-		case 'N': pY++; break;
-		case 'E': pX++; break;
-		case 'S': pY--; break;
-		case 'W': pX--; break;
-		default: break;
+	public boolean posizioEgokia(int pX, int pY){
+		return this.jokalariMapa[pY][pX].posizioEgokia();
 	}
 }
