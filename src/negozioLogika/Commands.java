@@ -1,5 +1,7 @@
 package negozioLogika;
 
-public interface Commands {
-	public void exekutatu();
+public abstract class Commands {
+	public int turnoa;
+	public String fasea;
+	public void exekutatu(){}
 }

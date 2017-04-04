@@ -3,7 +3,7 @@ package negozioLogika;
 public class Fragata extends Itsasontzia {
 
 	public Fragata() {
-		super(1, 200);
+		super("Fragata");
 		// TODO Auto-generated constructor stub
 	}
 

@@ -16,12 +16,7 @@ public class Kontsola {
 			neureBurua = new Kontsola();
 		}return neureBurua;
 	}
-	public Commands komandoaLortu(String pKomandoa){
-		Commands emaitzaKom;
-		switch (pKomandoa){
-			case "CommandItsasontziaIpini":
-				return new CommandItsasontziaIpini();
-		}
-			
+	public void CommandSartu(Commands k){
+		komandoZerrenda.add(k);
 	}
 }

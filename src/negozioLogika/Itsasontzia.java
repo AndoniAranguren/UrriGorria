@@ -3,12 +3,12 @@ package negozioLogika;
 import negozioLogika.ItsasontziTile;
 
 public abstract class Itsasontzia {
-	public final int luzeera;
-	private int prezioa;
+	public final int luzeera,prezioa;
+	private int tileKont=0;
 	private ItsasontziTile[] tileLista;
-	public Itsasontzia(int pLuzera, int pPrezioa){
-		luzeera = pLuzera;
-		prezioa = pPrezioa;
+	public Itsasontzia(String pMota){
+		luzeera = ItsasontziFactory.getItsasontziFactory().luzeeraLortu(pMota);
+		prezioa = ItsasontziFactory.getItsasontziFactory().prezioaLortu(pMota);
 		tileLista= new ItsasontziTile[luzeera];
 		}
 	public void itsasontziaKokatu(int x, int y, char norabidea, String pJabea){
@@ -31,6 +31,10 @@ public abstract class Itsasontzia {
 	}
 	
 	public abstract void informazioaInprimatu();
+	public void tileGehitu(ItsasontziTile pTile) {
+		// TODO Auto-generated method stub
+		tileLista[tileKont]=pTile;
+	}
 
 }
 

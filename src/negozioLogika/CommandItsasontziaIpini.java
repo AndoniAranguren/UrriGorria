@@ -1,34 +1,20 @@
 package negozioLogika;
 
 public class CommandItsasontziaIpini extends Commands {
-	Jokalaria jokalari;
-	Itsasontzia ontzia;
+	String jokalari;
+	String ontzia;
 	int koordX, koordY;
 	char norabidea;
 	
-	public void exekutatu(Jokalaria pJ, Itsasontzia pOntzi, int pX, int pY, char pNorabidea){
-		jokalari=pJ;
-		ontzia=pOntzi;
-		koordX=pX;
-		koordY=pY;
-		norabidea=pNorabidea;
+	public void exekutatu(String pJ, String pOntzi, int pX, int pY, char pNorabidea){
 		if(konprobatu()){
-			Kontsola.komandoaLortu("CommandObjetuaKendu").exekutatu(jokalari,ontzia);
-			jokalari.itsasontziaJarri(pOntzi, int pX, int pY, char pNorabidea)
+			CommandObjetuaKendu k = new CommandObjetuaKendu();
+			k.exekutatu(jokalari, ontzia);
+			Partida.itsasontziaJarri(pOntzi, pX, pY, pNorabidea,jokalari);
 		}
 	}
 	private boolean konprobatu(){
-		return jokalari.kokatuDaiteke(x, y, luzera, norabidea);
-		
-	}
-	
-	private void mugituNorabidera(int pX, int pY, char pNorabidea){
-		switch (pNorabidea){
-		case 'N': pY++; break;
-		case 'E': pX++; break;
-		case 'S': pY--; break;
-		case 'W': pX--; break;
-		default: break;
-		}
+		int luzeera = ItsasontziFactory.getItsasontziFactory().createItsasontzia(ontzia).luzeera;
+		return Partida.kokatuDaiteke(koordX, koordY, luzeera, norabidea,jokalari);
 	}
 }

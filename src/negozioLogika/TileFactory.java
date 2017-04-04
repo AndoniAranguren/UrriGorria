@@ -12,7 +12,7 @@ public class TileFactory {
 		return nireTile;
 	}
 	public Tile createItsasontziTile(int x, int y, Itsasontzia pItsas, String pJabea){
-		Tile nireTile= new ItsasontziTile(x, y, pItsas, pJabea);
+		Tile nireTile= new ItsasontziTile(x, y, pJabea, pItsas);
 		return nireTile;
 	}
 }

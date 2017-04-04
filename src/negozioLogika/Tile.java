@@ -7,11 +7,13 @@ public abstract class Tile {
 	private int kontJok=0;
 	protected boolean kokatuAhalDa = true;
 	protected String identifikadorea="Tile";
+	
 	public Tile(int a, int b, String pJabea){
 		zut=a;
 		err=b;
 		ikusiAhal[kontJok]=pJabea;
 	}
+	
 	public void jo(String pErasotzaile, int pIndarra){
 		if(!this.ikusiAhalDu(pErasotzaile)) ikusiAhal[kontJok++]=pErasotzaile;
 		this.bizitzaAldatu(pIndarra);
@@ -39,6 +41,9 @@ public abstract class Tile {
 	}
 	public boolean kokatuDaiteke() {
 		return kokatuAhalDa;
+	}
+	public void kokatzekoGaitasunaKendu(){
+		kokatuAhalDa=false;
 	}
 	private void bizitzaAldatu(int pIndarra){}
 }
