@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-public class DendaGUI extends JPanel {
+public class ItsasontziaGUI extends JPanel {
 
 	JLabel jLabel1 = new JLabel();
 	JLabel jLabel6 = new JLabel();
@@ -24,7 +24,7 @@ public class DendaGUI extends JPanel {
 	ButtonGroup g1 = new ButtonGroup();
 	ButtonGroup g2 = new ButtonGroup();
 	
-	public DendaGUI() {
+	public ItsasontziaGUI() {
 		
 		
 		setLayout(new GridLayout(4, 3));

@@ -11,7 +11,7 @@ public class LehioaGUI extends JFrame {
 	
 	private static LehioaGUI nLehioa = null;
 	private TableroaGUI tableroa = new TableroaGUI();
-	private DendaGUI denda = new DendaGUI();
+	private ItsasontziaGUI denda = new ItsasontziaGUI();
 
 	private LehioaGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +33,7 @@ public class LehioaGUI extends JFrame {
 		return tableroa;
 	}
 
-	public DendaGUI getDenda() {
+	public ItsasontziaGUI getDenda() {
 		return denda;
 	}		
 }
