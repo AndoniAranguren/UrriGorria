@@ -11,8 +11,8 @@ public class TileFactory {
 		Tile nireTile= new UraTile(pJabea,x,y); 
 		return nireTile;
 	}
-	public Tile createItsasontziTile(int x, int y, Itsasontzia pItsas){
-		Tile nireTile= new ItsasontziTile(x, y, pItsas);
+	public Tile createItsasontziTile(int x, int y, Itsasontzia pItsas, String pJabea){
+		Tile nireTile= new ItsasontziTile(x, y, pItsas, pJabea);
 		return nireTile;
 	}
 }

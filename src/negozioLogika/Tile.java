@@ -3,10 +3,12 @@ package negozioLogika;
 public abstract class Tile {
 	private int zut;
 	private int err;
+	private String jabea;
 	private  boolean jota = false;
-	public Tile(int a, int b){
+	public Tile(int a, int b, String pJabea){
 		zut=a;
 		err=b;
+		jabea=pJabea;
 	}
 	public void jo(){
 		jota = true;

@@ -1,7 +1,5 @@
 package negozioLogika;
 
-import java.util.ArrayList;
-
 import negozioLogika.ItsasontziTile;
 
 public abstract class Itsasontzia {
@@ -13,10 +11,10 @@ public abstract class Itsasontzia {
 		prezioa = pPrezioa;
 		tileLista= new ItsasontziTile[luzera];
 		}
-	public void itsasontziaKokatu(int x, int y, char norabidea){
+	public void itsasontziaKokatu(int x, int y, char norabidea, String pJabea){
 		//Mapan jada itsasontzia kokatu ahal dela begiratu dugu
 		for (int i=0;i<luzera;i++){
-			tileLista[i] = new ItsasontziTile(x, y, this);
+			tileLista[i] = new ItsasontziTile(x, y, pJabea,this);
 			if(norabidea=='N') y--;
 			if(norabidea=='S') y++;
 			if(norabidea=='E') x++;
@@ -30,6 +28,7 @@ public abstract class Itsasontzia {
 	
 	public void erasoaJaso(int x, int y){
 		for(int i=0;i<luzera;i++){
+			if(!tileLista[i].jotaDago())
 			if(tileLista[i].kokalekuHauDa(x, y)){
 				tileLista[i].jo();
 				luzera--;
