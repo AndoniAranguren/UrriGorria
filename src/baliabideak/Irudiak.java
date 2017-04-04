@@ -1,6 +1,6 @@
 package baliabideak;
 
-import interfazeGrafikoa.LehioaGUI;
+import interfazeGrafikoa.LeihoaGUI;
 
 public class Irudiak {
 	

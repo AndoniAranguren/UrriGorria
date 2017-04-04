@@ -22,7 +22,7 @@ public class KasilaGUI extends JButton implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-		LehioaGUI.getLehioa().getTableroa().ontziakKokatu(this, kx, ky);
+		LeihoaGUI.getLehioa().getTableroa().ontziakKokatu(this, kx, ky);
 	}
 
 	@Override
