@@ -1,10 +1,8 @@
 package negozioLogika;
 
 public class UraTile extends Tile {
-	String jabea;
 	public UraTile(String pJabea, int a, int b) {
 		super(a, b, pJabea);
-		jabea = pJabea;
 		// TODO Auto-generated constructor stub
 	}
 	@Override

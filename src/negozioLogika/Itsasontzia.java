@@ -3,7 +3,7 @@ package negozioLogika;
 import negozioLogika.ItsasontziTile;
 
 public abstract class Itsasontzia {
-	private int luzera;
+	public final int luzeera;
 	private int prezioa;
 	private ItsasontziTile[] tileLista;
 	public Itsasontzia(int pLuzera, int pPrezioa){
@@ -23,17 +23,16 @@ public abstract class Itsasontzia {
 	}
 	
 	public int getLuzera(){
-		return luzera;
+		return luzeera;
 	}
 	
 	public void erasoaJaso(int x, int y){
-		for(int i=0;i<luzera;i++){
+		for(int i=0;i<luzeera;i++){
 			if(!tileLista[i].jotaDago())
 			if(tileLista[i].kokalekuHauDa(x, y)){
 				tileLista[i].jo();
-				luzera--;
 			}
-			if(luzera==0) System.out.println("Hondoratuta!");
+			if(this.suntzituta()) System.out.println("Hondoratuta!");
 		}
 	}
 	public int getPrezioa(){
