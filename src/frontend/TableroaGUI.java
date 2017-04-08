@@ -1,4 +1,4 @@
-package interfazeGrafikoa;
+package frontend;
 
 import java.awt.GridLayout;
 
@@ -31,8 +31,8 @@ public class TableroaGUI extends JPanel {
 
 	public void ontziakKokatu(KasilaGUI k, int x, int y){
 		
-		String ontzia = LeihoaGUI.getLehioa().getDenda().ontziaBueltatu();
-		String norabidea = LeihoaGUI.getLehioa().getDenda().norabideaBueltatu();
+		String ontzia = UrriGorriaUI.getLehioa().getOntzia().ontziaBueltatu();
+		String norabidea = UrriGorriaUI.getLehioa().getOntzia().norabideaBueltatu();
 		if(ontzia.equals("fragata") && kontF<4){
 			k.setIcon(new ImageIcon(k.getClass().getResource("/baliabideak/silver.png")));
 			kontF++;

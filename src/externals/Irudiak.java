@@ -1,6 +1,6 @@
-package baliabideak;
+package externals;
 
-import interfazeGrafikoa.LeihoaGUI;
+import frontend.UrriGorriaUI;
 
 public class Irudiak {
 	

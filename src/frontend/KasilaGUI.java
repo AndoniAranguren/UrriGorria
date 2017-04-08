@@ -1,4 +1,4 @@
-package interfazeGrafikoa;
+package frontend;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -22,7 +22,7 @@ public class KasilaGUI extends JButton implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-		LeihoaGUI.getLehioa().getTableroa().ontziakKokatu(this, kx, ky);
+		UrriGorriaUI.getLehioa().getTableroa().ontziakKokatu(this, kx, ky);
 	}
 
 	@Override

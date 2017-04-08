@@ -1,4 +1,4 @@
-package interfazeGrafikoa;
+package frontend;
 
 import java.awt.Color;
 import java.awt.GridLayout;
