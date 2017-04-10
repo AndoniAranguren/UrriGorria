@@ -3,7 +3,9 @@ package frontend;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class UrriGorriaUI extends JFrame {
+import negozioLogika.UGKonstanteak;
+
+public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	
 	private static final long serialVersionUID = 1L;
 	//private static UrriGorriaUI nLeihoa = null;
@@ -12,11 +14,12 @@ public class UrriGorriaUI extends JFrame {
 	private JPanel oraingoa;
 
 	public UrriGorriaUI() {
-		this.setTitle("Urri Gorria");
+		this.setTitle(IZENBURUA);
 		oraingoa = new PartidaZehaztu();
 		this.add(oraingoa);	
-		setBounds(100, 100, 475, 600);
+		setBounds(550, 350, 300, 150);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
 	}
 	
 	/*public static UrriGorriaUI getLehioa() {
