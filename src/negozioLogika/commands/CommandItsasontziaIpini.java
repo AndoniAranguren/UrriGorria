@@ -1,4 +1,7 @@
-package negozioLogika;
+package negozioLogika.commands;
+
+import negozioLogika.ItsasontziFactory;
+import negozioLogika.Partida;
 
 public class CommandItsasontziaIpini extends Commands {
 	String jokalari;

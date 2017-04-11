@@ -1,4 +1,6 @@
-package negozioLogika;
+package negozioLogika.commands;
+
+import negozioLogika.Partida;
 
 public class CommandObjetuaKendu {
 	String jokalaria;

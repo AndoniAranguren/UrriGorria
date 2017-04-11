@@ -2,6 +2,8 @@ package negozioLogika;
 
 import java.util.ArrayList;
 
+import negozioLogika.commands.Commands;
+
 public class Kontsola {
 	//Atributuak
 	private static Kontsola neureBurua;

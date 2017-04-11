@@ -3,7 +3,7 @@ package frontend;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import negozioLogika.UGKonstanteak;
+import negozioLogika.interfaces.UGKonstanteak;
 
 public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	

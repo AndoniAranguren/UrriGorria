@@ -1,4 +1,4 @@
-package negozioLogika;
+package negozioLogika.commands;
 
 public abstract class Commands {
 	public int turnoa;
