@@ -3,7 +3,7 @@ package negozioLogika;
 public abstract class Jokalariak {
 	String izena, fasea;
 	Mapa mapa;
-	//Inbentario inb;
+	Inbentarioa inb;
 	int dirua, jarritakoItsasontziak = 0;
 	Itsasontzia[] nireItsasontziak;
 	
@@ -26,6 +26,9 @@ public abstract class Jokalariak {
 	}
 	public void objektuaKendu(String pObjektua) {
 		// TODO Auto-generated method stub
-		
+		this.inb.objektuaKendu(pObjektua);
+	}
+	public void erasoaJaso(int x, int y, String nork, int indarra) {
+		this.mapa.erasoaJaso(x,y,nork,indarra);
 	}
 }

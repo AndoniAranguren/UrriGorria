@@ -46,4 +46,5 @@ public abstract class Tile {
 		kokatuAhalDa=false;
 	}
 	private void bizitzaAldatu(int pIndarra){}
+	
 }

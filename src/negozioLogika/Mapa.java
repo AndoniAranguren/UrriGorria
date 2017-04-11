@@ -68,4 +68,9 @@ public class Mapa {
 		return pItsasontzia;
 	}
 	
+	public void erasoaJaso(int x,int y,String nork,int indarra){
+		jokalariMapa[x][y].jo(nork,indarra);
+		
+	}
+	
 }
