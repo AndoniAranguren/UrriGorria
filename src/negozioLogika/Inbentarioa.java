@@ -6,17 +6,10 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 	
 	private ArrayList<Objektuak> objektuak;
 
-	public void objektuaKendu(String pObjektua){
-		boolean aurkitua=false;
-		int i=0;
-		while (!aurkitua&&i<objektuak.size()){
-			if (objektuak.get(i).izenBerdina(pObjektua)) aurkitua=true;
-			i++;
+	public void objektuakEman(String[] pObjektua, boolean pZer){
+		for (String objektuBakoitza : pObjektua) {
+			if(pZer){ 	this.objektuak.add(		ObjektuakFactory.getObjektuakFactory().createObjektua(objektuBakoitza));}
+			else{		this.objektuak.remove(	ObjektuakFactory.getObjektuakFactory().createObjektua(objektuBakoitza));}
 		}
-		if (aurkitua) this.objektuak.remove(i-1);
-	}
-	
-	public void objektuaGehitu(String pMota){
-		this.objektuak.add(ObjektuakFactory.getObjektuakFactory().createObjektua(pMota));
 	}
 }

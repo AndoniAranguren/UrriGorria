@@ -2,6 +2,6 @@ package negozioLogika;
 
 public interface StrategyEkipo {
 	
-	public void erabili(int a, int b);
+	public void erabili(int x, int y);
 	
 }

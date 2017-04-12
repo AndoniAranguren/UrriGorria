@@ -24,6 +24,7 @@ public abstract class Tile {
 		}
 		return "Ezezaguna";
 	}
+	//Galderak -------------------------
 	public boolean ikusiAhalDu(String pNork){
 		int ind=0;
 		boolean aurkituta=false;
@@ -33,17 +34,23 @@ public abstract class Tile {
 		}
 		return aurkituta;
 	}
-	public int getX(){
-		return zut;
+	public boolean posizioanDago(int pX,int pY){
+		return (zut==pX && err==pY);
 	}
-	public int getY(){
-		return err;
+	public boolean jabeaDa(String pJ){
+		return ikusiAhal[0]==pJ;
 	}
 	public boolean kokatuDaiteke() {
 		return kokatuAhalDa;
 	}
-	public void kokatzekoGaitasunaKendu(){
-		kokatuAhalDa=false;
+	public boolean equals(Tile pTile){
+		return (pTile.posizioanDago(zut, err) && pTile.jabeaDa(ikusiAhal[0]));
+	}
+	//---------------------------------------
+	public void kokatzekoGaitasunaEman(boolean pZer){
+		kokatuAhalDa=pZer;
 	}
 	private void bizitzaAldatu(int pIndarra){}
+
+
 }

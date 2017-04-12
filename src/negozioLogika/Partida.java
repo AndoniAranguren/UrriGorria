@@ -2,14 +2,17 @@ package negozioLogika;
 
 public class Partida {
 	private static Partida nPartida=null;
+	
 	private static Jokalariak[] jokalariLista;
 	private static int maxJok=2;
-	private int txanda;
-	private int iraupena;
+	
+	private static int fasea,txanda,iraupena=0;
+	
 	private Partida(){
 		jokalariLista = new Jokalaria[maxJok];
 		iraupena=0;
 	}
+	
 	public static synchronized Partida getPartida(){
 		if(nPartida==null){ nPartida = new Partida();}
 		return nPartida;
@@ -26,15 +29,43 @@ public class Partida {
 		}
 		return ind;
 	}
-	public static void itsasontziaJarri(String pOntzi, int pX, int pY, char pNorabidea, String pJokalaria) {
+	public static int[] egoeraLortu() {
 		// TODO Auto-generated method stub
-		jokalariLista[jokalariarenPosLortu(pJokalaria)].itsasontziaJarri(pOntzi, pX, pY, pNorabidea);
+		int[] egoera = new int[2];			//Komandoeta informazioa sartzeko gehienbat
+		egoera[0]=txanda;
+		egoera[1]=fasea;
+		egoera[2]=iraupena;
+		return egoera;
+	}
+	public static void itsasontziaJarri(String pJokalaria, String pOntzi, int pX, int pY, char pNorabidea, boolean pZer) {
+		// TODO Auto-generated method stub
+		jokalariLista[jokalariarenPosLortu(pJokalaria)].itsasontziaJarri(pOntzi, pX, pY, pNorabidea, pZer);
 	}
 	public static boolean kokatuDaiteke(int pX, int pY, int pLuzeera, char pNorabidea, String pJokalaria) {
 		// TODO Auto-generated method stub
 		return jokalariLista[jokalariarenPosLortu(pJokalaria)].kokatuDaiteke(pX, pY, pLuzeera, pNorabidea);
 	}
-	public static void objektuaKendu(String pJokalaria, String pObjektua){
-		jokalariLista[jokalariarenPosLortu(pJokalaria)].objektuaKendu(pObjektua);
+	public static int jokalariakDiruaDu(String pJokalaria, String pErosketa) {
+		// TODO Auto-generated method stub
+		return jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariakDiruaDu(pJokalaria,pErosketa);
+	}
+	public static String[] dendakIzakinakDitu(String pJokalaria, String pErosketa) {
+		// TODO Auto-generated method stub
+		return jokalariLista[jokalariarenPosLortu(pJokalaria)].dendakIzakinakDitu(pErosketa);
+	}
+
+	public static void jokalariariDiruaEman(String pJokalaria, int pPrezioa, boolean pZer) {
+		// TODO Auto-generated method stub
+		jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariariDiruaEman(pPrezioa, pZer);
+	}
+
+	public static void dendariObjektuakEman(String pJokalaria, String[] pObjektuak, boolean pZer) {
+		// TODO Auto-generated method stub
+		jokalariLista[jokalariarenPosLortu(pJokalaria)].dendariObjektuakEman(pObjektuak, pZer);
+	}
+
+	public static void jokalariariObjektuakEman(String pJokalaria, String[] pObjektuak, boolean pZer) {
+		// TODO Auto-generated method stub
+		jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariariObjektuakEman(pObjektuak, pZer);
 	}
 }

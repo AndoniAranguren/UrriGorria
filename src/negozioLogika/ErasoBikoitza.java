@@ -5,7 +5,7 @@ public class ErasoBikoitza implements StrategyArmak{
 	public ErasoBikoitza(int pIndarra){
 		this.indarra=pIndarra;
 	}
-	public void eraso(int a, int b) {
+	public void eraso(int x, int y, String nork, String nori, int indarra) {
 		
 	}
 

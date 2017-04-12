@@ -5,7 +5,7 @@ public class ErasoLineal implements StrategyArmak{
 	public ErasoLineal(int pIndarra){
 		this.indarra=pIndarra;
 	}
-	public void eraso(int a, int b) {
+	public void eraso(int x, int y, String nork, String nori, int indarra) {
 		
 	}
 

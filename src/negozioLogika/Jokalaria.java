@@ -1,6 +1,6 @@
 package negozioLogika;
 
 public class Jokalaria extends Jokalariak {
-	private void intsasontziaIpini(){
+	private void itsasontziaIpini(){
 	}
 }

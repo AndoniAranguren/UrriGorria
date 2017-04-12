@@ -4,11 +4,11 @@ import negozioLogika.Partida;
 
 public class CommandObjetuaKendu {
 	String jokalaria;
-	String ontzia;
-	public void exekutatu(String pJokalaria, String pOntzia) {
+	String[] objektua;
+	public void exekutatu(String pJokalaria, String[] pObjektua) {
 		// TODO Auto-generated method stub
 		jokalaria=pJokalaria;
-		ontzia=pOntzia;
-		Partida.objektuaKendu(jokalaria, ontzia);
+		objektua=pObjektua;
+		Partida.jokalariariObjektuakEman(jokalaria, objektua, false);
 	}
 }
