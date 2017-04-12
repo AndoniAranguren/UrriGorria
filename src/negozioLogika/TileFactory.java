@@ -7,12 +7,12 @@ public class TileFactory {
 		if(nTileFactory==null) nTileFactory = new TileFactory();
 		return nTileFactory;
 	}
-	public Tile createUraTile(String pJabea, int x, int y){
-		Tile nireTile= new UraTile(pJabea,x,y); 
+	public Tile createUraTile(String pJabea, int pX, int pY){
+		Tile nireTile= new UraTile(pJabea,pX,pY); 
 		return nireTile;
 	}
-	public Tile createItsasontziTile(int x, int y, Itsasontzia pItsas, String pJabea){
-		Tile nireTile= new ItsasontziTile(x, y, pJabea, pItsas);
+	public Tile createItsasontziTile(String pJabea, int pX, int pY, Itsasontzia pItsas){
+		Tile nireTile= new ItsasontziTile(pJabea, pX, pY, pItsas);
 		return nireTile;
 	}
 }

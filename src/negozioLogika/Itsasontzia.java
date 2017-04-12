@@ -6,8 +6,8 @@ import java.util.Iterator;
 import negozioLogika.ItsasontziTile;
 
 public abstract class Itsasontzia {
-	public final int luzeera,prezioa;
-	private final String mota;
+	protected final int luzeera,prezioa;
+	private final String mota,jabea=null;
 	private boolean suntsituta;
 	private ArrayList<ItsasontziTile> tileLista;
 	public Itsasontzia(String pMota){
@@ -26,13 +26,15 @@ public abstract class Itsasontzia {
 			if(norabidea=='W') x--;
 		}
 	}
-//	public int getLuzera(){
-//		return luzeera;
-//	}
-//	public int getPrezioa(){
-//		return prezioa;
-//	}
-	public abstract void informazioaInprimatu();
+	public void informazioaInprimatu() {
+		// TODO Auto-generated method stub
+		System.out.println("       Mota: "		+mota);
+		System.out.println("       Jabea: "		+jabea);
+		System.out.println("       Luzera: "	+luzeera);
+		System.out.println("       Prezioa: "	+prezioa);
+		System.out.println("       Suntsituta: "+suntsituta);
+
+	}
 	public void tileGehitu(ItsasontziTile pTile, boolean pZer) {
 		// TODO Auto-generated method stub
 		if(pZer){

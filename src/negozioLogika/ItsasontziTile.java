@@ -5,9 +5,9 @@ public class ItsasontziTile extends Tile {
 	private Itsasontzia itsasontzi;
 	private int bizitza=200;
 	
-	public ItsasontziTile(String pJabea, int a, int b, Itsasontzia pItsasontzia) {
+	public ItsasontziTile(String pJabea, int pX, int pY, Itsasontzia pItsasontzia) {
 		// TODO Auto-generated constructor stub
-		super(a, b,pJabea);
+		super(pJabea,pX, pY);
 		itsasontzi = pItsasontzia;
 	}
 	

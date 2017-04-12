@@ -7,15 +7,9 @@ public abstract class Jokalariak {
 	String izena;
 	Mapa mapa;
 	Inbentarioa inb;
-<<<<<<< HEAD
 	Denda denda;
 	int dirua = 0;
 	ArrayList<Itsasontzia> nireItsasontziak;
-=======
-	int dirua, jarritakoItsasontziak = 0;
-	Itsasontzia[] nireItsasontziak;
->>>>>>> refs/remotes/origin/master
-	
 	public Jokalariak(){
 		
 	}
@@ -50,7 +44,6 @@ public abstract class Jokalariak {
 	}
 	public int jokalariakDiruaDu(String pJokalaria, String pErosketa) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
 		int diruaDu=-1;									//diru nahikorik ez badu, zenb negatiboa bueltatzen du
 		if(denda.zenbatBalioDu(pErosketa)<=dirua){
 			diruaDu=denda.zenbatBalioDu(pErosketa);		//diru nahikoa baldin badu, dirua bueltatzen du
@@ -73,11 +66,5 @@ public abstract class Jokalariak {
 	public void jokalariariObjektuakEman(String[] pObjektuak, boolean pZer) {
 		// TODO Auto-generated method stub
 		inb.objektuakEman(pObjektuak,pZer);
-=======
-		this.inb.objektuaKendu(pObjektua);
-	}
-	public void erasoaJaso(int x, int y, String nork, int indarra) {
-		this.mapa.erasoaJaso(x,y,nork,indarra);
->>>>>>> refs/remotes/origin/master
 	}
 }
