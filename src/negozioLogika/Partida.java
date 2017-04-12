@@ -68,4 +68,7 @@ public class Partida {
 		// TODO Auto-generated method stub
 		jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariariObjektuakEman(pObjektuak, pZer);
 	}
+	public void erasoaJaso(int x, int y, String nork, String nori, int indarra){
+		this.jokalariLista[this.jokalariarenPosLortu(nori)].erasoaJaso(x,y,nork,indarra);
+	}
 }

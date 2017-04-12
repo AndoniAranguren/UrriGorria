@@ -85,7 +85,15 @@ public class Mapa {
 		return pItsasontzia;
 	}
 	
+<<<<<<< HEAD
 	public void erasoaJaso(String pNork, int pX,int pY,int pIndarra){
 		jokalariMapa[pX][pY].jo(pNork,pIndarra);
 	}
+=======
+	public void erasoaJaso(int x,int y,String nork,int indarra){
+		jokalariMapa[x][y].jo(nork,indarra);
+		
+	}
+	
+>>>>>>> refs/remotes/origin/master
 }
