@@ -49,7 +49,7 @@ public class Partida {
 		// TODO Auto-generated method stub
 		return jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariakDiruaDu(pJokalaria,pErosketa);
 	}
-	public static String[] dendakIzakinakDitu(String pJokalaria, String pErosketa) {
+	public static Objektuak[] dendakIzakinakDitu(String pJokalaria, String pErosketa) {
 		// TODO Auto-generated method stub
 		return jokalariLista[jokalariarenPosLortu(pJokalaria)].dendakIzakinakDitu(pErosketa);
 	}

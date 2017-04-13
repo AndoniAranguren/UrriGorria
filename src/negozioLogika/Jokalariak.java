@@ -56,7 +56,7 @@ public abstract class Jokalariak {
 		}
 		return diruaDu;
 	}
-	public String[] dendakIzakinakDitu(String pErosketa) {
+	public Objektuak[] dendakIzakinakDitu(String pErosketa) {
 		// TODO Auto-generated method stub
 		return denda.dendakIzakinakDitu(pErosketa);		//Izakinik ez baldin badu, null bat bueltatuko du
 	}
