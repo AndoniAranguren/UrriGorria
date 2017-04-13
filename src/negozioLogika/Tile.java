@@ -1,22 +1,30 @@
 package negozioLogika;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public abstract class Tile {
 	private int zut;
 	private int err;
-	private String[] ikusiAhal;
-	private int kontJok=0;
+	private ArrayList<String> ikusiAhal;
 	protected boolean kokatuAhalDa = true;
 	protected String identifikadorea="Tile";
 	
 	public Tile(String pJabea, int pX, int pY){
 		zut=pX;
 		err=pY;
-		ikusiAhal[kontJok]=pJabea;
+		ikusiAhal.add(0,pJabea);
 	}
 	
-	public void jo(String pErasotzaile, int pIndarra){
-		if(!this.ikusiAhalDu(pErasotzaile)) ikusiAhal[kontJok++]=pErasotzaile;
-		this.bizitzaAldatu(pIndarra);
+	public void jo(String pErasotzaile, int pIndarra, boolean pZer){
+		if(pZer){
+			if(!this.ikusiAhalDu(pErasotzaile)) ikusiAhal.add(pErasotzaile);
+			this.bizitzaEman(pIndarra,!pZer);
+		}
+		else{
+			ikusiAhal.remove(pErasotzaile);
+			this.bizitzaEman(pIndarra,pZer);
+		}
 	}
 	public String erakutsi(String pNork){
 		if(ikusiAhalDu(pNork)){
@@ -26,11 +34,10 @@ public abstract class Tile {
 	}
 	//Galderak -------------------------
 	public boolean ikusiAhalDu(String pNork){
-		int ind=0;
+		Iterator<String> it=ikusiAhal.iterator();
 		boolean aurkituta=false;
-		while(!aurkituta && ind<=kontJok){
-			aurkituta=ikusiAhal[ind]==pNork;
-			if(!aurkituta) ind++;
+		while(!aurkituta && it.hasNext()){
+			aurkituta=it.next()==pNork;
 		}
 		return aurkituta;
 	}
@@ -38,17 +45,17 @@ public abstract class Tile {
 		return (zut==pX && err==pY);
 	}
 	public boolean jabeaDa(String pJ){
-		return ikusiAhal[0]==pJ;
+		return ikusiAhal.get(0)==pJ;
 	}
 	public boolean kokatuDaiteke() {
 		return kokatuAhalDa;
 	}
 	public boolean equals(Tile pTile){
-		return (pTile.posizioanDago(zut, err) && pTile.jabeaDa(ikusiAhal[0]));
+		return (pTile.posizioanDago(zut, err) && pTile.jabeaDa(ikusiAhal.get(0)));
 	}
 	//---------------------------------------
 	public void kokatzekoGaitasunaEman(boolean pZer){
 		kokatuAhalDa=pZer;
 	}
-	private void bizitzaAldatu(int pIndarra){}
+	private void bizitzaEman(int pIndarra,boolean pZer){}
 }

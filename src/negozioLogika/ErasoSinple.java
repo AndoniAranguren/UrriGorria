@@ -1,12 +1,10 @@
 package negozioLogika;
 
 public class ErasoSinple implements StrategyArmak{
-	private int indarra;
-	public ErasoSinple(int pIndarra){
-		this.indarra=pIndarra;
+	public ErasoSinple(){
 	}
-	public void eraso(int x, int y, String nork, String nori, int indarra) {
-		Partida.getPartida().erasoaJaso(x, y, nork, nori, indarra);
+	public Mapa erasoEgin(String pNork,Mapa pMapa, int pX, int pY, char pNorabide, int pIndarra, boolean pZer){
+		pMapa.erasoSinpleaJaso(pNork, pX, pY, pIndarra, pZer);
+		return pMapa;
 	}
-
 }

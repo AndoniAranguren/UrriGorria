@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public abstract class Jokalariak {
-	String izena;
-	Mapa mapa;
-	Inbentarioa inb;
-	Denda denda;
-	int dirua = 0;
-	ArrayList<Itsasontzia> nireItsasontziak;
-	public Jokalariak(){
-		
+	
+	private String izena;
+	private Mapa mapa;
+	private Inbentarioa inb;
+	private Denda denda;
+	private int dirua = 0;
+	private ArrayList<Itsasontzia> nireItsasontziak;
+	
+	
+	public Jokalariak(String pIzena){
+		izena=pIzena;
 	}
+	
+	
 	public boolean kokatuDaiteke(int x, int y, int luzera, char norabidea){
 		return mapa.kokatuDaiteke(x, y, luzera, norabidea);
 	}
@@ -66,5 +71,18 @@ public abstract class Jokalariak {
 	public void jokalariariObjektuakEman(String[] pObjektuak, boolean pZer) {
 		// TODO Auto-generated method stub
 		inb.objektuakEman(pObjektuak,pZer);
+	}
+	public String izenaLortu() {
+		// TODO Auto-generated method stub
+		return izena;
+	}
+	public boolean objektuakDitu(String[] pObjektuak) {
+		// TODO Auto-generated method stub
+		return inb.objektuakDitu(pObjektuak);
+	}
+
+	public void erasoaJaso(String pNork, Armak pArma, int pX, int pY,char pNorabide, boolean pZer) {
+		// TODO Auto-generated method stub
+		mapa=pArma.erasoEgin(pNork,mapa, pX, pY, pNorabide, pZer);
 	}
 }

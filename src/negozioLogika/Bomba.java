@@ -2,11 +2,10 @@ package negozioLogika;
 
 public class Bomba extends Armak{
 
-
 	public Bomba(String pIzena) {
 		super(pIzena);
-		indarra=100;
-		portaera=new ErasoSinple(indarra);
+		super.indarra=100;
+		super.portaera=new ErasoSinple();
 	}
 
 }

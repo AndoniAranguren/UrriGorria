@@ -84,7 +84,12 @@ public class Mapa {
 		}
 		return pItsasontzia;
 	}
-	public void erasoaJaso(String pNork, int pX,int pY,int pIndarra){
-		jokalariMapa[pX][pY].jo(pNork,pIndarra);
+
+	public boolean erasoSinpleaJaso(String pNork,int pX, int pY, int pIndarra, boolean pZer) {
+		// TODO Auto-generated method stub
+		if(pX<=Tamaina && pY<=Tamaina){
+			jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
+			return true;
+		}else return false;
 	}
 }

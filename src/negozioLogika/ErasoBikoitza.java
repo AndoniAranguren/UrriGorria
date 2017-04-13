@@ -1,12 +1,14 @@
 package negozioLogika;
 
 public class ErasoBikoitza implements StrategyArmak{
-	private int indarra;
-	public ErasoBikoitza(int pIndarra){
-		this.indarra=pIndarra;
+	public ErasoBikoitza(){
 	}
-	public void eraso(int x, int y, String nork, String nori, int indarra) {
+	public Mapa erasoEgin(String pNork,Mapa pMapa, int pX, int pY, char pNorabide, int pIndarra, boolean pZer){
+		ErasoLineal er=new ErasoLineal();
+		pMapa=er.erasoEgin(pNork, pMapa, pX, pY, 'N', pIndarra, pZer);
+		pMapa=er.erasoEgin(pNork, pMapa, pX, pY, 'E', pIndarra, pZer);
 		
+		return pMapa;
 	}
 
 }

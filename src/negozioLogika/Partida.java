@@ -9,7 +9,7 @@ public class Partida {
 	private static int fasea,txanda,iraupena=0;
 	
 	private Partida(){
-		jokalariLista = new Jokalaria[maxJok];
+		jokalariLista = new Jokalaria[maxJok-1];
 		iraupena=0;
 	}
 	
@@ -68,7 +68,19 @@ public class Partida {
 		// TODO Auto-generated method stub
 		jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariariObjektuakEman(pObjektuak, pZer);
 	}
-	public void erasoaJaso(int x, int y, String nork, String nori, int indarra){
-		this.jokalariLista[this.jokalariarenPosLortu(nori)].erasoaJaso(x,y,nork,indarra);
+
+	public static String norenTxandaDa() {
+		// TODO Auto-generated method stub
+		return jokalariLista[txanda].izenaLortu();
+	}
+
+	public static boolean jokalariakObjektuakDitu(String pJokalari, String[] pObjektuak) {
+		// TODO Auto-generated method stub
+		return jokalariLista[jokalariarenPosLortu(pJokalari)].objektuakDitu(pObjektuak);
+	}
+
+	public static void jokalariariErasoEgin(String pJokalari,String pNori, Armak pArma, int pX, int pY,char pNorabide, boolean pZer) {
+		// TODO Auto-generated method stub
+		jokalariLista[jokalariarenPosLortu(pNori)].erasoaJaso(pJokalari,pArma,pX,pY,pNorabide,pZer);
 	}
 }

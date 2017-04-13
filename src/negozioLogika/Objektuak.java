@@ -1,7 +1,6 @@
 package negozioLogika;
 
 public abstract class Objektuak {
-
 	private String izena;
 	
 	public Objektuak(String pIzena){
