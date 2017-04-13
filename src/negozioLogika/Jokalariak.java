@@ -18,15 +18,14 @@ public abstract class Jokalariak {
 	}
 	
 	
-	public boolean kokatuDaiteke(int x, int y, int luzera, char norabidea){
-		return mapa.kokatuDaiteke(x, y, luzera, norabidea);
+	public boolean kokatuDaiteke( int pX, int pY,  char pNorabidea, int pLuzeera){
+		return mapa.kokatuDaiteke(pX, pY,  pNorabidea, pLuzeera);
 	}
-	public void itsasontziaJarri(String pOntzi, int pX, int pY, char pNorabidea, boolean pZer) {
+	public Itsasontzia itsasontziaJarri(Itsasontzia pOntzi, int pX, int pY, char pNorabidea, boolean pZer) {
 		// TODO Auto-generated method stub
 		if(pZer==true){
-			Itsasontzia itsasontzia = ItsasontziFactory.getItsasontziFactory().createItsasontzia(pOntzi);
-			itsasontzia = mapa.itsasontziaJarri(izena, itsasontzia, pX, pY, pNorabidea,pZer);
-			nireItsasontziak.add(itsasontzia);
+			pOntzi = mapa.itsasontziaJarri(izena, pOntzi, pX, pY, pNorabidea,pZer);
+			nireItsasontziak.add(pOntzi);
 		}
 		else{
 			boolean aurkituta=false;
@@ -34,14 +33,16 @@ public abstract class Jokalariak {
 			Iterator<Itsasontzia> it=nireItsasontziak.iterator();
 			while(!aurkituta && it.hasNext()){
 				itsasontzia= it.next();
-				if(itsasontzia.hauDa(pOntzi, pX, pY)){
-					mapa.itsasontziaJarri(izena, itsasontzia, pX, pY, pNorabidea, pZer);
+				if(itsasontzia.hauDa(pOntzi)){
+					pOntzi = mapa.itsasontziaJarri(izena, itsasontzia, pX, pY, pNorabidea, pZer);
 				}
 				else{
+					pOntzi = null;
 					//Hemen ez dago itsasontzirik
 				}
 			}
 		}
+		return pOntzi;
 	}
 	public boolean izenHauDu(String pJ) {
 		// TODO Auto-generated method stub
@@ -64,11 +65,11 @@ public abstract class Jokalariak {
 		if(pZer==true)	dirua+=pPrezioa;
 		else			dirua-=pPrezioa;
 	}
-	public void dendariObjektuakEman(String[] pObjektuak, boolean pZer) {
+	public void dendariObjektuakEman(Objektuak[] pObjektuak, boolean pZer) {
 		// TODO Auto-generated method stub
 		denda.objektuakEman(pObjektuak,pZer);
 	}
-	public void jokalariariObjektuakEman(String[] pObjektuak, boolean pZer) {
+	public void jokalariariObjektuakEman(Objektuak[] pObjektuak, boolean pZer) {
 		// TODO Auto-generated method stub
 		inb.objektuakEman(pObjektuak,pZer);
 	}
@@ -76,13 +77,13 @@ public abstract class Jokalariak {
 		// TODO Auto-generated method stub
 		return izena;
 	}
-	public boolean objektuakDitu(String[] pObjektuak) {
+	public boolean objektuakDitu(Objektuak[] pObjektuak) {
 		// TODO Auto-generated method stub
 		return inb.objektuakDitu(pObjektuak);
 	}
 
 	public void erasoaJaso(String pNork, Armak pArma, int pX, int pY,char pNorabide, boolean pZer) {
 		// TODO Auto-generated method stub
-		mapa=pArma.erasoEgin(pNork,mapa, pX, pY, pNorabide, pZer);
+		mapa=pArma.eraso(pNork,mapa, pX, pY, pNorabide, pZer);
 	}
 }

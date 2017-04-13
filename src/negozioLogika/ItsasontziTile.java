@@ -8,9 +8,12 @@ public class ItsasontziTile extends Tile {
 	public ItsasontziTile(String pJabea, int pX, int pY, Itsasontzia pItsasontzia) {
 		// TODO Auto-generated constructor stub
 		super(pJabea,pX, pY);
+		
 		itsasontzi = pItsasontzia;
+		super.kokatuAhalDa=false;
+		super.identifikadorea="Itsasontzi";
 	}
-	
+
 	public void bizitzaAldatu(int pIndarra){
 		bizitza-=pIndarra;
 		if(this.suntsitutaDago()){

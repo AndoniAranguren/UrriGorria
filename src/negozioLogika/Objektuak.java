@@ -1,7 +1,7 @@
 package negozioLogika;
 
 public abstract class Objektuak {
-	private String izena;
+	protected String izena;
 	
 	public Objektuak(String pIzena){
 		this.izena=pIzena;

@@ -7,11 +7,18 @@ public class ObjektuakFactory {
 		if(nObjektuakFactory==null){ nObjektuakFactory = new ObjektuakFactory();}
 		return nObjektuakFactory;
 	}
-	public Objektuak createObjektua(String mota){
+	public Objektuak createObjektua(String pMota){
 		Objektuak i=null;
-		if (mota=="Bomba"){ i = new Bomba(mota);}
-		if (mota=="Radarra") {i = new Radarra(mota);}
-
+		//Armak--------------------------------
+		if (pMota=="Bomba"){i = new Armak(					"Bomba",100,new ErasoSinple());}		
+		else if (pMota=="Misil"){i = new Armak(				"Misil",200,new ErasoSinple());}
+		else if (pMota=="Misil Zuzendua"){i = new Armak(	"Misil Zuzendua",100,new ErasoLineal());}
+		else if (pMota=="Misil Zuzendua Pro"){i = new Armak("Misil Zuzendua Pro",100,new ErasoBikoitza());}
+		//-------------------------------------
+		//Ekipo--------------------------------
+		else if (pMota=="Radarra") {i = new Ekipoak(		"Radarra", new ErabiliRadarra());
+		}
+		//-------------------------------------
 		return i;
 	}
 }

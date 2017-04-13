@@ -1,9 +1,12 @@
 package negozioLogika;
 
-public class ErabiliRadarra implements StrategyEkipo{
+public class ErabiliRadarra implements StrategyEkipoak{
 
-	public void erabili(String pNork, String pNori,int pX, int pY) {
+	public Mapa erabili(String pNork, Mapa pMapa,int pX, int pY, char pNorabide, boolean pZer) {
 		
+		
+		
+		return pMapa;
 	}
 
 }
