@@ -1,5 +1,7 @@
 package frontend;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -22,28 +24,13 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		this.setVisible(true);
 	}
 	
-	/*public static UrriGorriaUI getLehioa() {
-		if (nLeihoa == null) {
-			nLeihoa = new UrriGorriaUI();
-		}
-		return nLeihoa ;
+	public void panelaAldatu(JPanel jartzeko) {
+		this.remove(oraingoa);
+		oraingoa = jartzeko;
+		this.add(oraingoa);
+		setBounds(500, 200, 475, 475);
+		this.revalidate();
+		this.repaint();
 	}
 	
-	public void ontziakKokatu(){
-		setLayout(new BorderLayout());
-		add(tableroa, BorderLayout.CENTER);
-		add(ontzia, BorderLayout.SOUTH);
-	}
-	
-	public void jokZehaztu(){
-		
-	}
-	
-	public TableroaGUI getTableroa() {
-		return tableroa;
-	}
-
-	public ItsasontziaGUI getOntzia() {
-		return ontzia;
-	}	*/	
 }
