@@ -8,14 +8,18 @@ import negozioLogika.ItsasontziTile;
 public abstract class Itsasontzia {
 	protected final int luzeera,prezioa;
 	private final String mota,jabea=null;
+	private int ezkutua;
 	private boolean suntsituta;
 	private ArrayList<ItsasontziTile> tileLista;
+	
 	public Itsasontzia(String pMota){
+		ezkutua=0;
+		suntsituta=false;
 		mota=pMota;
 		luzeera = ItsasontziFactory.getItsasontziFactory().luzeeraLortu(pMota);
 		prezioa = ItsasontziFactory.getItsasontziFactory().prezioaLortu(pMota);
 		tileLista= new ArrayList<ItsasontziTile>();
-		}
+	}
 	public void itsasontziaKokatu(int x, int y, char norabidea, String pJabea){
 		//Mapan jada itsasontzia kokatu ahal dela begiratu dugu
 		for (int i=0;i<luzeera;i++){
@@ -65,6 +69,16 @@ public abstract class Itsasontzia {
 			aurkituta= it.next().posizioanDago(pX, pY);
 		}
 		return aurkituta;
+	}
+	public void ezkutuaJarri(){
+		ezkutua=2;
+	}
+	public boolean ezkutuaDauka(){
+		return !(ezkutua==0);
+	}
+	public void ezkutuariJo(int pIndarra){
+		ezkutua-=pIndarra/100;
+		if(ezkutua<0) ezkutua=0;
 	}
 }
 

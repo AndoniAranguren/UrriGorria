@@ -92,4 +92,12 @@ public class Mapa {
 			return true;
 		}else return false;
 	}
+	public boolean ezkutuaJarri(String pNork, int pX, int pY){
+		if (!jokalariMapa[pX][pY].jabeaDa(pNork)) return false;
+		else if(!jokalariMapa[pX][pY].itsasonztiaDa()) return false;
+		else{
+			jokalariMapa[pX][pY].ezkutuaJarri();
+			return true;
+		}
+	}
 }

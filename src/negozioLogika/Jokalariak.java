@@ -16,8 +16,7 @@ public abstract class Jokalariak {
 	public Jokalariak(String pIzena){
 		izena=pIzena;
 	}
-	
-	
+
 	public boolean kokatuDaiteke(int x, int y, int luzera, char norabidea){
 		return mapa.kokatuDaiteke(x, y, luzera, norabidea);
 	}
