@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import externals.Irudiak;
 import negozioLogika.UrriGorria;
 import negozioLogika.interfaces.UGKonstanteak;
 
@@ -33,8 +34,10 @@ public class PartidaZehaztu extends JPanel implements UGKonstanteak {
 	
 	private void norekinZehaztu() {
 		ia = new JRadioButton("Makinaren aurka", true);
+		ia.setActionCommand(String.valueOf(MAKINAREN_AURKA));
 		ia.addActionListener(gureAL -> getZailtasuna());
 		bijokalari = new JRadioButton("Bi jokalari");
+		bijokalari.setActionCommand(String.valueOf(BI_JOKALARI));
 		bijokalari.addActionListener(gureAL -> getZailtasuna());
 		norekin = new ButtonGroup();
 		norekin.add(ia);
@@ -46,8 +49,10 @@ public class PartidaZehaztu extends JPanel implements UGKonstanteak {
 	}
 	
 	private void zailtasunaZehaztu() {
-		erreza = new JRadioButton("Erreza");
+		erreza = new JRadioButton("Erreza", true);
+		erreza.setActionCommand(String.valueOf(MAKINAREN_AURKA_ERREZA));
 		zaila = new JRadioButton("Zaila");
+		zaila.setActionCommand(String.valueOf(MAKINAREN_AURKA_ZAILA));
 		zailtasuna = new ButtonGroup();
 		zailtasuna.add(erreza);
 		zailtasuna.add(zaila);
@@ -59,17 +64,18 @@ public class PartidaZehaztu extends JPanel implements UGKonstanteak {
 	}
 	
 	public void partidaHasi(){
-		ButtonModel oraingoa = norekin.getSelection();
-		System.out.println(oraingoa);
-		if(oraingoa.isSelected()) 
-			System.out.println(oraingoa.getActionCommand());
+		ButtonModel oraingoa = zailtasuna.getSelection();
+		if(oraingoa.isEnabled()) 
+			UrriGorria.getUrriGorria().setPartida(Integer.parseInt(oraingoa.getActionCommand()));
 		else
 			UrriGorria.getUrriGorria().setPartida(BI_JOKALARI);
+		UrriGorria.getUrriGorria().getUi().panelaAldatu(new OntziakAukeratu1());
 	}
 	
 	public void getZailtasuna(){
-		/*ButtonModel oraingoa = zailtasuna.getSelection();
+		ButtonModel oraingoa = norekin.getSelection();
 		int zenbakia = Integer.parseInt(oraingoa.getActionCommand());
-		*/
+		erreza.setEnabled(zenbakia==MAKINAREN_AURKA ? true : false);
+		zaila.setEnabled(zenbakia==MAKINAREN_AURKA ? true : false);
 	}
 }
