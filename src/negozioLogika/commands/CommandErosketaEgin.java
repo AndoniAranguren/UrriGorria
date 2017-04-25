@@ -1,11 +1,10 @@
 package negozioLogika.commands;
 
-import negozioLogika.Objektuak;
 import negozioLogika.Partida;
 
 public class CommandErosketaEgin extends Commands {
 	String erosketa;
-	Objektuak[] objektuak=null;
+	String[] objektuak=null;
 	int prezioa=0;
 	
 	public CommandErosketaEgin(String pJ, String pErosketa){

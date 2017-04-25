@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 import negozioLogika.commands.Commands;
 
-public class Battelog {
+public class Kontsola {
 	//Atributuak
-	private static Battelog neureBurua;
+	private static Kontsola neureBurua;
 	ArrayList<Commands> komandoZerrenda= new ArrayList<Commands>(); //GERO DATU BASERA MUGITU
 	
 	//Eraikitzailea
-	public Battelog(){
+	public Kontsola(){
 		neureBurua=null;
 	}
-	public static Battelog BattlelogaLortu(){
+	public static Kontsola kontsolaLortu(){
 		if(neureBurua == null){
-			neureBurua = new Battelog();
+			neureBurua = new Kontsola();
 		}return neureBurua;
 	}
 	public void CommandSartu(Commands k){
