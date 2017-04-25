@@ -22,30 +22,30 @@ public class Mapa {
 		}
 	}
 
-	public boolean kokatuDaiteke(int x, int y, int luzera, char norabidea) throws IndexOutOfBoundsException{
+	public boolean kokatuDaiteke(int pX, int pY, char pNorabidea, int pLuzeera){// throws IndepXOutOfBoundsEpXception{
 		boolean libre = true;
 		while(libre){ //Lehenengoaren eta azkenengoaren ondoko posizioak begiratu baita, urez inguratua egon behar baitu
-			for (int i=-2;i<luzera;i++){
-				if(norabidea=='N'){
-					if(!jokalariMapa[x-1][y+1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[x][y+1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[x+1][y+1].kokatuDaiteke()) libre = false;
-					y--;}
-				if(norabidea=='E'){
-					if(!jokalariMapa[x-1][y-1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[x-1][y].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[x-1][y+1].kokatuDaiteke()) libre = false;
-					x++;}
-				if(norabidea=='W'){
-					if(!jokalariMapa[x+1][y-1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[x+1][y].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[x+1][y+1].kokatuDaiteke()) libre = false;
-					x--;}
-				if(norabidea=='S'){
-					if(!jokalariMapa[x-1][y-1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[x][y-1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[x+1][y-1].kokatuDaiteke()) libre = false;
-					y++;}
+			for (int i=-2;i<pLuzeera;i++){
+				if(pNorabidea=='N'){
+					if(!jokalariMapa[pX-1][pY+1].kokatuDaiteke()) libre = false;
+					if(!jokalariMapa[pX][pY+1].kokatuDaiteke()) libre = false;
+					if(!jokalariMapa[pX+1][pY+1].kokatuDaiteke()) libre = false;
+					pY--;}
+				if(pNorabidea=='E'){
+					if(!jokalariMapa[pX-1][pY-1].kokatuDaiteke()) libre = false;
+					if(!jokalariMapa[pX-1][pY].kokatuDaiteke()) libre = false;
+					if(!jokalariMapa[pX-1][pY+1].kokatuDaiteke()) libre = false;
+					pX++;}
+				if(pNorabidea=='W'){
+					if(!jokalariMapa[pX+1][pY-1].kokatuDaiteke()) libre = false;
+					if(!jokalariMapa[pX+1][pY].kokatuDaiteke()) libre = false;
+					if(!jokalariMapa[pX+1][pY+1].kokatuDaiteke()) libre = false;
+					pX--;}
+				if(pNorabidea=='S'){
+					if(!jokalariMapa[pX-1][pY-1].kokatuDaiteke()) libre = false;
+					if(!jokalariMapa[pX][pY-1].kokatuDaiteke()) libre = false;
+					if(!jokalariMapa[pX+1][pY-1].kokatuDaiteke()) libre = false;
+					pY++;}
 			}
 		}
 		return libre;
@@ -53,35 +53,24 @@ public class Mapa {
 
 	public Itsasontzia itsasontziaJarri(String pJabea, Itsasontzia pItsasontzia, int pX, int pY, char pNorabidea, boolean pZer) {
 		// TODO Auto-generated method stub
-		if(pZer){
 			ItsasontziTile tile;
 			for (int i=0;i<=pItsasontzia.luzeera;i++){
-				tile= new ItsasontziTile(pJabea, pX, pY, pItsasontzia);
-				
-				jokalariMapa[pX][pY]= tile;
-				pItsasontzia.tileGehitu(tile,pZer);							//Izan ahal da, tile bateri erasotzean itsasontzi nagusia ez jasotzea
-																		//Honela tilak itsasontzi atributu ezberdina duelako. Itsason1[Tile(Itsason2)]
-				jokalariMapa[pX-1][pY].kokatzekoGaitasunaEman(pZer);
-				jokalariMapa[pX+1][pY].kokatzekoGaitasunaEman(pZer);
-				jokalariMapa[pX][pY-1].kokatzekoGaitasunaEman(pZer);
-				jokalariMapa[pX][pY+1].kokatzekoGaitasunaEman(pZer);
+				if(pZer){
+					tile= new ItsasontziTile(pJabea, pX, pY, pItsasontzia);
+					jokalariMapa[pX][pY]= tile;
+				}
+				else{
+					tile=(ItsasontziTile)jokalariMapa[pX][pY];				
+					jokalariMapa[pX][pY]=new UraTile(pJabea, pX, pY);
+				}
+				//Izan ahal da, tile bateri erasotzean itsasontzi nagusia ez jasotzea
+				//Honela tilak itsasontzi atributu ezberdina duelako. Itsason1[Tile(Itsason2)]
+				pItsasontzia.tileGehitu(tile,pZer);							
+				jokalariMapa[pX-1][pY].kokatzekoGaitasunaEman(!pZer);	//Itsasontzia jartzen bada(pZer=t) ->Gaitasuna kentzen zaio	(pZer=f)
+				jokalariMapa[pX+1][pY].kokatzekoGaitasunaEman(!pZer);
+				jokalariMapa[pX][pY-1].kokatzekoGaitasunaEman(!pZer);
+				jokalariMapa[pX][pY+1].kokatzekoGaitasunaEman(!pZer);
 			}
-		}
-		else{
-			ItsasontziTile tile;
-			for (int i=0;i<=pItsasontzia.luzeera;i++){
-				
-				tile=(ItsasontziTile)jokalariMapa[pX][pY];
-				pItsasontzia.tileGehitu(tile,pZer);
-				
-				jokalariMapa[pX][pY]=new UraTile(pJabea, pX, pY);
-				
-				jokalariMapa[pX-1][pY].kokatzekoGaitasunaEman(pZer);
-				jokalariMapa[pX+1][pY].kokatzekoGaitasunaEman(pZer);
-				jokalariMapa[pX][pY-1].kokatzekoGaitasunaEman(pZer);
-				jokalariMapa[pX][pY+1].kokatzekoGaitasunaEman(pZer);
-			}
-		}
 		return pItsasontzia;
 	}
 
@@ -91,13 +80,5 @@ public class Mapa {
 			jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
 			return true;
 		}else return false;
-	}
-	public boolean ezkutuaJarri(String pNork, int pX, int pY){
-		if (!jokalariMapa[pX][pY].jabeaDa(pNork)) return false;
-		else if(!jokalariMapa[pX][pY].itsasonztiaDa()) return false;
-		else{
-			jokalariMapa[pX][pY].ezkutuaJarri();
-			return true;
-		}
 	}
 }

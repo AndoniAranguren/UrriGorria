@@ -37,19 +37,19 @@ public class Partida {
 		egoera[2]=iraupena;
 		return egoera;
 	}
-	public static void itsasontziaJarri(String pJokalaria, String pOntzi, int pX, int pY, char pNorabidea, boolean pZer) {
+	public static Itsasontzia itsasontziaJarri(String pJokalaria, Itsasontzia pOntzi, int pX, int pY, char pNorabidea, boolean pZer) {
 		// TODO Auto-generated method stub
-		jokalariLista[jokalariarenPosLortu(pJokalaria)].itsasontziaJarri(pOntzi, pX, pY, pNorabidea, pZer);
+		return jokalariLista[jokalariarenPosLortu(pJokalaria)].itsasontziaJarri(pOntzi, pX, pY, pNorabidea, pZer);
 	}
-	public static boolean kokatuDaiteke(int pX, int pY, int pLuzeera, char pNorabidea, String pJokalaria) {
+	public static boolean kokatuDaiteke( String pJokalaria, int pX, int pY, char pNorabidea, int pLuzeera) {
 		// TODO Auto-generated method stub
-		return jokalariLista[jokalariarenPosLortu(pJokalaria)].kokatuDaiteke(pX, pY, pLuzeera, pNorabidea);
+		return jokalariLista[jokalariarenPosLortu(pJokalaria)].kokatuDaiteke( pX, pY, pNorabidea, pLuzeera);
 	}
 	public static int jokalariakDiruaDu(String pJokalaria, String pErosketa) {
 		// TODO Auto-generated method stub
 		return jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariakDiruaDu(pJokalaria,pErosketa);
 	}
-	public static String[] dendakIzakinakDitu(String pJokalaria, String pErosketa) {
+	public static Objektuak[] dendakIzakinakDitu(String pJokalaria, String pErosketa) {
 		// TODO Auto-generated method stub
 		return jokalariLista[jokalariarenPosLortu(pJokalaria)].dendakIzakinakDitu(pErosketa);
 	}
@@ -59,12 +59,12 @@ public class Partida {
 		jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariariDiruaEman(pPrezioa, pZer);
 	}
 
-	public static void dendariObjektuakEman(String pJokalaria, String[] pObjektuak, boolean pZer) {
+	public static void dendariObjektuakEman(String pJokalaria, Objektuak[] pObjektuak, boolean pZer) {
 		// TODO Auto-generated method stub
 		jokalariLista[jokalariarenPosLortu(pJokalaria)].dendariObjektuakEman(pObjektuak, pZer);
 	}
 
-	public static void jokalariariObjektuakEman(String pJokalaria, String[] pObjektuak, boolean pZer) {
+	public static void jokalariariObjektuakEman(String pJokalaria, Objektuak[] pObjektuak, boolean pZer) {
 		// TODO Auto-generated method stub
 		jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariariObjektuakEman(pObjektuak, pZer);
 	}
@@ -74,7 +74,7 @@ public class Partida {
 		return jokalariLista[txanda].izenaLortu();
 	}
 
-	public static boolean jokalariakObjektuakDitu(String pJokalari, String[] pObjektuak) {
+	public static boolean jokalariakObjektuakDitu(String pJokalari, Objektuak[] pObjektuak) {
 		// TODO Auto-generated method stub
 		return jokalariLista[jokalariarenPosLortu(pJokalari)].objektuakDitu(pObjektuak);
 	}

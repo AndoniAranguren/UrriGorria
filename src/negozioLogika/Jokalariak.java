@@ -17,6 +17,7 @@ public abstract class Jokalariak {
 		izena=pIzena;
 	}
 	
+	
 	public boolean kokatuDaiteke( int pX, int pY,  char pNorabidea, int pLuzeera){
 		return mapa.kokatuDaiteke(pX, pY,  pNorabidea, pLuzeera);
 	}

@@ -1,8 +1,12 @@
 package negozioLogika;
 
-public class ErabiliEzkutua implements StrategyEkipoak{//, String pNori?????
+public class ErabiliEzkutua implements StrategyEkipoak{
 
-	public boolean erabili(Mapa pMapa, String pNork,int pX, int pY) {
-		return pMapa.ezkutuaJarri(pNork,pX,pY);
+	public Mapa erabili(String pNork, Mapa pMapa,int pX, int pY, char pNorabide, boolean pZer) {
+		
+		
+		
+		return pMapa;
 	}
+
 }
