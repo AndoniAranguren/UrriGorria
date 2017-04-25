@@ -11,8 +11,8 @@ public class Armak extends Objektuak {
 		portaera=pPortaera;
 	}
 
-	public Mapa erasoEgin(String pNork, Mapa pMapa, int pX, int pY, char pNorabide, boolean pZer) {
+	public Mapa eraso(String pNork, Mapa pMapa, int pX, int pY, char pNorabide, boolean pZer) {
 		// TODO Auto-generated method stub
-		return portaera.erasoEgin(pNork,pMapa, pX, pY,pNorabide, indarra, pZer);
+		return portaera.eraso(pNork,pMapa, pX, pY,pNorabide, indarra, pZer);
 	}
 }
