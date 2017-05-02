@@ -6,14 +6,14 @@ import java.util.Iterator;
 public abstract class Tile {
 	private int zut;
 	private int err;
-	private ArrayList<String> ikusiAhal;
+	private ArrayList<String> ikusiAhal; //Jabea 0.posizioan egongo da
 	protected boolean kokatuAhalDa = true;
 	protected String identifikadorea="Tile";
 	
 	public Tile(String pJabea, int pX, int pY){
 		zut=pX;
 		err=pY;
-		ikusiAhal.add(0,pJabea);
+		ikusiAhal.add(0,pJabea); //Jabea 0.posizioan egongo da
 	}
 	
 	public void jo(String pErasotzaile, int pIndarra, boolean pZer){

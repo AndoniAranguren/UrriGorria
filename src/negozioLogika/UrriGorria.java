@@ -5,6 +5,7 @@ import frontend.UrriGorriaUI;
 public class UrriGorria {
 	private static UrriGorria ug;
 	private int partida;
+
 	private UrriGorriaUI ui;
 
 	private UrriGorria() 

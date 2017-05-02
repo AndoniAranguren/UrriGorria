@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import negozioLogika.ItsasontziTile;
+import negozioLogika.commands.CommandItsasontziaIpini;
 
 public class Itsasontzia extends Objektuak {
 	protected final int luzeera,prezioa;
@@ -33,6 +34,9 @@ public class Itsasontzia extends Objektuak {
 		else{
 			tileLista.remove(pTile);
 		}
+	}
+	public void erabili(String pNori, int pX, int pY,char pNorabide) {
+		new CommandItsasontziaIpini(pNori, this, pX, pY, pNorabide).exekutatu();
 	}
 	public void suntsitutaDago() {
 		// TODO Auto-generated method stub
