@@ -3,6 +3,7 @@ package negozioLogika;
 import java.util.ArrayList;
 
 public class Denda {
+<<<<<<< HEAD
 	private ArrayList<Objektuak> listaStock;
 	private ArrayList<Erosketa> listaErosketak;
 	public Denda(){
@@ -64,5 +65,16 @@ public class Denda {
 	private void gehituXAldiz(String pIzen,int pZ){
 		Objektuak e=ObjektuakFactory.getObjektuakFactory().createObjektua(pIzen);
 		for(int i=0;i<pZ;i++){listaStock.add(e);}
+=======
+	private ArrayList<Objektuak> lista;
+	private static Denda nDenda=null;
+	private Denda(){}
+	public static synchronized Denda getDenda(){
+		if(nDenda==null){ nDenda= new Denda();}
+		return nDenda;
+	}
+	public void dendaEguneratu(){
+		
+>>>>>>> branch 'master' of https://github.com/Kaskagues/UrriGorria
 	}
 }

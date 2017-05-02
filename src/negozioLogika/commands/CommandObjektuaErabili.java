@@ -1,13 +1,16 @@
 package negozioLogika.commands;
 
 import negozioLogika.Partida;
+
+import java.util.ArrayList;
+
 import negozioLogika.Itsasontzia;
 import negozioLogika.Objektuak;
 
 public class CommandObjektuaErabili extends Commands {
 	
 	private String nori;
-	private Objektuak[] objektuak=new Objektuak[0];
+	private ArrayList<Objektuak> objektuak=new ArrayList<Objektuak>();
 	private int koordX, koordY;
 	private char norabidea;
 	
@@ -15,7 +18,7 @@ public class CommandObjektuaErabili extends Commands {
 		//Datuak gorde----------
 		super();
 		nori=pJ;
-		objektuak[0]= pObjektuak;
+		objektuak.add(pObjektuak);
 		koordX=pX;
 		koordY=pY;
 		//----------------------
@@ -23,15 +26,15 @@ public class CommandObjektuaErabili extends Commands {
 	public void exekutatu(){
 		if(konprobatu()){
 			Partida.jokalariariObjektuakEman(jokalaria, objektuak, false);
-			if(objektuak[0] instanceof Itsasontzia) objektuak[0].erabili(nori, koordX, koordY, norabidea);
-			else Partida.jokalariariErasotu(jokalaria, nori, objektuak[0], koordX, koordY, norabidea, true);
+			if(objektuak.get(0) instanceof Itsasontzia) objektuak.get(0).erabili(nori, koordX, koordY, norabidea);
+			else Partida.jokalariariErasotu(jokalaria, nori, objektuak.get(0), koordX, koordY, norabidea, true);
 			super.komandoaGorde(true);
 		}
 	}
 	
 	public void deuseztatu(){
 		Partida.jokalariariObjektuakEman(jokalaria, objektuak, true);
-		Partida.jokalariariErasotu(jokalaria,nori,objektuak[0],koordX,koordY,norabidea,false);
+		Partida.jokalariariErasotu(jokalaria,nori,objektuak.get(0),koordX,koordY,norabidea,false);
 		super.komandoaGorde(false);
 	}
 	private boolean konprobatu(){
