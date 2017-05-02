@@ -82,7 +82,7 @@ public class ErosketaFactory {
 			for(int i=0;i<5;i++){
 				lista.add(o);}
 		}
-		Erosketa e=new Erosketa(prezioa, pMota, lista);
-		return e;
+		Erosketa er=new Erosketa(prezioa, pMota, lista);
+		return er;
 	}
 }
