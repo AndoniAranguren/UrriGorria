@@ -10,8 +10,7 @@ public class Denda {
 		if(nDenda==null){ nDenda= new Denda();}
 		return nDenda;
 	}
-	public Erosketa erosketaEgin(String mota){
-		Erosketa e=ErosketaFactory.getErosketaFactory().createErosketa(mota);
+	public void dendaEguneratu(){
 		
 	}
 }

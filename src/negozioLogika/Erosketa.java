@@ -18,5 +18,6 @@ public class Erosketa {
 	}
 	public void erosketaExekutatu(){
 		CommandErosketaEgin c = new CommandErosketaEgin(Partida.getPartida().norenTxandaDa() ,mota);
+		c.exekutatu();
 	}
 }
