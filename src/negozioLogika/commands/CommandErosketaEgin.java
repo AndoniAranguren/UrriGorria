@@ -21,6 +21,7 @@ public class CommandErosketaEgin extends Commands {
 			Partida.jokalariariDiruaEman(jokalaria, prezioa, false);
 			Partida.dendariObjektuakEman(jokalaria, objektuak, false);
 			Partida.jokalariariObjektuakEman(jokalaria, objektuak, true);
+			super.komandoaGorde(true);
 		}
 	}
 		
@@ -28,6 +29,7 @@ public class CommandErosketaEgin extends Commands {
 		Partida.jokalariariDiruaEman(jokalaria, prezioa, true);
 		Partida.dendariObjektuakEman(jokalaria, objektuak, true);
 		Partida.jokalariariObjektuakEman(jokalaria, objektuak, false);
+		super.komandoaGorde(false);
 	}
 	
 	private boolean konprobatu(){

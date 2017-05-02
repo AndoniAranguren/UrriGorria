@@ -2,21 +2,21 @@ package negozioLogika;
 
 public class Mapa {
 	//Atributuak
-	private static int Tamaina=10;
+	private static int tamaina=10;
 	private Tile[][] jokalariMapa;
 	String jabea;
 	
 	//Eraikitzailea
 	public Mapa(String pIzena){
 		jabea= pIzena;
-		jokalariMapa= new Tile[Tamaina][Tamaina];
+		jokalariMapa= new Tile[tamaina][tamaina];
 		this.urezBete(jokalariMapa);
 	}
 		
 	//Metodoak
 	private void urezBete(Tile[][] pMap){
-		for(int Y=0;Y<=Tamaina; Y++){
-			for(int X=0;X<=Tamaina; X++){
+		for(int Y=0;Y<=tamaina; Y++){
+			for(int X=0;X<=tamaina; X++){
 				pMap[Y][X]=TileFactory.getTileFactory().createUraTile(jabea, X, Y);
 			}
 		}
@@ -76,9 +76,20 @@ public class Mapa {
 
 	public boolean erasoSinpleaJaso(String pNork,int pX, int pY, int pIndarra, boolean pZer) {
 		// TODO Auto-generated method stub
-		if(pX<=Tamaina && pY<=Tamaina){
+		if(pX<=tamaina && pY<=tamaina){
 			jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
 			return true;
 		}else return false;
+	}
+
+	public String[][] mapaInterpretatu(String pNork){
+		String[][] mapa= new String[tamaina][tamaina];
+		
+		for(int indX=0;indX<tamaina;indX++){
+			for(int indY=0;indY<tamaina;indY++){
+				mapa[indX][indY]=jokalariMapa[indX][indY].erakutsi(pNork);
+			}
+		}
+		return mapa;
 	}
 }

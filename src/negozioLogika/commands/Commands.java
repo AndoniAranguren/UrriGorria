@@ -1,6 +1,7 @@
 package negozioLogika.commands;
 
 import negozioLogika.Partida;
+import negozioLogika.Battlelog;
 
 public abstract class Commands {
 	
@@ -9,15 +10,20 @@ public abstract class Commands {
 	
 	public Commands(){
 		egoera=Partida.egoeraLortu();
-		//txanda=egoera[0];
-		//fasea=egoera[1];
+		//fasea=egoera[0];
+		//txanda=egoera[1];
 		//iraupena=egoera[2];
 		jokalaria=Partida.norenTxandaDa();
 	}
 	
 	public void exekutatu(){
 	}
+	public void deuseztatu(){
+	}
 	public int[] egoeraLortu(){
 		return egoera;
+	}
+	protected void komandoaGorde(boolean pZer){
+		Battlelog.BattlelogaLortu().komandoaGorde(this,pZer);
 	}
 }
