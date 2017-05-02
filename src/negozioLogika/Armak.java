@@ -1,5 +1,7 @@
 package negozioLogika;
 
+import strategyak.StrategyArmak;
+
 public class Armak extends Objektuak {
 	
 	protected StrategyArmak portaera;

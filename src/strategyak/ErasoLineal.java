@@ -1,4 +1,6 @@
-package negozioLogika;
+package strategyak;
+
+import negozioLogika.Mapa;
 
 public class ErasoLineal implements StrategyArmak{
 	public ErasoLineal(){

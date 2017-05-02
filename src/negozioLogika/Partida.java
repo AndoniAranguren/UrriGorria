@@ -1,5 +1,7 @@
 package negozioLogika;
 
+import java.util.ArrayList;
+
 public class Partida {
 	private static Partida nPartida=null;
 	
@@ -47,16 +49,13 @@ public class Partida {
 	public static boolean kokatuDaiteke( String pJokalaria, int pX, int pY, char pNorabidea, int pLuzeera) {
 		return jokalariLista[jokalariarenPosLortu(pJokalaria)].kokatuDaiteke( pX, pY, pNorabidea, pLuzeera);
 	}
-	public static boolean jokalariakObjektuakDitu(String pJokalari, Objektuak[] pObjektuak) {
+	public static boolean jokalariakObjektuakDitu(String pJokalari, ArrayList<Objektuak> pObjektuak) {
 		return jokalariLista[jokalariarenPosLortu(pJokalari)].objektuakDitu(pObjektuak);
 	}
 	public static boolean jokalariaBizirikDago(String pNor) {
 		return jokalariLista[jokalariarenPosLortu(pNor)].jokalariaBizirikDago();
 	}
-	public static int jokalariakDiruaDu(String pJokalaria, String pErosketa) {
-		return jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariakDiruaDu(pJokalaria,pErosketa);
-	}
-	public static Objektuak[] dendakIzakinakDitu(String pJokalaria, String pErosketa) {
+	public static ArrayList<Objektuak> dendakIzakinakDitu(String pJokalaria, Erosketa pErosketa) {
 		return jokalariLista[jokalariarenPosLortu(pJokalaria)].dendakIzakinakDitu(pErosketa);
 	}
 	public String[][] mapaInterpretatu(String pNork,String pNori){
@@ -71,10 +70,13 @@ public class Partida {
 	public static void jokalariariDiruaEman(String pJokalaria, int pPrezioa, boolean pZer) {
 		jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariariDiruaEman(pPrezioa, pZer);
 	}
-	public static void dendariObjektuakEman(String pJokalaria, Objektuak[] pObjektuak, boolean pZer) {
+	public static void dendariObjektuakEman(String pJokalaria, ArrayList<Objektuak> pObjektuak, boolean pZer) {
 		jokalariLista[jokalariarenPosLortu(pJokalaria)].dendariObjektuakEman(pObjektuak, pZer);
 	}
-	public static void jokalariariObjektuakEman(String pJokalaria, Objektuak[] pObjektuak, boolean pZer) {
+	public static void jokalariariObjektuakEman(String pJokalaria, ArrayList<Objektuak> pObjektuak, boolean pZer) {
 		jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariariObjektuakEman(pObjektuak, pZer);
+	}
+	public static boolean jokalariakDiruaDu(String pJokalaria, int pPrezioa) {
+		return jokalariLista[jokalariarenPosLortu(pJokalaria)].jokalariakDiruaDu(pPrezioa);
 	}
 }

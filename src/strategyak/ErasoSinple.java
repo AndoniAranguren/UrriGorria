@@ -1,4 +1,6 @@
-package negozioLogika;
+package strategyak;
+
+import negozioLogika.Mapa;
 
 public class ErasoSinple implements StrategyArmak{
 	public ErasoSinple(){

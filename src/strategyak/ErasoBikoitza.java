@@ -1,4 +1,6 @@
-package negozioLogika;
+package strategyak;
+
+import negozioLogika.Mapa;
 
 public class ErasoBikoitza implements StrategyArmak{
 	public ErasoBikoitza(){

@@ -50,14 +50,7 @@ public abstract class Jokalariak {
 	public boolean izenHauDu(String pJ) {
 		return pJ==izena;
 	}
-	public int jokalariakDiruaDu(String pJokalaria, String pErosketa) {
-		int diruaDu=-1;									//diru nahikorik ez badu, zenb negatiboa bueltatzen du
-		if(denda.zenbatBalioDu(pErosketa)<=dirua){
-			diruaDu=denda.zenbatBalioDu(pErosketa);		//diru nahikoa baldin badu, dirua bueltatzen du
-		}
-		return diruaDu;
-	}
-	public Objektuak[] dendakIzakinakDitu(String pErosketa) {
+	public ArrayList<Objektuak> dendakIzakinakDitu(Erosketa pErosketa) {
 		return denda.dendakIzakinakDitu(pErosketa);		//Izakinik ez baldin badu, null bat bueltatuko du
 	}
 	public void jokalariariDiruaEman(int pPrezioa, boolean pZer) { 
@@ -65,17 +58,17 @@ public abstract class Jokalariak {
 		if(pZer==true)	dirua+=pPrezioa;
 		else			dirua-=pPrezioa;
 	}
-	public void dendariObjektuakEman(Objektuak[] pObjektuak, boolean pZer) {
+	public void dendariObjektuakEman(ArrayList<Objektuak> pObjektuak, boolean pZer) {
 		// TODO Auto-generated method stub
 		denda.objektuakEman(pObjektuak,pZer);
 	}
-	public void jokalariariObjektuakEman(Objektuak[] pObjektuak, boolean pZer) {
+	public void jokalariariObjektuakEman(ArrayList<Objektuak> pObjektuak, boolean pZer) {
 		inb.objektuakEman(pObjektuak,pZer);
 	}
 	public String izenaLortu() {
 		return izena;
 	}
-	public boolean objektuakDitu(Objektuak[] pObjektuak) {
+	public boolean objektuakDitu(ArrayList<Objektuak> pObjektuak) {
 		return inb.objektuakDitu(pObjektuak);
 	}
 	public void jokalariariErasotu(String pNork, Objektuak pObjektua, int pX, int pY,char pNorabide, boolean pZer) {
@@ -86,5 +79,8 @@ public abstract class Jokalariak {
 	}
 	public String[][] mapaInterpretatu(String pNork){
 		return mapa.mapaInterpretatu(pNork);
+	}
+	public boolean jokalariakDiruaDu(int pPrezioa) {
+		return (dirua>=pPrezioa);
 	}
 }

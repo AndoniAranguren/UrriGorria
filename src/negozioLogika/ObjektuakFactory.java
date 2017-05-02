@@ -1,4 +1,10 @@
 package negozioLogika;
+
+import strategyak.ErabiliRadarra;
+import strategyak.ErasoBikoitza;
+import strategyak.ErasoLineal;
+import strategyak.ErasoSinple;
+
 public class ObjektuakFactory {
 
 	private static ObjektuakFactory nObjektuakFactory = null;

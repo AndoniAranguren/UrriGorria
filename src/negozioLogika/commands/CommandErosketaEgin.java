@@ -3,16 +3,20 @@ package negozioLogika.commands;
 import negozioLogika.Objektuak;
 import negozioLogika.Partida;
 
+import java.util.ArrayList;
+
+import negozioLogika.Erosketa;
+
 public class CommandErosketaEgin extends Commands {
-	String erosketa;
-	Objektuak[] objektuak=null;
+	Erosketa erosketa;
+	ArrayList<Objektuak> objektuak=null;
 	int prezioa=0;
 	
-	public CommandErosketaEgin(String pJ, String pErosketa){
+	public CommandErosketaEgin(String pJ, Erosketa pErosketa){
 		//Datuak gorde----------
 		super.exekutatu();
 		objektuak=Partida.dendakIzakinakDitu(jokalaria,erosketa);
-		prezioa=Partida.jokalariakDiruaDu(jokalaria,erosketa);
+		prezioa=pErosketa.getPrezioa();
 		//----------------------
 	}
 	
@@ -33,6 +37,6 @@ public class CommandErosketaEgin extends Commands {
 	}
 	
 	private boolean konprobatu(){
-		return (objektuak!=null&&prezioa>=0);
+		return (objektuak!=null&&Partida.jokalariakDiruaDu(jokalaria,prezioa));
 	}
 }
