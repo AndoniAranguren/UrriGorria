@@ -2,7 +2,7 @@ package negozioLogika;
 
 public class Mapa {
 	//Atributuak
-	private static int tamaina=10;
+	public static final int tamaina=10;
 	private Tile[][] jokalariMapa;
 	String jabea;
 	
