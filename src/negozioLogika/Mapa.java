@@ -92,4 +92,12 @@ public class Mapa {
 		}
 		return mapa;
 	}
+	public boolean ezkutuaJarri(String pNork, int pX, int pY, boolean pZer){
+		if (!jokalariMapa[pX][pY].jabeaDa(pNork)) return false;
+		else if(jokalariMapa[pX][pY] instanceof ItsasontziTile) return false;
+		else{
+			((ItsasontziTile)jokalariMapa[pX][pY]).ezkutuaJarri(pZer);
+			return true;
+		}
+	}
 }

@@ -15,9 +15,9 @@ public class ItsasontziTile extends Tile {
 	}
 	
 	public void bizitzaAldatu(int pIndarra, boolean pZer){
-		if(!pZer){
+		if(pZer){
 			if(itsasontzi.ezkutuaDauka()){
-				itsasontzi.ezkutuariJo(pIndarra);
+				itsasontzi.ezkutuariJo(pIndarra, pZer);
 			}
 			else{
 				bizitza-=pIndarra;
@@ -26,14 +26,15 @@ public class ItsasontziTile extends Tile {
 				}
 			}
 		}
-		else{//erregenera daiteke, hau da, suntsituta badago ondo egotera pasako da BAINA itsasontzia guztiz suntsitua balego EZ
-			bizitza=100;
+		else{
+			if (bizitza<100) bizitza=100;
+			else itsasontzi.ezkutuariJo(pIndarra, pZer);
 		}
 	}
 	public boolean suntsitutaDago(){
 		return bizitza<=0;
 	}
-	public void ezkutuaJarri(){
-		itsasontzi.ezkutuaJarri();
+	public void ezkutuaJarri(boolean pZer){
+		itsasontzi.ezkutuaJarri(pZer);
 	}
 }

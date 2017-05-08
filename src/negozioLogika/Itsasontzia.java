@@ -8,11 +8,13 @@ import negozioLogika.commands.CommandItsasontziaIpini;
 
 public class Itsasontzia extends Objektuak {
 	protected final int luzeera,prezioa;
+	private int ezkutua;
 	private final String jabea=null;
 	private boolean suntsituta;
 	private ArrayList<ItsasontziTile> tileLista;
 	public Itsasontzia(String pMota, int pLuzeera, int pPrezioa){
 		super(pMota);
+		ezkutua=0;
 		luzeera = pLuzeera;
 		prezioa = pPrezioa;
 		tileLista= new ArrayList<ItsasontziTile>();
@@ -66,6 +68,17 @@ public class Itsasontzia extends Objektuak {
 	public int luzeera() {
 		// TODO Auto-generated method stub
 		return luzeera;
+	}
+	public void ezkutuaJarri(boolean pZer){
+		if(pZer) ezkutua=200;
+		else ezkutua-=200;
+	}
+	public boolean ezkutuaDauka(){
+		return ezkutua!=0;
+	}
+	public void ezkutuariJo(int pIndarra, boolean pZer){
+		if (pZer) this.ezkutua-=pIndarra;
+		else this.ezkutua+=pIndarra;
 	}
 }
 
