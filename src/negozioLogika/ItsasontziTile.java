@@ -15,16 +15,12 @@ public class ItsasontziTile extends Tile {
 	}
 	
 	public void bizitzaAldatu(int pIndarra, boolean pZer){
-		if(pZer){
-			if(itsasontzi.ezkutuaDauka()){
+		if(this.suntsitutaDago()) bizitza=0;
+		else if(pZer){
+			if(itsasontzi.ezkutuaDauka()||this.suntsitutaDago()){
 				itsasontzi.ezkutuariJo(pIndarra, pZer);
 			}
-			else{
-				bizitza-=pIndarra;
-				if(this.suntsitutaDago()){
-					itsasontzi.suntsitutaDago();
-				}
-			}
+			else bizitza-=pIndarra;
 		}
 		else{
 			if (bizitza<100) bizitza=100;
@@ -37,4 +33,5 @@ public class ItsasontziTile extends Tile {
 	public void ezkutuaJarri(boolean pZer){
 		itsasontzi.ezkutuaJarri(pZer);
 	}
+	
 }

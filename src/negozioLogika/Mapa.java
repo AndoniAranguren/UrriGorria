@@ -60,7 +60,7 @@ public class Mapa {
 					jokalariMapa[pX][pY]= tile;
 				}
 				else{
-					tile=(ItsasontziTile)jokalariMapa[pX][pY];				
+					tile=((ItsasontziTile)jokalariMapa[pX][pY]);				
 					jokalariMapa[pX][pY]=new UraTile(pJabea, pX, pY);
 				}
 				//Izan ahal da, tile bateri erasotzean itsasontzi nagusia ez jasotzea
@@ -92,12 +92,13 @@ public class Mapa {
 		}
 		return mapa;
 	}
-	public boolean ezkutuaJarri(String pNork, int pX, int pY, boolean pZer){
-		if (!jokalariMapa[pX][pY].jabeaDa(pNork)) return false;
-		else if(jokalariMapa[pX][pY] instanceof ItsasontziTile) return false;
-		else{
-			((ItsasontziTile)jokalariMapa[pX][pY]).ezkutuaJarri(pZer);
-			return true;
-		}
+	public void ezkutuaJarri(String pNork, int pX, int pY, boolean pZer){
+		if (!jokalariMapa[pX][pY].jabeaDa(pNork));
+		else if(jokalariMapa[pX][pY] instanceof ItsasontziTile);
+		else ((ItsasontziTile)jokalariMapa[pX][pY]).ezkutuaJarri(pZer);
+	}
+	
+	public void radarraErabili(String pNork,int pX, int pY, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,pZer)
+		error
 	}
 }

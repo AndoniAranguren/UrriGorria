@@ -83,4 +83,5 @@ public abstract class Jokalariak {
 	public boolean jokalariakDiruaDu(int pPrezioa) {
 		return (dirua>=pPrezioa);
 	}
+
 }
