@@ -2,15 +2,17 @@ package negozioLogika;
 
 import java.util.ArrayList;
 
+import frontend.UrriGorriaUI;
+
 public class Partida {
 	private static Partida nPartida=null;
 	
 	private static ArrayList<Jokalariak> jokalariLista;
 	private static int maxJok=2;
 
-	private UrriGorria ui= UrriGorria.getUrriGorria();
 	private boolean jokatzenJarraitu;
 	private static int[] egoera= new int[3];
+	private UrriGorriaUI ui;
 	//fasea=egoera[0];
 	//txanda=egoera[1];
 	//iraupena=egoera[2];
@@ -27,7 +29,7 @@ public class Partida {
 	}
 	
 	public void partidaJokatu(){
-		ui.jokatu();
+		this.ui = new UrriGorriaUI();
 		while(jokatzenJarraitu){
 			
 		}
