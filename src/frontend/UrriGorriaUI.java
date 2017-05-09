@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import negozioLogika.UrriGorria;
 import negozioLogika.interfaces.UGKonstanteak;
 
 public class UrriGorriaUI extends JFrame implements UGKonstanteak {
@@ -14,6 +15,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	//private TableroaGUI tableroa = new TableroaGUI();
 	//private ItsasontziaGUI ontzia = new ItsasontziaGUI();
 	private JPanel oraingoa;
+	private static UrriGorriaUI ui;
 
 	public UrriGorriaUI() {
 		this.setTitle(IZENBURUA);
@@ -23,6 +25,11 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
+
+	public static UrriGorriaUI getUrriGorriaUI() {
+		return ui == null ? (ui = new UrriGorriaUI()) : ui;
+	}
+	
 	
 	public void panelaAldatu(JPanel jartzeko) {
 		this.remove(oraingoa);
@@ -31,6 +38,5 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		setBounds(500, 200, 475, 475);
 		this.revalidate();
 		this.repaint();
-	}
-	
+	}	
 }
