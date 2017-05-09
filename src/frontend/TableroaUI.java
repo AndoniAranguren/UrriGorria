@@ -30,13 +30,12 @@ public class TableroaUI extends JPanel implements UGKonstanteak, ActionListener 
 	public TableroaUI(String pIzena) {
 		jokalaria=pIzena;
 		ArrayList<String> inb=Partida.dendaEman(jokalaria);
-		//this.add(pMapa, BorderLayout.CENTER);
-		this.add(pInbentarioa, BorderLayout.CENTER);
-		pInbentarioa.setLayout(new BoxLayout(pInbentarioa,BoxLayout.Y_AXIS));
-		pInbentarioa.setLayout(new GridLayout(inb.size(), 1));
-		//pMapa.setLayout(new GridLayout(tamaina, tamaina));
-		this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
 		
+//		pInbentarioa.setLayout(new BoxLayout(pInbentarioa,BoxLayout.Y_AXIS));
+		pInbentarioa.setLayout(new GridLayout(inb.size(), 1));
+		pMapa.setLayout(new GridLayout(tamaina, tamaina));
+//		this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+
 		tableroa = new JButton[tamaina][tamaina];
 		inbentario = new JButton[inb.size()];
 		
@@ -57,6 +56,8 @@ public class TableroaUI extends JPanel implements UGKonstanteak, ActionListener 
 				pMapa.add(tableroa[i][j]);
 			}
 		}
+		this.add(pMapa, BorderLayout.PAGE_START);
+		this.add(pInbentarioa, BorderLayout.PAGE_END);
 	}
 	private void tableroaEguneratu(){
 		Partida.getPartida();

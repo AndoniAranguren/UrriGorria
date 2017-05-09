@@ -2,15 +2,18 @@ package negozioLogika;
 
 import java.util.ArrayList;
 
+import frontend.TableroaUI;
+import frontend.UrriGorriaUI;
+
 public class Partida {
 	private static Partida nPartida=null;
 	
 	private static ArrayList<Jokalariak> jokalariLista;
 	private static int maxJok=2;
 
-	private UrriGorria ui= UrriGorria.getUrriGorria();
 	private boolean jokatzenJarraitu;
 	private static int[] egoera= new int[3];
+	public UrriGorriaUI ui;
 	//fasea=egoera[0];
 	//txanda=egoera[1];
 	//iraupena=egoera[2];
@@ -20,6 +23,7 @@ public class Partida {
 		egoera[2]=0;
 		egoera[1]=0;
 		egoera[0]=-1;
+		ui=new UrriGorriaUI();
 	}	
 	public static synchronized Partida getPartida(){
 		if(nPartida==null){ nPartida = new Partida();}
@@ -27,7 +31,6 @@ public class Partida {
 	}
 	
 	public void partidaJokatu(){
-		ui.jokatu();
 		while(jokatzenJarraitu){
 			
 		}
@@ -98,6 +101,6 @@ public class Partida {
 		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).inbentarioaEman();
 	}
 	public static ArrayList<String> dendaEman(String pJokalaria) {
-		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).inbentarioaEman();
+		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).dendaEman();
 	}
 }
