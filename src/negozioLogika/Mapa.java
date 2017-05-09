@@ -2,7 +2,7 @@ package negozioLogika;
 
 public class Mapa {
 	//Atributuak
-	public static final int tamaina=10;
+	public static int tamaina=10;
 	private Tile[][] jokalariMapa;
 	String jabea;
 	
@@ -15,8 +15,8 @@ public class Mapa {
 		
 	//Metodoak
 	private void urezBete(Tile[][] pMap){
-		for(int Y=0;Y<=tamaina; Y++){
-			for(int X=0;X<=tamaina; X++){
+		for(int Y=0;Y<=tamaina-1; Y++){
+			for(int X=0;X<=tamaina-1; X++){
 				pMap[Y][X]=TileFactory.getTileFactory().createUraTile(jabea, X, Y);
 			}
 		}
@@ -60,7 +60,7 @@ public class Mapa {
 					jokalariMapa[pX][pY]= tile;
 				}
 				else{
-					tile=(ItsasontziTile)jokalariMapa[pX][pY];				
+					tile=((ItsasontziTile)jokalariMapa[pX][pY]);				
 					jokalariMapa[pX][pY]=new UraTile(pJabea, pX, pY);
 				}
 				//Izan ahal da, tile bateri erasotzean itsasontzi nagusia ez jasotzea

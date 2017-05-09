@@ -8,32 +8,29 @@ public class ItsasontziTile extends Tile {
 	public ItsasontziTile(String pJabea, int pX, int pY, Itsasontzia pItsasontzia) {
 		// TODO Auto-generated constructor stub
 		super(pJabea,pX, pY);
-		identifikadorea="ItsasontziTile";
 		itsasontzi = pItsasontzia;
 		super.kokatuAhalDa=false;
 		super.identifikadorea="Itsasontzi";
 	}
 	
 	public void bizitzaAldatu(int pIndarra, boolean pZer){
-		if(!pZer){
-			if(itsasontzi.ezkutuaDauka()){
-				itsasontzi.ezkutuariJo(pIndarra);
+		if(this.suntsitutaDago()) bizitza=0;
+		else if(pZer){
+			if(itsasontzi.ezkutuaDauka()||this.suntsitutaDago()){
+				itsasontzi.ezkutuariJo(pIndarra, pZer);
 			}
-			else{
-				bizitza-=pIndarra;
-				if(this.suntsitutaDago()){
-					itsasontzi.suntsitutaDago();
-				}
-			}
+			else bizitza-=pIndarra;
 		}
-		else{//erregenera daiteke, hau da, suntsituta badago ondo egotera pasako da BAINA itsasontzia guztiz suntsitua balego EZ
-			bizitza=100;
+		else{
+			if (bizitza<100) bizitza=100;
+			else itsasontzi.ezkutuariJo(pIndarra, pZer);
 		}
 	}
 	public boolean suntsitutaDago(){
 		return bizitza<=0;
 	}
-	public void ezkutuaJarri(){
-		itsasontzi.ezkutuaJarri();
+	public void ezkutuaJarri(boolean pZer){
+		itsasontzi.ezkutuaJarri(pZer);
 	}
+	
 }

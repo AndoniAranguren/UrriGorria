@@ -3,6 +3,7 @@ package negozioLogika;
 public abstract class Objektuak {
 	protected String izena;
 	
+
 	public Objektuak(String pIzena){
 		this.izena=pIzena;
 	}
@@ -13,5 +14,8 @@ public abstract class Objektuak {
 		return pMapa;
 	}
 	public void erabili(String nori, int koordX, int koordY, char norabidea) {
+	}
+	public String getIzena(){
+		return izena;
 	}
 }

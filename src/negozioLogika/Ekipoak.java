@@ -11,9 +11,9 @@ public class Ekipoak extends Objektuak {
 		portaera=pPortaera;
 	}
 
-	public Mapa erabili(String pNork, Mapa pMapa, int pX, int pY, char pNorabide, boolean pZer) {
+	public Mapa erabili(String pNork, Mapa pMapa, int pX, int pY, boolean pZer) {
 		// TODO Auto-generated method stub
-		return portaera.erabili(pNork, pMapa, pX, pY, pNorabide, pZer);
+		return portaera.erabili(pNork, pMapa, pX, pY, pZer);
 	}
 
 }

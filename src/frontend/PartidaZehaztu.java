@@ -1,6 +1,7 @@
 package frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import externals.Irudiak;
+import negozioLogika.Partida;
 import negozioLogika.UrriGorria;
 import negozioLogika.interfaces.UGKonstanteak;
 
@@ -34,10 +36,10 @@ public class PartidaZehaztu extends JPanel implements UGKonstanteak {
 	
 	private void norekinZehaztu() {
 		ia = new JRadioButton("Makinaren aurka", true);
-		ia.setActionCommand(String.valueOf(MAKINAREN_AURKA));
+		ia.setActionCommand("MAKINAREN_AURKA");
 		ia.addActionListener(gureAL -> getZailtasuna());
 		bijokalari = new JRadioButton("Bi jokalari");
-		bijokalari.setActionCommand(String.valueOf(BI_JOKALARI));
+		bijokalari.setActionCommand("BI_JOKALARI");
 		bijokalari.addActionListener(gureAL -> getZailtasuna());
 		norekin = new ButtonGroup();
 		norekin.add(ia);
@@ -50,9 +52,9 @@ public class PartidaZehaztu extends JPanel implements UGKonstanteak {
 	
 	private void zailtasunaZehaztu() {
 		erreza = new JRadioButton("Erreza", true);
-		erreza.setActionCommand(String.valueOf(MAKINAREN_AURKA_ERREZA));
+		erreza.setActionCommand("MAKINAREN_AURKA_ERREZA");
 		zaila = new JRadioButton("Zaila");
-		zaila.setActionCommand(String.valueOf(MAKINAREN_AURKA_ZAILA));
+		zaila.setActionCommand("MAKINAREN_AURKA_ZAILA");
 		zailtasuna = new ButtonGroup();
 		zailtasuna.add(erreza);
 		zailtasuna.add(zaila);
@@ -64,18 +66,17 @@ public class PartidaZehaztu extends JPanel implements UGKonstanteak {
 	}
 	
 	public void partidaHasi(){
+		String info;
 		ButtonModel oraingoa = zailtasuna.getSelection();
-		if(oraingoa.isEnabled()) 
-			UrriGorria.getUrriGorria().setPartida(Integer.parseInt(oraingoa.getActionCommand()));
-		else
-			UrriGorria.getUrriGorria().setPartida(BI_JOKALARI);
-		UrriGorria.getUrriGorria().getUi().panelaAldatu(new OntziakAukeratu1());
+		info=(oraingoa.isEnabled() ? oraingoa.getActionCommand(): "BI_JOKALARI");
+		Partida.getPartida().partidaZehaztu(info);
+		UrriGorria.getUrriGorria().getUi().panelaAldatu(new TableroaUI(Partida.norenTxandaDa()));
 	}
 	
 	public void getZailtasuna(){
 		ButtonModel oraingoa = norekin.getSelection();
-		int zenbakia = Integer.parseInt(oraingoa.getActionCommand());
-		erreza.setEnabled(zenbakia==MAKINAREN_AURKA ? true : false);
-		zaila.setEnabled(zenbakia==MAKINAREN_AURKA ? true : false);
+		String zailtasuna = oraingoa.getActionCommand();
+		erreza.setEnabled(zailtasuna.equals("MAKINAREN_AURKA") ? true : false);
+		zaila.setEnabled(zailtasuna.equals("MAKINAREN_AURKA") ? true : false);
 	}
 }

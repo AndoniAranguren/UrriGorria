@@ -15,6 +15,7 @@ public class CommandErosketaEgin extends Commands {
 	public CommandErosketaEgin(String pJ, Erosketa pErosketa){
 		//Datuak gorde----------
 		super.exekutatu();
+		erosketa=pErosketa;
 		objektuak=Partida.dendakIzakinakDitu(jokalaria,erosketa);
 		prezioa=pErosketa.getPrezioa();
 		//----------------------

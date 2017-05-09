@@ -12,9 +12,9 @@ public class OntziakAukeratu1 extends JPanel implements UGKonstanteak {
 	private static final long serialVersionUID = 1L;
 	private JPanel tableroa, txt;
 
-	public OntziakAukeratu1() {
+	public OntziakAukeratu1(String pIzena) {
 		this.setLayout(new BorderLayout());
-		tableroa = new TableroaUI();
+		tableroa = new TableroaUI(pIzena);
 		this.add(tableroa, BorderLayout.CENTER);
 		//txt = new TXT1();
 		//this.add(txt, BorderLayout.NORTH);

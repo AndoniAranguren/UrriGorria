@@ -3,23 +3,33 @@ package negozioLogika;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import frontend.OntziakAukeratu1;
+import negozioLogika.commands.CommandErosketaEgin;
+
 public abstract class Jokalariak {
 	
-	private String izena;
+	protected String izena;
 	boolean bizirik;
 	private Mapa mapa;
 	private Inbentarioa inb;
 	private Denda denda;
-	private int dirua = 0;
+	private int dirua;
 	private ArrayList<Itsasontzia> nireItsasontziak;
-
-	
 	
 	public Jokalariak(String pIzena){
 		izena=pIzena;
 		bizirik=true;
+		mapa= new Mapa(izena);
+		dirua = 5000;
+		denda = new Denda();
+		inb = new Inbentarioa();
 	}
-	
+	public abstract void itsasontziakIpini();
+	public void jokalariaErreseteatu(){
+		denda= new Denda();
+		inb = new Inbentarioa();
+		dirua=5000;
+	}
 	
 	public boolean kokatuDaiteke( int pX, int pY,  char pNorabidea, int pLuzeera){
 		return mapa.kokatuDaiteke(pX, pY,  pNorabidea, pLuzeera);
@@ -82,5 +92,11 @@ public abstract class Jokalariak {
 	}
 	public boolean jokalariakDiruaDu(int pPrezioa) {
 		return (dirua>=pPrezioa);
+	}
+	public ArrayList<String> inbentarioaEman() {
+		return inb.inbentarioaEman();
+	}
+	public ArrayList<String> dendaEman() {
+		return denda.dendaEman();
 	}
 }

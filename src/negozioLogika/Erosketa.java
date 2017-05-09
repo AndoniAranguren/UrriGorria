@@ -3,7 +3,7 @@ import negozioLogika.commands.CommandErosketaEgin;
 import java.util.ArrayList;
 public class Erosketa {
 	
-	private ArrayList<Objektuak> erosketak;
+	private ArrayList<Objektuak> erosketak = new ArrayList<Objektuak>();
 	private int prezioa;
 	private String mota;
 	
@@ -19,7 +19,9 @@ public class Erosketa {
 		new CommandErosketaEgin(pNork,this).exekutatu();
 	}
 	public ArrayList<Objektuak> getObjektuak() {
-		// TODO Auto-generated method stub
 		return erosketak;
+	}
+	public String getIzena(){
+		return mota;
 	}
 }

@@ -13,76 +13,74 @@ public class ErosketaFactory {
 	public Erosketa createErosketa(String pMota){
 		ArrayList<Objektuak> lista= new ArrayList<Objektuak>();
 		int prezioa=0;
-		if(pMota=="ErosketaBomba"){ 
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba"); 
+		Objektuak o;
+		if(pMota.equals("ErosketaBomba")){ 
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba"); 
 			lista.add(o);
-			prezioa=prezioa+100;
-							}
-		else if(pMota=="Misila"){
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misila"); 
-			lista.add(o);
-			prezioa=prezioa+200;
+			prezioa=100;
 		}
-		else if (pMota=="Misil Zuzendua"){
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua"); 
+		else if(pMota.equals("Misil")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil"); 
 			lista.add(o);
-			prezioa=prezioa+300;
+			prezioa=200;
+		}
+		else if (pMota.equals("Misil Zuzendua")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua"); 
+			lista.add(o);
+			prezioa=300;
 			
 		}
-		else if (pMota=="Misil Zuzendua Pro"){
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua Pro"); 
+		else if (pMota.equals("Misil Zuzendua Pro")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua Pro"); 
 			lista.add(o);
-			prezioa=prezioa+300;
+			prezioa=300;
 		}
-		else if (pMota=="Radarra") {
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra"); 
+		else if (pMota.equals("Radarra")) {
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra"); 
 			lista.add(o);
-			prezioa=prezioa+200;
+			prezioa=200;
 		}
-		else if (pMota=="Fragata"){ 
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("Fragata"); 
+		else if (pMota.equals("Fragata")){ 
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Fragata"); 
 			lista.add(o);
-			prezioa=prezioa+100;
+			prezioa=100;
 		}
-		else if (pMota=="Itsapekoa") { 
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspekoa"); 
+		else if (pMota.equals("Itsaspekoa")) { 
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspekoa"); 
 			lista.add(o);
-			prezioa=prezioa+150;
+			prezioa=150;
 		}
-		else if (pMota=="Suntsitzailea") { 
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("Suntsitzailea"); 
+		else if (pMota.equals("Suntsitzailea")) { 
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Suntsitzailea"); 
 			lista.add(o);
-			prezioa=prezioa+175;
+			prezioa=175;
 		}
-		else if (pMota=="HegazkinOntzia") { 
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia"); 
+		else if (pMota.equals("HegazkinOntzia")) { 
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia"); 
 			lista.add(o);
-			prezioa=prezioa+250;
+			prezioa=250;
 		}
-		else if (pMota=="Itsasontzi Guztiak"){
+		else if (pMota.equals("Itsasontzi Guztiak")){
 			//1
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia"); 
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia"); 
 			lista.add(o);
 			//2
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspekoa"); 
-			for(int i=0;i<2;i++){
-				lista.add(o);}
+			for(int i=0;i<2;i++) 	lista.add(o); 
 			//3
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Suntsitzailea"); 
-			for(int i=0;i<3;i++){
-				lista.add(o);}
+			for(int i=0;i<3;i++) 	lista.add(o);
 			//4
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Fragata"); 
-			for(int i=0;i<4;i++){
-				lista.add(o);}
-			prezioa=prezioa+1200;
+			for(int i=0;i<4;i++)	lista.add(o);
+			prezioa=1200;
 		}
-		else if(pMota=="x5Bomba"){
-			Objektuak o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba"); 
+		else if(pMota.equals("x5Bomba")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba"); 
 			for(int i=0;i<5;i++){
 				lista.add(o);}
+			prezioa=400;
 		}
-		Erosketa er=new Erosketa(prezioa, pMota, lista);
-		return er;
+		return new Erosketa(prezioa, pMota, lista);
 	}
 }
