@@ -2,7 +2,9 @@ package frontend;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -24,21 +26,27 @@ public class TableroaUI extends JPanel implements UGKonstanteak, ActionListener 
 	private String jokalaria;
 	private JButton[][] tableroa;
 	private JButton[] inbentario;
-	private static final int tamaina = Mapa.tamaina;
-	private JPanel pMapa= new JPanel(), pInbentarioa= new JPanel();
+	private static final int zut = Mapa.zut;
+	private static final int erren = Mapa.erren;
+	private JPanel pTableroa= new JPanel(), pInbentarioa= new JPanel();
+	ArrayList<String> inb = new ArrayList<>();
 	
 	public TableroaUI(String pIzena) {
 		jokalaria=pIzena;
-		ArrayList<String> inb=Partida.dendaEman(jokalaria);
+		this.setLayout(new GridLayout(zut, erren));
+//		inb = Partida.dendaEman(jokalaria);
+//		inbentario = new JButton[inb.size()];
+//		pInbentarioa.setLayout(new GridLayout(inb.size(), 1));
 		
-//		pInbentarioa.setLayout(new BoxLayout(pInbentarioa,BoxLayout.Y_AXIS));
-		pInbentarioa.setLayout(new GridLayout(inb.size(), 1));
-		pMapa.setLayout(new GridLayout(tamaina, tamaina));
-//		this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
-
-		tableroa = new JButton[tamaina][tamaina];
-		inbentario = new JButton[inb.size()];
+		tableroa = new JButton[zut][erren];
+//		pTableroa.setLayout(new GridLayout(zut, erren));
 		
+//		this.inbentarioaHasieratu();
+		this.tableroaHasieratu();
+//		this.add(pInbentarioa, BorderLayout.PAGE_END);
+	}
+	
+	private void inbentarioaHasieratu() {
 		for(int i=0; i<inb.size(); i++){
 			inbentario[i] = new JButton();
 			inbentario[i].setName(inb.get(i));
@@ -47,31 +55,45 @@ public class TableroaUI extends JPanel implements UGKonstanteak, ActionListener 
 			inbentario[i].setIcon(new ImageIcon(TableroaUI.class.getResource("/externals/ontzia.png")));
 			pInbentarioa.add(inbentario[i]);
 		}
-		for(int i=0; i<tamaina; i++){
-			for(int j=0; j<tamaina; j++){
+	}
+	
+	private void tableroaHasieratu() {
+		for(int i=0; i<zut; i++){
+			for(int j=0; j<erren; j++){
 				tableroa[i][j] = new JButton();
 				tableroa[i][j].setName(i + "-" + j);
 				tableroa[i][j].addActionListener(this);
-				tableroa[i][j].setIcon(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
-				pMapa.add(tableroa[i][j]);
+				tableroa[i][j].setIcon(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));	
+				this.add(tableroa[i][j]);
 			}
 		}
-		this.add(pMapa, BorderLayout.PAGE_START);
-		this.add(pInbentarioa, BorderLayout.PAGE_END);
 	}
+	
+	private Image iconScaled(String icon) {
+		Dimension size = tableroa[0][0].getSize();
+		int height = (int) size.getHeight();
+		System.out.println(height);
+		int width = (int) size.getWidth();
+		ImageIcon icona = new ImageIcon(TableroaUI.class.getResource(icon));
+		Image imga = icona.getImage();
+		Image imgb = imga.getScaledInstance(width, height, java.awt.Image.SCALE_FAST);
+		return imgb;
+	}
+	
 	private void tableroaEguneratu(){
 		Partida.getPartida();
 		String aux="/externals/ura.png";
 		String[][] mapa=Partida.mapaInterpretatu(jokalaria, jokalaria);
-		for(int i=0; i<tamaina; i++){
-			for(int j=0; j<tamaina; j++){
+		for(int i=0; i<zut; i++){
+			for(int j=0; j<erren; j++){
 				if(mapa[i][j].equals("Ura")) aux="/externals/ura.png";
 				else if(mapa[i][j].equals("Itsasontzi")) aux="/externals/ontzia.png";
 				tableroa[i][j].setIcon(new ImageIcon(TableroaUI.class.getResource(aux)));
-				pMapa.add(tableroa[i][j]);
+				pTableroa.add(tableroa[i][j]);
 			}
 		}
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton botoia = (JButton) e.getSource();

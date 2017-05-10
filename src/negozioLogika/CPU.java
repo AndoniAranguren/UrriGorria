@@ -6,5 +6,11 @@ public class CPU extends Jokalariak {
 		super(pIzena);
 		zailtasuna=pZailtasuna;
 	}
+	
+	@Override
+	public void itsasontziakIpini() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

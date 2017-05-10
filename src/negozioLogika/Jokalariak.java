@@ -24,7 +24,9 @@ public abstract class Jokalariak {
 		denda = new Denda();
 		inb = new Inbentarioa();
 	}
+	
 	public abstract void itsasontziakIpini();
+	
 	public void jokalariaErreseteatu(){
 		denda= new Denda();
 		inb = new Inbentarioa();

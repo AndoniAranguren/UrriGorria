@@ -2,10 +2,6 @@ package negozioLogika;
 
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-=======
-import frontend.TableroaUI;
->>>>>>> branch 'Branch1' of https://github.com/Kaskagues/UrriGorria.git
 import frontend.UrriGorriaUI;
 
 public class Partida {
@@ -16,11 +12,7 @@ public class Partida {
 
 	private boolean jokatzenJarraitu;
 	private static int[] egoera= new int[3];
-<<<<<<< HEAD
 	private UrriGorriaUI ui;
-=======
-	public UrriGorriaUI ui;
->>>>>>> branch 'Branch1' of https://github.com/Kaskagues/UrriGorria.git
 	//fasea=egoera[0];
 	//txanda=egoera[1];
 	//iraupena=egoera[2];
@@ -38,14 +30,16 @@ public class Partida {
 	}
 	
 	public void partidaJokatu(){
-<<<<<<< HEAD
 		this.ui = new UrriGorriaUI();
-=======
->>>>>>> branch 'Branch1' of https://github.com/Kaskagues/UrriGorria.git
 		while(jokatzenJarraitu){
 			
 		}
 	}
+	
+	public UrriGorriaUI getUi() {
+		return ui;
+	}
+	
 	private static int jokalariarenPosLortu(String pJ) {
 		int ind =0;
 		Boolean aurkituta=false;
@@ -106,7 +100,7 @@ public class Partida {
 		}else if(pInfo.equals("MAKINAREN_AURKA_ZAILA")){
 			jokalariLista.add(new CPU("1.CPU", 2));
 		}
-		for(Jokalariak jok : jokalariLista)	jok.jokalariaErreseteatu();
+//		for(Jokalariak jok : jokalariLista)	jok.jokalariaErreseteatu();
 	}
 	public static ArrayList<String> inbentarioaEman(String pJokalaria) {
 		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).inbentarioaEman();
