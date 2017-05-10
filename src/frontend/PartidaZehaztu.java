@@ -70,7 +70,7 @@ public class PartidaZehaztu extends JPanel implements UGKonstanteak {
 		ButtonModel oraingoa = zailtasuna.getSelection();
 		info=(oraingoa.isEnabled() ? oraingoa.getActionCommand(): "BI_JOKALARI");
 		Partida.getPartida().partidaZehaztu(info);
-		Partida.getPartida().getUi().panelaAldatu(new TableroaUI(Partida.norenTxandaDa()));
+		Partida.getPartida().getUi().panelaAldatu(new PantailaUI(Partida.norenTxandaDa()));
 	}
 	
 	public void getZailtasuna(){

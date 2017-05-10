@@ -1,6 +1,7 @@
 package frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,7 +15,7 @@ public class OntziakAukeratu1 extends JPanel implements UGKonstanteak {
 
 	public OntziakAukeratu1(String pIzena) {
 		this.setLayout(new BorderLayout());
-		tableroa = new TableroaUI(pIzena);
+		tableroa = new TableroaUI(pIzena, Color.BLACK);
 		this.add(tableroa, BorderLayout.CENTER);
 		//txt = new TXT1();
 		//this.add(txt, BorderLayout.NORTH);

@@ -1,15 +1,12 @@
 package frontend;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -19,51 +16,30 @@ import negozioLogika.Mapa;
 import negozioLogika.ObjektuakFactory;
 import negozioLogika.Partida;
 import negozioLogika.commands.CommandItsasontziaIpini;
-import negozioLogika.interfaces.UGKonstanteak;
 
-public class TableroaUI extends JPanel implements UGKonstanteak, ActionListener {
+public class TableroaUI extends JPanel implements ActionListener {
+	
 	private static final long serialVersionUID = 1L;
 	private String jokalaria;
 	private JButton[][] tableroa;
-	private JButton[] inbentario;
 	private static final int zut = Mapa.zut;
 	private static final int erren = Mapa.erren;
-	private JPanel pTableroa= new JPanel(), pInbentarioa= new JPanel();
-	ArrayList<String> inb = new ArrayList<>();
 	
-	public TableroaUI(String pIzena) {
-		jokalaria=pIzena;
+	public TableroaUI(String pIzena, Color c) {
 		this.setLayout(new GridLayout(zut, erren));
-//		inb = Partida.dendaEman(jokalaria);
-//		inbentario = new JButton[inb.size()];
-//		pInbentarioa.setLayout(new GridLayout(inb.size(), 1));
-		
 		tableroa = new JButton[zut][erren];
-//		pTableroa.setLayout(new GridLayout(zut, erren));
-		
-//		this.inbentarioaHasieratu();
-		this.tableroaHasieratu();
-//		this.add(pInbentarioa, BorderLayout.PAGE_END);
+		this.tableroaHasieratu(c);
 	}
 	
-	private void inbentarioaHasieratu() {
-		for(int i=0; i<inb.size(); i++){
-			inbentario[i] = new JButton();
-			inbentario[i].setName(inb.get(i));
-			inbentario[i].setText(inb.get(i));
-			inbentario[i].addActionListener(this);
-			inbentario[i].setIcon(new ImageIcon(TableroaUI.class.getResource("/externals/ontzia.png")));
-			pInbentarioa.add(inbentario[i]);
-		}
-	}
-	
-	private void tableroaHasieratu() {
+	private void tableroaHasieratu(Color c) {
 		for(int i=0; i<zut; i++){
 			for(int j=0; j<erren; j++){
 				tableroa[i][j] = new JButton();
+				tableroa[i][j].setOpaque(true);
+				tableroa[i][j].setForeground(c);
 				tableroa[i][j].setName(i + "-" + j);
 				tableroa[i][j].addActionListener(this);
-				tableroa[i][j].setIcon(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));	
+//				tableroa[i][j].setIcon(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
 				this.add(tableroa[i][j]);
 			}
 		}
@@ -86,22 +62,22 @@ public class TableroaUI extends JPanel implements UGKonstanteak, ActionListener 
 		String[][] mapa=Partida.mapaInterpretatu(jokalaria, jokalaria);
 		for(int i=0; i<zut; i++){
 			for(int j=0; j<erren; j++){
-				if(mapa[i][j].equals("Ura")) aux="/externals/ura.png";
-				else if(mapa[i][j].equals("Itsasontzi")) aux="/externals/ontzia.png";
-				tableroa[i][j].setIcon(new ImageIcon(TableroaUI.class.getResource(aux)));
-				pTableroa.add(tableroa[i][j]);
+				if(mapa[i][j].equals("Itsasontzi")) aux="/externals/ontzia.png";
+				Image img = this.iconScaled(aux);
+				tableroa[i][j].setIcon(new ImageIcon(img));
+				this.add(tableroa[i][j]);
 			}
 		}
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton botoia = (JButton) e.getSource();
-		int x = Integer.parseInt(botoia.getName().substring(0,1));
-		int y = Integer.parseInt(botoia.getName().substring(2));
-		//botoia.setEnabled(false);
-		new CommandItsasontziaIpini(jokalaria,(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspeko"), x, y, 'N');
-		tableroaEguneratu();
+//		JButton botoia = (JButton) e.getSource();
+//		int x = Integer.parseInt(botoia.getName().substring(0,1));
+//		int y = Integer.parseInt(botoia.getName().substring(2));
+//		//botoia.setEnabled(false);
+//		new CommandItsasontziaIpini(jokalaria,(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspeko"), x, y, 'N');
+//		tableroaEguneratu();
 	}
 
 }

@@ -1,6 +1,7 @@
 package frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,7 +36,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		this.remove(oraingoa);
 		oraingoa = jartzeko;
 		this.add(oraingoa);
-		setBounds(500, 200, 475, 475);
+		setMinimumSize(new Dimension(900, 500));
 		this.revalidate();
 		this.repaint();
 	}	
