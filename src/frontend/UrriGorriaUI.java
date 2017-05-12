@@ -36,7 +36,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		this.remove(oraingoa);
 		oraingoa = jartzeko;
 		this.add(oraingoa);
-		setMinimumSize(new Dimension(900, 500));
+//		setMinimumSize(new Dimension(900, 500));
 		this.revalidate();
 		this.repaint();
 	}	

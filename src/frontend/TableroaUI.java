@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 import negozioLogika.Itsasontzia;
 import negozioLogika.Mapa;
@@ -27,16 +29,20 @@ public class TableroaUI extends JPanel implements ActionListener {
 	
 	public TableroaUI(String pIzena, Color c) {
 		this.setLayout(new GridLayout(zut, erren));
+		this.setBorder(new MatteBorder(5, 0, 5, 0, Color.WHITE));
 		tableroa = new JButton[zut][erren];
 		this.tableroaHasieratu(c);
+//		this.setSize(1, 1);
 	}
 	
 	private void tableroaHasieratu(Color c) {
 		for(int i=0; i<zut; i++){
 			for(int j=0; j<erren; j++){
-				tableroa[i][j] = new JButton();
-				tableroa[i][j].setOpaque(true);
-				tableroa[i][j].setForeground(c);
+				tableroa[i][j] = new JButton(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
+//				tableroa[i][j].setOpaque(false);
+				tableroa[i][j].setBorderPainted(false);
+//				tableroa[i][j].setForeground(c);
+//				tableroa[i][j].setSize(0.5, 0.5);
 				tableroa[i][j].setName(i + "-" + j);
 				tableroa[i][j].addActionListener(this);
 //				tableroa[i][j].setIcon(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
