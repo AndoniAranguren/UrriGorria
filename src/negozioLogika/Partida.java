@@ -1,11 +1,6 @@
 package negozioLogika;
 
 import java.util.ArrayList;
-
-<<<<<<< HEAD
-=======
-import frontend.TableroaUI;
->>>>>>> branch 'Branch1' of https://github.com/Kaskagues/UrriGorria.git
 import frontend.UrriGorriaUI;
 
 public class Partida {
@@ -16,11 +11,9 @@ public class Partida {
 
 	private boolean jokatzenJarraitu;
 	private static int[] egoera= new int[3];
-<<<<<<< HEAD
+
 	private UrriGorriaUI ui;
-=======
-	public UrriGorriaUI ui;
->>>>>>> branch 'Branch1' of https://github.com/Kaskagues/UrriGorria.git
+
 	//fasea=egoera[0];
 	//txanda=egoera[1];
 	//iraupena=egoera[2];
@@ -38,10 +31,7 @@ public class Partida {
 	}
 	
 	public void partidaJokatu(){
-<<<<<<< HEAD
 		this.ui = new UrriGorriaUI();
-=======
->>>>>>> branch 'Branch1' of https://github.com/Kaskagues/UrriGorria.git
 		while(jokatzenJarraitu){
 			
 		}

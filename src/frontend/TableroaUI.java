@@ -24,7 +24,7 @@ public class TableroaUI extends JPanel implements UGKonstanteak, ActionListener 
 	private String jokalaria;
 	private JButton[][] tableroa;
 	private JButton[] inbentario;
-	private static final int tamaina = Mapa.tamaina;
+	private static final int tamaina = Mapa.getTamaina();
 	private JPanel pMapa= new JPanel(), pInbentarioa= new JPanel();
 	
 	public TableroaUI(String pIzena) {
