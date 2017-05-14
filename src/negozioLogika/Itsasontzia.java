@@ -50,23 +50,14 @@ public class Itsasontzia extends Objektuak {
 		suntsituta=suntsitutaDago;
 	}
 	public boolean hauDa(Itsasontzia pOntzi) {
-		// TODO Auto-generated method stub
 		return (pOntzi.izenBerdina(super.izena) && pOntzi.tileBerdinakDira(tileLista));
 	}
-//	private boolean hemenDago(int pX, int pY) {
-//		// TODO Auto-generated method stub
-//		boolean aurkituta=false;
-//		Iterator<ItsasontziTile> it=tileLista.iterator();
-//		while(!aurkituta && it.hasNext()){
-//			aurkituta= it.next().posizioanDago(pX, pY);
-//		}
-//		return aurkituta;
-//	}
+
 	private boolean tileBerdinakDira(ArrayList<ItsasontziTile> pTileLista){
-		return pTileLista==this.tileLista;
+
+		return pTileLista.equals(this.tileLista);
 	}
 	public int luzeera() {
-		// TODO Auto-generated method stub
 		return luzeera;
 	}
 	public void ezkutuaJarri(boolean pZer){

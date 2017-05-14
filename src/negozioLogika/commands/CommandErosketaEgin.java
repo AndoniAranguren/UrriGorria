@@ -21,7 +21,7 @@ public class CommandErosketaEgin extends Commands {
 		//----------------------
 	}
 	
-	public void exekutatu(String pErosketa){
+	public void exekutatu(){
 		if(konprobatu()){
 			Partida.jokalariariDiruaEman(jokalaria, prezioa, false);
 			Partida.dendariObjektuakEman(jokalaria, objektuak, false);
@@ -39,5 +39,10 @@ public class CommandErosketaEgin extends Commands {
 	
 	private boolean konprobatu(){
 		return (objektuak!=null&&Partida.jokalariakDiruaDu(jokalaria,prezioa));
+	}
+	
+	public String info(){
+		String info=super.info();
+		return info.concat("CommandErosketaEgin (" +erosketa.getIzena()+")");
 	}
 }

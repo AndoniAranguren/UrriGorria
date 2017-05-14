@@ -81,6 +81,6 @@ public class ErosketaFactory {
 				lista.add(o);}
 			prezioa=400;
 		}
-		return new Erosketa(prezioa, pMota, lista);
+		return (new Erosketa(prezioa, pMota, lista));
 	}
 }

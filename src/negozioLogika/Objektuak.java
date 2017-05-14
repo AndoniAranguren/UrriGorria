@@ -7,8 +7,8 @@ public abstract class Objektuak {
 	public Objektuak(String pIzena){
 		this.izena=pIzena;
 	}
-	public boolean izenBerdina (String pObjektua){
-		return this.izena==pObjektua;
+	public boolean izenBerdina (String pIzena){
+		return this.izena.equals(pIzena);
 	}
 	public Mapa aktibatu(String pNori, Mapa pMapa, int pX, int pY,char pNorabide,boolean pZer) {
 		return pMapa;

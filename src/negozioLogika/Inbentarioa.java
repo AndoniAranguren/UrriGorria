@@ -22,31 +22,31 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 		}
 	}
 
-	public boolean objektuakDitu(ArrayList<Objektuak> pObjektuak) {
-		// TODO Auto-generated method stub
-		ArrayList<Objektuak> ob = pObjektuak, aux=objektuak;
-		Objektuak azkenengoObj=ob.get(ob.size());
-		boolean dauzka=true;
-		while(dauzka && ob.size()!=0){
-			azkenengoObj=ob.get(ob.size());
-			if(aux.contains(azkenengoObj)){
-				aux.remove(azkenengoObj);
-				ob.remove(ob.size()-1);
-			}else dauzka=false;
+	public boolean objektuakDitu(ArrayList<Objektuak> pObjektuak) {		
+		boolean daude=true;
+		List<String> list= new ArrayList<String>(),listParametro = new ArrayList<String>();
+		for (Objektuak ob : objektuak) {
+			list.add(ob.getIzena());
 		}
-		return dauzka;
+		for (Objektuak ob : pObjektuak) {
+			listParametro.add(ob.getIzena());
+		}
+		Set<String> unique1= new HashSet<String>(list);
+		for(String pO:unique1){
+			daude=Collections.frequency(list, pO)>=Collections.frequency(listParametro, pO);
+		}
+		return daude;
 	}
 
 	public ArrayList<String> inbentarioaEman() {
 		ArrayList<String> inb= new ArrayList<String>();
 		List<String> list = new ArrayList<String>();
 		for (Objektuak ob : objektuak) {
-			list.add(ob.izena);
+			list.add(ob.getIzena());
 		}
 		Set<String> unique = new HashSet<String>(list);
 		for (String key : unique) {
 		    inb.add(key + ": " + Collections.frequency(list, key));
-		    System.out.println(key + ": " + Collections.frequency(list, key));
 		}
 		return inb;
 	}

@@ -26,4 +26,10 @@ public abstract class Commands {
 	protected void komandoaGorde(boolean pZer){
 		Battlelog.BattlelogaLortu().komandoaGorde(this,pZer);
 	}
+
+	public String info() {
+		String info= new String();
+		info=("("+egoera[2]+") "+jokalaria+":\n");
+		return info;
+	}
 }

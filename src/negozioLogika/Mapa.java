@@ -2,51 +2,45 @@ package negozioLogika;
 
 public class Mapa {
 	//Atributuak
-	private static int tamaina=10;
+	public static int zut=10;
+	public static int erren=10;
 	private Tile[][] jokalariMapa;
 	String jabea;
 	
 	//Eraikitzailea
 	public Mapa(String pIzena){
 		jabea= pIzena;
-		jokalariMapa= new Tile[tamaina][tamaina];
+		jokalariMapa= new Tile[zut][erren];
 		this.urezBete(jokalariMapa);
 	}
 		
 	//Metodoak
 	private void urezBete(Tile[][] pMap){
-		for(int Y=0;Y<tamaina; Y++){
-			for(int X=0;X<tamaina; X++){
+		for(int Y=0;Y<zut; Y++){
+			for(int X=0;X<erren; X++){
 				pMap[Y][X]=TileFactory.getTileFactory().createUraTile(jabea, X, Y);
 			}
 		}
 	}
 
 	public boolean kokatuDaiteke(int pX, int pY, char pNorabidea, int pLuzeera){// throws IndepXOutOfBoundsEpXception{
-		boolean libre = true;
-		while(libre){ //Lehenengoaren eta azkenengoaren ondoko posizioak begiratu baita, urez inguratua egon behar baitu
-			for (int i=-2;i<pLuzeera;i++){
-				if(pNorabidea=='N'){
-					if(!jokalariMapa[pX-1][pY+1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[pX][pY+1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[pX+1][pY+1].kokatuDaiteke()) libre = false;
-					pY--;}
-				if(pNorabidea=='E'){
-					if(!jokalariMapa[pX-1][pY-1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[pX-1][pY].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[pX-1][pY+1].kokatuDaiteke()) libre = false;
-					pX++;}
-				if(pNorabidea=='W'){
-					if(!jokalariMapa[pX+1][pY-1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[pX+1][pY].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[pX+1][pY+1].kokatuDaiteke()) libre = false;
-					pX--;}
-				if(pNorabidea=='S'){
-					if(!jokalariMapa[pX-1][pY-1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[pX][pY-1].kokatuDaiteke()) libre = false;
-					if(!jokalariMapa[pX+1][pY-1].kokatuDaiteke()) libre = false;
-					pY++;}
+		boolean libre = true, amaituta=false;
+		Tile t;
+		while(libre&&!amaituta){ //Lehenengoaren eta azkenengoaren ondoko posizioak begiratu baita, urez inguratua egon behar baitu
+			for (int i=0;i<pLuzeera;i++){
+				if(pX<erren&&pX>=0&&pY<zut&&pY>=0){
+					t=jokalariMapa[pX][pY];
+					if(pNorabidea=='N'){pY--;}
+					if(pNorabidea=='E'){pX++;}
+					if(pNorabidea=='W'){pX--;}
+					if(pNorabidea=='S'){pY++;}
+					
+					libre=t.kokatuDaiteke();
+//					System.out.println("X:"+pX+" Y:"+pY+" Librea:"+libre);
+				}
+				else libre=false;
 			}
+			amaituta=true;
 		}
 		return libre;
 	}
@@ -63,6 +57,10 @@ public class Mapa {
 					tile=((ItsasontziTile)jokalariMapa[pX][pY]);				
 					jokalariMapa[pX][pY]=new UraTile(pJabea, pX, pY);
 				}
+				if(pNorabidea=='N'){pY--;}
+				if(pNorabidea=='E'){pX++;}
+				if(pNorabidea=='W'){pX--;}
+				if(pNorabidea=='S'){pY++;}
 				//Izan ahal da, tile bateri erasotzean itsasontzi nagusia ez jasotzea
 				//Honela tilak itsasontzi atributu ezberdina duelako. Itsason1[Tile(Itsason2)]
 				pItsasontzia.tileGehitu(tile,pZer);							
@@ -76,17 +74,17 @@ public class Mapa {
 
 	public boolean erasoSinpleaJaso(String pNork,int pX, int pY, int pIndarra, boolean pZer) {
 		// TODO Auto-generated method stub
-		if(pX<=tamaina && pY<=tamaina){
+		if(pX<=zut && pY<=erren){
 			jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
 			return true;
 		}else return false;
 	}
 
 	public String[][] mapaInterpretatu(String pNork){
-		String[][] mapa= new String[tamaina][tamaina];
+		String[][] mapa= new String[zut][erren];
 		
-		for(int indX=0;indX<tamaina;indX++){
-			for(int indY=0;indY<tamaina;indY++){
+		for(int indX=0;indX<zut;indX++){
+			for(int indY=0;indY<erren;indY++){
 				mapa[indX][indY]=jokalariMapa[indX][indY].erakutsi(pNork);
 			}
 		}
@@ -99,11 +97,6 @@ public class Mapa {
 	}
 	
 	public void radarraErabili(String pNork,int pX, int pY, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,pZer)
-		error
-	}
-
-	public static int getTamaina() {
-		// TODO Auto-generated method stub
-		return tamaina;
+//		error
 	}
 }

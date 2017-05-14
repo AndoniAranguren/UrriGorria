@@ -40,4 +40,8 @@ public class CommandObjektuaErabili extends Commands {
 	private boolean konprobatu(){
 		return (Partida.jokalariakObjektuakDitu(jokalaria, objektuak) && Partida.jokalariaBizirikDago(nori));
 	}
+	public String info(){
+		String info=super.info();
+		return info.concat("CommandObjektuaErabili ("+objektuak.get(0)+")");
+	}
 }

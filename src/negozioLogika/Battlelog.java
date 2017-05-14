@@ -1,6 +1,10 @@
 package negozioLogika;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import negozioLogika.commands.Commands;
 
@@ -23,15 +27,26 @@ public class Battlelog {
 			komandoZerrenda.add(pK);
 		}else komandoZerrenda.remove(pK);
 	}
+	public void komandoaAtzera(){
+		if(komandoZerrenda.size()>0){
+			komandoZerrenda.get(komandoZerrenda.size()-1).deuseztatu();
+		}
+	}
 	public void egoeraraBueltatu(int[] pEgoera){
 		//txanda=egoera[0];
 		//fasea=egoera[1];
 		//iraupena=egoera[2];
 		int ind=komandoZerrenda.size()-1;
 		while(pEgoera!=komandoZerrenda.get(ind).egoeraLortu()){
-			komandoZerrenda.get(ind).deuseztatu();
-			ind--;
+			komandoaAtzera();
 		}
 		
+	}
+	public ArrayList<String> logaEman() {
+		ArrayList<String> loga= new ArrayList<String>();
+		for (Commands komandoa : komandoZerrenda) {
+			loga.add(komandoa.info());
+		}
+		return loga;
 	}
 }

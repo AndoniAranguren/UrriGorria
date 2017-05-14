@@ -3,7 +3,6 @@ package negozioLogika;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import frontend.OntziakAukeratu1;
 import negozioLogika.commands.CommandErosketaEgin;
 
 public abstract class Jokalariak {
@@ -18,24 +17,24 @@ public abstract class Jokalariak {
 	
 	public Jokalariak(String pIzena){
 		izena=pIzena;
-		bizirik=true;
-		mapa= new Mapa(izena);
-		dirua = 5000;
-		denda = new Denda();
-		inb = new Inbentarioa();
+		jokalariaErreseteatu();
 	}
+	
 	public abstract void itsasontziakIpini();
+	
 	public void jokalariaErreseteatu(){
 		denda= new Denda();
 		inb = new Inbentarioa();
 		dirua=5000;
+		bizirik=true;
+		mapa= new Mapa(izena);
+		nireItsasontziak=new ArrayList<Itsasontzia>();
 	}
 	
 	public boolean kokatuDaiteke( int pX, int pY,  char pNorabidea, int pLuzeera){
 		return mapa.kokatuDaiteke(pX, pY,  pNorabidea, pLuzeera);
 	}
 	public Itsasontzia itsasontziaJarri(Itsasontzia pOntzi, int pX, int pY, char pNorabidea, boolean pZer) {
-		// TODO Auto-generated method stub
 		if(pZer==true){
 			pOntzi = mapa.itsasontziaJarri(izena, pOntzi, pX, pY, pNorabidea,pZer);
 			nireItsasontziak.add(pOntzi);

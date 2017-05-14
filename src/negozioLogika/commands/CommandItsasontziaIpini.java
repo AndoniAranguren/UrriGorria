@@ -27,6 +27,7 @@ public class CommandItsasontziaIpini extends Commands {
 			ontzia.add(0, Partida.itsasontziaJarri(jokalaria, (Itsasontzia) ontzia.get(0), koordX, koordY, norabidea, true));
 			super.komandoaGorde(true);
 		}
+		System.out.println(konprobatu());
 	}
 	public void deuseztatu(){
 		Partida.jokalariariObjektuakEman(jokalaria, ontzia, true);
@@ -34,6 +35,11 @@ public class CommandItsasontziaIpini extends Commands {
 		super.komandoaGorde(false);
 	}
 	private boolean konprobatu(){
-		return Partida.kokatuDaiteke(jokalaria, koordX, koordY, norabidea, ((Itsasontzia) ontzia.get(0)).luzeera());
+		return (Partida.kokatuDaiteke(jokalaria, koordX, koordY, norabidea, ((Itsasontzia) ontzia.get(0)).luzeera())
+				&& Partida.jokalariakObjektuakDitu(jokalaria, ontzia));
+	}
+	public String info(){
+		String info=super.info();
+		return info.concat("CommandItsasontziaIpini("+ontzia.get(0)+")");
 	}
 }
