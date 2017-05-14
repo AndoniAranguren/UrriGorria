@@ -3,7 +3,6 @@ package negozioLogika;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import frontend.OntziakAukeratu1;
 import negozioLogika.commands.CommandErosketaEgin;
 
 public abstract class Jokalariak {

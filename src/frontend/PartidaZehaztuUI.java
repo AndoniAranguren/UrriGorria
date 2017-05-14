@@ -1,7 +1,6 @@
 package frontend;
 
 import java.awt.BorderLayout;
-import java.awt.Graphics;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -10,12 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import externals.Irudiak;
 import negozioLogika.Partida;
-import negozioLogika.UrriGorria;
 import negozioLogika.interfaces.UGKonstanteak;
 
-public class PartidaZehaztu extends JPanel implements UGKonstanteak {
+public class PartidaZehaztuUI extends JPanel implements UGKonstanteak {
 
 	private static final long serialVersionUID = 1L;
 	private JRadioButton ia, bijokalari, erreza, zaila;
@@ -23,7 +20,7 @@ public class PartidaZehaztu extends JPanel implements UGKonstanteak {
 	private JButton sartu;
 	private JPanel pNorekin, pZailtasuna;
 	
-	public PartidaZehaztu() {
+	public PartidaZehaztuUI() {
 		this.setLayout(new BorderLayout());
 		this.norekinZehaztu();
 		this.zailtasunaZehaztu();

@@ -1,26 +1,21 @@
 package frontend;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import negozioLogika.UrriGorria;
 import negozioLogika.interfaces.UGKonstanteak;
 
 public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	
 	private static final long serialVersionUID = 1L;
-	//private static UrriGorriaUI nLeihoa = null;
-	//private TableroaGUI tableroa = new TableroaGUI();
-	//private ItsasontziaGUI ontzia = new ItsasontziaGUI();
 	private JPanel oraingoa;
 	private static UrriGorriaUI ui;
 
 	public UrriGorriaUI() {
 		this.setTitle(IZENBURUA);
-		oraingoa = new PartidaZehaztu();
+		oraingoa = new PartidaZehaztuUI();
 		this.add(oraingoa);	
 		setBounds(550, 350, 300, 150);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +31,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		this.remove(oraingoa);
 		oraingoa = jartzeko;
 		this.add(oraingoa);
-//		setMinimumSize(new Dimension(900, 500));
+		setMinimumSize(new Dimension(825, 825));
 		this.revalidate();
 		this.repaint();
 	}	

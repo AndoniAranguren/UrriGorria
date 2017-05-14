@@ -2,6 +2,7 @@ package frontend;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.border.TitledBorder;
 
 import negozioLogika.Itsasontzia;
 import negozioLogika.Mapa;
@@ -29,7 +31,7 @@ public class TableroaUI extends JPanel implements ActionListener {
 	
 	public TableroaUI(String pIzena, Color c) {
 		this.setLayout(new GridLayout(zut, erren));
-		this.setBorder(new MatteBorder(5, 0, 5, 0, Color.WHITE));
+		this.setBorder(new TitledBorder(new LineBorder(c), pIzena + "ren tableroa", 1, 2, null, c));
 		tableroa = new JButton[zut][erren];
 		this.tableroaHasieratu(c);
 //		this.setSize(1, 1);
