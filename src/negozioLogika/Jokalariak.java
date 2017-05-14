@@ -98,4 +98,8 @@ public abstract class Jokalariak {
 	public ArrayList<String> dendaEman() {
 		return denda.dendaEman();
 	}
+
+	public void objektuaErabili(String pNori, String[] pInfo) {
+		inb.objektuaErabili(pNori,pInfo);
+	}
 }

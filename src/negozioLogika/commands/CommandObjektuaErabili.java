@@ -34,7 +34,9 @@ public class CommandObjektuaErabili extends Commands {
 	
 	public void deuseztatu(){
 		Partida.jokalariariObjektuakEman(jokalaria, objektuak, true);
-		Partida.jokalariariErasotu(jokalaria,nori,objektuak.get(0),koordX,koordY,norabidea,false);
+		if(objektuak.get(0) instanceof Itsasontzia){
+			Partida.getPartida().komandoaAtzera();
+		}else Partida.jokalariariErasotu(jokalaria,nori,objektuak.get(0),koordX,koordY,norabidea,false);
 		super.komandoaGorde(false);
 	}
 	private boolean konprobatu(){

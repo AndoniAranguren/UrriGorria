@@ -25,7 +25,8 @@ public class Battlelog {
 	public void komandoaGorde(Commands pK, boolean pZer){
 		if(pZer){
 			komandoZerrenda.add(pK);
-		}else komandoZerrenda.remove(pK);
+		}else komandoZerrenda.remove(komandoZerrenda.size()-1);
+		System.out.println("Komando zerrenda luzeera:"+komandoZerrenda.size());
 	}
 	public void komandoaAtzera(){
 		if(komandoZerrenda.size()>0){

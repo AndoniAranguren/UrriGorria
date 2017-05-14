@@ -34,24 +34,20 @@ public class TableroaUI extends JPanel implements ActionListener {
 		this.setLayout(new GridLayout(zut, erren));
 		this.setBorder(new TitledBorder(new LineBorder(c), pIzena + "ren tableroa", 1, 2, null, c));
 		tableroa = new JButton[zut][erren];
-		this.tableroaHasieratu(c);
+		this.tableroaHasieratu();
 //		this.setSize(1, 1);
 	}
 	
-	private void tableroaHasieratu(Color c) {
+	private void tableroaHasieratu() {
 		for(int i=0; i<zut; i++){
 			for(int j=0; j<erren; j++){
-				tableroa[i][j] = new JButton(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
-//				tableroa[i][j].setOpaque(false);
-				tableroa[i][j].setBorderPainted(false);
-//				tableroa[i][j].setForeground(c);
-//				tableroa[i][j].setSize(0.5, 0.5);
+				tableroa[i][j] = new JButton();
 				tableroa[i][j].setName(i + "-" + j);
 				tableroa[i][j].addActionListener(this);
-//				tableroa[i][j].setIcon(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
 				this.add(tableroa[i][j]);
 			}
 		}
+		tableroaEguneratu();
 	}
 	
 	private void tableroaEguneratu(){
@@ -75,7 +71,7 @@ public class TableroaUI extends JPanel implements ActionListener {
 		int x = Integer.parseInt(botoia.getName().substring(0,1));
 		int y = Integer.parseInt(botoia.getName().substring(2));
 		//botoia.setEnabled(false);
-		if(UrriGorriaUI.getUrriGorriaUI().objektuaEman()!=null){
+		if(UrriGorriaUI.getUrriGorriaUI().objektuaEman()!="Ezer"){
 			char norabidea;
 			switch (UrriGorriaUI.getUrriGorriaUI().norabideaLortu()){
 				case 0: norabidea='E';
@@ -89,14 +85,16 @@ public class TableroaUI extends JPanel implements ActionListener {
 				default: norabidea='E';
 					break;
 			}
-		String[] info= new String[4];
-		info[0]=UrriGorriaUI.getUrriGorriaUI().objektuaEman();
-		info[1]=(""+x);
-		info[2]=(""+y);
-		info[3]=(""+norabidea);
-		System.out.println(info[0]+ info[1] + info[2] + info[3]);
-		UrriGorriaUI.getUrriGorriaUI().komandoaEgikaritu(jokalaria,"CommandItsasontziaIpini",info);
-		tableroaEguneratu();
+			String[] info= new String[4];
+			info[0]=UrriGorriaUI.getUrriGorriaUI().objektuaEman();
+			info[1]=(""+x);
+			info[2]=(""+y);
+			info[3]=(""+norabidea);
+			System.out.println(info[0]+ info[1] + info[2] + info[3]);
+			UrriGorriaUI.getUrriGorriaUI().objektuaErabili(jokalaria,info);
+			UrriGorriaUI.getUrriGorriaUI().objektuaAldatu("Ezer");
+			tableroaEguneratu();
+			UrriGorriaUI.getUrriGorriaUI().panelaAktualizatu();
 		}
 	}
 

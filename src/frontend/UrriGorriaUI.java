@@ -74,4 +74,9 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		if(norabidea>=3)norabidea=0;
 		else norabidea++;
 	}
+
+	public void objektuaErabili(String pNori, String[] pInfo) {
+		Partida.getPartida().jokalariakObjektuaErabili(pNori, pInfo);
+		
+	}
 }

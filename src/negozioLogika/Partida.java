@@ -139,4 +139,8 @@ public class Partida {
 	public void komandoaAtzera() {
 		Battlelog.BattlelogaLortu().komandoaAtzera();
 	}
+	public void jokalariakObjektuaErabili(String pNori, String[] pInfo) {
+		jokalariLista.get(jokalariarenPosLortu(norenTxandaDa())).objektuaErabili(pNori,pInfo);
+		
+	}
 }
