@@ -41,13 +41,9 @@ public class TableroaUI extends JPanel implements ActionListener {
 		for(int i=0; i<zut; i++){
 			for(int j=0; j<erren; j++){
 				tableroa[i][j] = new JButton(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
-//				tableroa[i][j].setOpaque(false);
 				tableroa[i][j].setBorderPainted(false);
-//				tableroa[i][j].setForeground(c);
-//				tableroa[i][j].setSize(0.5, 0.5);
 				tableroa[i][j].setName(i + "-" + j);
 				tableroa[i][j].addActionListener(this);
-//				tableroa[i][j].setIcon(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
 				this.add(tableroa[i][j]);
 			}
 		}
@@ -86,6 +82,9 @@ public class TableroaUI extends JPanel implements ActionListener {
 //		//botoia.setEnabled(false);
 //		new CommandItsasontziaIpini(jokalaria,(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspeko"), x, y, 'N');
 //		tableroaEguneratu();
+		JButton botoia = (JButton) e.getSource();
+		int x = Integer.parseInt(botoia.getName().substring(0));
+		int y = Integer.parseInt(botoia.getName().substring(2));
+		botoia.setEnabled(false);
 	}
-
 }
