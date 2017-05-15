@@ -17,11 +17,7 @@ public abstract class Jokalariak {
 	
 	public Jokalariak(String pIzena){
 		izena=pIzena;
-		bizirik=true;
-		mapa= new Mapa(izena);
-		dirua = 5000;
-		denda = new Denda();
-		inb = new Inbentarioa();
+		jokalariaErreseteatu();
 	}
 	
 	public abstract void itsasontziakIpini();
@@ -30,13 +26,15 @@ public abstract class Jokalariak {
 		denda= new Denda();
 		inb = new Inbentarioa();
 		dirua=5000;
+		bizirik=true;
+		mapa= new Mapa(izena);
+		nireItsasontziak=new ArrayList<Itsasontzia>();
 	}
 	
 	public boolean kokatuDaiteke( int pX, int pY,  char pNorabidea, int pLuzeera){
 		return mapa.kokatuDaiteke(pX, pY,  pNorabidea, pLuzeera);
 	}
 	public Itsasontzia itsasontziaJarri(Itsasontzia pOntzi, int pX, int pY, char pNorabidea, boolean pZer) {
-		// TODO Auto-generated method stub
 		if(pZer==true){
 			pOntzi = mapa.itsasontziaJarri(izena, pOntzi, pX, pY, pNorabidea,pZer);
 			nireItsasontziak.add(pOntzi);
@@ -99,5 +97,9 @@ public abstract class Jokalariak {
 	}
 	public ArrayList<String> dendaEman() {
 		return denda.dendaEman();
+	}
+
+	public void objektuaErabili(String pNori, String[] pInfo) {
+		inb.objektuaErabili(pNori,pInfo);
 	}
 }

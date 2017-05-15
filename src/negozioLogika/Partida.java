@@ -3,14 +3,16 @@ package negozioLogika;
 import java.util.ArrayList;
 
 import frontend.UrriGorriaUI;
+import negozioLogika.commands.CommandErosketaEgin;
+import negozioLogika.commands.CommandItsasontziaIpini;
+import negozioLogika.commands.CommandObjektuaErabili;
 
 public class Partida {
 	private static Partida nPartida=null;
 	
 	private static ArrayList<Jokalariak> jokalariLista;
-	private static int maxJok=2;
+	private static int maxJok=0;
 
-	private boolean jokatzenJarraitu;
 	private static int[] egoera= new int[3];
 	private UrriGorriaUI ui;
 	//fasea=egoera[0];
@@ -22,7 +24,6 @@ public class Partida {
 		egoera[2]=0;
 		egoera[1]=0;
 		egoera[0]=-1;
-		ui=new UrriGorriaUI();
 	}	
 	public static synchronized Partida getPartida(){
 		if(nPartida==null){ nPartida = new Partida();}
@@ -31,9 +32,6 @@ public class Partida {
 	
 	public void partidaJokatu(){
 		this.ui = new UrriGorriaUI();
-		while(jokatzenJarraitu){
-			
-		}
 	}
 	
 	public UrriGorriaUI getUi() {
@@ -43,7 +41,7 @@ public class Partida {
 	private static int jokalariarenPosLortu(String pJ) {
 		int ind =0;
 		Boolean aurkituta=false;
-		while(!aurkituta && ind<=(maxJok-1)){
+		while(!aurkituta && ind<(maxJok-1)){
 			if(jokalariLista.get(ind).izenHauDu(pJ)) aurkituta=true;
 			else ind++;
 		}
@@ -92,7 +90,9 @@ public class Partida {
 		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).jokalariakDiruaDu(pPrezioa);
 	}
 	public void partidaZehaztu(String pInfo) {
+		maxJok++;
 		jokalariLista.add(new Jokalaria("1.Jokalaria"));
+		maxJok++;
 		if(pInfo.equals("BI_JOKALARI")){
 			jokalariLista.add(new Jokalaria("2.Jokalaria"));
 		}else if(pInfo.equals("MAKINAREN_AURKA_ERREZA")){
@@ -100,12 +100,47 @@ public class Partida {
 		}else if(pInfo.equals("MAKINAREN_AURKA_ZAILA")){
 			jokalariLista.add(new CPU("1.CPU", 2));
 		}
-//		for(Jokalariak jok : jokalariLista)	jok.jokalariaErreseteatu();
 	}
 	public static ArrayList<String> inbentarioaEman(String pJokalaria) {
 		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).inbentarioaEman();
 	}
 	public static ArrayList<String> dendaEman(String pJokalaria) {
 		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).dendaEman();
+	}
+	public ArrayList<String> logaEman(String pJokalaria) {
+		return Battlelog.BattlelogaLortu().logaEman();
+	}
+	public void komandoaEgikaritu(String pJokalaria, String pKomandoa, String[] pInfo) {
+		if(pJokalaria==norenTxandaDa()){
+			System.out.println("Zure txanda da");
+			switch (pKomandoa){
+				case "CommandErosketaEgin":
+					Erosketa e=ErosketaFactory.getErosketaFactory().createErosketa(pInfo[0]);
+					CommandErosketaEgin kEros= new CommandErosketaEgin(pJokalaria,e);
+					kEros.exekutatu();
+					break;
+				case "CommandObjektuaErabili":
+					Objektuak ob=ObjektuakFactory.getObjektuakFactory().createObjektua(pInfo[0]);
+					CommandObjektuaErabili kObj= new CommandObjektuaErabili(pJokalaria,ob,Integer.parseInt(pInfo[1]),
+							Integer.parseInt(pInfo[2]),pInfo[3].charAt(0));
+					kObj.exekutatu();
+					break;
+				case "CommandItsasontziaIpini":
+					Itsasontzia its=(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua(pInfo[0]);
+					CommandItsasontziaIpini kIts= new CommandItsasontziaIpini(pJokalaria,its,Integer.parseInt(pInfo[1]),
+							Integer.parseInt(pInfo[2]),pInfo[3].charAt(0));
+					kIts.exekutatu();
+					break;
+			}
+		}else System.out.println("Ez da zure txanda");
+		System.out.println(pJokalaria);
+		System.out.println(norenTxandaDa());
+	}
+	public void komandoaAtzera() {
+		Battlelog.BattlelogaLortu().komandoaAtzera();
+	}
+	public void jokalariakObjektuaErabili(String pNori, String[] pInfo) {
+		jokalariLista.get(jokalariarenPosLortu(norenTxandaDa())).objektuaErabili(pNori,pInfo);
+		
 	}
 }

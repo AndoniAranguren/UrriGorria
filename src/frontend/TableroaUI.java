@@ -30,34 +30,29 @@ public class TableroaUI extends JPanel implements ActionListener {
 	private static final int erren = Mapa.erren;
 	
 	public TableroaUI(String pIzena, Color c) {
+		jokalaria=pIzena;
 		this.setLayout(new GridLayout(zut, erren));
 		this.setBorder(new TitledBorder(new LineBorder(c), pIzena + "ren tableroa", 1, 2, null, c));
 		tableroa = new JButton[zut][erren];
-		this.tableroaHasieratu(c);
+		this.tableroaHasieratu();
 //		this.setSize(1, 1);
 	}
 	
-	private void tableroaHasieratu(Color c) {
+	private void tableroaHasieratu() {
 		for(int i=0; i<zut; i++){
 			for(int j=0; j<erren; j++){
+<<<<<<< HEAD
 				tableroa[i][j] = new JButton(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
 				tableroa[i][j].setBorderPainted(false);
+=======
+				tableroa[i][j] = new JButton();
+>>>>>>> branch 'Branch1' of https://github.com/Kaskagues/UrriGorria.git
 				tableroa[i][j].setName(i + "-" + j);
 				tableroa[i][j].addActionListener(this);
 				this.add(tableroa[i][j]);
 			}
 		}
-	}
-	
-	private Image iconScaled(String icon) {
-		Dimension size = tableroa[0][0].getSize();
-		int height = (int) size.getHeight();
-		System.out.println(height);
-		int width = (int) size.getWidth();
-		ImageIcon icona = new ImageIcon(TableroaUI.class.getResource(icon));
-		Image imga = icona.getImage();
-		Image imgb = imga.getScaledInstance(width, height, java.awt.Image.SCALE_FAST);
-		return imgb;
+		tableroaEguneratu();
 	}
 	
 	private void tableroaEguneratu(){
@@ -67,8 +62,9 @@ public class TableroaUI extends JPanel implements ActionListener {
 		for(int i=0; i<zut; i++){
 			for(int j=0; j<erren; j++){
 				if(mapa[i][j].equals("Itsasontzi")) aux="/externals/ontzia.png";
-				Image img = this.iconScaled(aux);
-				tableroa[i][j].setIcon(new ImageIcon(img));
+				else aux="/externals/ura.png";
+				tableroa[i][j].setBorderPainted(false);
+				tableroa[i][j].setIcon((new ImageIcon(TableroaUI.class.getResource(aux))));
 				this.add(tableroa[i][j]);
 			}
 		}
@@ -76,6 +72,7 @@ public class TableroaUI extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 //		JButton botoia = (JButton) e.getSource();
 //		int x = Integer.parseInt(botoia.getName().substring(0,1));
 //		int y = Integer.parseInt(botoia.getName().substring(2));
@@ -86,5 +83,36 @@ public class TableroaUI extends JPanel implements ActionListener {
 		int x = Integer.parseInt(botoia.getName().substring(0));
 		int y = Integer.parseInt(botoia.getName().substring(2));
 		botoia.setEnabled(false);
+=======
+		JButton botoia = (JButton) e.getSource();
+		int x = Integer.parseInt(botoia.getName().substring(0,1));
+		int y = Integer.parseInt(botoia.getName().substring(2));
+		//botoia.setEnabled(false);
+		if(UrriGorriaUI.getUrriGorriaUI().objektuaEman()!="Ezer"){
+			char norabidea;
+			switch (UrriGorriaUI.getUrriGorriaUI().norabideaLortu()){
+				case 0: norabidea='E';
+					break;
+				case 1: norabidea='S';
+					break;
+				case 2: norabidea='W';
+					break;
+				case 3: norabidea='N';
+					break;
+				default: norabidea='E';
+					break;
+			}
+			String[] info= new String[4];
+			info[0]=UrriGorriaUI.getUrriGorriaUI().objektuaEman();
+			info[1]=(""+x);
+			info[2]=(""+y);
+			info[3]=(""+norabidea);
+			System.out.println(info[0]+ info[1] + info[2] + info[3]);
+			UrriGorriaUI.getUrriGorriaUI().objektuaErabili(jokalaria,info);
+			UrriGorriaUI.getUrriGorriaUI().objektuaAldatu("Ezer");
+			tableroaEguneratu();
+			UrriGorriaUI.getUrriGorriaUI().panelaAktualizatu();
+		}
+>>>>>>> branch 'Branch1' of https://github.com/Kaskagues/UrriGorria.git
 	}
 }

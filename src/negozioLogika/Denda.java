@@ -23,7 +23,7 @@ public class Denda {
 		listaErosketak.add(eros.createErosketa("Misil Zuzendua Pro"));
 		listaErosketak.add(eros.createErosketa("Radarra"));
 		listaErosketak.add(eros.createErosketa("Fragata"));
-		listaErosketak.add(eros.createErosketa("Itsaspeko"));
+		listaErosketak.add(eros.createErosketa("Itsaspekoa"));
 		listaErosketak.add(eros.createErosketa("Suntsitzailea"));
 		listaErosketak.add(eros.createErosketa("HegazkinOntzia"));
 		listaErosketak.add(eros.createErosketa("Itsasontzi Guztiak"));
@@ -40,7 +40,6 @@ public class Denda {
 		gehituXAldiz("Itsaspekoa", 3);
 		gehituXAldiz("Suntsitzailea", 2);
 		gehituXAldiz("HegazkinOntzia", 1);
-		for(Objektuak ob: listaStock) System.out.println(ob.getIzena());
 	}
 	public void dendaEguneratu(){
 		
@@ -90,7 +89,6 @@ public class Denda {
 		Set<String> unique = new HashSet<String>(list);
 		for (String key : unique) {
 		    inb.add(key + ": " + Collections.frequency(list, key));
-		    System.out.println(key + ": " + Collections.frequency(list, key));
 		}
 		return inb;
 	}
