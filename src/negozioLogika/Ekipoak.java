@@ -6,14 +6,13 @@ public class Ekipoak extends Objektuak {
 	
 	private StrategyEkipoak portaera;
 	
-	public Ekipoak(String pIzena, StrategyEkipoak pPortaera){
-		super(pIzena);
+	public Ekipoak(String pIzena, int pKop, StrategyEkipoak pPortaera){
+		super(pIzena, pKop);
 		portaera=pPortaera;
 	}
 
-	public Mapa erabili(String pNork, Mapa pMapa, int pX, int pY, boolean pZer) {
-		// TODO Auto-generated method stub
-		return portaera.erabili(pNork, pMapa, pX, pY, pZer);
+	public Mapa erabili(String pNori, Mapa pMapa, int pX, int pY, boolean pZer) {
+		return portaera.erabili(pNori, pMapa, pX, pY, pZer);
 	}
 
 }

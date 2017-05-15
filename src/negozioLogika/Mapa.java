@@ -55,7 +55,7 @@ public class Mapa {
 			if(pY-1>=0)jokalariMapa[pX][pY-1].kokatzekoGaitasunaEman(!pZer);
 			if(pY+1<erren)jokalariMapa[pX][pY+1].kokatzekoGaitasunaEman(!pZer);
 			
-			for (int i=0;i<=pItsasontzia.luzeera;i++){
+			for (int i=0;i<pItsasontzia.luzeera;i++){
 				if(pZer){
 					tile= new ItsasontziTile(pJabea, pX, pY, pItsasontzia);
 					jokalariMapa[pX][pY]= tile;

@@ -1,5 +1,6 @@
 package frontend;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,8 +35,10 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 			inbentarioa[i].setName(inb.get(i));
 			inbentarioa[i].setText(inb.get(i));
 			inbentarioa[i].addActionListener(this);
-			if(UrriGorriaUI.getUrriGorriaUI().objektuaEman().equals(inb.get(i).split(":")[0])){
+			if(Integer.parseInt(inb.get(i).split(": ")[1])<1){
 				inbentarioa[i].setEnabled(false);
+			}else if((UrriGorriaUI.getUrriGorriaUI().objektuaEman().equals(inb.get(i).split(": ")[0]))){
+				inbentarioa[i].setBackground(new Color(255, 175, 175));
 			}
 			this.add(inbentarioa[i]);
 		}

@@ -29,13 +29,13 @@ public class CommandItsasontziaIpini extends Commands {
 		}
 	}
 	public void deuseztatu(){
-		Partida.itsasontziaJarri(jokalaria, (Itsasontzia) ontzia.get(0), koordX, koordY, norabidea, false);
 		Partida.jokalariariObjektuakEman(jokalaria, ontzia, true);
+		Partida.itsasontziaJarri(jokalaria, (Itsasontzia) ontzia.get(0), koordX, koordY, norabidea, false);
 		super.komandoaGorde(false);
 	}
 	private boolean konprobatu(){
 		return (Partida.kokatuDaiteke(jokalaria, koordX, koordY, norabidea, ((Itsasontzia) ontzia.get(0)).luzeera())
-				&& Partida.jokalariakObjektuakDitu(jokalaria, ontzia));
+				&& Partida.jokalariakObjektuakNahikoakDitu(jokalaria, ontzia));
 	}
 	public String info(){
 		String info=super.info();

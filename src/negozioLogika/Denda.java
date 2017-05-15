@@ -31,47 +31,55 @@ public class Denda {
 	}
 	private void stockaErreseteatu(){
 		listaStock.clear();
-		gehituXAldiz("Bomba", 50);
-		gehituXAldiz("Misil", 20);
-		gehituXAldiz("Misil Zuzendua", 5);
-		gehituXAldiz("Misil Zuzendua Pro", 2);
-		gehituXAldiz("Radarra",5);
-		gehituXAldiz("Fragata", 4);
-		gehituXAldiz("Itsaspekoa", 3);
-		gehituXAldiz("Suntsitzailea", 2);
-		gehituXAldiz("HegazkinOntzia", 1);
+		ObjektuakFactory ob=ObjektuakFactory.getObjektuakFactory();
+		listaStock.add(ob.createObjektua("Bomba", 50));
+		listaStock.add(ob.createObjektua("Misil", 20));
+		listaStock.add(ob.createObjektua("Misil Zuzendua", 5));
+		listaStock.add(ob.createObjektua("Misil Zuzendua Pro", 2));
+		listaStock.add(ob.createObjektua("Radarra",5));
+		listaStock.add(ob.createObjektua("Fragata", 4));
+		listaStock.add(ob.createObjektua("Itsaspekoa", 3));
+		listaStock.add(ob.createObjektua("Suntsitzailea", 2));
+		listaStock.add(ob.createObjektua("HegazkinOntzia", 1));
 	}
 	public void dendaEguneratu(){
 		
 	}
 	public ArrayList<Objektuak> dendakIzakinakDitu(Erosketa pErosketa) {
-		ArrayList<Objektuak> ob = pErosketa.getObjektuak();
-		ArrayList<Objektuak> aux= listaStock;
-//		Objektuak azkenengoObj=ob.get(ob.size()-1);
-//		boolean dauzka=true;
-//		while(dauzka && ob.size()!=0){
-//			azkenengoObj=ob.get(ob.size()-1);
-//			if(aux.contains(azkenengoObj)){
-//				aux.remove(azkenengoObj);
-//				ob.remove(ob.size()-1);
-//			}else dauzka=false;
-//		}
-//		if(dauzka){
-//			listaStock=aux;
-//			ob=pErosketa.getObjektuak();
-//		}else ob=null;
-		listaStock.contains(pErosketa.getObjektuak());
-		return ob;
+		if(zenbatErosiAhal(pErosketa)!=0)
+			return pErosketa.getObjektuak();
+		else
+			return null;
 	}
 	public void objektuakEman(ArrayList<Objektuak> pObjektuak, boolean pZer) {
-		if(pZer){ listaStock.addAll(pObjektuak);
-		}else listaStock.removeAll(pObjektuak);
-		
+		Objektuak objektua;
+		int pos;
+		for (Objektuak objektuBakoitza : pObjektuak) {
+			pos=objektuarenPosLortu(objektuBakoitza);
+			if(pos!=-1){
+				objektua=listaStock.get(pos);
+				objektua.gehitu(objektuBakoitza.getKopurua(),pZer);
+				listaStock.set(pos, objektua);
+			}
+		}
 	}
-	private void gehituXAldiz(String pIzen,int pZ){
-		Objektuak e=ObjektuakFactory.getObjektuakFactory().createObjektua(pIzen);
-		for(int i=0;i<pZ;i++){listaStock.add(e);}
+	private int objektuarenPosLortu(Objektuak pObj){
+		return objektuarenPosLortu(pObj.getIzena());
 	}
+	private int objektuarenPosLortu(String pObj){
+		boolean aurkituta=false;
+		int ind=0;
+		Iterator<Objektuak> it=listaStock.iterator();
+		while(!aurkituta&&it.hasNext()){
+			if(it.next().izenBerdina(pObj)) aurkituta=true;
+			else ind++;
+		}
+		if(!aurkituta){
+			ind=-1;
+		}
+		return ind;
+	}
+
 	public Erosketa erosketaLortu(String pErosketa){
 		int i = listaErosketak.indexOf(ErosketaFactory.getErosketaFactory().createErosketa(pErosketa));
 		Erosketa eros= null;
@@ -81,15 +89,35 @@ public class Denda {
 		return eros;
 	}
 	public ArrayList<String> dendaEman() {
-		ArrayList<String> inb= new ArrayList<String>();
-		List<String> list = new ArrayList<String>();
+		ArrayList<String> list=new ArrayList<String>();
 		for (Erosketa ob : listaErosketak) {
-			list.add(ob.getIzena());
+			list.add(ob.getIzena() + ": " + zenbatErosiAhal(ob));
 		}
-		Set<String> unique = new HashSet<String>(list);
-		for (String key : unique) {
-		    inb.add(key + ": " + Collections.frequency(list, key));
+		return list;
+	}
+	private int zenbatErosiAhal(Erosketa pErosketa) {
+		int kopHandiena=99,pos;
+		boolean izakinakDitu=true;
+		Iterator<Objektuak> it=pErosketa.getIterator();
+		Objektuak stockObj,erosObj;
+		
+		while(it.hasNext()&&izakinakDitu){
+			erosObj=it.next();
+			pos=objektuarenPosLortu(erosObj);
+			if(pos!=-1){
+				stockObj=listaStock.get(pos);
+				if((erosObj.getKopurua())==0){//infinitu aldiz erosi ahal duzu hau
+				}else if(erosObj.getKopurua()<=stockObj.getKopurua()){
+					kopHandiena=stockObj.getKopurua()/(erosObj.getKopurua());
+				}else {
+					izakinakDitu=false; 
+				}
+			}
 		}
-		return inb;
+		if(izakinakDitu)
+			kopHandiena=(kopHandiena>99? 99 : kopHandiena);
+		else 
+			kopHandiena=0;
+		return kopHandiena;
 	}
 }

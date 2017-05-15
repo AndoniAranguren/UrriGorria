@@ -1,6 +1,7 @@
 package negozioLogika;
 import negozioLogika.commands.CommandErosketaEgin;
 import java.util.ArrayList;
+import java.util.Iterator;
 public class Erosketa {
 	
 	private ArrayList<Objektuak> erosketak = new ArrayList<Objektuak>();
@@ -23,5 +24,8 @@ public class Erosketa {
 	}
 	public String getIzena(){
 		return mota;
+	}
+	public Iterator<Objektuak> getIterator(){
+		return erosketak.iterator();
 	}
 }

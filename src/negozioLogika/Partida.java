@@ -57,10 +57,11 @@ public class Partida {
 		return egoera;
 	}
 	public static boolean kokatuDaiteke( String pJokalaria, int pX, int pY, char pNorabidea, int pLuzeera) {
-		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).kokatuDaiteke( pX, pY, pNorabidea, pLuzeera);
+		return jokalariLista.get(jokalariarenPosLortu(pJokalaria))
+				.kokatuDaiteke( pX, pY, pNorabidea, pLuzeera);
 	}
-	public static boolean jokalariakObjektuakDitu(String pJokalari, ArrayList<Objektuak> pObjektuak) {
-		return jokalariLista.get(jokalariarenPosLortu(pJokalari)).objektuakDitu(pObjektuak);
+	public static boolean jokalariakObjektuakNahikoakDitu(String pJokalari, ArrayList<Objektuak> pObjektuak) {
+		return jokalariLista.get(jokalariarenPosLortu(pJokalari)).objektuakNahikoakDitu(pObjektuak);
 	}
 	public static boolean jokalariaBizirikDago(String pNor) {
 		return jokalariLista.get(jokalariarenPosLortu(pNor)).jokalariaBizirikDago();

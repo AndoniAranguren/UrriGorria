@@ -26,7 +26,7 @@ public class CommandObjektuaErabili extends Commands {
 	public void exekutatu(){
 		if(konprobatu()){
 			Partida.jokalariariObjektuakEman(jokalaria, objektuak, false);
-			if(objektuak.get(0) instanceof Itsasontzia) objektuak.get(0).erabili(nori, koordX, koordY, norabidea);
+			if(objektuak.get(0) instanceof Itsasontzia) ((Itsasontzia) objektuak.get(0)).erabili(nori, koordX, koordY, norabidea);
 			else Partida.jokalariariErasotu(jokalaria, nori, objektuak.get(0), koordX, koordY, norabidea, true);
 			super.komandoaGorde(true);
 		}
@@ -40,7 +40,7 @@ public class CommandObjektuaErabili extends Commands {
 		super.komandoaGorde(false);
 	}
 	private boolean konprobatu(){
-		return (Partida.jokalariakObjektuakDitu(jokalaria, objektuak) && Partida.jokalariaBizirikDago(nori));
+		return (Partida.jokalariakObjektuakNahikoakDitu(jokalaria, objektuak) && Partida.jokalariaBizirikDago(nori));
 	}
 	public String info(){
 		String info=super.info();

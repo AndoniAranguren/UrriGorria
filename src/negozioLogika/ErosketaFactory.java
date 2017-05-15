@@ -61,24 +61,18 @@ public class ErosketaFactory {
 			prezioa=250;
 		}
 		else if (pMota.equals("Itsasontzi Guztiak")){
-			//1
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia"); 
 			lista.add(o);
-			//2
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspekoa"); 
-			for(int i=0;i<2;i++) 	lista.add(o); 
-			//3
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Suntsitzailea"); 
-			for(int i=0;i<3;i++) 	lista.add(o);
-			//4
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Fragata"); 
-			for(int i=0;i<4;i++)	lista.add(o);
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspekoa",2); 
+			lista.add(o); 
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Suntsitzailea",3); 
+			lista.add(o);
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Fragata",4);
+			lista.add(o);
 			prezioa=1200;
 		}
 		else if(pMota.equals("x5Bomba")){
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba"); 
-			for(int i=0;i<5;i++){
-				lista.add(o);}
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba",5); 
 			prezioa=400;
 		}
 		return (new Erosketa(prezioa, pMota, lista));

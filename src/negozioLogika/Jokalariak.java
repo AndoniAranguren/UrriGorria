@@ -77,8 +77,8 @@ public abstract class Jokalariak {
 	public String izenaLortu() {
 		return izena;
 	}
-	public boolean objektuakDitu(ArrayList<Objektuak> pObjektuak) {
-		return inb.objektuakDitu(pObjektuak);
+	public boolean objektuakNahikoakDitu(ArrayList<Objektuak> pObjektuak) {
+		return inb.objektuakNahikoakDitu(pObjektuak);
 	}
 	public void jokalariariErasotu(String pNork, Objektuak pObjektua, int pX, int pY,char pNorabide, boolean pZer) {
 		mapa=pObjektua.aktibatu(pNork,mapa, pX, pY, pNorabide, pZer);

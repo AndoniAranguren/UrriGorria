@@ -14,22 +14,25 @@ public class ObjektuakFactory {
 		return nObjektuakFactory;
 	}
 	public Objektuak createObjektua(String pMota){
+		return createObjektua(pMota,1);
+	}
+	public Objektuak createObjektua(String pMota,int pKop){
 		Objektuak i=null;
 		//Armak--------------------------------
-		if (pMota.equals("Bomba")){i = new Armak(						"Bomba",100,new ErasoSinple());}		
-		else if (pMota.equals("Misil")){i = new Armak(					"Misil",200,new ErasoSinple());}
-		else if (pMota.equals("Misil Zuzendua")){i = new Armak(		"Misil Zuzendua",100,new ErasoLineal());}
-		else if (pMota.equals("Misil Zuzendua Pro")){i = new Armak(	"Misil Zuzendua Pro",100,new ErasoBikoitza());}
+		if (pMota.equals("Bomba")){i = new Armak(						"Bomba",pKop,100,new ErasoSinple());}		
+		else if (pMota.equals("Misil")){i = new Armak(					"Misil",pKop,200,new ErasoSinple());}
+		else if (pMota.equals("Misil Zuzendua")){i = new Armak(		"Misil Zuzendua",pKop,100,new ErasoLineal());}
+		else if (pMota.equals("Misil Zuzendua Pro")){i = new Armak(	"Misil Zuzendua Pro",pKop,100,new ErasoBikoitza());}
 		
 		//Ekipo--------------------------------
-		else if (pMota.equals("Radarra")) {i = new Ekipoak(			"Radarra", new ErabiliRadarra());}
-		else if (pMota.equals("Eskutua")) {i = new Ekipoak(			"Eskutua", new ErabiliRadarra());}
+		else if (pMota.equals("Radarra")) {i = new Ekipoak(			"Radarra",pKop, new ErabiliRadarra());}
+		else if (pMota.equals("Eskutua")) {i = new Ekipoak(			"Eskutua",pKop, new ErabiliRadarra());}
 		
 		//Itsasontziak-------------------------
-		else if (pMota.equals("Fragata")){ i = new Itsasontzia(				"Fragata",1,100);}
-		else if (pMota.equals("Itsaspekoa")) {i = new Itsasontzia(		"Itsaspekoa",2,200);}
-		else if (pMota.equals("Suntsitzailea")) {i = new Itsasontzia(	"Suntsitzailea",3,300);}
-		else if (pMota.equals("HegazkinOntzia")) { i = new Itsasontzia("HegazkinOntzia",4,400);}
+		else if (pMota.equals("Fragata")){ i = new Itsasontzia(				"Fragata",pKop,1,100);}
+		else if (pMota.equals("Itsaspekoa")) {i = new Itsasontzia(		"Itsaspekoa",pKop,2,200);}
+		else if (pMota.equals("Suntsitzailea")) {i = new Itsasontzia(	"Suntsitzailea",pKop,3,300);}
+		else if (pMota.equals("HegazkinOntzia")) { i = new Itsasontzia("HegazkinOntzia",pKop,4,400);}
 		return i;
 	}
 }

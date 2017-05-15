@@ -12,8 +12,8 @@ public class Itsasontzia extends Objektuak {
 	private final String jabea=null;
 	private boolean suntsituta;
 	private ArrayList<ItsasontziTile> tileLista;
-	public Itsasontzia(String pMota, int pLuzeera, int pPrezioa){
-		super(pMota);
+	public Itsasontzia(String pMota, int pKop, int pLuzeera, int pPrezioa){
+		super(pMota, pKop);
 		ezkutua=0;
 		luzeera = pLuzeera;
 		prezioa = pPrezioa;
@@ -22,6 +22,7 @@ public class Itsasontzia extends Objektuak {
 	public void informazioaInprimatu() {
 		// TODO Auto-generated method stub
 		System.out.println("       Mota: "		+izena);
+		System.out.println("       Kopurua: "	+kopurua);
 		System.out.println("       Jabea: "		+jabea);
 		System.out.println("       Luzera: "	+luzeera);
 		System.out.println("       Prezioa: "	+prezioa);
