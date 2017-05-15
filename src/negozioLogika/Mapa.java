@@ -25,24 +25,22 @@ public class Mapa {
 
 	public boolean kokatuDaiteke(int pX, int pY, char pNorabidea, int pLuzeera){// throws IndepXOutOfBoundsEpXception{
 		boolean libre = true, amaituta=false;
-		int koordX=pX, koordY=pY;
+		int koordX=pX, koordY=pY,i=0;
 		Tile t;
-		while(libre&&!amaituta){ //Lehenengoaren eta azkenengoaren ondoko posizioak begiratu baita, urez inguratua egon behar baitu
-			for (int i=0;i<pLuzeera;i++){
-				if(koordX<erren-1&&koordX>0&&koordY<zut-1&&koordY>0){
-					t=jokalariMapa[koordX][koordY];
+		while (i<pLuzeera&&libre){
+			if(koordX<erren-1&&koordX>0&&koordY<zut-1&&koordY>0){
+				t=jokalariMapa[koordX][koordY];
 
-					libre=t.kokatuDaiteke();
-					if(pNorabidea=='W'){koordY--;}
-					else if(pNorabidea=='E'){koordY++;}
-					else if(pNorabidea=='N'){koordX--;}
-					else if(pNorabidea=='S'){koordX++;}
-					
-					System.out.println("X:"+koordX+" Y:"+koordY+" Librea:"+libre+" Norabidea:" +pNorabidea);
-				}
-				else libre=false;
+				libre=t.kokatuDaiteke();
+				if(pNorabidea=='W'){koordY--;}
+				else if(pNorabidea=='E'){koordY++;}
+				else if(pNorabidea=='N'){koordX--;}
+				else if(pNorabidea=='S'){koordX++;}
+				
+				System.out.println("X:"+koordX+" Y:"+koordY+" Librea:"+libre+" Norabidea:" +pNorabidea);
+				i++;
 			}
-			amaituta=true;
+			else libre=false;
 		}
 		return libre;
 	}
