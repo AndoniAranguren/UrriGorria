@@ -65,7 +65,7 @@ public class Itsasontzia extends Objektuak {
 	}
 	public void ezkutuaJarri(boolean pZer){
 		if(pZer) ezkutua=200;
-		else ezkutua-=200;
+		else ezkutua=0;
 	}
 	public boolean ezkutuaDauka(){
 		return ezkutua!=0;

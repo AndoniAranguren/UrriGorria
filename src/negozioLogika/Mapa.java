@@ -95,12 +95,10 @@ public class Mapa {
 		return mapa;
 	}
 	public void ezkutuaJarri(String pNork, int pX, int pY, boolean pZer){
-		if (!jokalariMapa[pX][pY].jabeaDa(pNork));
-		else if(jokalariMapa[pX][pY] instanceof ItsasontziTile);
-		else ((ItsasontziTile)jokalariMapa[pX][pY]).ezkutuaJarri(pZer);
+		if (jokalariMapa[pX][pY].jabeaDa(pNork)&&jokalariMapa[pX][pY] instanceof ItsasontziTile) ((ItsasontziTile)jokalariMapa[pX][pY]).ezkutuaJarri(pZer);
 	}
 	
-	public void radarraErabili(String pNork,int pX, int pY, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,pZer)
-
+	public void radarraErabili(String pNork,int pX, int pY, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,True)
+		
 	}
 }
