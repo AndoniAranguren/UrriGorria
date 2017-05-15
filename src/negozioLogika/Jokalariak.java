@@ -3,8 +3,6 @@ package negozioLogika;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import negozioLogika.commands.CommandErosketaEgin;
-
 public abstract class Jokalariak {
 	
 	protected String izena;

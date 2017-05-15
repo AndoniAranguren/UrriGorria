@@ -101,9 +101,6 @@ public class Mapa {
 	}
 	
 	public void radarraErabili(String pNork,int pX, int pY, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,pZer)
-<<<<<<< HEAD
-=======
-		error
->>>>>>> refs/remotes/origin/master
+
 	}
 }
