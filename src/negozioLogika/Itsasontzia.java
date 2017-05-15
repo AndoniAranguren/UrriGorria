@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import negozioLogika.ItsasontziTile;
-import negozioLogika.commands.CommandItsasontziaIpini;
 
 public class Itsasontzia extends Objektuak {
 	protected final int luzeera,prezioa;
@@ -30,7 +29,6 @@ public class Itsasontzia extends Objektuak {
 
 	}
 	public void tileGehitu(ItsasontziTile pTile, boolean pZer) {
-		// TODO Auto-generated method stub
 		if(pZer){
 			tileLista.add(pTile);
 		}
@@ -38,11 +36,7 @@ public class Itsasontzia extends Objektuak {
 			tileLista.remove(pTile);
 		}
 	}
-	public void erabili(String pNori, int pX, int pY,char pNorabide) {
-		new CommandItsasontziaIpini(pNori, this, pX, pY, pNorabide).exekutatu();
-	}
 	public void suntsitutaDago() {
-		// TODO Auto-generated method stub
 		boolean suntsitutaDago=true;
 		Iterator<ItsasontziTile> it=tileLista.iterator();
 		while(suntsitutaDago && it.hasNext()){
@@ -53,10 +47,18 @@ public class Itsasontzia extends Objektuak {
 	public boolean hauDa(Itsasontzia pOntzi) {
 		return (pOntzi.izenBerdina(super.izena) && pOntzi.tileBerdinakDira(tileLista));
 	}
-
 	private boolean tileBerdinakDira(ArrayList<ItsasontziTile> pTileLista){
-
-		return pTileLista.equals(this.tileLista);
+		boolean ezberdinak=true;
+		Iterator<ItsasontziTile> it;
+		for(ItsasontziTile tile: pTileLista){
+			it=tileLista.iterator();
+			ezberdinak=true;
+			while(it.hasNext()&&ezberdinak){
+				ezberdinak= !it.next().equals(tile);
+			}
+			if(ezberdinak) break;
+		}
+		return ezberdinak;
 	}
 	public int luzeera() {
 		return luzeera;

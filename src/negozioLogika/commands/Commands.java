@@ -17,9 +17,16 @@ public abstract class Commands {
 	}
 	
 	public void exekutatu(){
+		if(konprobatu()){
+			egikaritu(true);
+		}
 	}
 	public void deuseztatu(){
+		egikaritu(false);
 	}
+	protected abstract boolean konprobatu();
+	protected abstract void egikaritu(boolean b);
+
 	public int[] egoeraLortu(){
 		return egoera;
 	}

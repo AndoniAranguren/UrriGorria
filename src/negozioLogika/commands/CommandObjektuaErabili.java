@@ -21,25 +21,25 @@ public class CommandObjektuaErabili extends Commands {
 		objektuak.add(pObjektuak);
 		koordX=pX;
 		koordY=pY;
+		norabidea=pNorabide;
 		//----------------------
+		super.exekutatu();
 	}
-	public void exekutatu(){
-		if(konprobatu()){
-			Partida.jokalariariObjektuakEman(jokalaria, objektuak, false);
-			if(objektuak.get(0) instanceof Itsasontzia) ((Itsasontzia) objektuak.get(0)).erabili(nori, koordX, koordY, norabidea);
-			else Partida.jokalariariErasotu(jokalaria, nori, objektuak.get(0), koordX, koordY, norabidea, true);
-			super.komandoaGorde(true);
-		}
+	public void egikaritu(boolean pZer){
+		if(objektuak.get(0) instanceof Itsasontzia) {
+			if(pZer){
+				CommandItsasontziaIpini k=new CommandItsasontziaIpini(nori,
+						(Itsasontzia)objektuak.get(0), koordX, koordY, norabidea);
+				k.exekutatu();
+			}else
+				Partida.getPartida().komandoaAtzera();}
+			
+		else {
+			Partida.jokalariariErasotu(jokalaria, nori, objektuak.get(0), koordX, koordY, norabidea, pZer);
+			super.komandoaGorde(pZer);}
 	}
 	
-	public void deuseztatu(){
-		Partida.jokalariariObjektuakEman(jokalaria, objektuak, true);
-		if(objektuak.get(0) instanceof Itsasontzia){
-			Partida.getPartida().komandoaAtzera();
-		}else Partida.jokalariariErasotu(jokalaria,nori,objektuak.get(0),koordX,koordY,norabidea,false);
-		super.komandoaGorde(false);
-	}
-	private boolean konprobatu(){
+	protected boolean konprobatu(){
 		return (Partida.jokalariakObjektuakNahikoakDitu(jokalaria, objektuak) && Partida.jokalariaBizirikDago(nori));
 	}
 	public String info(){

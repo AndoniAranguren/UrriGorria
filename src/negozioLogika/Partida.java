@@ -117,25 +117,22 @@ public class Partida {
 			switch (pKomandoa){
 				case "CommandErosketaEgin":
 					Erosketa e=ErosketaFactory.getErosketaFactory().createErosketa(pInfo[0]);
-					CommandErosketaEgin kEros= new CommandErosketaEgin(pJokalaria,e);
-					kEros.exekutatu();
+					new CommandErosketaEgin(pJokalaria,e);
 					break;
 				case "CommandObjektuaErabili":
 					Objektuak ob=ObjektuakFactory.getObjektuakFactory().createObjektua(pInfo[0]);
-					CommandObjektuaErabili kObj= new CommandObjektuaErabili(pJokalaria,ob,Integer.parseInt(pInfo[1]),
+					new CommandObjektuaErabili(pJokalaria,ob,Integer.parseInt(pInfo[1]),
 							Integer.parseInt(pInfo[2]),pInfo[3].charAt(0));
-					kObj.exekutatu();
+					System.out.print(pInfo[3].charAt(0));
 					break;
 				case "CommandItsasontziaIpini":
 					Itsasontzia its=(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua(pInfo[0]);
-					CommandItsasontziaIpini kIts= new CommandItsasontziaIpini(pJokalaria,its,Integer.parseInt(pInfo[1]),
+					new CommandItsasontziaIpini(pJokalaria,its,Integer.parseInt(pInfo[1]),
 							Integer.parseInt(pInfo[2]),pInfo[3].charAt(0));
-					kIts.exekutatu();
+
 					break;
 			}
-		}else System.out.println("Ez da zure txanda");
-		System.out.println(pJokalaria);
-		System.out.println(norenTxandaDa());
+		}else System.out.println(norenTxandaDa()+"-ren txanda da");
 	}
 	public void komandoaAtzera() {
 		Battlelog.BattlelogaLortu().komandoaAtzera();

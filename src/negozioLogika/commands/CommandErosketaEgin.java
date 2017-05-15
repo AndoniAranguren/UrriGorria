@@ -14,30 +14,22 @@ public class CommandErosketaEgin extends Commands {
 	
 	public CommandErosketaEgin(String pJ, Erosketa pErosketa){
 		//Datuak gorde----------
-		super.exekutatu();
+		super();
 		erosketa=pErosketa;
 		objektuak=Partida.dendakIzakinakDitu(jokalaria,erosketa);
 		prezioa=pErosketa.getPrezioa();
 		//----------------------
+		super.exekutatu();
 	}
 	
-	public void exekutatu(){
-		if(konprobatu()){
-			Partida.jokalariariDiruaEman(jokalaria, prezioa, false);
-			Partida.dendariObjektuakEman(jokalaria, objektuak, false);
-			Partida.jokalariariObjektuakEman(jokalaria, objektuak, true);
-			super.komandoaGorde(true);
-		}
-	}
-		
-	public void deuseztatu(){
-		Partida.jokalariariDiruaEman(jokalaria, prezioa, true);
-		Partida.dendariObjektuakEman(jokalaria, objektuak, true);
-		Partida.jokalariariObjektuakEman(jokalaria, objektuak, false);
-		super.komandoaGorde(false);
+	protected void egikaritu(boolean pZer){
+		Partida.jokalariariDiruaEman(jokalaria, prezioa, !pZer);
+		Partida.dendariObjektuakEman(jokalaria, objektuak, !pZer);
+		Partida.jokalariariObjektuakEman(jokalaria, objektuak, pZer);
+		super.komandoaGorde(pZer);
 	}
 	
-	private boolean konprobatu(){
+	protected boolean konprobatu(){
 		return (objektuak!=null&&Partida.jokalariakDiruaDu(jokalaria,prezioa));
 	}
 	

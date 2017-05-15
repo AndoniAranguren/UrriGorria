@@ -16,4 +16,5 @@ public class Armak extends Objektuak {
 	public Mapa aktibatu(String pNori, Mapa pMapa, int pX, int pY, char pNorabide, boolean pZer) {
 		return portaera.eraso(pNori,pMapa, pX, pY,pNorabide, indarra, pZer);
 	}
+	
 }

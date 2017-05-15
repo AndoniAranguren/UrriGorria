@@ -17,7 +17,7 @@ public class Erosketa {
 		return prezioa;
 	}
 	public void erosketaExekutatu(String pNork){
-		new CommandErosketaEgin(pNork,this).exekutatu();
+		new CommandErosketaEgin(pNork,this);
 	}
 	public ArrayList<Objektuak> getObjektuak() {
 		return erosketak;

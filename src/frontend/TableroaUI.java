@@ -15,11 +15,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 
-import negozioLogika.Itsasontzia;
 import negozioLogika.Mapa;
-import negozioLogika.ObjektuakFactory;
 import negozioLogika.Partida;
-import negozioLogika.commands.CommandItsasontziaIpini;
 
 public class TableroaUI extends JPanel implements ActionListener {
 	
@@ -93,11 +90,10 @@ public class TableroaUI extends JPanel implements ActionListener {
 					break;
 			}
 			String[] info= new String[4];
-			info[0]=UrriGorriaUI.getUrriGorriaUI().objektuaEman();
+			//info0 urrigorriaUI-n jartzen da
 			info[1]=(""+x);
 			info[2]=(""+y);
 			info[3]=(""+norabidea);
-			System.out.println(info[0]+ info[1] + info[2] + info[3]);
 			UrriGorriaUI.getUrriGorriaUI().objektuaErabili(jokalaria,info);
 			UrriGorriaUI.getUrriGorriaUI().objektuaAldatu("Ezer");
 			tableroaEguneratu();

@@ -41,7 +41,6 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 				objektua=objektuak.get(pos);
 				objektua.gehitu(objektuBakoitza.getKopurua(),pZer);
 				objektuak.set(pos, objektua);
-				System.out.println("Inbentarioan"+objektua.getIzena()+" Kopurua:"+objektua.getKopurua());
 			}
 		}
 	}

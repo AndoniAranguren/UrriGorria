@@ -10,32 +10,31 @@ public class CommandItsasontziaIpini extends Commands {
 	private ArrayList<Objektuak> ontzia= new ArrayList<Objektuak>();
 	private int koordX, koordY;
 	private char norabidea;
+	private String nori;
 	
 	public CommandItsasontziaIpini(String pJ, Itsasontzia pItsasontzia, int pX, int pY, char pNorabidea){
 		//Datuak gorde----------
-		super.exekutatu();
+		super();
+		nori = pJ;
 		ontzia.add(pItsasontzia);
+		System.out.println(pItsasontzia.getIzena());
 		koordX=pX;
 		koordY=pY;
 		norabidea=pNorabidea;
 		//----------------------
+		super.exekutatu();
 	}
 	
-	public void exekutatu(){
-		if(konprobatu()){
-			Partida.jokalariariObjektuakEman(jokalaria, ontzia, false);
-			ontzia.add(0, Partida.itsasontziaJarri(jokalaria, (Itsasontzia) ontzia.get(0), koordX, koordY, norabidea, true));
-			super.komandoaGorde(true);
-		}
+
+	protected void egikaritu(boolean pZer) {
+		ontzia.get(0).behinErabili(pZer);
+		ontzia.set(0,Partida.itsasontziaJarri(nori, (Itsasontzia) ontzia.get(0), koordX, koordY, norabidea, pZer));
+		super.komandoaGorde(pZer);
 	}
-	public void deuseztatu(){
-		Partida.jokalariariObjektuakEman(jokalaria, ontzia, true);
-		Partida.itsasontziaJarri(jokalaria, (Itsasontzia) ontzia.get(0), koordX, koordY, norabidea, false);
-		super.komandoaGorde(false);
-	}
-	private boolean konprobatu(){
-		return (Partida.kokatuDaiteke(jokalaria, koordX, koordY, norabidea, ((Itsasontzia) ontzia.get(0)).luzeera())
-				&& Partida.jokalariakObjektuakNahikoakDitu(jokalaria, ontzia));
+	protected boolean konprobatu(){
+		return (Partida.kokatuDaiteke(nori, koordX, koordY, norabidea, ((Itsasontzia) ontzia.get(0)).luzeera())
+				&& Partida.jokalariakObjektuakNahikoakDitu(jokalaria, ontzia)
+				&& nori.equals(jokalaria));
 	}
 	public String info(){
 		String info=super.info();

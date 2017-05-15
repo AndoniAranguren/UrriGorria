@@ -25,19 +25,20 @@ public class Mapa {
 
 	public boolean kokatuDaiteke(int pX, int pY, char pNorabidea, int pLuzeera){// throws IndepXOutOfBoundsEpXception{
 		boolean libre = true, amaituta=false;
+		int koordX=pX, koordY=pY;
 		Tile t;
 		while(libre&&!amaituta){ //Lehenengoaren eta azkenengoaren ondoko posizioak begiratu baita, urez inguratua egon behar baitu
 			for (int i=0;i<pLuzeera;i++){
-				if(pX<erren-1&&pX>0&&pY<zut-1&&pY>0){
-					t=jokalariMapa[pX][pY];
+				if(koordX<erren-1&&koordX>0&&koordY<zut-1&&koordY>0){
+					t=jokalariMapa[koordX][koordY];
 
 					libre=t.kokatuDaiteke();
-					if(pNorabidea=='W'){pY--;}
-					if(pNorabidea=='E'){pY++;}
-					if(pNorabidea=='N'){pX--;}
-					if(pNorabidea=='S'){pX++;}
+					if(pNorabidea=='W'){koordY--;}
+					else if(pNorabidea=='E'){koordY++;}
+					else if(pNorabidea=='N'){koordX--;}
+					else if(pNorabidea=='S'){koordX++;}
 					
-//					System.out.println("X:"+pX+" Y:"+pY+" Librea:"+libre);
+					System.out.println("X:"+koordX+" Y:"+koordY+" Librea:"+libre+" Norabidea:" +pNorabidea);
 				}
 				else libre=false;
 			}
@@ -47,39 +48,33 @@ public class Mapa {
 	}
 
 	public Itsasontzia itsasontziaJarri(String pJabea, Itsasontzia pItsasontzia, int pX, int pY, char pNorabidea, boolean pZer) {
-		// TODO Auto-generated method stub
-			ItsasontziTile tile;
-			
-			if(pX-1>=0)jokalariMapa[pX-1][pY].kokatzekoGaitasunaEman(!pZer);	//Itsasontzia jartzen bada(pZer=t) ->Gaitasuna kentzen zaio	(pZer=f)
-			if(pX+1<zut)jokalariMapa[pX+1][pY].kokatzekoGaitasunaEman(!pZer);
-			if(pY-1>=0)jokalariMapa[pX][pY-1].kokatzekoGaitasunaEman(!pZer);
-			if(pY+1<erren)jokalariMapa[pX][pY+1].kokatzekoGaitasunaEman(!pZer);
-			
-			for (int i=0;i<pItsasontzia.luzeera;i++){
-				if(pZer){
-					tile= new ItsasontziTile(pJabea, pX, pY, pItsasontzia);
-					jokalariMapa[pX][pY]= tile;
-				}
-				else{
-					tile=((ItsasontziTile)jokalariMapa[pX][pY]);				
-					jokalariMapa[pX][pY]=new UraTile(pJabea, pX, pY);
-				}
-
-				if(pNorabidea=='W'){pY--;}
-				if(pNorabidea=='E'){pY++;}
-				if(pNorabidea=='N'){pX--;}
-				if(pNorabidea=='S'){pX++;}
-				//Izan ahal da, tile bateri erasotzean itsasontzi nagusia ez jasotzea
-				//Honela tilak itsasontzi atributu ezberdina duelako. Itsason1[Tile(Itsason2)]
-				pItsasontzia.tileGehitu(tile,pZer);	
-				
-				if(pX-1>=0)jokalariMapa[pX-1][pY].kokatzekoGaitasunaEman(!pZer);
-				if(pX+1<zut)jokalariMapa[pX+1][pY].kokatzekoGaitasunaEman(!pZer);
-				if(pY-1>=0)jokalariMapa[pX][pY-1].kokatzekoGaitasunaEman(!pZer);
-				if(pY+1<erren)jokalariMapa[pX][pY+1].kokatzekoGaitasunaEman(!pZer);
-				
-				
+		ItsasontziTile tile;
+		int koordX=pX, koordY=pY;
+		System.out.println(pNorabidea);
+		
+		for (int i=0;i<pItsasontzia.luzeera;i++){
+			if(pZer){
+				tile= new ItsasontziTile(pJabea, koordX, koordY, pItsasontzia);
+				jokalariMapa[koordX][koordY]= tile;
 			}
+			else{
+				tile=((ItsasontziTile)jokalariMapa[koordX][koordY]);				
+				jokalariMapa[koordX][koordY]=new UraTile(pJabea, koordX, koordY);
+			}
+
+			if(koordX-1>0)jokalariMapa[koordX-1][koordY].kokatzekoGaitasunaEman(!pZer);
+			if(koordX+1<zut)jokalariMapa[koordX+1][koordY].kokatzekoGaitasunaEman(!pZer);
+			if(koordY-1>0)jokalariMapa[koordX][koordY-1].kokatzekoGaitasunaEman(!pZer);
+			if(koordY+1<erren)jokalariMapa[koordX][koordY+1].kokatzekoGaitasunaEman(!pZer);
+			
+			if(pNorabidea=='W'){koordY--;}
+			else if(pNorabidea=='E'){koordY++;}
+			else if(pNorabidea=='N'){koordX--;}
+			else if(pNorabidea=='S'){koordX++;}
+			
+			pItsasontzia.tileGehitu(tile,pZer);	
+			
+		}
 		return pItsasontzia;
 	}
 
@@ -108,6 +103,5 @@ public class Mapa {
 	}
 	
 	public void radarraErabili(String pNork,int pX, int pY, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,pZer)
-//		error
 	}
 }
