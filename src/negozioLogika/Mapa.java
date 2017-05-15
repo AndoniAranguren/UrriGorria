@@ -46,7 +46,6 @@ public class Mapa {
 	}
 
 	public Itsasontzia itsasontziaJarri(String pJabea, Itsasontzia pItsasontzia, int pX, int pY, char pNorabidea, boolean pZer) {
-		
 		ItsasontziTile tile;
 		int koordX=pX, koordY=pY;
 		if(pZer)pItsasontzia=(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua(pItsasontzia.getIzena());
@@ -102,5 +101,9 @@ public class Mapa {
 	}
 	
 	public void radarraErabili(String pNork,int pX, int pY, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,pZer)
+<<<<<<< HEAD
+=======
+		error
+>>>>>>> refs/remotes/origin/master
 	}
 }
