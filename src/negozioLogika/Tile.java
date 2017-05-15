@@ -53,5 +53,11 @@ public abstract class Tile {
 	public void kokatzekoGaitasunaEman(boolean pZer){
 		kokatuAhalDa=pZer;
 	}
+	public boolean itsasontziaDa() {
+		return false;
+	}
+	public boolean bizirikDago(){
+		return false;
+	}
 
 }

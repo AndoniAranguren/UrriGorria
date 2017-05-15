@@ -37,5 +37,12 @@ public abstract class Objektuak {
 	public boolean kopuruNahikoa(int pKop) {
 		return (kopurua>=pKop&&kopurua>0);
 	}
+	public boolean itsasontziaDa() {
+		return false;
+	}
+	public int getLuzeera() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

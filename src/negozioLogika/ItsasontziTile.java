@@ -25,5 +25,11 @@ public class ItsasontziTile extends Tile {
 	public void ezkutuaJarri(boolean pZer){
 		itsasontzi.ezkutuaJarri(pZer);
 	}
+	public boolean itsasontziaDa() {
+		return true;
+	}
+	public boolean bizirikDago(){
+		return bizitza>0;
+	}
 	
 }

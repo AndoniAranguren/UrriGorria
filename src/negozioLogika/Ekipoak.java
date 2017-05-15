@@ -10,8 +10,8 @@ public class Ekipoak extends Objektuak {
 		super(pIzena, pKop);
 		portaera=pPortaera;
 	}
-	public Mapa erabili(String pNori, Mapa pMapa, int pX, int pY, boolean pZer) {
-		return portaera.erabili(pNori, pMapa, pX, pY, pZer);
+	public void erabili(String pNori, Mapa pMapa, int pX, int pY, boolean pZer) {
+		portaera.erabili(pNori, pMapa, pX, pY, pZer);
 	}
 
 }

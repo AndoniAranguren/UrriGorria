@@ -98,7 +98,22 @@ public class Mapa {
 		if (jokalariMapa[pX][pY].jabeaDa(pNork)&&jokalariMapa[pX][pY] instanceof ItsasontziTile) ((ItsasontziTile)jokalariMapa[pX][pY]).ezkutuaJarri(pZer);
 	}
 	
-	public void radarraErabili(String pNork,int pX, int pY, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,True)
+	public int[] radarraErabili(String pNork,int pX, int pY, int pRadio, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,True)
+		int[] koord=new int[2];
+		int hurbilena=pRadio+1;
+		for(int x = pX-pRadio;x<pX+pRadio;x++){
+			for(int y = pY-pRadio;y<pY+pRadio;y++){
+				if(x>=0&&x<zut&&y>=0&&y<erren)
+				if(x*x+y*y<=pRadio){
+					if(jokalariMapa[x][y].itsasontziaDa()&&jokalariMapa[x][y].bizirikDago()&&x*x+y*y<hurbilena){
+						hurbilena=x*x+y*y;
+						koord[0]=x;
+						koord[1]=y;
+					}
+				}
+			}
+		}
 		
+		return koord;
 	}
 }

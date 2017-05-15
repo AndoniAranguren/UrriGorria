@@ -28,8 +28,7 @@ public class CommandObjektuaErabili extends Commands {
 	public void egikaritu(boolean pZer){
 		if(objektuak.get(0) instanceof Itsasontzia) {
 			if(pZer){
-				CommandItsasontziaIpini k=new CommandItsasontziaIpini(nori,
-						(Itsasontzia)objektuak.get(0), koordX, koordY, norabidea);
+				new CommandItsasontziaIpini(nori,(Itsasontzia)objektuak.get(0), koordX, koordY, norabidea);
 			}else
 				Partida.getPartida().komandoaAtzera();}
 			
