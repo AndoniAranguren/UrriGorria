@@ -12,7 +12,7 @@ public abstract class Objektuak {
 		kopurua=pKop;
 	}
 	public boolean izenBerdina (String pIzena){
-		return this.izena.equals(pIzena);
+		return izena.equals(pIzena);
 	}
 	public Mapa aktibatu(String pNori, Mapa pMapa, int pX, int pY,char pNorabide,boolean pZer) {
 		return pMapa;

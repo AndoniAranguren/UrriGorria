@@ -24,7 +24,7 @@ public class Mapa {
 	}
 
 	public boolean kokatuDaiteke(int pX, int pY, char pNorabidea, int pLuzeera){// throws IndepXOutOfBoundsEpXception{
-		boolean libre = true, amaituta=false;
+		boolean libre = true;
 		int koordX=pX, koordY=pY,i=0;
 		Tile t;
 		while (i<pLuzeera&&libre){
@@ -37,7 +37,7 @@ public class Mapa {
 				else if(pNorabidea=='N'){koordX--;}
 				else if(pNorabidea=='S'){koordX++;}
 				
-				System.out.println("X:"+koordX+" Y:"+koordY+" Librea:"+libre+" Norabidea:" +pNorabidea);
+				System.out.println(i+" X:"+koordX+" Y:"+koordY+" Librea:"+libre+" Norabidea:" +pNorabidea);
 				i++;
 			}
 			else libre=false;
@@ -46,9 +46,10 @@ public class Mapa {
 	}
 
 	public Itsasontzia itsasontziaJarri(String pJabea, Itsasontzia pItsasontzia, int pX, int pY, char pNorabidea, boolean pZer) {
+		
 		ItsasontziTile tile;
 		int koordX=pX, koordY=pY;
-		System.out.println(pNorabidea);
+		if(pZer)pItsasontzia=(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua(pItsasontzia.getIzena());
 		
 		for (int i=0;i<pItsasontzia.luzeera;i++){
 			if(pZer){

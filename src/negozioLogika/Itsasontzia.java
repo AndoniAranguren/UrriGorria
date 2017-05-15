@@ -45,7 +45,7 @@ public class Itsasontzia extends Objektuak {
 		suntsituta=suntsitutaDago;
 	}
 	public boolean hauDa(Itsasontzia pOntzi) {
-		return (pOntzi.izenBerdina(super.izena) && pOntzi.tileBerdinakDira(tileLista));
+		return (pOntzi.izenBerdina(izena) && pOntzi.tileBerdinakDira(tileLista));
 	}
 	private boolean tileBerdinakDira(ArrayList<ItsasontziTile> pTileLista){
 		boolean ezberdinak=true;

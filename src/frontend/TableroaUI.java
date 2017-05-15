@@ -65,16 +65,10 @@ public class TableroaUI extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		JButton botoia = (JButton) e.getSource();
-//		int x = Integer.parseInt(botoia.getName().substring(0,1));
-//		int y = Integer.parseInt(botoia.getName().substring(2));
-//		//botoia.setEnabled(false);
-//		new CommandItsasontziaIpini(jokalaria,(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspeko"), x, y, 'N');
-//		tableroaEguneratu();
+
 		JButton botoia = (JButton) e.getSource();
 		int x = Integer.parseInt(botoia.getName().substring(0,1));
 		int y = Integer.parseInt(botoia.getName().substring(2));
-		//botoia.setEnabled(false);
 		if(UrriGorriaUI.getUrriGorriaUI().objektuaEman()!="Ezer"){
 			char norabidea;
 			switch (UrriGorriaUI.getUrriGorriaUI().norabideaLortu()){
@@ -90,7 +84,6 @@ public class TableroaUI extends JPanel implements ActionListener {
 					break;
 			}
 			String[] info= new String[4];
-			//info0 urrigorriaUI-n jartzen da
 			info[1]=(""+x);
 			info[2]=(""+y);
 			info[3]=(""+norabidea);

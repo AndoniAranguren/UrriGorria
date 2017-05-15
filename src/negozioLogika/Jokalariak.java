@@ -45,12 +45,11 @@ public abstract class Jokalariak {
 			Iterator<Itsasontzia> it=nireItsasontziak.iterator();
 			while(!aurkituta && it.hasNext()){
 				itsasontzia= it.next();
+				System.out.println("Lista"+itsasontzia.getIzena());
+				System.out.println("Comando"+pOntzi.getIzena());
 				if(itsasontzia.hauDa(pOntzi)){
 					pOntzi = mapa.itsasontziaJarri(izena, itsasontzia, pX, pY, pNorabidea, pZer);
-				}
-				else{
-					pOntzi = null;
-					//Hemen ez dago itsasontzirik
+					aurkituta=true;
 				}
 			}
 		}

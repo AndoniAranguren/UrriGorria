@@ -30,7 +30,6 @@ public class CommandObjektuaErabili extends Commands {
 			if(pZer){
 				CommandItsasontziaIpini k=new CommandItsasontziaIpini(nori,
 						(Itsasontzia)objektuak.get(0), koordX, koordY, norabidea);
-				k.exekutatu();
 			}else
 				Partida.getPartida().komandoaAtzera();}
 			
