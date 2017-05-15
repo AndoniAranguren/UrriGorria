@@ -41,7 +41,8 @@ public class TableroaUI extends JPanel implements ActionListener {
 	private void tableroaHasieratu() {
 		for(int i=0; i<zut; i++){
 			for(int j=0; j<erren; j++){
-				tableroa[i][j] = new JButton();
+				tableroa[i][j] = new JButton(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
+				tableroa[i][j].setBorderPainted(false);
 				tableroa[i][j].setName(i + "-" + j);
 				tableroa[i][j].addActionListener(this);
 				this.add(tableroa[i][j]);
@@ -67,6 +68,12 @@ public class TableroaUI extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+//		JButton botoia = (JButton) e.getSource();
+//		int x = Integer.parseInt(botoia.getName().substring(0,1));
+//		int y = Integer.parseInt(botoia.getName().substring(2));
+//		//botoia.setEnabled(false);
+//		new CommandItsasontziaIpini(jokalaria,(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspeko"), x, y, 'N');
+//		tableroaEguneratu();
 		JButton botoia = (JButton) e.getSource();
 		int x = Integer.parseInt(botoia.getName().substring(0,1));
 		int y = Integer.parseInt(botoia.getName().substring(2));
@@ -97,5 +104,4 @@ public class TableroaUI extends JPanel implements ActionListener {
 			UrriGorriaUI.getUrriGorriaUI().panelaAktualizatu();
 		}
 	}
-
 }
