@@ -8,7 +8,7 @@ public abstract class Jokalariak {
 	protected String izena;
 	boolean bizirik;
 	private Mapa mapa;
-	private Inbentarioa inb;
+	protected Inbentarioa inb;
 	private Denda denda;
 	private int dirua;
 	private ArrayList<Itsasontzia> nireItsasontziak;

@@ -114,6 +114,10 @@ public class Mapa {
 			}
 		}
 		
+<<<<<<< HEAD
 		return koord;
+=======
+		return koord;
+>>>>>>> branch 'master' of https://github.com/Kaskagues/UrriGorria
 	}
 }

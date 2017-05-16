@@ -80,4 +80,5 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		System.out.println(pInfo[0]+" "+ pInfo[1]+" "+pInfo[2]+" "+pInfo[3]);
 		Partida.getPartida().jokalariakObjektuaErabili(pNori, pInfo);
 	}
+
 }
