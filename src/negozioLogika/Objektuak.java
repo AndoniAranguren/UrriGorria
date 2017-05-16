@@ -14,7 +14,7 @@ public abstract class Objektuak {
 	public boolean izenBerdina (String pIzena){
 		return izena.equals(pIzena);
 	}
-	public Mapa aktibatu(String pNori, Mapa pMapa, int pX, int pY,char pNorabide,boolean pZer) {
+	public Mapa aktibatu(String pNork, Mapa pMapa, int pX, int pY,char pNorabide,boolean pZer) {
 		return pMapa;
 	}
 	public void erabili(String pNori, int pX, int pY,char pNorabide) {
@@ -43,6 +43,9 @@ public abstract class Objektuak {
 	public int getLuzeera() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	public boolean armaDa(){
+		return false;
 	}
 
 }

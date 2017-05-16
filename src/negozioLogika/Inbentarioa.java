@@ -64,7 +64,7 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 		return list;
 	}
 
-	public void objektuaErabili(String pNori, String[] pInfo) {
+	public void objektuaErabili(String pNori, String[] pInfo){
 		if(objektuaDu(pInfo[0])){
 			int pos=objektuarenPosLortu(pInfo[0]);
 			objektuak.get(pos).erabili(pNori, Integer.parseInt(pInfo[1]), Integer.parseInt(pInfo[2]), 
@@ -74,7 +74,6 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 	private boolean objektuaDu(String pIzena) {
 		return (objektuarenPosLortu(pIzena)!=-1);
 	}
-
 	private int objektuarenPosLortu(String pObj){
 		boolean aurkituta=false;
 		int ind=0;
@@ -90,5 +89,14 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 	}
 	private int objektuarenPosLortu(Objektuak pObj){
 		return objektuarenPosLortu(pObj.getIzena());
+	}
+	public int lenght(){
+		return this.lenght();
+	}
+	public boolean armaDa(int pN){
+		return objektuak.get(pN).armaDa();
+	}
+	public Objektuak get(int pX){
+		return objektuak.get(pX);
 	}
 }
