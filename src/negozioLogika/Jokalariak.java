@@ -7,7 +7,7 @@ public abstract class Jokalariak {
 	
 	protected String izena;
 	boolean bizirik;
-	private Mapa mapa;
+	protected Mapa mapa;
 	protected Inbentarioa inb;
 	private Denda denda;
 	private int dirua;
