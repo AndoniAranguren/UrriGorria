@@ -1,6 +1,7 @@
 package frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -67,7 +68,7 @@ public class PartidaZehaztuUI extends JPanel implements UGKonstanteak {
 		ButtonModel oraingoa = zailtasuna.getSelection();
 		info=(oraingoa.isEnabled() ? oraingoa.getActionCommand(): "BI_JOKALARI");
 		UrriGorriaUI.getUrriGorriaUI().partidaZehaztu(info);
-		UrriGorriaUI.getUrriGorriaUI().panelaAldatu(new PantailaUI(Partida.norenTxandaDa()));
+		UrriGorriaUI.getUrriGorriaUI().panelaAldatu(new OntziakKokatuUI(Partida.norenTxandaDa(), Color.BLACK));
 	}
 	
 	public void getZailtasuna(){

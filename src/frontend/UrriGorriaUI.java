@@ -35,7 +35,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		this.remove(oraingoa);
 		oraingoa = jartzeko;
 		this.add(oraingoa);
-		setMinimumSize(new Dimension(825, 825));
+//		setMinimumSize(new Dimension(825, 825));
 		this.revalidate();
 		this.repaint();
 	}
@@ -60,7 +60,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 
 	public void panelaAktualizatu() {
 		Partida.getPartida();
-		panelaAldatu(new PantailaUI(Partida.norenTxandaDa()));
+//		panelaAldatu(new PantailaUI(Partida.norenTxandaDa()));
 		System.out.println("PanelaAktualizatu");
 	}
 
