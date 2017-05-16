@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class CPU extends Jokalariak {
 	int zailtasuna;
+	private ArrayList<Integer> erasotutakoPos=new ArrayList<Integer>();
 	
 	public CPU(String pIzena, int pZailtasuna) {
 		super(pIzena);
@@ -36,13 +37,44 @@ public class CPU extends Jokalariak {
 				}
 			}
 		}
-		System.out.println("CPU-k bere itsasontziak kokatu ditu!");
-//		for(int i=0; i<10; i++){
-//			int luzeera=(int)Math.random()*3+1;
-//			Itsasontzia pOntzi=new Itsasontzia)(izena, zailtasuna, zailtasuna, zailtasuna);
-//			pOntzi = mapa.itsasontziaJarri(izena, pOntzi, pX, pY, pNorabidea,pZer);
-//			nireItsasontziak.add(pOntzi);
-//		}
+		System.out.println("CPU-ak bere itsasontziak kokatu ditu.");
+		objektuak.add(ob.createObjektua("Bomba", 50));
+		objektuak.add(ob.createObjektua("Misil", 20));
+		objektuak.add(ob.createObjektua("Misil Zuzendua", 5));
+		objektuak.add(ob.createObjektua("Misil Zuzendua Pro", 2));
+		objektuak.add(ob.createObjektua("Radarra",5));
+		System.out.println("CPU-ak bere inbentarioa betetu du.");
+	}
+	
+	public void erasotu(String pNori){
+		Random r=new Random();
+		String karak="NSEW";
+		int pos;
+		int obj;
+		String[] info=new String[4];
+		boolean ondo=false,ekipoaErabilia=false;
+		while(!ondo){
+			pos=(int)Math.random()*100;
+			info[1]=String.valueOf(pos/100);
+			info[2]=String.valueOf(pos%100);
+			obj=(int)Math.random()*inb.lenght();
+			info[0]=String.valueOf(obj);
+			info[3]=String.valueOf(karak.charAt(r.nextInt(karak.length())));
+			if(inb.armaDa(obj)){
+				while(erasotutakoPos.contains(pos)) pos=(int)Math.random()*100;
+				//desde donde habria que llamar al ataque?
+				Partida.getPartida().jokalariariErasotu(izena, pNori, inb.get(obj), pos/100, pos%100, karak.charAt(r.nextInt(karak.length())), true);
+				//creo que desde Inbentarioa no se contempla la posibilidad de que el objeto sea un arma
+				//con el comando objektuaErabili
+				erasotutakoPos.add(pos);
+				ondo=true;
+			}
+			else if(!ekipoaErabilia){
+				inb.objektuaErabili(pNori, info);
+				ekipoaErabilia=true;
+			}
+		}
+		
 	}
 
 }
