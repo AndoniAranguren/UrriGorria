@@ -59,7 +59,7 @@ public class OntziakKokatuUI extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Jarraitu")){
-			UrriGorriaUI.getUrriGorriaUI().panelaAldatu(new PantailaUI(Partida.norenTxandaDa(), jok_tableroa));
+			UrriGorriaUI.getUrriGorriaUI().panelaAldatu(new PantailaUI(Partida.norenTxandaDa()));
 		}
 	}
 }

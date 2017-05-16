@@ -60,7 +60,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 
 	public void panelaAktualizatu() {
 		Partida.getPartida();
-//		panelaAldatu(new PantailaUI(Partida.norenTxandaDa()));
+		panelaAldatu(new PantailaUI(Partida.norenTxandaDa()));
 		System.out.println("PanelaAktualizatu");
 	}
 
