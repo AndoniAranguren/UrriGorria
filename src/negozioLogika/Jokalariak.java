@@ -3,8 +3,6 @@ package negozioLogika;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import negozioLogika.commands.CommandErosketaEgin;
-
 public abstract class Jokalariak {
 	
 	protected String izena;
@@ -29,6 +27,10 @@ public abstract class Jokalariak {
 		bizirik=true;
 		mapa= new Mapa(izena);
 		nireItsasontziak=new ArrayList<Itsasontzia>();
+		ArrayList<Objektuak> objektuak=new ArrayList<Objektuak>();
+		objektuak=denda.dendakIzakinakDitu(ErosketaFactory.getErosketaFactory().createErosketa("Itsasontzi Guztiak"));
+		denda.objektuakEman(objektuak, false);
+		inb.objektuakEman(objektuak, true);
 	}
 	
 	public boolean kokatuDaiteke( int pX, int pY,  char pNorabidea, int pLuzeera){

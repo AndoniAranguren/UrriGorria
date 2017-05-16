@@ -21,7 +21,6 @@ public class CommandErosketaEgin extends Commands {
 		//----------------------
 		super.exekutatu();
 	}
-	
 	protected void egikaritu(boolean pZer){
 		Partida.jokalariariDiruaEman(jokalaria, prezioa, !pZer);
 		Partida.dendariObjektuakEman(jokalaria, objektuak, !pZer);

@@ -17,12 +17,8 @@ public abstract class Tile {
 	}
 	
 	public void jo(String pErasotzaile, int pIndarra, boolean pZer){
-		if(pZer){
-			if(!this.ikusiAhalDu(pErasotzaile)) ikusiAhal.add(pErasotzaile);
-		}
-		else{
-			ikusiAhal.remove(pErasotzaile);
-		}
+		if(pZer) ikusiAhal.add(pErasotzaile);
+		else ikusiAhal.remove(pErasotzaile);
 		if(this instanceof ItsasontziTile) ((ItsasontziTile)(this)).bizitzaAldatu(pIndarra,pZer);
 	}
 	public String erakutsi(String pNork){
@@ -56,6 +52,12 @@ public abstract class Tile {
 	//---------------------------------------
 	public void kokatzekoGaitasunaEman(boolean pZer){
 		kokatuAhalDa=pZer;
+	}
+	public boolean itsasontziaDa() {
+		return false;
+	}
+	public boolean bizirikDago(){
+		return false;
 	}
 
 }

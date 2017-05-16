@@ -14,15 +14,15 @@ import javax.swing.JPanel;
 public class PantailaUI extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private TableroaUI tableroa1, tableroa2;
+	private TableroaUI tableroa1;
 	private DendaUI denda;
 	private LogUI log;
 	private InbentarioaUI inbentarioa;
 	private JPanel tableroak, dendaP, inbentarioaP,dendaInbP,logP,top;
 	
-	public PantailaUI(String jokalaria) {
+	public PantailaUI(String jokalaria, TableroaUI jok_tableroa) {
 		this.setLayout(new BorderLayout());
-		this.setTableroak(jokalaria);
+		this.setTableroak(jokalaria, jok_tableroa);
 		this.setLoga(jokalaria);
 		this.setDendaInbP(jokalaria);
 		this.setTop();
@@ -79,13 +79,12 @@ public class PantailaUI extends JPanel implements ActionListener {
 		dendaInbP.add(dendaP, BorderLayout.NORTH);
 		dendaInbP.add(inbentarioaP, BorderLayout.SOUTH);
 	}
-	private void setTableroak(String jokalaria) {
+	private void setTableroak(String jokalaria, TableroaUI jok_tableroa) {
 		tableroak = new JPanel();
 		tableroak.setLayout(new GridLayout(2, 1));
 		tableroa1 = new TableroaUI("Aurkaria", Color.RED);
-		tableroa2 = new TableroaUI(jokalaria, Color.BLUE);
 		tableroak.add(tableroa1);
-		tableroak.add(tableroa2);
+		tableroak.add(jok_tableroa);
 	}
 	
 	private void setLoga(String jokalaria) {

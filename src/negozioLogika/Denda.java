@@ -19,6 +19,7 @@ public class Denda {
 		ErosketaFactory eros=ErosketaFactory.getErosketaFactory();
 		listaErosketak.add(eros.createErosketa("Bomba"));
 		listaErosketak.add(eros.createErosketa("Misil"));
+		listaErosketak.add(eros.createErosketa("Misilx5"));
 		listaErosketak.add(eros.createErosketa("Misil Zuzendua"));
 		listaErosketak.add(eros.createErosketa("Misil Zuzendua Pro"));
 		listaErosketak.add(eros.createErosketa("Radarra"));
@@ -27,7 +28,6 @@ public class Denda {
 		listaErosketak.add(eros.createErosketa("Suntsitzailea"));
 		listaErosketak.add(eros.createErosketa("HegazkinOntzia"));
 		listaErosketak.add(eros.createErosketa("Itsasontzi Guztiak"));
-		listaErosketak.add(eros.createErosketa("x5Bomba"));
 	}
 	private void stockaErreseteatu(){
 		listaStock.clear();
@@ -38,15 +38,12 @@ public class Denda {
 		listaStock.add(ob.createObjektua("Misil Zuzendua Pro", 2));
 		listaStock.add(ob.createObjektua("Radarra",5));
 		listaStock.add(ob.createObjektua("Fragata", 4));
-		listaStock.add(ob.createObjektua("Itsaspekoa", 3));
-		listaStock.add(ob.createObjektua("Suntsitzailea", 2));
+		listaStock.add(ob.createObjektua("Suntsitzailea", 3));
+		listaStock.add(ob.createObjektua("Itsaspekoa", 2));
 		listaStock.add(ob.createObjektua("HegazkinOntzia", 1));
 	}
-	public void dendaEguneratu(){
-		
-	}
 	public ArrayList<Objektuak> dendakIzakinakDitu(Erosketa pErosketa) {
-		if(zenbatErosiAhal(pErosketa)!=0)
+		if(zenbatErosiAhal(pErosketa)>0)
 			return pErosketa.getObjektuak();
 		else
 			return null;
@@ -79,19 +76,10 @@ public class Denda {
 		}
 		return ind;
 	}
-
-	public Erosketa erosketaLortu(String pErosketa){
-		int i = listaErosketak.indexOf(ErosketaFactory.getErosketaFactory().createErosketa(pErosketa));
-		Erosketa eros= null;
-		if(i!=-1){
-			eros=listaErosketak.get(i);
-		}
-		return eros;
-	}
 	public ArrayList<String> dendaEman() {
 		ArrayList<String> list=new ArrayList<String>();
 		for (Erosketa ob : listaErosketak) {
-			list.add(ob.getIzena() + ": " + zenbatErosiAhal(ob));
+			list.add(ob.getIzena() + ": " + zenbatErosiAhal(ob)+ " ("+ob.getPrezioa()+"€)");
 		}
 		return list;
 	}
@@ -99,16 +87,18 @@ public class Denda {
 		int kopHandiena=99,pos;
 		boolean izakinakDitu=true;
 		Iterator<Objektuak> it=pErosketa.getIterator();
-		Objektuak stockObj,erosObj;
+		Objektuak stockObj =null,erosObj;
 		
 		while(it.hasNext()&&izakinakDitu){
 			erosObj=it.next();
 			pos=objektuarenPosLortu(erosObj);
 			if(pos!=-1){
 				stockObj=listaStock.get(pos);
+				
 				if((erosObj.getKopurua())==0){//infinitu aldiz erosi ahal duzu hau
 				}else if(erosObj.getKopurua()<=stockObj.getKopurua()){
-					kopHandiena=stockObj.getKopurua()/(erosObj.getKopurua());
+					if(kopHandiena>stockObj.getKopurua()/(erosObj.getKopurua()))
+							kopHandiena=stockObj.getKopurua()/(erosObj.getKopurua());
 				}else {
 					izakinakDitu=false; 
 				}

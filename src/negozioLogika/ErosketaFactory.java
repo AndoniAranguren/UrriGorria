@@ -14,7 +14,7 @@ public class ErosketaFactory {
 		ArrayList<Objektuak> lista= new ArrayList<Objektuak>();
 		int prezioa=0;
 		Objektuak o;
-		if(pMota.equals("ErosketaBomba")){ 
+		if(pMota.equals("Bomba")){ 
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba"); 
 			lista.add(o);
 			prezioa=100;
@@ -71,8 +71,8 @@ public class ErosketaFactory {
 			lista.add(o);
 			prezioa=1200;
 		}
-		else if(pMota.equals("x5Bomba")){
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba",5); 
+		else if(pMota.equals("Misilx5")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",5); 
 			prezioa=400;
 		}
 		return (new Erosketa(prezioa, pMota, lista));
