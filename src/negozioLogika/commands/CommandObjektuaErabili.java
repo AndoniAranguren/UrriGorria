@@ -30,9 +30,10 @@ public class CommandObjektuaErabili extends Commands {
 			if(pZer){
 				new CommandItsasontziaIpini(nori,(Itsasontzia)objektuak.get(0), koordX, koordY, norabidea);
 			}else
-				Partida.getPartida().komandoaAtzera();}
-			
-		else {
+				Partida.getPartida().komandoaAtzera();
+		}else{
+			objektuak.get(0).behinErabili(pZer);
+			Partida.getPartida().faseaAldatu(pZer);
 			Partida.jokalariariErasotu(jokalaria, nori, objektuak.get(0), koordX, koordY, norabidea, pZer);
 			super.komandoaGorde(pZer);}
 	}
@@ -42,6 +43,6 @@ public class CommandObjektuaErabili extends Commands {
 	}
 	public String info(){
 		String info=super.info();
-		return info.concat("CommandObjektuaErabili ("+objektuak.get(0)+")");
+		return info.concat("CommandObjektuaErabili ("+objektuak.get(0).getIzena()+")");
 	}
 }

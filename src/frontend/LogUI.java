@@ -1,39 +1,47 @@
 package frontend;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-import negozioLogika.Partida;
-
-public class LogUI extends JPanel {
+public class LogUI extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private String jokalaria=null;
-	private JTextArea[] BattleLoga;
+	private JButton[] BattleLoga;
 	private ArrayList<String> loga = new ArrayList<>();
 
 
 	public LogUI(String pIzena) {
 		jokalaria=pIzena;
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		loga = UrriGorriaUI.getUrriGorriaUI().logaEman(jokalaria);
+		this.setLayout(new GridLayout(16, 1));
 		this.setBorder(BorderFactory.createTitledBorder("Loga:"));
+		this.setPreferredSize(new Dimension(250, UrriGorriaUI.getLeihoaH()-150));
 		this.logaAktualizatu();
 	}
 	public void logaAktualizatu(){
-		loga = UrriGorriaUI.getUrriGorriaUI().logaEman(jokalaria);
-		BattleLoga = new JTextArea[loga.size()];
-		for(int i=(loga.size()-10 <0 ? 0 : loga.size()-10); i<loga.size(); i++){
-			BattleLoga[i] = new JTextArea();
-			BattleLoga[i].setText(loga.get(i));
+		BattleLoga = new JButton[loga.size()];
+		for(int i=(loga.size()-16 <0 ? 0 : loga.size()-16); i<loga.size(); i++){
+			BattleLoga[i] = new JButton();
+			BattleLoga[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+			String info=loga.get(i);
+			BattleLoga[i].setName(info.split("-ç")[0]);
+			BattleLoga[i].setText("<html>" + info.split("-ç")[1]+ "</html>");
+			BattleLoga[i].addActionListener(this);
 			this.add(BattleLoga[i]);
 		}
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String info=((Component) e.getSource()).getName();
+		UrriGorriaUI.getUrriGorriaUI().komandoaAtzera(info.split("'"));
 	}
 }

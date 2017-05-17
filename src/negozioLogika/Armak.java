@@ -8,7 +8,7 @@ public class Armak extends Objektuak {
 	protected int indarra;
 	
 	public Armak(String pIzena, int pKop, int pIndarra, StrategyArmak pPortaera){
-		super(pIzena,pKop);
+		super(pIzena,pKop,2);
 		indarra=pIndarra;
 		portaera=pPortaera;
 	}

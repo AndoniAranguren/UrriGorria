@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CPU extends Jokalariak {
-	int zailtasuna;
+	private int zailtasuna;
+	private String etsaia;
 	private ArrayList<Integer> erasotutakoPos=new ArrayList<Integer>();
 	
 	public CPU(String pIzena, int pZailtasuna) {
@@ -46,7 +47,7 @@ public class CPU extends Jokalariak {
 		System.out.println("CPU-ak bere inbentarioa betetu du.");
 	}
 	
-	public void erasotu(String pNori){
+	public void erasotu(){
 		Random r=new Random();
 		String karak="NSEW";
 		int pos;
@@ -63,18 +64,27 @@ public class CPU extends Jokalariak {
 			if(inb.armaDa(obj)){
 				while(erasotutakoPos.contains(pos)) pos=(int)Math.random()*100;
 				//desde donde habria que llamar al ataque?
-				Partida.getPartida().jokalariariErasotu(izena, pNori, inb.get(obj), pos/100, pos%100, karak.charAt(r.nextInt(karak.length())), true);
+				Partida.getPartida().jokalariariErasotu(izena, etsaia, inb.get(obj), pos/100, pos%100, karak.charAt(r.nextInt(karak.length())), true);
 				//creo que desde Inbentarioa no se contempla la posibilidad de que el objeto sea un arma
 				//con el comando objektuaErabili
 				erasotutakoPos.add(pos);
 				ondo=true;
 			}
 			else if(!ekipoaErabilia){
-				inb.objektuaErabili(pNori, info);
+				inb.objektuaErabili(etsaia, info);
 				ekipoaErabilia=true;
 			}
 		}
 		
+	}
+	public void jokalariariErasotu(String pNork, Objektuak pObjektua, int pX, int pY,char pNorabide, boolean pZer) {
+		etsaia=pNork;
+		mapa=pObjektua.aktibatu(etsaia,mapa, pX, pY, pNorabide, pZer);
+	}
+
+	@Override
+	public void jokatuCPU(int pFasea) {
+		Partida.getPartida().faseaAldatu(true);
 	}
 
 }

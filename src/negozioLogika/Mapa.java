@@ -1,5 +1,7 @@
 package negozioLogika;
 
+import javax.swing.SingleSelectionModel;
+
 public class Mapa {
 	//Atributuak
 	public static int zut=10;
@@ -76,12 +78,13 @@ public class Mapa {
 		return pItsasontzia;
 	}
 
-	public boolean erasoSinpleaJaso(String pNork,int pX, int pY, int pIndarra, boolean pZer) {
-		// TODO Auto-generated method stub
-		if(pX<=zut && pY<=erren){
-			jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
+	public boolean erasoSinpleaKonprobatu(int pX, int pY) {
+		if(pX<zut && pY<erren&&pX>=0 && pY>=0){
 			return true;
 		}else return false;
+	}
+	public void erasoSinpleaJaso(String pNork,int pX, int pY, int pIndarra, boolean pZer) {
+		if(erasoSinpleaKonprobatu(pX,pY))jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
 	}
 
 	public String[][] mapaInterpretatu(String pNork){
@@ -100,15 +103,27 @@ public class Mapa {
 	
 	public int[] radarraErabili(String pNork,int pX, int pY, int pRadio, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,True)
 		int[] koord=new int[2];
-		int hurbilena=pRadio+1;
-		for(int x = pX-pRadio;x<pX+pRadio;x++){
-			for(int y = pY-pRadio;y<pY+pRadio;y++){
-				if(x>=0&&x<zut&&y>=0&&y<erren)
-				if(x*x+y*y<=pRadio){
-					if(jokalariMapa[x][y].itsasontziaDa()&&jokalariMapa[x][y].bizirikDago()&&x*x+y*y<hurbilena){
-						hurbilena=x*x+y*y;
-						koord[0]=x;
-						koord[1]=y;
+		koord[0]=-1;
+		koord[1]=-1;
+		double hurbilena=pRadio+1;
+		if(jokalariMapa[pX][pY].itsasontziaDa()&&jokalariMapa[pX][pY].bizirikDago()){
+			hurbilena=0;
+			koord[0]=pX;
+			koord[1]=pY;
+		}else
+		for(int x = pX-pRadio;x<=pX+pRadio;x++){
+			for(int y = pY-pRadio;y<=pY+pRadio;y++){
+				
+				if(x>=0&&x<zut&&y>=0&&y<erren){
+					
+					if(Math.pow(x-pX, 2)+Math.pow(y-pY, 2)<=Math.pow(pRadio, 2)){
+						
+						if(jokalariMapa[x][y].itsasontziaDa()&&jokalariMapa[x][y].bizirikDago()
+								&&Math.pow(x-pX, 2)+Math.pow(y-pY, 2)<Math.pow(hurbilena,2)){
+							hurbilena=Math.pow(x-pX, 2)+Math.pow(y-pY, 2);
+							koord[0]=x;
+							koord[1]=y;
+						}
 					}
 				}
 			}

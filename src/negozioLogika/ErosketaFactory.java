@@ -24,43 +24,47 @@ public class ErosketaFactory {
 			lista.add(o);
 			prezioa=200;
 		}
+		else if(pMota.equals("Misilx5")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",5); 
+			prezioa=400;
+		}
 		else if (pMota.equals("Misil Zuzendua")){
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua"); 
 			lista.add(o);
 			prezioa=300;
 			
 		}
-		else if (pMota.equals("Misil Zuzendua Pro")){
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua Pro"); 
+		else if (pMota.equals("Misil Zuz. Pro")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuz. Pro"); 
 			lista.add(o);
 			prezioa=300;
 		}
-		else if (pMota.equals("Radarra")) {
+		else if (pMota.equals("DRadarra")) {
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra"); 
 			lista.add(o);
 			prezioa=200;
 		}
-		else if (pMota.equals("Fragata")){ 
+		else if (pMota.equals("DFragata")){ 
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Fragata"); 
 			lista.add(o);
 			prezioa=100;
 		}
-		else if (pMota.equals("Itsaspekoa")) { 
+		else if (pMota.equals("DItsaspekoa")) { 
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspekoa"); 
 			lista.add(o);
 			prezioa=150;
 		}
-		else if (pMota.equals("Suntsitzailea")) { 
+		else if (pMota.equals("DSuntsitzailea")) { 
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Suntsitzailea"); 
 			lista.add(o);
 			prezioa=175;
 		}
-		else if (pMota.equals("HegazkinOntzia")) { 
+		else if (pMota.equals("DHegazkinOntzia")) { 
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia"); 
 			lista.add(o);
 			prezioa=250;
 		}
-		else if (pMota.equals("Itsasontzi Guztiak")){
+		else if (pMota.equals("DHasteko Objektu Guztiak")){
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia"); 
 			lista.add(o);
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspekoa",2); 
@@ -69,11 +73,15 @@ public class ErosketaFactory {
 			lista.add(o);
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Fragata",4);
 			lista.add(o);
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba",50); 
+			lista.add(o);
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",10); 
+			lista.add(o); 
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua",1); 
+			lista.add(o);
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra",4);
+			lista.add(o);
 			prezioa=1200;
-		}
-		else if(pMota.equals("Misilx5")){
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",5); 
-			prezioa=400;
 		}
 		return (new Erosketa(prezioa, pMota, lista));
 	}

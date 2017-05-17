@@ -9,4 +9,7 @@ public class ErasoSinple implements StrategyArmak{
 		pMapa.erasoSinpleaJaso(pNork, pX, pY, pIndarra, pZer);
 		return pMapa;
 	}
+	public boolean konprobatu(Mapa pMapa,int pX, int pY){
+		return pMapa.erasoSinpleaKonprobatu(pX, pY);
+	}
 }

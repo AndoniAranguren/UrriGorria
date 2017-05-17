@@ -11,31 +11,36 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-import negozioLogika.Partida;
-import negozioLogika.UrriGorria;
-
 public class DendaUI extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private String jokalaria = null;
 	private JButton[] denda;
 	private ArrayList<String> den = new ArrayList<>();
+	private boolean faseZuzenean;
 	
-	public DendaUI(String pIzena) {
+	public DendaUI(String pIzena, boolean pFaseZuzenean) {
 		jokalaria=pIzena;
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		faseZuzenean=pFaseZuzenean;
+		den = UrriGorriaUI.getUrriGorriaUI().dendaEman(jokalaria);
+		this.setLayout(new GridLayout(den.size(), 1));
 		this.setBorder(BorderFactory.createTitledBorder("Denda:"));
 		this.dendaAktualizatu();
 	}
 	
 	private void dendaAktualizatu() {
-		den = Partida.dendaEman(jokalaria);
 		denda = new JButton[den.size()];
 		for(int i=0; i<den.size(); i++){
 			denda[i] = new JButton();
+			denda[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 			denda[i].setName(den.get(i));
 			denda[i].setText(den.get(i));
 	        denda[i].addActionListener(this);
+	        denda[i].setEnabled(faseZuzenean);
+	        String kopuru=(den.get(i).split(": ")[1]);
+	        kopuru=kopuru.split(" ")[0];
+	        if(Integer.parseInt(kopuru)<1)
+	        	denda[i].setEnabled(false);
 			this.add(denda[i]);
 		}
 	}

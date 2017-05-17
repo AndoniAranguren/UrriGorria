@@ -5,15 +5,17 @@ import negozioLogika.Battlelog;
 
 public abstract class Commands {
 	
-	private int[] egoera= new int[2];
+	protected int turnoa,fasea;
 	protected String jokalaria;
 	
 	public Commands(){
-		egoera=Partida.egoeraLortu();
+		int[] egoera=Partida.getPartida().egoeraLortu();
+		turnoa=egoera[2];
+		fasea=egoera[0];
 		//fasea=egoera[0];
 		//txanda=egoera[1];
 		//iraupena=egoera[2];
-		jokalaria=Partida.norenTxandaDa();
+		jokalaria=Partida.getPartida().norenTxandaDaIzena();
 	}
 	
 	public void exekutatu(){
@@ -27,16 +29,21 @@ public abstract class Commands {
 	protected abstract boolean konprobatu();
 	protected abstract void egikaritu(boolean b);
 
-	public int[] egoeraLortu(){
-		return egoera;
-	}
 	protected void komandoaGorde(boolean pZer){
 		Battlelog.BattlelogaLortu().komandoaGorde(this,pZer);
 	}
 
 	public String info() {
 		String info= new String();
-		info=("("+egoera[2]+") "+jokalaria+":\n");
+		info=(turnoa+"'"+jokalaria+"'"+fasea+"-ç("+turnoa+") "+jokalaria+":<br>");
+		return info;
+	}
+
+	public String[] getInfo() {
+		String[] info= new String[3];
+		info[0]=""+turnoa;
+		info[1]=""+fasea;
+		info[2]=jokalaria;
 		return info;
 	}
 }

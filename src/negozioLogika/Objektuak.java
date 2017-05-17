@@ -4,12 +4,13 @@ import negozioLogika.commands.CommandObjektuaErabili;
 
 public abstract class Objektuak {
 	protected String izena;
-	protected int kopurua;
+	protected int kopurua,fase;
 	
 
-	public Objektuak(String pIzena, int pKop){
+	public Objektuak(String pIzena, int pKop, int pZeFasetanErabili){
 		izena=pIzena;
 		kopurua=pKop;
+		fase=pZeFasetanErabili;
 	}
 	public boolean izenBerdina (String pIzena){
 		return izena.equals(pIzena);
@@ -30,6 +31,9 @@ public abstract class Objektuak {
 	public int getKopurua() {
 		return kopurua;
 	}
+	public int getFasea(){
+		return fase;
+	}
 	public void gehitu(int pKop,boolean pZer) {
 		if(pZer)kopurua+=pKop;
 		else	kopurua-=pKop;
@@ -41,7 +45,6 @@ public abstract class Objektuak {
 		return false;
 	}
 	public int getLuzeera() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	public boolean armaDa(){

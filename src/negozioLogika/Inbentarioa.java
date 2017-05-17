@@ -24,7 +24,7 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 		objektuak.add(ob.createObjektua("Bomba", 0));
 		objektuak.add(ob.createObjektua("Misil", 0));
 		objektuak.add(ob.createObjektua("Misil Zuzendua", 0));
-		objektuak.add(ob.createObjektua("Misil Zuzendua Pro", 0));
+		objektuak.add(ob.createObjektua("Misil Zuz. Pro", 0));
 		objektuak.add(ob.createObjektua("Radarra",0));
 		objektuak.add(ob.createObjektua("Fragata", 0));
 		objektuak.add(ob.createObjektua("Itsaspekoa", 0));
@@ -59,7 +59,7 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 	public ArrayList<String> inbentarioaEman() {
 		ArrayList<String> list=new ArrayList<String>();
 		for (Objektuak ob : objektuak) {
-			list.add(ob.getIzena() + ": " + ob.getKopurua());
+			list.add(ob.getFasea()+":"+ob.getIzena() + ": " + ob.getKopurua());
 		}
 		return list;
 	}

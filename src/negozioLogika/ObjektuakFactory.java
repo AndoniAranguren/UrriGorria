@@ -22,7 +22,7 @@ public class ObjektuakFactory {
 		if (pMota.equals("Bomba")){i = new Armak(						"Bomba",pKop,100,new ErasoSinple());}		
 		else if (pMota.equals("Misil")){i = new Armak(					"Misil",pKop,200,new ErasoSinple());}
 		else if (pMota.equals("Misil Zuzendua")){i = new Armak(		"Misil Zuzendua",pKop,100,new ErasoLineal());}
-		else if (pMota.equals("Misil Zuzendua Pro")){i = new Armak(	"Misil Zuzendua Pro",pKop,100,new ErasoBikoitza());}
+		else if (pMota.equals("Misil Zuz. Pro")){i = new Armak(	"Misil Zuz. Pro",pKop,100,new ErasoBikoitza());}
 		
 		//Ekipo--------------------------------
 		else if (pMota.equals("Radarra")) {i = new Ekipoak(			"Radarra",pKop, new ErabiliRadarra());}

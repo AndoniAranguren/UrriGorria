@@ -23,22 +23,21 @@ public class TableroaUI extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private String jokalaria;
 	private JButton[][] tableroa;
-	private static final int zut = Mapa.zut;
-	private static final int erren = Mapa.erren;
+	String[][] mapa;
 	
 	public TableroaUI(String pIzena, Color c) {
 		jokalaria=pIzena;
-		this.setLayout(new GridLayout(zut, erren));
+		mapa=UrriGorriaUI.mapaInterpretatu(pIzena);
+		this.setLayout(new GridLayout(mapa.length, mapa[0].length));
 		this.setBorder(new TitledBorder(new LineBorder(c), pIzena + "ren tableroa", 1, 2, null, c));
-		tableroa = new JButton[zut][erren];
+		tableroa = new JButton[mapa.length][mapa[0].length];
 		this.tableroaHasieratu();
-//		this.setSize(1, 1);
 	}
 	
 	private void tableroaHasieratu() {
-		for(int i=0; i<zut; i++){
-			for(int j=0; j<erren; j++){
-				tableroa[i][j] = new JButton(new ImageIcon(TableroaUI.class.getResource("/externals/ura.png")));
+		for(int i=0; i<mapa.length; i++){
+			for(int j=0; j<mapa[0].length; j++){
+				tableroa[i][j] = new JButton(new ImageIcon(TableroaUI.class.getResource("/externals/ezezaguna.png")));
 				tableroa[i][j].setBorderPainted(false);
 				tableroa[i][j].setName(i + "-" + j);
 				tableroa[i][j].addActionListener(this);
@@ -51,11 +50,12 @@ public class TableroaUI extends JPanel implements ActionListener {
 	private void tableroaEguneratu(){
 		Partida.getPartida();
 		String aux="/externals/ura.png";
-		String[][] mapa=Partida.mapaInterpretatu(jokalaria, jokalaria);
-		for(int i=0; i<zut; i++){
-			for(int j=0; j<erren; j++){
+		for(int i=0; i<mapa.length; i++){
+			for(int j=0; j<mapa[1].length; j++){
 				if(mapa[i][j].equals("Itsasontzi")) aux="/externals/ontzia.png";
-				else aux="/externals/ura.png";
+				else if(mapa[i][j].equals("Ura")) aux="/externals/ura.png";
+				else if(mapa[i][j].equals("Ezezaguna"))aux="/externals/ezezaguna.png";
+				else if(mapa[i][j].equals("Suntzituta"))aux="/externals/red.png";
 				tableroa[i][j].setBorderPainted(false);
 				tableroa[i][j].setIcon((new ImageIcon(TableroaUI.class.getResource(aux))));
 				this.add(tableroa[i][j]);
@@ -69,9 +69,9 @@ public class TableroaUI extends JPanel implements ActionListener {
 		JButton botoia = (JButton) e.getSource();
 		int x = Integer.parseInt(botoia.getName().substring(0,1));
 		int y = Integer.parseInt(botoia.getName().substring(2));
-		if(UrriGorriaUI.getUrriGorriaUI().objektuaEman()!="Ezer"){
+		if(UrriGorriaUI.getObjektua()!="Ezer"){
 			char norabidea;
-			switch (UrriGorriaUI.getUrriGorriaUI().norabideaLortu()){
+			switch (UrriGorriaUI.norabideaLortu()){
 				case 0: norabidea='E';
 					break;
 				case 1: norabidea='S';
@@ -84,6 +84,7 @@ public class TableroaUI extends JPanel implements ActionListener {
 					break;
 			}
 			String[] info= new String[4];
+			info[0]=UrriGorriaUI.getObjektua();
 			info[1]=(""+x);
 			info[2]=(""+y);
 			info[3]=(""+norabidea);

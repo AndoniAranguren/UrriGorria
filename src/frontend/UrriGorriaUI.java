@@ -1,27 +1,44 @@
 package frontend;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import negozioLogika.Partida;
 import negozioLogika.interfaces.UGKonstanteak;
 
-public class UrriGorriaUI extends JFrame implements UGKonstanteak {
+public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel oraingoa;
 	private static UrriGorriaUI ui;
-	private String objektua="Ezer";
-	private int norabidea;
+	private static String objektua="Ezer";
+	private static int norabidea;
+	private static String aurkaria=null;
+	private int monitoreaW=(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth());
+	private int monitoreaH=(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+	private static int leihoaW, leihoaH;
+	private JMenuBar menubar = new JMenuBar();
 	
 	public UrriGorriaUI() {
 		this.setTitle(IZENBURUA);
 		oraingoa = new PartidaZehaztuUI();
 		this.add(oraingoa);	
-		setBounds(550, 350, 300, 150);
+		leihoaW=300;
+		leihoaH=150;
+		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
@@ -31,18 +48,17 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	}
 	
 	
-	public void panelaAldatu(JPanel jartzeko) {
+	private void panelaAldatu(JPanel jartzeko) {
 		this.remove(oraingoa);
 		oraingoa = jartzeko;
 		this.add(oraingoa);
-//		setMinimumSize(new Dimension(825, 825));
 		this.revalidate();
 		this.repaint();
 	}
 	public void objektuaAldatu(String pObj){
 		objektua=pObj;
 	}
-	public String objektuaEman(){
+	public static String getObjektua(){
 		return objektua;
 	}
 
@@ -55,19 +71,44 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	}
 
 	public ArrayList<String> logaEman(String pJokalaria) {
-		return Partida.getPartida().logaEman(pJokalaria);
+		return Partida.logaEman(pJokalaria);
+	}
+	public ArrayList<String> dendaEman(String pJokalaria) {
+		return Partida.dendaEman(pJokalaria);
+	}
+	public ArrayList<String> inbentarioaEman(String pJokalaria) {
+		return Partida.inbentarioaEman(pJokalaria);
 	}
 
 	public void panelaAktualizatu() {
-		Partida.getPartida();
-		panelaAldatu(new PantailaUI(Partida.norenTxandaDa()));
+		int[] egoera=Partida.getPartida().egoeraLortu();
+		//fasea=egoera[0];
+		//txanda=egoera[1];
+		//iraupena=egoera[2];
+
+		if(egoera[2]==0){
+			leihoaW=monitoreaW*50/100;
+			leihoaH=monitoreaH*50/100;
+			panelaAldatu(new OntziakKokatuUI(Partida.getPartida().norenTxandaDaIzena(), Color.BLACK));
+		}
+		else{
+			leihoaW=monitoreaW*65/100;
+			leihoaH=monitoreaH*90/100;
+			setMenua();
+			panelaAldatu(new PantailaUI(Partida.getPartida().norenTxandaDaIzena(),egoera));
+		}
+		this.setMinimumSize(new Dimension(leihoaW,leihoaH));
+		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
 		System.out.println("PanelaAktualizatu");
 	}
 
 	public void komandoaAtzera() {
 		Partida.getPartida().komandoaAtzera();
 	}
-	public int norabideaLortu() {
+	public void komandoaAtzera(String[] pInfo) {
+		Partida.getPartida().komandoaAtzera(pInfo);
+	}
+	public static int norabideaLortu() {
 		return norabidea;
 	}
 	public void norabideaAldatu(){
@@ -76,9 +117,69 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	}
 
 	public void objektuaErabili(String pNori, String[] pInfo) {
-		pInfo[0]=objektua;
 		System.out.println(pInfo[0]+" "+ pInfo[1]+" "+pInfo[2]+" "+pInfo[3]);
 		Partida.getPartida().jokalariakObjektuaErabili(pNori, pInfo);
 	}
+
+	public void faseaAldatu() {
+		Partida.getPartida().faseaAldatu(true);
+	}
+	private void setMenua() {
+        menubar.removeAll();
+        JMenu menua = new JMenu("Aurkariaren mapa aukeratu");
+        menua.setMnemonic(KeyEvent.VK_F);
+
+        String[] jokalariak=Partida.getPartida().jokalarienIzenakEman();
+        JMenuItem[] eMenuItem = new JMenuItem[jokalariak.length];
+        int ind=-1;
+        for(String izena:jokalariak){
+			System.out.println(izena);
+        	if(!izena.equals(Partida.getPartida().norenTxandaDa())){
+                ind++;
+            	eMenuItem[ind] = new JMenuItem(izena);
+            	eMenuItem[ind].setMnemonic(KeyEvent.VK_E);
+                eMenuItem[ind].setName(izena);
+                eMenuItem[ind].addActionListener(this);
+                menua.add(eMenuItem[ind]);
+        	}
+        }
+        menubar.add(menua);
+
+        setJMenuBar(menubar);
+
+    	System.out.println(aurkaria);
+        if(aurkaria==null)	aurkaria=eMenuItem[ind].getName();
+
+    	System.out.println(eMenuItem[ind].getName());
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JMenuItem menua = (JMenuItem) e.getSource();
+		aurkaria= menua.getName();
+		panelaAktualizatu();
+	}
+
+	public static String getAurkaria() {
+		return aurkaria;
+	}
+
+	public static String[][] mapaInterpretatu(String pIzena) {
+		return Partida.getPartida().mapaInterpretatu(pIzena);
+	}
+
+	public static String norenTxandaDaIzena() {
+		return Partida.getPartida().norenTxandaDaIzena();
+	}
+
+	public static int getLeihoaW() {
+		return leihoaW;
+	}
+	public static int getLeihoaH() {
+		return leihoaH;
+	}
+
+	
+
 
 }

@@ -7,4 +7,8 @@ public class Jokalaria extends Jokalariak {
 	public void itsasontziakIpini(){
 //		UrriGorria.getUrriGorria().getUi().panelaAldatu(new OntziakAukeratu1(izena));
 	}
+	@Override
+	public void jokatuCPU(int pFasea) {
+		
+	}
 }

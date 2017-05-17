@@ -28,15 +28,11 @@ public class Battlelog {
 			komandoZerrenda.get(komandoZerrenda.size()-1).deuseztatu();
 		}
 	}
-	public void egoeraraBueltatu(int[] pEgoera){
+	public void turnoraBueltatu(int pTurno){
 		//txanda=egoera[0];
 		//fasea=egoera[1];
 		//iraupena=egoera[2];
-		int ind=komandoZerrenda.size()-1;
-		while(pEgoera!=komandoZerrenda.get(ind).egoeraLortu()){
-			komandoaAtzera();
-		}
-		
+
 	}
 	public ArrayList<String> logaEman() {
 		ArrayList<String> loga= new ArrayList<String>();
@@ -44,5 +40,17 @@ public class Battlelog {
 			loga.add(komandoa.info());
 		}
 		return loga;
+	}
+	public void komandoaAtzera(String[] pInfo) {
+		int ind=komandoZerrenda.size()-1;
+		String[] infoC= new String[3];
+		boolean aurkituGabe=true;
+		while(aurkituGabe){
+			komandoZerrenda.get(ind).getInfo();
+			aurkituGabe=(pInfo[0].equals(infoC[0])&&
+						pInfo[1].equals(infoC[1])&&
+						pInfo[2].equals(infoC[2]));
+			komandoaAtzera();
+		}
 	}
 }

@@ -8,13 +8,15 @@ public class ErasoLineal implements StrategyArmak{
 	public Mapa eraso(String pNork,Mapa pMapa, int pX, int pY, char pNorabide, int pIndarra, boolean pZer){
 		int ind=0;
 		ErasoSinple er=new ErasoSinple();
-		if(pNorabide=='E'||pNorabide=='W'){
-			while(pMapa.erasoSinpleaJaso(pNork, ind, pY, pIndarra, pZer)){
+		if(pNorabide=='N'||pNorabide=='S'){
+			while(er.konprobatu(pMapa, ind, pY)){
+				er.eraso(pNork,pMapa, ind, pY, pNorabide, pIndarra, pZer);
 				ind++;
 			}
 		}
 		else{
-			while(pMapa.erasoSinpleaJaso(pNork, pX, ind, pIndarra, pZer)){
+			while(er.konprobatu(pMapa, pX, ind)){
+				er.eraso(pNork,pMapa, pX, ind,pNorabide, pIndarra, pZer);
 				ind++;
 			}
 		}

@@ -21,22 +21,22 @@ public class Denda {
 		listaErosketak.add(eros.createErosketa("Misil"));
 		listaErosketak.add(eros.createErosketa("Misilx5"));
 		listaErosketak.add(eros.createErosketa("Misil Zuzendua"));
-		listaErosketak.add(eros.createErosketa("Misil Zuzendua Pro"));
+		listaErosketak.add(eros.createErosketa("Misil Zuz. Pro"));
 		listaErosketak.add(eros.createErosketa("Radarra"));
-		listaErosketak.add(eros.createErosketa("Fragata"));
-		listaErosketak.add(eros.createErosketa("Itsaspekoa"));
-		listaErosketak.add(eros.createErosketa("Suntsitzailea"));
-		listaErosketak.add(eros.createErosketa("HegazkinOntzia"));
-		listaErosketak.add(eros.createErosketa("Itsasontzi Guztiak"));
+		listaErosketak.add(eros.createErosketa("DFragata"));
+		listaErosketak.add(eros.createErosketa("DItsaspekoa"));
+		listaErosketak.add(eros.createErosketa("DSuntsitzailea"));
+		listaErosketak.add(eros.createErosketa("DHegazkinOntzia"));
+		listaErosketak.add(eros.createErosketa("DHasteko Objektu Guztiak"));
 	}
 	private void stockaErreseteatu(){
 		listaStock.clear();
 		ObjektuakFactory ob=ObjektuakFactory.getObjektuakFactory();
-		listaStock.add(ob.createObjektua("Bomba", 50));
-		listaStock.add(ob.createObjektua("Misil", 20));
-		listaStock.add(ob.createObjektua("Misil Zuzendua", 5));
-		listaStock.add(ob.createObjektua("Misil Zuzendua Pro", 2));
-		listaStock.add(ob.createObjektua("Radarra",5));
+		listaStock.add(ob.createObjektua("Bomba", 100));
+		listaStock.add(ob.createObjektua("Misil", 40));
+		listaStock.add(ob.createObjektua("Misil Zuzendua", 11));
+		listaStock.add(ob.createObjektua("Misil Zuz. Pro", 2));
+		listaStock.add(ob.createObjektua("Radarra",4));
 		listaStock.add(ob.createObjektua("Fragata", 4));
 		listaStock.add(ob.createObjektua("Suntsitzailea", 3));
 		listaStock.add(ob.createObjektua("Itsaspekoa", 2));
@@ -79,7 +79,8 @@ public class Denda {
 	public ArrayList<String> dendaEman() {
 		ArrayList<String> list=new ArrayList<String>();
 		for (Erosketa ob : listaErosketak) {
-			list.add(ob.getIzena() + ": " + zenbatErosiAhal(ob)+ " ("+ob.getPrezioa()+"€)");
+			if(!(ob.getIzena().charAt(0)=='D'))
+				list.add(ob.getIzena() + ": " + zenbatErosiAhal(ob)+ " ("+ob.getPrezioa()+"€)");
 		}
 		return list;
 	}
@@ -95,7 +96,7 @@ public class Denda {
 			if(pos!=-1){
 				stockObj=listaStock.get(pos);
 				
-				if((erosObj.getKopurua())==0){//infinitu aldiz erosi ahal duzu hau
+				if((erosObj.getKopurua())<0){//infinitu aldiz erosi ahal duzu hau
 				}else if(erosObj.getKopurua()<=stockObj.getKopurua()){
 					if(kopHandiena>stockObj.getKopurua()/(erosObj.getKopurua()))
 							kopHandiena=stockObj.getKopurua()/(erosObj.getKopurua());

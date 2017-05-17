@@ -7,7 +7,7 @@ public abstract class Jokalariak {
 	
 	protected String izena;
 	boolean bizirik;
-	private Mapa mapa;
+	protected Mapa mapa;
 	protected Inbentarioa inb;
 	private Denda denda;
 	private int dirua;
@@ -27,8 +27,10 @@ public abstract class Jokalariak {
 		bizirik=true;
 		mapa= new Mapa(izena);
 		nireItsasontziak=new ArrayList<Itsasontzia>();
+		
 		ArrayList<Objektuak> objektuak=new ArrayList<Objektuak>();
-		objektuak=denda.dendakIzakinakDitu(ErosketaFactory.getErosketaFactory().createErosketa("Itsasontzi Guztiak"));
+		objektuak=denda.dendakIzakinakDitu(ErosketaFactory.getErosketaFactory()
+				.createErosketa("DHasteko Objektu Guztiak"));
 		denda.objektuakEman(objektuak, false);
 		inb.objektuakEman(objektuak, true);
 	}
@@ -102,5 +104,11 @@ public abstract class Jokalariak {
 
 	public void objektuaErabili(String pNori, String[] pInfo) {
 		inb.objektuaErabili(pNori,pInfo);
+	}
+
+	public abstract void jokatuCPU(int pFasea);
+
+	public String getIzena() {
+		return izena;
 	}
 }

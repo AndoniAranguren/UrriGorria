@@ -23,7 +23,8 @@ public abstract class Tile {
 	}
 	public String erakutsi(String pNork){
 		if(ikusiAhalDu(pNork)){
-			return identifikadorea;
+			if(itsasontziaDa()&&!bizirikDago()) return "Suntzituta";
+			else	return identifikadorea;
 		}
 		return "Ezezaguna";
 	}
@@ -32,7 +33,7 @@ public abstract class Tile {
 		Iterator<String> it=ikusiAhal.iterator();
 		boolean aurkituta=false;
 		while(!aurkituta && it.hasNext()){
-			aurkituta=it.next()==pNork;
+			aurkituta=(it.next().equals(pNork));
 		}
 		return aurkituta;
 	}

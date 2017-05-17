@@ -12,7 +12,7 @@ public class Itsasontzia extends Objektuak {
 	private boolean suntsituta;
 	private ArrayList<ItsasontziTile> tileLista;
 	public Itsasontzia(String pMota, int pKop, int pLuzeera, int pPrezioa){
-		super(pMota, pKop);
+		super(pMota, pKop,0);
 		ezkutua=0;
 		luzeera = pLuzeera;
 		prezioa = pPrezioa;
