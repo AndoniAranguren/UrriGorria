@@ -43,13 +43,7 @@ public class Battlelog {
 	}
 	public void komandoaAtzera(String[] pInfo) {
 		int ind=komandoZerrenda.size()-1;
-		String[] infoC= new String[3];
-		boolean aurkituGabe=true;
-		while(aurkituGabe){
-			komandoZerrenda.get(ind).getInfo();
-			aurkituGabe=(pInfo[0].equals(infoC[0])&&
-						pInfo[1].equals(infoC[1])&&
-						pInfo[2].equals(infoC[2]));
+		while(komandoZerrenda.get(ind).berdinaDa(pInfo)){
 			komandoaAtzera();
 		}
 	}

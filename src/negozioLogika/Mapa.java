@@ -1,7 +1,5 @@
 package negozioLogika;
 
-import javax.swing.SingleSelectionModel;
-
 public class Mapa {
 	//Atributuak
 	public static int zut=10;

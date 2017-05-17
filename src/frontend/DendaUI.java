@@ -17,14 +17,16 @@ public class DendaUI extends JPanel implements ActionListener {
 	private String jokalaria = null;
 	private JButton[] denda;
 	private ArrayList<String> den = new ArrayList<>();
+	private int dirua;
 	private boolean faseZuzenean;
 	
 	public DendaUI(String pIzena, boolean pFaseZuzenean) {
 		jokalaria=pIzena;
 		faseZuzenean=pFaseZuzenean;
+		dirua = UrriGorriaUI.getUrriGorriaUI().jokalariakZenbatDiru(jokalaria);
 		den = UrriGorriaUI.getUrriGorriaUI().dendaEman(jokalaria);
 		this.setLayout(new GridLayout(den.size(), 1));
-		this.setBorder(BorderFactory.createTitledBorder("Denda:"));
+		this.setBorder(BorderFactory.createTitledBorder("Denda: "+dirua+"€"));
 		this.dendaAktualizatu();
 	}
 	
@@ -37,9 +39,9 @@ public class DendaUI extends JPanel implements ActionListener {
 			denda[i].setText(den.get(i));
 	        denda[i].addActionListener(this);
 	        denda[i].setEnabled(faseZuzenean);
-	        String kopuru=(den.get(i).split(": ")[1]);
-	        kopuru=kopuru.split(" ")[0];
-	        if(Integer.parseInt(kopuru)<1)
+	        int kopuru=Integer.parseInt(den.get(i).split(": ")[1].split(" \\(")[0]);
+	        int diru=Integer.parseInt(den.get(i).split("\\(")[1].split("€")[0]);
+	        if(kopuru<1 || diru>dirua)
 	        	denda[i].setEnabled(false);
 			this.add(denda[i]);
 		}

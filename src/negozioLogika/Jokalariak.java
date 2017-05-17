@@ -23,7 +23,7 @@ public abstract class Jokalariak {
 	public void jokalariaErreseteatu(){
 		denda= new Denda();
 		inb = new Inbentarioa();
-		dirua=5000;
+		dirua=500;
 		bizirik=true;
 		mapa= new Mapa(izena);
 		nireItsasontziak=new ArrayList<Itsasontzia>();
@@ -95,11 +95,17 @@ public abstract class Jokalariak {
 	public boolean jokalariakDiruaDu(int pPrezioa) {
 		return (dirua>=pPrezioa);
 	}
+	public String getIzena() {
+		return izena;
+	}
 	public ArrayList<String> inbentarioaEman() {
 		return inb.inbentarioaEman();
 	}
 	public ArrayList<String> dendaEman() {
 		return denda.dendaEman();
+	}
+	public int jokalariakZenbatDiru() {
+		return dirua;
 	}
 
 	public void objektuaErabili(String pNori, String[] pInfo) {
@@ -108,7 +114,5 @@ public abstract class Jokalariak {
 
 	public abstract void jokatuCPU(int pFasea);
 
-	public String getIzena() {
-		return izena;
-	}
+
 }

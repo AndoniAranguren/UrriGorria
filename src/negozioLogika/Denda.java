@@ -18,6 +18,7 @@ public class Denda {
 		listaErosketak.clear();
 		ErosketaFactory eros=ErosketaFactory.getErosketaFactory();
 		listaErosketak.add(eros.createErosketa("Bomba"));
+		listaErosketak.add(eros.createErosketa("Bombax10"));
 		listaErosketak.add(eros.createErosketa("Misil"));
 		listaErosketak.add(eros.createErosketa("Misilx5"));
 		listaErosketak.add(eros.createErosketa("Misil Zuzendua"));
@@ -95,7 +96,6 @@ public class Denda {
 			pos=objektuarenPosLortu(erosObj);
 			if(pos!=-1){
 				stockObj=listaStock.get(pos);
-				
 				if((erosObj.getKopurua())<0){//infinitu aldiz erosi ahal duzu hau
 				}else if(erosObj.getKopurua()<=stockObj.getKopurua()){
 					if(kopHandiena>stockObj.getKopurua()/(erosObj.getKopurua()))

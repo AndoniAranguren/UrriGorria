@@ -40,13 +40,13 @@ public class Partida {
 		if(egoera[2]==0)	egoera[1]--; //Hasieraketa turnoan bagaude jokalaria aldatu
 		else 			egoera[0]--; //Bestela fasea
 		
-		if(egoera[0]>2 &&egoera[0]<0){//fasea
+		if(egoera[0]<0){//fasea
 			egoera[0]=2;
 			egoera[1]--;//txanda hurrengo jokalariarena
 		}
 		if(egoera[1]<0){
 				egoera[0]=2;
-				egoera[1]=maxJok;
+				egoera[1]=maxJok-1;
 				egoera[2]--;//turno oso bat pasatu da
 		}
 		
@@ -56,7 +56,7 @@ public class Partida {
 		if(egoera[2]==0)	egoera[1]++; //Hasieraketa turnoan bagaude jokalaria aldatu
 		else 			egoera[0]++; //Bestela fasea
 		
-		if(egoera[0]>2 || egoera[0]<0){//fasea
+		if(egoera[0]>2){//fasea
 			egoera[0]=0;
 			egoera[1]++;//txanda hurrengo jokalariarena
 		}
@@ -88,6 +88,9 @@ public class Partida {
 	}
 	public static ArrayList<String> logaEman(String pJokalaria) {
 		return Battlelog.BattlelogaLortu().logaEman();
+	}
+	public int jokalariakZenbatDiru(String pJokalaria) {
+		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).jokalariakZenbatDiru();
 	}
 	//=================================================================================
 	public UrriGorriaUI getUi() {
@@ -188,7 +191,6 @@ public class Partida {
 		String[] izenak = new String[jokalariLista.size()];
 		int ind=0;
 		for(Jokalariak jok : jokalariLista){
-			System.out.println(jok.getIzena());
 			if(jok.jokalariaBizirikDago()){
 				izenak[ind]=jok.getIzena();
 				ind++;
@@ -196,5 +198,6 @@ public class Partida {
 		}
 		return izenak;
 	}
+
 	
 }

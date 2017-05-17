@@ -5,11 +5,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -19,17 +17,18 @@ import javax.swing.border.TitledBorder;
 public class PantailaUI extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private TableroaUI tableroa1,jok_tableroa;
+	private TableroaUI aurk_tableroa,jok_tableroa;
 	private DendaUI denda;
 	private LogUI log;
 	private InbentarioaUI inbentarioa;
 	private int[] egoera;
-	private String jokalaria;
+	private String jokalaria,aurkaria;
 	private JPanel tableroak, dendaP, inbentarioaP,dendaInbP,logP,top;
 	
-	public PantailaUI(String pJokalaria, int[] pEgoera) {
+	public PantailaUI(String pJokalaria,String pAurkaria,  int[] pEgoera) {
 		jokalaria=pJokalaria;
 		egoera=pEgoera;
+		aurkaria=pAurkaria;
 		
 		pantailaAktualizatu();
 	}
@@ -58,7 +57,7 @@ public class PantailaUI extends JPanel implements ActionListener {
 			break;
 		}
 		JButton tituluaJ = new JButton(titulua);
-		top.setBorder(new TitledBorder(new LineBorder(Color.CYAN),"Iraupena: ("+egoera[2]+") "+UrriGorriaUI.norenTxandaDaIzena()));
+		top.setBorder(new TitledBorder(new LineBorder(Color.CYAN),"Iraupena: ("+egoera[2]+") "+jokalaria));
 		JButton nora2 = new JButton(new ImageIcon(TableroaUI.class.getResource(norabideaLortu())));
 		JButton atzera = new JButton("Atzera");
 
@@ -116,8 +115,8 @@ public class PantailaUI extends JPanel implements ActionListener {
 		tableroak = new JPanel();
 		tableroak.setLayout(new GridLayout(2, 1));
 		jok_tableroa = new TableroaUI(jokalaria, Color.RED);
-		tableroa1 = new TableroaUI(UrriGorriaUI.getAurkaria(), Color.RED);
-		tableroak.add(tableroa1);
+		aurk_tableroa = new TableroaUI(aurkaria, Color.RED);
+		tableroak.add(aurk_tableroa);
 		tableroak.add(jok_tableroa);
 	}
 	

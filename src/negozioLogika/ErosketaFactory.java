@@ -19,13 +19,19 @@ public class ErosketaFactory {
 			lista.add(o);
 			prezioa=100;
 		}
+		else if(pMota.equals("Bombax10")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba",10);
+			lista.add(o);
+			prezioa=800;
+		}
 		else if(pMota.equals("Misil")){
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil"); 
 			lista.add(o);
 			prezioa=200;
 		}
 		else if(pMota.equals("Misilx5")){
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",5); 
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",5);
+			lista.add(o);
 			prezioa=400;
 		}
 		else if (pMota.equals("Misil Zuzendua")){

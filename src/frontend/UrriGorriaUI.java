@@ -26,7 +26,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	private static UrriGorriaUI ui;
 	private static String objektua="Ezer";
 	private static int norabidea;
-	private static String aurkaria=null;
+	private static String aurkaria=null,norenTxanda;
 	private int monitoreaW=(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 	private int monitoreaH=(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 	private static int leihoaW, leihoaH;
@@ -82,6 +82,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 
 	public void panelaAktualizatu() {
 		int[] egoera=Partida.getPartida().egoeraLortu();
+        norenTxanda=Partida.getPartida().norenTxandaDa().getIzena();
 		//fasea=egoera[0];
 		//txanda=egoera[1];
 		//iraupena=egoera[2];
@@ -89,13 +90,13 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		if(egoera[2]==0){
 			leihoaW=monitoreaW*50/100;
 			leihoaH=monitoreaH*50/100;
-			panelaAldatu(new OntziakKokatuUI(Partida.getPartida().norenTxandaDaIzena(), Color.BLACK));
+			panelaAldatu(new OntziakKokatuUI(norenTxanda, Color.BLACK));
 		}
 		else{
 			leihoaW=monitoreaW*65/100;
 			leihoaH=monitoreaH*90/100;
-			setMenua();
-			panelaAldatu(new PantailaUI(Partida.getPartida().norenTxandaDaIzena(),egoera));
+			setMenua(norenTxanda);
+			panelaAldatu(new PantailaUI(norenTxanda,aurkaria,egoera));
 		}
 		this.setMinimumSize(new Dimension(leihoaW,leihoaH));
 		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
@@ -124,7 +125,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	public void faseaAldatu() {
 		Partida.getPartida().faseaAldatu(true);
 	}
-	private void setMenua() {
+	private void setMenua(String pNorenTxanda) {
         menubar.removeAll();
         JMenu menua = new JMenu("Aurkariaren mapa aukeratu");
         menua.setMnemonic(KeyEvent.VK_F);
@@ -133,8 +134,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
         JMenuItem[] eMenuItem = new JMenuItem[jokalariak.length];
         int ind=-1;
         for(String izena:jokalariak){
-			System.out.println(izena);
-        	if(!izena.equals(Partida.getPartida().norenTxandaDa())){
+        	if(!izena.equals(pNorenTxanda)){
                 ind++;
             	eMenuItem[ind] = new JMenuItem(izena);
             	eMenuItem[ind].setMnemonic(KeyEvent.VK_E);
@@ -147,10 +147,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 
         setJMenuBar(menubar);
 
-    	System.out.println(aurkaria);
-        if(aurkaria==null)	aurkaria=eMenuItem[ind].getName();
-
-    	System.out.println(eMenuItem[ind].getName());
+        if(aurkaria==null||aurkaria.equals(pNorenTxanda))	aurkaria=eMenuItem[ind].getName();
 	}
 
 	@Override
@@ -169,7 +166,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	}
 
 	public static String norenTxandaDaIzena() {
-		return Partida.getPartida().norenTxandaDaIzena();
+		return norenTxanda;
 	}
 
 	public static int getLeihoaW() {
@@ -177,6 +174,10 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	}
 	public static int getLeihoaH() {
 		return leihoaH;
+	}
+
+	public int jokalariakZenbatDiru(String pJokalaria) {
+		return Partida.getPartida().jokalariakZenbatDiru(pJokalaria);
 	}
 
 	

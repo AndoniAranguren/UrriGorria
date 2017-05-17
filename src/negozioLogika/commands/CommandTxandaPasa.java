@@ -8,7 +8,6 @@ public class CommandTxandaPasa extends Commands {
 		//Datuak gorde----------
 		super();
 		//----------------------
-		System.out.println("Txanda pasn");
 		super.exekutatu();
 	}
 	
@@ -19,8 +18,6 @@ public class CommandTxandaPasa extends Commands {
 
 	@Override
 	protected void egikaritu(boolean pZer) {
-
-		System.out.println("Txanda pasatzen saiaasdadassatzen");
 		Partida.getPartida().faseaAldatu(pZer);
 		super.komandoaGorde(pZer);
 	}

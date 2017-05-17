@@ -39,11 +39,9 @@ public abstract class Commands {
 		return info;
 	}
 
-	public String[] getInfo() {
-		String[] info= new String[3];
-		info[0]=""+turnoa;
-		info[1]=""+fasea;
-		info[2]=jokalaria;
-		return info;
+	public boolean berdinaDa(String[] pInfo) {
+		return (pInfo[0].equals(""+turnoa)&&
+				pInfo[1].equals(""+fasea)&&
+				pInfo[2].equals(jokalaria));
 	}
 }

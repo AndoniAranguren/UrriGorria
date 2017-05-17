@@ -18,12 +18,12 @@ public class OntziakKokatuUI extends JPanel implements ActionListener{
 	private InbentarioaUI inb;
 	private JPanel top;
 
-	public OntziakKokatuUI(String jokalaria, Color c) {
+	public OntziakKokatuUI(String pJokalaria, Color c) {
 		this.setLayout(new BorderLayout());
-		jok_tableroa = new TableroaUI(jokalaria, c);
+		jok_tableroa = new TableroaUI(pJokalaria, c);
 		this.add(jok_tableroa, BorderLayout.CENTER);
 		top= new JPanel();
-		inb = new InbentarioaUI(jokalaria,0);
+		inb = new InbentarioaUI(pJokalaria,0);
 		JButton nora = new JButton(new ImageIcon(TableroaUI.class.getResource(norabideaLortu())));
 		nora.setName("Norabidea");
 		nora.addActionListener(this);
