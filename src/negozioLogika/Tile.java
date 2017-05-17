@@ -19,7 +19,7 @@ public abstract class Tile {
 	public void jo(String pErasotzaile, int pIndarra, boolean pZer){
 		if(pZer) ikusiAhal.add(pErasotzaile);
 		else ikusiAhal.remove(pErasotzaile);
-		if(this instanceof ItsasontziTile) ((ItsasontziTile)(this)).bizitzaAldatu(pIndarra,pZer);
+		if(itsasontziaDa()) ((ItsasontziTile)(this)).bizitzaAldatu(pIndarra,pZer);
 	}
 	public String erakutsi(String pNork){
 		if(ikusiAhalDu(pNork)){

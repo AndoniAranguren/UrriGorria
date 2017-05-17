@@ -15,9 +15,10 @@ public class ItsasontziTile extends Tile {
 	
 	public void bizitzaAldatu(int pIndarra, boolean pZer){
 		if(pZer)
-			bizitza-=pIndarra;
+			if(itsasontzi.ezkutuaDauka()) itsasontzi.ezkutuariJo(pIndarra, pZer);
+			else bizitza-=pIndarra;
 		else if (bizitza<100) bizitza=100;
-		itsasontzi.ezkutuariJo(pIndarra, pZer);
+		else itsasontzi.ezkutuariJo(pIndarra, pZer);
 	}
 	public boolean suntsitutaDago(){
 		return bizitza<=0;
