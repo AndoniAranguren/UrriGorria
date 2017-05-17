@@ -18,9 +18,9 @@ public class OntziakKokatuUI extends JPanel implements ActionListener{
 	private InbentarioaUI inb;
 	private JPanel top;
 
-	public OntziakKokatuUI(String pJokalaria, Color c) {
+	public OntziakKokatuUI(String pJokalaria) {
 		this.setLayout(new BorderLayout());
-		jok_tableroa = new TableroaUI(pJokalaria, c);
+		jok_tableroa = new TableroaUI(pJokalaria, Color.BLACK);
 		this.add(jok_tableroa, BorderLayout.CENTER);
 		top= new JPanel();
 		inb = new InbentarioaUI(pJokalaria,0);

@@ -21,15 +21,7 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 	private void stockaErreseteatu(){
 		objektuak.clear();
 		ObjektuakFactory ob=ObjektuakFactory.getObjektuakFactory();
-		objektuak.add(ob.createObjektua("Bomba", 0));
-		objektuak.add(ob.createObjektua("Misil", 0));
-		objektuak.add(ob.createObjektua("Misil Zuzendua", 0));
-		objektuak.add(ob.createObjektua("Misil Zuz. Pro", 0));
-		objektuak.add(ob.createObjektua("Radarra",0));
-		objektuak.add(ob.createObjektua("Fragata", 0));
-		objektuak.add(ob.createObjektua("Itsaspekoa", 0));
-		objektuak.add(ob.createObjektua("Suntsitzailea", 0));
-		objektuak.add(ob.createObjektua("HegazkinOntzia", 0));
+		objektuak.addAll(ob.objektuGuztiak(true));
 	}
 	
 	public void objektuakEman(ArrayList<Objektuak> pObjektuak, boolean pZer){

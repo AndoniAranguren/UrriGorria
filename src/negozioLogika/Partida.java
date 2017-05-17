@@ -12,6 +12,7 @@ public class Partida {
 	private static int maxJok=0;
 	private int[] egoera= new int[3];
 	private UrriGorriaUI ui;
+	private boolean jarraitu;
 
 	
 	private Partida(){
@@ -19,6 +20,9 @@ public class Partida {
 		egoera[2]=0;//iraupena
 		egoera[1]=0;//txanda
 		egoera[0]=0;//fasea
+		jarraitu=true;
+		ui=UrriGorriaUI.getUrriGorriaUI();
+		ui.urriGorriaUIErreseteatu();
 	}	
 	public static synchronized Partida getPartida(){
 		if(nPartida==null){ nPartida = new Partida();}
@@ -27,13 +31,13 @@ public class Partida {
 
 	//=================================================================================
 	//Jokoaren dinamika (Iraupena,turnoa,fasea)		===================================
-	public void partidaJokatu(){
-		this.ui = new UrriGorriaUI();
+	public void partidaErreseteatu(){
+		nPartida=new Partida();
 	}
 	public void faseaAldatu(boolean pZer){
 		if(pZer) faseaAhurrera();
 		else faseaAtzera();
-		if(norenTxandaDaIzena().split(".",1).equals("CPU"))
+		if(norenTxandaDaIzena().split("\\.")[1].equals("CPU"))
 			norenTxandaDa().jokatuCPU(egoera[0]);
 	}
 	private void faseaAtzera() {
@@ -49,22 +53,28 @@ public class Partida {
 				egoera[1]=maxJok-1;
 				egoera[2]--;//turno oso bat pasatu da
 		}
-		
-			
+		jarraitu=true;
 	}
 	private void faseaAhurrera() {
-		if(egoera[2]==0)	egoera[1]++; //Hasieraketa turnoan bagaude jokalaria aldatu
-		else 			egoera[0]++; //Bestela fasea
-		
-		if(egoera[0]>2){//fasea
-			egoera[0]=0;
-			egoera[1]++;//txanda hurrengo jokalariarena
-		}
-		if(egoera[1]>=maxJok){
+		if(jarraitu){
+			if(egoera[2]==0)	egoera[1]++; //Hasieraketa turnoan bagaude jokalaria aldatu
+			else 			egoera[0]++; //Bestela fasea
+			
+			if(egoera[0]>2){//fasea
 				egoera[0]=0;
-				egoera[1]=0;
-				egoera[2]++;//turno oso bat pasatu da
+				egoera[1]++;//txanda hurrengo jokalariarena
+			}
+			if(egoera[1]>=maxJok){
+					egoera[0]=0;
+					egoera[1]=0;
+					egoera[2]++;//turno oso bat pasatu da
+			}
 		}
+		int zenbatBizirik=0;
+		for(Jokalariak jok : jokalariLista){
+			if(jok.jokalariaBizirikDago())zenbatBizirik++;
+		}
+		jarraitu=(zenbatBizirik>1);
 	}
 	public String norenTxandaDaIzena() {
 		return jokalariLista.get(egoera[1]).izenaLortu();
@@ -91,6 +101,14 @@ public class Partida {
 	}
 	public int jokalariakZenbatDiru(String pJokalaria) {
 		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).jokalariakZenbatDiru();
+	}
+	public String getIrabazlea() {
+		String irabazlea=null;
+		if(!jarraitu){
+			for(Jokalariak jok: jokalariLista)
+				if(jok.jokalariaBizirikDago()) irabazlea=jok.getIzena();
+		}
+		return irabazlea;
 	}
 	//=================================================================================
 	public UrriGorriaUI getUi() {
@@ -148,6 +166,7 @@ public class Partida {
 			jokalariLista.add(new CPU("1.CPU", 1));
 		}else if(pInfo.equals("MAKINAREN_AURKA_ZAILA")){
 			jokalariLista.add(new CPU("1.CPU", 2));
+			maxJok++;
 			jokalariLista.add(new CPU("2.CPU", 2));
 		}
 	}
@@ -198,6 +217,7 @@ public class Partida {
 		}
 		return izenak;
 	}
+	
 
 	
 }

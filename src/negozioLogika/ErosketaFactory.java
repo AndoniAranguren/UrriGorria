@@ -45,7 +45,12 @@ public class ErosketaFactory {
 			lista.add(o);
 			prezioa=300;
 		}
-		else if (pMota.equals("DRadarra")) {
+		else if (pMota.equals("Ezkutua")) {
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Ezkutua"); 
+			lista.add(o);
+			prezioa=300;
+		}
+		else if (pMota.equals("Radarra")) {
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra"); 
 			lista.add(o);
 			prezioa=200;
@@ -69,25 +74,6 @@ public class ErosketaFactory {
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia"); 
 			lista.add(o);
 			prezioa=250;
-		}
-		else if (pMota.equals("DHasteko Objektu Guztiak")){
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia"); 
-			lista.add(o);
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspekoa",2); 
-			lista.add(o); 
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Suntsitzailea",3); 
-			lista.add(o);
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Fragata",4);
-			lista.add(o);
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba",50); 
-			lista.add(o);
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",10); 
-			lista.add(o); 
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua",1); 
-			lista.add(o);
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra",4);
-			lista.add(o);
-			prezioa=1200;
 		}
 		return (new Erosketa(prezioa, pMota, lista));
 	}

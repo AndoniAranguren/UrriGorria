@@ -1,6 +1,7 @@
 package frontend;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -8,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -42,7 +42,9 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-
+	public void urriGorriaUIErreseteatu(){
+		ui=new UrriGorriaUI();
+	}
 	public static UrriGorriaUI getUrriGorriaUI() {
 		return ui == null ? (ui = new UrriGorriaUI()) : ui;
 	}
@@ -82,22 +84,36 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 
 	public void panelaAktualizatu() {
 		int[] egoera=Partida.getPartida().egoeraLortu();
-        norenTxanda=Partida.getPartida().norenTxandaDa().getIzena();
+        norenTxanda=Partida.getPartida().norenTxandaDaIzena();
+        String irabazlea=Partida.getPartida().getIrabazlea();
 		//fasea=egoera[0];
 		//txanda=egoera[1];
 		//iraupena=egoera[2];
-
-		if(egoera[2]==0){
-			leihoaW=monitoreaW*50/100;
-			leihoaH=monitoreaH*50/100;
-			panelaAldatu(new OntziakKokatuUI(norenTxanda, Color.BLACK));
-		}
-		else{
-			leihoaW=monitoreaW*65/100;
-			leihoaH=monitoreaH*90/100;
-			setMenua(norenTxanda);
-			panelaAldatu(new PantailaUI(norenTxanda,aurkaria,egoera));
-		}
+        if(irabazlea==null){
+        	if(egoera[2]==0){
+    			leihoaW=monitoreaW*50/100;
+    			leihoaH=monitoreaH*50/100;
+    			panelaAldatu(new OntziakKokatuUI(norenTxanda));
+    		}
+    		else{
+    			leihoaW=monitoreaW*65/100;
+    			leihoaH=monitoreaH*90/100;
+    			setMenua(norenTxanda);
+    			panelaAldatu(new PantailaUI(norenTxanda,aurkaria,egoera));
+    		}
+        }
+        else{
+        	JPanel amaituta=new JPanel();
+        	amaituta.setName(irabazlea+"-k jokoa irabazi du");
+        	amaituta.add(new javax.swing.JTextField(irabazlea+"-k jokoa irabazi du"));
+        	JButton berriro= new JButton("Berriro hasi");
+        	berriro.setName("Berriro hasi");
+        	berriro.addActionListener(this);
+        	amaituta.add(berriro);
+        	leihoaW=300;
+    		leihoaH=150;
+        	panelaAldatu(amaituta);
+        }
 		this.setMinimumSize(new Dimension(leihoaW,leihoaH));
 		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
 		System.out.println("PanelaAktualizatu");
@@ -149,14 +165,6 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 
         if(aurkaria==null||aurkaria.equals(pNorenTxanda))	aurkaria=eMenuItem[ind].getName();
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JMenuItem menua = (JMenuItem) e.getSource();
-		aurkaria= menua.getName();
-		panelaAktualizatu();
-	}
-
 	public static String getAurkaria() {
 		return aurkaria;
 	}
@@ -180,7 +188,14 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		return Partida.getPartida().jokalariakZenbatDiru(pJokalaria);
 	}
 
-	
-
-
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() instanceof JMenuItem){
+			JMenuItem menua = (JMenuItem) e.getSource();
+			aurkaria= menua.getName();
+			panelaAktualizatu();
+		}else if(e.getSource() instanceof JButton)
+			if(((Component) e.getSource()).getName().equals("Berriro hasi"))
+				Partida.getPartida().partidaErreseteatu();
+	}
 }

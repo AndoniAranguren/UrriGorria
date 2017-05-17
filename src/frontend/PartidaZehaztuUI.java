@@ -1,7 +1,6 @@
 package frontend;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -10,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import negozioLogika.Partida;
 import negozioLogika.interfaces.UGKonstanteak;
 
 public class PartidaZehaztuUI extends JPanel implements UGKonstanteak {

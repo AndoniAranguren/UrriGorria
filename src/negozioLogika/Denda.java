@@ -1,11 +1,7 @@
 package negozioLogika;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 public class Denda {
 	private ArrayList<Objektuak> listaStock= new ArrayList<Objektuak>();
@@ -24,24 +20,12 @@ public class Denda {
 		listaErosketak.add(eros.createErosketa("Misil Zuzendua"));
 		listaErosketak.add(eros.createErosketa("Misil Zuz. Pro"));
 		listaErosketak.add(eros.createErosketa("Radarra"));
-		listaErosketak.add(eros.createErosketa("DFragata"));
-		listaErosketak.add(eros.createErosketa("DItsaspekoa"));
-		listaErosketak.add(eros.createErosketa("DSuntsitzailea"));
-		listaErosketak.add(eros.createErosketa("DHegazkinOntzia"));
-		listaErosketak.add(eros.createErosketa("DHasteko Objektu Guztiak"));
+		listaErosketak.add(eros.createErosketa("Ezkutua"));
 	}
 	private void stockaErreseteatu(){
 		listaStock.clear();
 		ObjektuakFactory ob=ObjektuakFactory.getObjektuakFactory();
-		listaStock.add(ob.createObjektua("Bomba", 100));
-		listaStock.add(ob.createObjektua("Misil", 40));
-		listaStock.add(ob.createObjektua("Misil Zuzendua", 11));
-		listaStock.add(ob.createObjektua("Misil Zuz. Pro", 2));
-		listaStock.add(ob.createObjektua("Radarra",4));
-		listaStock.add(ob.createObjektua("Fragata", 4));
-		listaStock.add(ob.createObjektua("Suntsitzailea", 3));
-		listaStock.add(ob.createObjektua("Itsaspekoa", 2));
-		listaStock.add(ob.createObjektua("HegazkinOntzia", 1));
+		listaStock.addAll(ob.objektuGuztiak(false));
 	}
 	public ArrayList<Objektuak> dendakIzakinakDitu(Erosketa pErosketa) {
 		if(zenbatErosiAhal(pErosketa)>0)

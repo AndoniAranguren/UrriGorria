@@ -1,9 +1,8 @@
 package negozioLogika;
 
-import strategyak.ErabiliRadarra;
-import strategyak.ErasoBikoitza;
-import strategyak.ErasoLineal;
-import strategyak.ErasoSinple;
+import java.util.ArrayList;
+
+import strategyak.*;
 
 public class ObjektuakFactory {
 
@@ -26,7 +25,7 @@ public class ObjektuakFactory {
 		
 		//Ekipo--------------------------------
 		else if (pMota.equals("Radarra")) {i = new Ekipoak(			"Radarra",pKop, new ErabiliRadarra());}
-		else if (pMota.equals("Eskutua")) {i = new Ekipoak(			"Eskutua",pKop, new ErabiliRadarra());}
+		else if (pMota.equals("Ezkutua")) {i = new Ekipoak(			"Ezkutua",pKop, new ErabiliEzkutua());}
 		
 		//Itsasontziak-------------------------
 		else if (pMota.equals("Fragata")){ i = new Itsasontzia(				"Fragata",pKop,1,100);}
@@ -34,5 +33,32 @@ public class ObjektuakFactory {
 		else if (pMota.equals("Suntsitzailea")) {i = new Itsasontzia(	"Suntsitzailea",pKop,3,300);}
 		else if (pMota.equals("HegazkinOntzia")) { i = new Itsasontzia("HegazkinOntzia",pKop,4,400);}
 		return i;
+	}
+	public ArrayList<Objektuak> objektuGuztiak(boolean pZ){//true=Jokalaria false=denda
+		ArrayList<Objektuak> lista= new ArrayList<Objektuak>();
+		Objektuak o;
+		
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba",pZ?			50:100); 
+		lista.add(o);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",pZ?			10:40); 
+		lista.add(o); 
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua",pZ?	1:4); 
+		lista.add(o);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuz. Pro",pZ?	0:2); 
+		lista.add(o);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra",pZ?			4:10);
+		lista.add(o);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Ezkutua",pZ?			3:4);
+		lista.add(o);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia",pZ?	1:0); 
+		lista.add(o);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Itsaspekoa",pZ?		2:0); 
+		lista.add(o); 
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Suntsitzailea",pZ?	3:0); 
+		lista.add(o);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Fragata",pZ?			4:0);
+		lista.add(o);
+		
+		return lista;
 	}
 }
