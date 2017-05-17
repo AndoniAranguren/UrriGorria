@@ -28,12 +28,6 @@ public class Battlelog {
 			komandoZerrenda.get(komandoZerrenda.size()-1).deuseztatu();
 		}
 	}
-	public void turnoraBueltatu(int pTurno){
-		//txanda=egoera[0];
-		//fasea=egoera[1];
-		//iraupena=egoera[2];
-
-	}
 	public ArrayList<String> logaEman() {
 		ArrayList<String> loga= new ArrayList<String>();
 		for (Commands komandoa : komandoZerrenda) {

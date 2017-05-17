@@ -8,6 +8,7 @@ import negozioLogika.Partida;
 
 public class CommandItsasontziaIpini extends Commands {
 	private ArrayList<Objektuak> ontzia= new ArrayList<Objektuak>();
+	private Itsasontzia jarritakoOntzia;
 	private int koordX, koordY;
 	private char norabidea;
 	private String nori;
@@ -17,7 +18,7 @@ public class CommandItsasontziaIpini extends Commands {
 		super();
 		nori = pJ;
 		ontzia.add(pItsasontzia);
-		System.out.println(pItsasontzia.getIzena());
+		jarritakoOntzia=pItsasontzia;
 		koordX=pX;
 		koordY=pY;
 		norabidea=pNorabidea;
@@ -28,7 +29,7 @@ public class CommandItsasontziaIpini extends Commands {
 
 	protected void egikaritu(boolean pZer) {
 		ontzia.get(0).behinErabili(pZer);
-		ontzia.set(0,Partida.itsasontziaJarri(nori, (Itsasontzia) ontzia.get(0), koordX, koordY, norabidea, pZer));
+		jarritakoOntzia=Partida.itsasontziaJarri(nori, (Itsasontzia) jarritakoOntzia, koordX, koordY, norabidea, pZer);
 		super.komandoaGorde(pZer);
 	}
 	protected boolean konprobatu(){

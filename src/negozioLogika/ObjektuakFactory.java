@@ -28,10 +28,10 @@ public class ObjektuakFactory {
 		else if (pMota.equals("Ezkutua")) {i = new Ekipoak(			"Ezkutua",pKop, new ErabiliEzkutua());}
 		
 		//Itsasontziak-------------------------
-		else if (pMota.equals("Fragata")){ i = new Itsasontzia(				"Fragata",pKop,1,100);}
-		else if (pMota.equals("Itsaspekoa")) {i = new Itsasontzia(		"Itsaspekoa",pKop,2,200);}
-		else if (pMota.equals("Suntsitzailea")) {i = new Itsasontzia(	"Suntsitzailea",pKop,3,300);}
-		else if (pMota.equals("HegazkinOntzia")) { i = new Itsasontzia("HegazkinOntzia",pKop,4,400);}
+		else if (pMota.equals("Fragata")){ i = new Itsasontzia(			"Fragata",pKop,1,100);}
+		else if (pMota.equals("Suntsitzailea")) {i = new Itsasontzia(	"Suntsitzailea",pKop,2,200);}
+		else if (pMota.equals("Itsaspekoa")) {i = new Itsasontzia(		"Itsaspekoa",pKop,3,300);}
+		else if (pMota.equals("HegazkinOntzia")) { i = new Itsasontzia(	"HegazkinOntzia",pKop,4,400);}
 		return i;
 	}
 	public ArrayList<Objektuak> objektuGuztiak(boolean pZ){//true=Jokalaria false=denda

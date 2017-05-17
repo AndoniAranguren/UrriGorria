@@ -87,7 +87,7 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 	public ArrayList<Itsasontzia> itsasontziakLortu() {
 		ArrayList<Itsasontzia> lista= new ArrayList<Itsasontzia>();
 		for(Objektuak its: objektuak)
-			if(its.itsasontziaDa()) lista.add((Itsasontzia)its);
+			if(its.itsasontziaDa()&& its.getKopurua()>0) lista.add((Itsasontzia)its);
 		return lista;
 	}
 }

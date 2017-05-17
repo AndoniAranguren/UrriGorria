@@ -37,6 +37,9 @@ public class Partida {
 	public void faseaAldatu(boolean pZer){
 		if(pZer) faseaAhurrera();
 		else faseaAtzera();
+		txandaIAKonprobatu();
+	}
+	public void txandaIAKonprobatu(){
 		if(norenTxandaDaIzena().split("\\.")[1].equals("CPU"))
 			norenTxandaDa().jokatuCPU(egoera[0]);
 	}
@@ -216,6 +219,9 @@ public class Partida {
 			}
 		}
 		return izenak;
+	}
+	public int itsasontziaJo(String pJokalaria, ItsasontziTile pTile, int pIndarra, boolean pZer) {
+		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).itsasontziaJo(pTile,pIndarra,pZer);
 	}
 	
 

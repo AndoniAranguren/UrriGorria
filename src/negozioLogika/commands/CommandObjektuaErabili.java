@@ -26,7 +26,7 @@ public class CommandObjektuaErabili extends Commands {
 		super.exekutatu();
 	}
 	public void egikaritu(boolean pZer){
-		if(objektuak.get(0) instanceof Itsasontzia) {
+		if(objektuak.get(0).itsasontziaDa()) {
 			if(pZer){
 				new CommandItsasontziaIpini(nori,(Itsasontzia)objektuak.get(0), koordX, koordY, norabidea);
 			}else

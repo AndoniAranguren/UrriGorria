@@ -8,7 +8,7 @@ import negozioLogika.ItsasontziTile;
 public class Itsasontzia extends Objektuak {
 	protected final int luzeera,prezioa;
 	private int ezkutua;
-	private final String jabea=null;
+	private String jabea=null;
 	private boolean suntsituta;
 	private ArrayList<ItsasontziTile> tileLista;
 	public Itsasontzia(String pMota, int pKop, int pLuzeera, int pPrezioa){
@@ -19,32 +19,28 @@ public class Itsasontzia extends Objektuak {
 		tileLista= new ArrayList<ItsasontziTile>();
 	}
 	public void informazioaInprimatu() {
-		// TODO Auto-generated method stub
-		System.out.println("       Mota: "		+izena);
-		System.out.println("       Kopurua: "	+kopurua);
+		System.out.println("\nMota: "+izena);
+//		System.out.println("       Kopurua: "	+kopurua);
 		System.out.println("       Jabea: "		+jabea);
-		System.out.println("       Luzera: "	+luzeera);
-		System.out.println("       Prezioa: "	+prezioa);
-		System.out.println("       Suntsituta: "+suntsituta);
-
+//		System.out.println("       Luzera: "	+luzeera);
+//		System.out.println("       Prezioa: "	+prezioa);
+//		System.out.println("       Suntsituta: "+suntsituta);
 	}
 	public void tileGehitu(ItsasontziTile pTile, boolean pZer) {
 		if(pZer){
-			tileLista.add(pTile);
-		}
+			tileLista.add(pTile);}
 		else{
-			tileLista.remove(pTile);
-		}
+			tileLista.remove(pTile);}
 	}
 	public void suntsitutaDago() {
 		boolean suntsitutaDago=true;
 		Iterator<ItsasontziTile> it=tileLista.iterator();
 		while(suntsitutaDago && it.hasNext()){
-			suntsitutaDago= it.next().suntsitutaDago();
-		}
+			suntsitutaDago= it.next().suntsitutaDago();}
 		suntsituta=suntsitutaDago;
 	}
-	public boolean hauDa(Itsasontzia pOntzi) {
+	
+	public boolean equals(Itsasontzia pOntzi) {
 		return (pOntzi.izenBerdina(izena) && pOntzi.tileBerdinakDira(tileLista));
 	}
 	private boolean tileBerdinakDira(ArrayList<ItsasontziTile> pTileLista){
@@ -52,11 +48,9 @@ public class Itsasontzia extends Objektuak {
 		Iterator<ItsasontziTile> it;
 		for(ItsasontziTile tile: pTileLista){
 			it=tileLista.iterator();
-			ezberdinak=true;
 			while(it.hasNext()&&ezberdinak){
-				ezberdinak= !it.next().equals(tile);
-			}
-			if(ezberdinak) break;
+				ezberdinak= it.next().berdinak(tile);}
+			if(!ezberdinak) break;
 		}
 		return ezberdinak;
 	}
@@ -67,17 +61,31 @@ public class Itsasontzia extends Objektuak {
 		if(pZer) ezkutua=200;
 		else ezkutua=0;
 	}
-	public boolean ezkutuaDauka(){
-		return ezkutua>0;
-	}
-	public void ezkutuariJo(int pIndarra, boolean pZer){
-		if (pZer) this.ezkutua-=pIndarra;
-		else this.ezkutua+=pIndarra;
-	}
 	public boolean itsasontziaDa(){
 		return true;
 	}
 	public int getLuzeera(){
 		return this.luzeera;
+	}
+	public void jabeaJarri(String pIzena) {
+		jabea=pIzena;		
+	}
+	public int jo(int pIndarra, boolean pZer) {
+		int emaitza=0;
+		if(pZer){
+			if(ezkutua<=0)emaitza=pIndarra;
+			else ezkutua-=pIndarra;
+		}else{
+			ezkutua+=pIndarra;
+		}
+		return emaitza;
+	}
+	public boolean tileHauDauka(ItsasontziTile pTile) {
+		Iterator<ItsasontziTile> it=tileLista.iterator();
+		while(it.hasNext()){
+			if(it.next().berdinak(pTile))
+				return true;
+		}
+		return false;
 	}
 }

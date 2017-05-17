@@ -18,8 +18,8 @@ public class CommandTxandaPasa extends Commands {
 
 	@Override
 	protected void egikaritu(boolean pZer) {
-		Partida.getPartida().faseaAldatu(pZer);
 		super.komandoaGorde(pZer);
+		Partida.getPartida().faseaAldatu(pZer);
 	}
 	public String info(){
 		String info=super.info();

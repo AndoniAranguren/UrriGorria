@@ -7,66 +7,62 @@ public class CPU extends Jokalariak {
 	private int zailtasuna;
 	private String etsaia;
 	private ArrayList<Integer> erasotutakoPos=new ArrayList<Integer>();
-	private boolean itsasontziakIpinita;
 	
 	public CPU(String pIzena, int pZailtasuna) {
 		super(pIzena);
 		zailtasuna=pZailtasuna;
-		itsasontziakIpinita=false;
 	}
 	
 	@Override
 	public void itsasontziakIpini() {
-//		this.jokalariariObjektuakEman(null, bizirik);
-//		ArrayList<Objektuak> objektuak= new ArrayList<Objektuak>();
-//		ObjektuakFactory ob=ObjektuakFactory.getObjektuakFactory();
-//		objektuak.add(ob.createObjektua("Fragata", 4));
-//		objektuak.add(ob.createObjektua("Itsaspekoa", 3));
-//		objektuak.add(ob.createObjektua("Suntsitzailea", 2));
-//		objektuak.add(ob.createObjektua("HegazkinOntzia", 1));
 		ArrayList<Itsasontzia> itsasontziak=inb.itsasontziakLortu();
-		int rX=0,rY=0,x=0,y=0;
-		Itsasontzia its=itsasontziak.get(0);
+		int rY=0,x=0,y=0,zaiakerak=0,ontziKop=0;
+		final int zaiakeraMax=mapa.getErrenkada();
 		char n='N';
 		Random r = new Random();
 		String nora="NSWENSWE";
 		boolean bilatzen=false;
 		while(itsasontziak.size()>0){
+			x=0;
 			if(!bilatzen){
 				bilatzen=true;
-				its=itsasontziak.get(0);
-				rX = r.nextInt(mapa.getZutabe()-2);
+				x = r.nextInt(mapa.getZutabe()-2);
 				rY = r.nextInt(mapa.getErrenkada()-2);
-				x=rX;
+				zaiakerak=0;
 			}
-			else while(x<mapa.getErrenkada()-1&&bilatzen){
+			else while(x<mapa.getErrenkada()-1&&bilatzen&&zaiakerak<zaiakeraMax){
+				zaiakerak++;
 				y=rY;
-				System.out.println();
-				while(y<mapa.getZutabe()-1&&bilatzen){
-					int ind=0, rNum=r.nextInt(4);
+				
+				while(y<mapa.getZutabe()-1&&bilatzen&&zaiakerak<zaiakeraMax){
+					int ind=0, 
+					rNum=r.nextInt(4);
+					
 					while(ind<4&&bilatzen){
 						n=nora.charAt(rNum+ind);
-						if(mapa.kokatuDaiteke(x, y,	n,its.getLuzeera())){
+						
+						if(mapa.kokatuDaiteke(x, y,	n,itsasontziak.get(0).getLuzeera())){
 							itsasontziak.get(0).erabili(izena, x, y, n);
+							ontziKop++;
+							bilatzen=false;
+							
 							if(itsasontziak.get(0).getKopurua()<=0)
 								itsasontziak.remove(0);
-							bilatzen=false;
-						}
+							}
 						ind++;
 					}
 					y++;
 				}
 				x++;
+			}if(zaiakerak>=zaiakeraMax){
+				for(int i=0;i<ontziKop;i++){
+					Partida.getPartida().komandoaAtzera();}
+				System.out.println("Berriro hasi");
+				itsasontziak=inb.itsasontziakLortu();
+				bilatzen=false;
 			}
 		}
-		itsasontziakIpinita=true;
 		System.out.println("CPU-ak bere itsasontziak kokatu ditu.");
-//		objektuak.add(ob.createObjektua("Bomba", 50));
-//		objektuak.add(ob.createObjektua("Misil", 20));
-//		objektuak.add(ob.createObjektua("Misil Zuzendua", 5));
-//		objektuak.add(ob.createObjektua("Misil Zuzendua Pro", 2));
-//		objektuak.add(ob.createObjektua("Radarra",5));
-//		System.out.println("CPU-ak bere inbentarioa betetu du.");
 	}
 	
 	public void erasotu(){
@@ -107,7 +103,9 @@ public class CPU extends Jokalariak {
 	@Override
 	public void jokatuCPU(int pFasea) {
 		if(pFasea==0){
-			if(!itsasontziakIpinita)itsasontziakIpini();
+			for(Itsasontzia its: (inb.itsasontziakLortu())){
+				if(its.getKopurua()>0) itsasontziakIpini();
+			}
 		}
 		else if (pFasea==1){
 			

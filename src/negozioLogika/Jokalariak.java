@@ -41,19 +41,21 @@ public abstract class Jokalariak {
 	public Itsasontzia itsasontziaJarri(Itsasontzia pOntzi, int pX, int pY, char pNorabidea, boolean pZer) {
 		if(pZer==true){
 			pOntzi = mapa.itsasontziaJarri(izena, pOntzi, pX, pY, pNorabidea,pZer);
-			nireItsasontziak.add(pOntzi);
+			nireItsasontziak.add(0,pOntzi);
 		}
 		else{
+			for(Itsasontzia its:nireItsasontziak){
+				its.informazioaInprimatu();
+			}
 			boolean aurkituta=false;
 			Itsasontzia itsasontzia;
 			Iterator<Itsasontzia> it=nireItsasontziak.iterator();
 			while(!aurkituta && it.hasNext()){
 				itsasontzia= it.next();
-				System.out.println("Lista"+itsasontzia.getIzena());
-				System.out.println("Comando"+pOntzi.getIzena());
-				if(itsasontzia.hauDa(pOntzi)){
+				if(itsasontzia.equals(pOntzi)){
 					pOntzi = mapa.itsasontziaJarri(izena, itsasontzia, pX, pY, pNorabidea, pZer);
 					aurkituta=true;
+					nireItsasontziak.remove(itsasontzia);
 				}
 			}
 		}
@@ -66,7 +68,6 @@ public abstract class Jokalariak {
 		return denda.dendakIzakinakDitu(pErosketa);		//Izakinik ez baldin badu, null bat bueltatuko du
 	}
 	public void jokalariariDiruaEman(int pPrezioa, boolean pZer) { 
-		//pZer=true denean jokalariari dirua emango zaio, bestela kendu
 		if(pZer==true)	dirua+=pPrezioa;
 		else			dirua-=pPrezioa;
 	}
@@ -113,6 +114,15 @@ public abstract class Jokalariak {
 	}
 
 	public abstract void jokatuCPU(int pFasea);
+
+	public int itsasontziaJo(ItsasontziTile pTile, int pIndarra, boolean pZer) {
+		for(Itsasontzia its:nireItsasontziak){
+			if(its.tileHauDauka(pTile)){
+				return its.jo(pIndarra, pZer);
+			}
+		}
+		return 0;
+	}
 
 
 }

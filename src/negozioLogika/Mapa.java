@@ -40,7 +40,6 @@ public class Mapa {
 				else if(pNorabidea=='N'){koordX--;}
 				else if(pNorabidea=='S'){koordX++;}
 				
-				System.out.println(i+" X:"+koordX+" Y:"+koordY+" Librea:"+libre+" Norabidea:" +pNorabidea);
 				i++;
 			}
 			else libre=false;
@@ -52,6 +51,7 @@ public class Mapa {
 		ItsasontziTile tile;
 		int koordX=pX, koordY=pY;
 		if(pZer)pItsasontzia=(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua(pItsasontzia.getIzena());
+		pItsasontzia.jabeaJarri(pJabea);
 		
 		for (int i=0;i<pItsasontzia.luzeera;i++){
 			if(pZer){
@@ -63,9 +63,9 @@ public class Mapa {
 				jokalariMapa[koordX][koordY]=new UraTile(pJabea, koordX, koordY);
 			}
 
-			if(koordX-1>0)jokalariMapa[koordX-1][koordY].kokatzekoGaitasunaEman(!pZer);
+			if(koordX-1>=0)jokalariMapa[koordX-1][koordY].kokatzekoGaitasunaEman(!pZer);
 			if(koordX+1<zut)jokalariMapa[koordX+1][koordY].kokatzekoGaitasunaEman(!pZer);
-			if(koordY-1>0)jokalariMapa[koordX][koordY-1].kokatzekoGaitasunaEman(!pZer);
+			if(koordY-1>=0)jokalariMapa[koordX][koordY-1].kokatzekoGaitasunaEman(!pZer);
 			if(koordY+1<erren)jokalariMapa[koordX][koordY+1].kokatzekoGaitasunaEman(!pZer);
 			
 			if(pNorabidea=='W'){koordY--;}
@@ -102,7 +102,7 @@ public class Mapa {
 		if (jokalariMapa[pX][pY].jabeaDa(pNork)&&jokalariMapa[pX][pY].itsasontziaDa()) ((ItsasontziTile)jokalariMapa[pX][pY]).ezkutuaJarri(pZer);
 	}
 	
-	public int[] radarraErabili(String pNork,int pX, int pY, int pRadio, boolean pZer){//al encontrar hazle un jokalariMapa[x][y].jo(pNork,0,True)
+	public int[] radarraErabili(String pNork,int pX, int pY, int pRadio, boolean pZer){
 		int[] koord=new int[2];
 		koord[0]=-1;
 		koord[1]=-1;

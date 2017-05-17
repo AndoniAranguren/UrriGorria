@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public abstract class Tile {
-	private int koordX;
-	private int koordY;
-	private ArrayList<String> ikusiAhal=new ArrayList<String>(); //Jabea 0.posizioan egongo da
-	protected boolean kokatuAhalDa = true;
+	protected int koordX;
+	protected int koordY;
+	protected ArrayList<String> ikusiAhal=new ArrayList<String>(); //Jabea 0.posizioan egongo da
+	private int kokatuAhalDa = 0;  //0=Ezin da kokatu, Positiboa Bai, Negatiboa Ez
 	protected String identifikadorea="Tile";
 	
 	public Tile(String pJabea, int pX, int pY){
@@ -42,17 +42,20 @@ public abstract class Tile {
 		return (koordX==pX && koordY==pY);
 	}
 	public boolean jabeaDa(String pJ){
-		return ikusiAhal.get(0)==pJ;
+		return ikusiAhal.get(0).equals(pJ);
 	}
 	public boolean kokatuDaiteke() {
-		return kokatuAhalDa;
+		return kokatuAhalDa>0;
 	}
 	public boolean equals(Tile pTile){
 		return (pTile.posizioanDago(koordX, koordY) && pTile.jabeaDa(ikusiAhal.get(0)));
 	}
 	//---------------------------------------
 	public void kokatzekoGaitasunaEman(boolean pZer){
-		kokatuAhalDa=pZer;
+		if(pZer){
+			if(!kokatuDaiteke())
+				kokatuAhalDa++;}
+		else kokatuAhalDa--;
 	}
 	public boolean itsasontziaDa() {
 		return false;
