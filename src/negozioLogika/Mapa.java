@@ -22,6 +22,9 @@ public class Mapa {
 			}
 		}
 	}
+	public boolean kokatuDaiteke(int pX, int pY) {
+		return jokalariMapa[pX][pY].kokatuDaiteke();
+	}
 
 	public boolean kokatuDaiteke(int pX, int pY, char pNorabidea, int pLuzeera){// throws IndepXOutOfBoundsEpXception{
 		boolean libre = true;
@@ -128,4 +131,16 @@ public class Mapa {
 		}
 		return koord;
 	}
+
+	public int getErrenkada() {
+		return erren;
+	}
+	public int getZutabe() {
+		return zut;
+	}
+
+	public boolean itsasontziaDa(int x, int y) {
+		return jokalariMapa[x][y].itsasontziaDa();
+	}
+
 }

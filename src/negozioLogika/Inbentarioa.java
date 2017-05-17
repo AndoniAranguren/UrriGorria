@@ -1,14 +1,7 @@
 package negozioLogika;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import frontend.UrriGorriaUI;
-
 
 public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango dute
 	
@@ -83,12 +76,18 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 		return objektuarenPosLortu(pObj.getIzena());
 	}
 	public int lenght(){
-		return this.lenght();
+		return objektuak.size();
 	}
 	public boolean armaDa(int pN){
 		return objektuak.get(pN).armaDa();
 	}
 	public Objektuak get(int pX){
 		return objektuak.get(pX);
+	}
+	public ArrayList<Itsasontzia> itsasontziakLortu() {
+		ArrayList<Itsasontzia> lista= new ArrayList<Itsasontzia>();
+		for(Objektuak its: objektuak)
+			if(its.itsasontziaDa()) lista.add((Itsasontzia)its);
+		return lista;
 	}
 }
