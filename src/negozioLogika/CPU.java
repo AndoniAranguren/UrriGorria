@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CPU extends Jokalariak {
-	private int zailtasuna;
 	private String etsaia;
 	private ArrayList<Integer> erasotutakoPos=new ArrayList<Integer>();
 	
-	public CPU(String pIzena, int pZailtasuna) {
+	public CPU(String pIzena, String jok) {
 		super(pIzena);
-		zailtasuna=pZailtasuna;
+		etsaia=jok;
 	}
 	
 	@Override
