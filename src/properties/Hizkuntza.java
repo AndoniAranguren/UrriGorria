@@ -7,20 +7,7 @@ public class Hizkuntza extends Properties {
 	private static final long serialVersionUID = 1L;
 
 	public Hizkuntza(String hizkuntza) {
-		switch (hizkuntza) {
-		case "euskera":
-			getProperties("euskera.properties");
-			break;
-		case "gaztelera":
-			getProperties("gaztelera.properties");
-			break;
-		case "ingelesa":
-			getProperties("ingelesa.properties");
-			break;	
-		default:
-			getProperties("eusk.properties");
-			break;
-		}
+		getProperties(hizkuntza+".properties");
 	}
 
 	private void getProperties(String hizkuntza) {
