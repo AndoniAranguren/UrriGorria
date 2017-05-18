@@ -35,6 +35,6 @@ public class CommandErosketaEgin extends Commands {
 	
 	public String info(){
 		String info=super.info();
-		return info.concat("CommandErosketaEgin (" +erosketa.getIzena()+")");
+		return info.concat("'CommandErosketaEgin'" +erosketa.getIzena());
 	}
 }

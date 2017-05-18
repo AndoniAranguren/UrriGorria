@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import properties.Hizkuntza;
+
 public class PantailaUI extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -24,8 +26,12 @@ public class PantailaUI extends JPanel implements ActionListener {
 	private int[] egoera;
 	private String jokalaria,aurkaria;
 	private JPanel tableroak, dendaP, inbentarioaP,dendaInbP,logP,top;
+	private String hizk;
+	private Hizkuntza h;
 	
-	public PantailaUI(String pJokalaria,String pAurkaria,  int[] pEgoera) {
+	public PantailaUI(String pJokalaria,String pAurkaria,  int[] pEgoera, String hikuntza) {
+		hizk =hikuntza;
+		h = new Hizkuntza(hizk);
 		jokalaria=pJokalaria;
 		egoera=pEgoera;
 		aurkaria=pAurkaria;
@@ -49,17 +55,17 @@ public class PantailaUI extends JPanel implements ActionListener {
 		top= new JPanel();
 		String titulua=""+egoera[0];
 		switch (egoera[0]){
-		case 0: titulua="Erosi fasea";
+		case 0: titulua="ErosiFasea";
 			break;
-		case 1: titulua="Ekipo fasea";
+		case 1: titulua="EkipoFasea";
 			break;
-		case 2: titulua="Eraso fasea";
+		case 2: titulua="ErasoFasea";
 			break;
 		}
-		JButton tituluaJ = new JButton(titulua);
-		top.setBorder(new TitledBorder(new LineBorder(Color.CYAN),"Iraupena: ("+egoera[2]+") "+jokalaria));
+		JButton tituluaJ = new JButton(h.getProperty(titulua));
+		top.setBorder(new TitledBorder(new LineBorder(Color.CYAN),h.getProperty("iraupena") + ": ("+egoera[2]+") " + h.getProperty(jokalaria)));
 		JButton nora2 = new JButton(new ImageIcon(TableroaUI.class.getResource(norabideaLortu())));
-		JButton atzera = new JButton("Atzera");
+		JButton atzera = new JButton(h.getProperty("atzera"));
 
 		tituluaJ.setToolTipText("Txanda pasatu");
 		tituluaJ.setName("Txanda pasatu");
@@ -97,11 +103,11 @@ public class PantailaUI extends JPanel implements ActionListener {
 		
         
 		dendaP = new JPanel();
-		denda = new DendaUI(jokalaria,(egoera[0]==0? true:false));
+		denda = new DendaUI(jokalaria,(egoera[0]==0? true:false), hizk);
 		dendaP.add(denda);
 		
 		inbentarioaP = new JPanel();
-		inbentarioa = new InbentarioaUI(jokalaria,egoera[0]);
+		inbentarioa = new InbentarioaUI(jokalaria,egoera[0], hizk);
 		inbentarioaP.add(inbentarioa);
 		
 		if(egoera[0]!=0){
@@ -114,8 +120,8 @@ public class PantailaUI extends JPanel implements ActionListener {
 	private void setTableroak() {
 		tableroak = new JPanel();
 		tableroak.setLayout(new GridLayout(2, 1));
-		jok_tableroa = new TableroaUI(jokalaria, Color.RED);
-		aurk_tableroa = new TableroaUI(aurkaria, Color.RED);
+		jok_tableroa = new TableroaUI(jokalaria, Color.RED, hizk);
+		aurk_tableroa = new TableroaUI(aurkaria, Color.RED, hizk);
 		tableroak.add(aurk_tableroa);
 		tableroak.add(jok_tableroa);
 	}
@@ -123,7 +129,7 @@ public class PantailaUI extends JPanel implements ActionListener {
 
 	private void setLoga() {
 		logP = new JPanel();
-		log = new LogUI(jokalaria);
+		log = new LogUI(jokalaria, hizk);
 		logP.add(log);
 	}
 

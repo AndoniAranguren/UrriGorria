@@ -10,6 +10,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import properties.Hizkuntza;
+
 public class InbentarioaUI extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -17,14 +19,16 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 	private JButton[] inbentarioa;
 	private ArrayList<String> inb = new ArrayList<>();
 	private int fasea;
+	private Hizkuntza h;
 
 
-	public InbentarioaUI(String pIzena, int pFasea) {
+	public InbentarioaUI(String pIzena, int pFasea, String hizkuntza) {
+		h = new Hizkuntza(hizkuntza);
 		jokalaria=pIzena;
 		fasea=pFasea;
 		inb = UrriGorriaUI.getUrriGorriaUI().inbentarioaEman(jokalaria);
 		this.setLayout(new GridLayout(inb.size(), 1));
-		this.setBorder(BorderFactory.createTitledBorder("Inbentarioa:"));
+		this.setBorder(BorderFactory.createTitledBorder(h.getProperty("inbentarioa")));
 		this.inbentarioaAktualizatu();
 	}
 	public void inbentarioaAktualizatu(){
@@ -34,7 +38,7 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 			inbentarioa[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 			String izena=inb.get(i);
 			inbentarioa[i].setName(izena.split(":")[1]);
-			inbentarioa[i].setText(izena.split(":")[1].concat(":"+izena.split(":")[2]));
+			inbentarioa[i].setText(h.getProperty(izena.split(":")[1]) + ":"+izena.split(":")[2]);
 			inbentarioa[i].addActionListener(this);
 			if(Integer.parseInt(izena.split(":")[0])!=fasea||Integer.parseInt(izena.split(": ")[1])<1){
 				inbentarioa[i].setEnabled(false);
