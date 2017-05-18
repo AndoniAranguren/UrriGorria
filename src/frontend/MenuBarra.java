@@ -7,6 +7,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import negozioLogika.Partida;
+import properties.Hizkuntza;
 
 public class MenuBarra extends JMenuBar {
 
@@ -14,10 +15,11 @@ public class MenuBarra extends JMenuBar {
 	private JMenu hizkuntza,jokalariMenu;
 	private JMenuItem[] hizkBat;
 	private String[] hizkuntzak;
+	private Hizkuntza h;
 	
 	public MenuBarra() {
 		hizkuntzak= new String[3];
-		hizkuntzak[0]="Euskera";hizkuntzak[1]="Gaztelera";hizkuntzak[2]="Ingelesa";
+		hizkuntzak[0]="Euskera";hizkuntzak[1]="Castellano";hizkuntzak[2]="English";
 		hizkBat= new JMenuItem[hizkuntzak.length];
 		erreseteatu("Euskera",false);
 	}
@@ -73,8 +75,9 @@ public class MenuBarra extends JMenuBar {
 		UrriGorriaUI.getUrriGorriaUI().setAurkaria(pIzen);
 	}
 	private void hizkuntzaAldatu(String pHiz) {
+		h = new Hizkuntza(pHiz);
 		UrriGorriaUI.getUrriGorriaUI().setHizkuntza(pHiz.toLowerCase());
-		
+		this.hizkuntza.setText(h.getProperty("hizkuntza"));
 	}
 
 }

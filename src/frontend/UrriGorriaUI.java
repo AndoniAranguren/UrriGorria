@@ -29,7 +29,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	private String hizkuntza = "euskera";
 	private boolean partidaZehaztuDa;
 	
-	public UrriGorriaUI() {
+	private UrriGorriaUI() {
 		this.setTitle(IZENBURUA);
 		oraingoa=new JPanel();
 		partidaZehaztuDa=false;
@@ -81,6 +81,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	}
 
 	public void panelaAktualizatu() {
+		this.setJMenuBar(menubar);
 		if(partidaZehaztuDa){
 			int[] egoera=Partida.getPartida().egoeraLortu();
 	        norenTxanda=Partida.getPartida().norenTxandaDaIzena();
@@ -118,7 +119,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		else{//Jokalariak aukeratu behar dira
 			panelaAldatu(new PartidaZehaztuUI(hizkuntza));
 			setMenua(false);
-			leihoaW=300;
+			leihoaW=325;
 			leihoaH=150;
 		}
 		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
@@ -183,6 +184,10 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	public void setHizkuntza(String pHiz) {
 		hizkuntza=pHiz;		
 		panelaAktualizatu();
+	}
+	
+	public JPanel getOraingoa() {
+		return this.oraingoa;
 	}
 
 	@Override
