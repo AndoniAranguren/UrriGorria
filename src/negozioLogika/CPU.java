@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class CPU extends Jokalariak {
 	private String etsaia;
-	private ArrayList<Integer> erasotutakoPos=new ArrayList<Integer>();
 	
 	public CPU(String pIzena, String jok) {
 		super(pIzena);
@@ -65,38 +64,40 @@ public class CPU extends Jokalariak {
 	}
 	
 	public void erasotu(){
+		//String pNori, int pX, int pY,char pNorabide
 		Random r=new Random();
-		String karak="NSEW";
-		int pos;
-		int obj;
-		String[] info=new String[4];
-		boolean ondo=false,ekipoaErabilia=false;
-		while(!ondo){
-			pos=(int)Math.random()*100;
-			info[1]=String.valueOf(pos/100);
-			info[2]=String.valueOf(pos%100);
-			obj=(int)Math.random()*inb.lenght();
-			info[0]=String.valueOf(obj);
-			info[3]=String.valueOf(karak.charAt(r.nextInt(karak.length())));
-			if(inb.armaDa(obj)){
-				while(erasotutakoPos.contains(pos)) pos=(int)Math.random()*100;
-				//desde donde habria que llamar al ataque?
-				Partida.jokalariariErasotu(izena, etsaia, inb.get(obj), pos/100, pos%100, karak.charAt(r.nextInt(karak.length())), true);
-				//creo que desde Inbentarioa no se contempla la posibilidad de que el objeto sea un arma
-				//con el comando objektuaErabili
-				erasotutakoPos.add(pos);
-				ondo=true;
+		if(true/*r.nextInt(10)>8*/){
+			String[][] etsaiMapa= Partida.getPartida().mapaInterpretatu(etsaia);
+			boolean[][] etsaiMapa2= new boolean[mapa.getErrenkada()][mapa.getZutabe()];
+			String kasilla;
+			for(int x=0;x<mapa.getErrenkada();x++){
+				for(int y=0;y<mapa.getZutabe();y++){
+					kasilla=etsaiMapa[x][y];
+					if(kasilla.equals("Itsasontzia")||kasilla.equals("Ezkutu")||kasilla.equals("Suntzituta")){
+						etsaiMapa2[x-1][y]=true;
+						etsaiMapa2[x+1][y]=true;
+						etsaiMapa2[x][y-1]=true;
+						etsaiMapa2[x][y-1]=true;
+					}
+				}
 			}
-			else if(!ekipoaErabilia){
-				inb.objektuaErabili(etsaia, info);
-				ekipoaErabilia=true;
-			}
+			int pos=r.nextInt(mapa.getErrenkada()*mapa.getZutabe());
+//			while(erasotu){
+//				for(int x=0;x<mapa.getErrenkada();x++){
+//					for(int y=0;y<mapa.getZutabe();y++){
+//						pos--;
+//						if(pos<=0){
+//							int inbPos=r.nextInt(inb.lenght());
+//							while(!inb.armaDa(inbPos)){
+//								inbPos++;
+//							}
+//							String nora="NSWE";
+//							inb.get(inbPos).erabili(etsaia, x, y, nora.charAt(r.nextInt(4)));
+//						}
+//					}
+//				}
+//			}
 		}
-		
-	}
-	public void jokalariariErasotu(String pNork, Objektuak pObjektua, int pX, int pY,char pNorabide, boolean pZer) {
-		etsaia=pNork;
-		mapa=pObjektua.aktibatu(etsaia,mapa, pX, pY, pNorabide, pZer);
 	}
 
 	@Override
@@ -109,7 +110,7 @@ public class CPU extends Jokalariak {
 		else if (pFasea==1){
 			
 		}else{
-			erasotu();
+//			erasotu();
 		}
 //		Partida.getPartida().faseaAldatu(true);
 	}

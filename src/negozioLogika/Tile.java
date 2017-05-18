@@ -24,12 +24,13 @@ public abstract class Tile {
 		return emaitza;
 	}
 	public String erakutsi(String pNork){
-		if(ikusiAhalDu(pNork)){
-			if(itsasontziaDa()&&!bizirikDago()) return "Suntzituta";
-			else	return identifikadorea;
-		}
-		return "Ezezaguna";
+		if(ikusiAhalDu(pNork)) return identifikadorea();
+		else return "Ezezaguna";
 	}
+	protected String identifikadorea(){
+		return identifikadorea;
+	}
+
 	//Galderak -------------------------
 	public boolean ikusiAhalDu(String pNork){
 		Iterator<String> it=ikusiAhal.iterator();
@@ -64,5 +65,21 @@ public abstract class Tile {
 	}
 	public boolean bizirikDago(){
 		return false;
+	}
+	public boolean ondoratuta() {
+		return false;
+	}
+	public boolean ezkutuaDu() {
+		return false;
+	}
+	public void ezkutuaJarri(boolean pZer) {
+		System.out.println("Ezin duzu ezkutua hemen jarria \""+identifikadorea+"\" naiz");
+	}
+
+	public int getX() {
+		return koordX;
+	}
+	public int getY() {
+		return koordY;
 	}
 }

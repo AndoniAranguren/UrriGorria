@@ -30,7 +30,8 @@ public class MenuBarra extends JMenuBar {
 		this.revalidate();
 	}
 	private void hizkuntzaEraiki(String pHizkunta) {
-		hizkuntza = new JMenu("Hizkuntza");
+		h = new Hizkuntza(pHizkunta);
+		hizkuntza = new JMenu(h.getProperty("hizkuntza"));
 		int i=0;
 		for(String hiz:hizkuntzak){
 			hizkBat[i] = new JMenuItem(hiz);
@@ -44,7 +45,7 @@ public class MenuBarra extends JMenuBar {
 	}
 	
 	private void jokalariaJarri() {		
-		jokalariMenu= new JMenu("Jokalariak");
+		jokalariMenu= new JMenu(h.getProperty("jokalariak"));
 		
         String aurkaria=UrriGorriaUI.getUrriGorriaUI().getAurkaria();
         String[] jokalariak=Partida.getPartida().jokalarienIzenakEman();
@@ -75,7 +76,6 @@ public class MenuBarra extends JMenuBar {
 		UrriGorriaUI.getUrriGorriaUI().setAurkaria(pIzen);
 	}
 	private void hizkuntzaAldatu(String pHiz) {
-		h = new Hizkuntza(pHiz);
 		UrriGorriaUI.getUrriGorriaUI().setHizkuntza(pHiz.toLowerCase());
 		this.hizkuntza.setText(h.getProperty("hizkuntza"));
 	}

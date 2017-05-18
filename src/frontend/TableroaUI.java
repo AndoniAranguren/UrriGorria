@@ -17,6 +17,7 @@ import javax.swing.border.TitledBorder;
 
 import negozioLogika.Mapa;
 import negozioLogika.Partida;
+import properties.Hizkuntza;
 
 public class TableroaUI extends JPanel implements ActionListener {
 	
@@ -24,12 +25,14 @@ public class TableroaUI extends JPanel implements ActionListener {
 	private String jokalaria;
 	private JButton[][] tableroa;
 	String[][] mapa;
+	private Hizkuntza h;
 	
-	public TableroaUI(String pIzena, Color c) {
+	public TableroaUI(String pIzena, Color c, String hizkuntza) {
+		h = new Hizkuntza(hizkuntza);
 		jokalaria=pIzena;
 		mapa=UrriGorriaUI.mapaInterpretatu(pIzena);
 		this.setLayout(new GridLayout(mapa.length, mapa[0].length));
-		this.setBorder(new TitledBorder(new LineBorder(c), pIzena + "ren tableroa", 1, 2, null, c));
+		this.setBorder(new TitledBorder(new LineBorder(c), h.getProperty(pIzena) + " " + h.getProperty("tableroa"), 1, 2, null, c));
 		tableroa = new JButton[mapa.length][mapa[0].length];
 		this.tableroaHasieratu();
 	}
@@ -55,7 +58,9 @@ public class TableroaUI extends JPanel implements ActionListener {
 				if(mapa[i][j].equals("Itsasontzi")) aux="/externals/ontzia.png";
 				else if(mapa[i][j].equals("Ura")) aux="/externals/ura.png";
 				else if(mapa[i][j].equals("Ezezaguna"))aux="/externals/ezezaguna.png";
-				else if(mapa[i][j].equals("Suntzituta"))aux="/externals/red.png";
+				else if(mapa[i][j].equals("Suntzituta"))aux="/externals/ondoratuta.png";
+				else if(mapa[i][j].equals("Ukituta"))aux="/externals/red.png";
+				else if(mapa[i][j].equals("Ezkutua"))aux="/externals/ezkutua.png";
 				tableroa[i][j].setBorderPainted(false);
 				tableroa[i][j].setIcon((new ImageIcon(TableroaUI.class.getResource(aux))));
 				this.add(tableroa[i][j]);

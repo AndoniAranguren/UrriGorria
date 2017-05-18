@@ -65,7 +65,7 @@ public class Denda {
 		ArrayList<String> list=new ArrayList<String>();
 		for (Erosketa ob : listaErosketak) {
 			if(!(ob.getIzena().charAt(0)=='D'))
-				list.add(ob.getIzena() + ": " + zenbatErosiAhal(ob)+ " ("+ob.getPrezioa()+"€)");
+				list.add(ob.getIzena() + ": " + zenbatErosiAhal(ob)+ " ("+ob.getPrezioa()+"â‚¬");
 		}
 		return list;
 	}

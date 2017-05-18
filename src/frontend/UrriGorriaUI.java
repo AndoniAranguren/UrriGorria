@@ -94,12 +94,12 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	        	if(egoera[2]!=0){//Turno normalak
 	    			leihoaW=monitoreaW*65/100;
 	    			leihoaH=monitoreaH*90/100;
-	    			panelaAldatu(new PantailaUI(norenTxanda,aurkaria,egoera));
+	    			panelaAldatu(new PantailaUI(norenTxanda,aurkaria,egoera, hizkuntza));
 	    		}
 	    		else{//Barkuak jarri
 	    			leihoaW=monitoreaW*50/100;
 	    			leihoaH=monitoreaH*50/100;
-	    			panelaAldatu(new OntziakKokatuUI(norenTxanda));
+	    			panelaAldatu(new OntziakKokatuUI(norenTxanda, hizkuntza));
 	    		}
 	        }
 	        else{//Irabazle bat dago AMAITU
@@ -119,8 +119,8 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		else{//Jokalariak aukeratu behar dira
 			panelaAldatu(new PartidaZehaztuUI(hizkuntza));
 			setMenua(false);
-			leihoaW=325;
-			leihoaH=150;
+			leihoaW=350;
+			leihoaH=175;
 		}
 		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
 		System.out.println("PanelaAktualizatu");

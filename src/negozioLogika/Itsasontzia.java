@@ -38,7 +38,7 @@ public class Itsasontzia extends Objektuak {
 		boolean suntsitutaDago=true;
 		Iterator<ItsasontziTile> it=tileLista.iterator();
 		while(suntsitutaDago && it.hasNext()){
-			suntsitutaDago= it.next().suntsitutaDago();}
+			suntsitutaDago= !it.next().bizirikDago();}
 		suntsituta=suntsitutaDago;
 	}
 	public boolean equals(Itsasontzia pOntzi) {
@@ -58,7 +58,7 @@ public class Itsasontzia extends Objektuak {
 	public int luzeera() {
 		return luzeera;
 	}
-	public void ezkutuaJarri(boolean pZer){
+	public ArrayList<ItsasontziTile> ezkutuaJarri(boolean pZer){
 		if(pZer){
 			ezkutuLehen=ezkutua;
 			ezkutua=ezkutuMax;
@@ -66,6 +66,9 @@ public class Itsasontzia extends Objektuak {
 		else{
 			ezkutua=ezkutuLehen;
 		}
+		for(int i=0; i<tileLista.size();i++) 
+			tileLista.get(i).setEzkutua(pZer);
+		return tileLista;
 	}
 	public boolean itsasontziaDa(){
 		return true;
@@ -76,23 +79,23 @@ public class Itsasontzia extends Objektuak {
 	public void jabeaJarri(String pIzena) {
 		jabea=pIzena;		
 	}
-	public Tile jo(String pNork,int pIndarra, boolean pZer,int pX,int pY) {
+	public ArrayList<Tile> jo(String pNork,int pIndarra,int pX,int pY, boolean pZer) {
 		int i=0,emaitza=pIndarra;
 		boolean bilatzen=true;
-		ItsasontziTile its=null;
+		ItsasontziTile itsTile=null;
 		Iterator<ItsasontziTile> it= tileLista.iterator();
 		while(it.hasNext()&&bilatzen){
-			its = it.next();
-			if(its.posizioanDago(pX, pY)){
+			itsTile = it.next();
+			if(itsTile.posizioanDago(pX, pY)){
 				bilatzen=false;
 				if(pZer){
 					emaitza=eskutuaErasotu(pIndarra, pZer);
 				}else{
-					if(its.bizitzaOsoaDu()){
+					if(itsTile.bizitzaOsoaDu()){
 						eskutuaErasotu(pIndarra, pZer);
-					}else{
-						its.jo(pNork,emaitza, pZer);
 						emaitza=0;
+					}else{
+						tileLista.get(i).jo(pNork,emaitza, pZer);
 					}
 					
 				}
@@ -100,11 +103,21 @@ public class Itsasontzia extends Objektuak {
 			else 
 			i++;
 		}
-		its.jo(pNork,emaitza, pZer);
-		return its;
+		tileLista.get(i).jo(pNork,emaitza, pZer);
+		int bizirik=0;
+		for(i=0; i<tileLista.size()-1;i++){
+			if(tileLista.get(i).bizirikDago())bizirik++;
+		}
+		suntsituta=(bizirik==0);
+		
+		ArrayList<Tile>tile=new ArrayList<Tile>();
+		for(i=0; i<tileLista.size();i++) {
+			tileLista.get(i).suntsitutaDago(suntsituta);
+			tile.add(tileLista.get(i));
+		}
+		return tile;
 	}
 	private int eskutuaErasotu(int pIndarra, boolean pZer) {
-		System.out.println("ezkutua: "+ezkutua);
 		int emaitza=0;
 		if(pZer){
 			if(ezkutua>0){
@@ -117,7 +130,6 @@ public class Itsasontzia extends Objektuak {
 			emaitza=0;
 		}
 		if (ezkutuOsoaDu())ezkutua=ezkutuMax;
-		System.out.println("emaitza: "+emaitza);
 		return emaitza;
 	}
 	public boolean ezkutuOsoaDu() {

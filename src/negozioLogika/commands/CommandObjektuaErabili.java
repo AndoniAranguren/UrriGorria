@@ -22,6 +22,7 @@ public class CommandObjektuaErabili extends Commands {
 		koordX=pX;
 		koordY=pY;
 		norabidea=pNorabide;
+		System.out.println("Objektua erabili da: "+pObjektuak.getIzena()+" Kopurua: "+pObjektuak.getKopurua()+" X:"+pX+" Y:"+pY);
 		//----------------------
 		super.exekutatu();
 	}
@@ -43,6 +44,6 @@ public class CommandObjektuaErabili extends Commands {
 	}
 	public String info(){
 		String info=super.info();
-		return info.concat("CommandObjektuaErabili ("+objektuak.get(0).getIzena()+")");
+		return info.concat("CommandObjektuaErabili'"+objektuak.get(0).getIzena());
 	}
 }

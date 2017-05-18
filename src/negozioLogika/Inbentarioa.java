@@ -79,7 +79,7 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 		return objektuak.size();
 	}
 	public boolean armaDa(int pN){
-		return objektuak.get(pN).armaDa();
+		return (pN<objektuak.size()?objektuak.get(pN).armaDa():false);
 	}
 	public Objektuak get(int pX){
 		return objektuak.get(pX);

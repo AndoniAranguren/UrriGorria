@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.text.html.parser.Parser;
+
+import properties.Hizkuntza;
 
 public class LogUI extends JPanel implements ActionListener {
 
@@ -17,13 +20,15 @@ public class LogUI extends JPanel implements ActionListener {
 	private String jokalaria=null;
 	private JButton[] BattleLoga;
 	private ArrayList<String> loga = new ArrayList<>();
+	private Hizkuntza h;
 
 
-	public LogUI(String pIzena) {
+	public LogUI(String pIzena, String hizkuntza) {
+		h = new Hizkuntza(hizkuntza);
 		jokalaria=pIzena;
 		loga = UrriGorriaUI.getUrriGorriaUI().logaEman(jokalaria);
 		this.setLayout(new GridLayout(16, 1));
-		this.setBorder(BorderFactory.createTitledBorder("Loga:"));
+		this.setBorder(BorderFactory.createTitledBorder("Log:"));
 		this.setPreferredSize(new Dimension(250, UrriGorriaUI.getLeihoaH()-150));
 		this.logaAktualizatu();
 	}
@@ -33,8 +38,14 @@ public class LogUI extends JPanel implements ActionListener {
 			BattleLoga[i] = new JButton();
 			BattleLoga[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 			String info=loga.get(i);
-			BattleLoga[i].setName(info.split("-ç")[0]);
-			BattleLoga[i].setText("<html>" + info.split("-ç")[1]+ "</html>");
+			BattleLoga[i].setName(info.split("#")[0]);
+			
+			info=info.split("#")[1];
+			String jok=h.getProperty(info.split("'")[1]);
+			String kom=" "+h.getProperty(info.split("'")[2]);
+			String obj=(!info.split("'")[3].equals("Ezer")?
+					" ("+h.getProperty(info.split("'")[3])+")" :" ");
+			BattleLoga[i].setText("<html>" +info.split("'")[0]+jok+"<br>"+kom+obj +"</html>");
 			BattleLoga[i].addActionListener(this);
 			this.add(BattleLoga[i]);
 		}

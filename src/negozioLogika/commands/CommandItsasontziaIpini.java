@@ -39,6 +39,6 @@ public class CommandItsasontziaIpini extends Commands {
 	}
 	public String info(){
 		String info=super.info();
-		return info.concat("CommandItsasontziaIpini("+ontzia.get(0).getIzena()+")");
+		return info.concat("CommandItsasontziaIpini'"+ontzia.get(0).getIzena());
 	}
 }
