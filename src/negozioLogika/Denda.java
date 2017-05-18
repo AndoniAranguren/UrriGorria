@@ -17,8 +17,8 @@ public class Denda {
 		listaErosketak.add(eros.createErosketa("Bombax10"));
 		listaErosketak.add(eros.createErosketa("Misil"));
 		listaErosketak.add(eros.createErosketa("Misilx5"));
-		listaErosketak.add(eros.createErosketa("Misil Zuzendua"));
-		listaErosketak.add(eros.createErosketa("Misil Zuz. Pro"));
+		listaErosketak.add(eros.createErosketa("MisilZuzendua"));
+		listaErosketak.add(eros.createErosketa("MisilZuz.Pro"));
 		listaErosketak.add(eros.createErosketa("Radarra"));
 		listaErosketak.add(eros.createErosketa("Ezkutua"));
 	}

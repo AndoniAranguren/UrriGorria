@@ -118,8 +118,8 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		else{//Jokalariak aukeratu behar dira
 			panelaAldatu(new PartidaZehaztuUI(hizkuntza));
 			setMenua(false);
-			leihoaW=300;
-			leihoaH=150;
+			leihoaW=400;
+			leihoaH=200;
 		}
 		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
 		System.out.println("PanelaAktualizatu");

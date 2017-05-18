@@ -34,14 +34,14 @@ public class ErosketaFactory {
 			lista.add(o);
 			prezioa=400;
 		}
-		else if (pMota.equals("Misil Zuzendua")){
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua"); 
+		else if (pMota.equals("MisilZuzendua")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuzendua"); 
 			lista.add(o);
 			prezioa=300;
 			
 		}
-		else if (pMota.equals("Misil Zuz. Pro")){
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuz. Pro"); 
+		else if (pMota.equals("MisilZuz.Pro")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuz.Pro"); 
 			lista.add(o);
 			prezioa=300;
 		}

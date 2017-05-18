@@ -20,8 +20,8 @@ public class ObjektuakFactory {
 		//Armak--------------------------------
 		if (pMota.equals("Bomba")){i = new Armak(						"Bomba",pKop,100,new ErasoSinple());}		
 		else if (pMota.equals("Misil")){i = new Armak(					"Misil",pKop,200,new ErasoSinple());}
-		else if (pMota.equals("Misil Zuzendua")){i = new Armak(		"Misil Zuzendua",pKop,100,new ErasoLineal());}
-		else if (pMota.equals("Misil Zuz. Pro")){i = new Armak(	"Misil Zuz. Pro",pKop,100,new ErasoBikoitza());}
+		else if (pMota.equals("MisilZuzendua")){i = new Armak(		"MisilZuzendua",pKop,100,new ErasoLineal());}
+		else if (pMota.equals("MisilZuz.Pro")){i = new Armak(	"MisilZuz.Pro",pKop,100,new ErasoBikoitza());}
 		
 		//Ekipo--------------------------------
 		else if (pMota.equals("Radarra")) {i = new Ekipoak(			"Radarra",pKop, new ErabiliRadarra());}
@@ -42,9 +42,9 @@ public class ObjektuakFactory {
 		lista.add(o);
 		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",pZ?			10:40); 
 		lista.add(o); 
-		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuzendua",pZ?	1:4); 
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuzendua",pZ?	1:4); 
 		lista.add(o);
-		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil Zuz. Pro",pZ?	0:2); 
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuz.Pro",pZ?	0:2); 
 		lista.add(o);
 		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra",pZ?			4:10);
 		lista.add(o);

@@ -16,10 +16,12 @@ public abstract class Tile {
 		ikusiAhal.add(pJabea); //Jabea 0.posizioan egongo da
 	}
 	
-	public void jo(String pErasotzaile, int pIndarra, boolean pZer){
+	public int jo(String pErasotzaile, int pIndarra, boolean pZer){
+		int emaitza=0;
 		if(pZer) ikusiAhal.add(pErasotzaile);
 		else ikusiAhal.remove(pErasotzaile);
-		if(itsasontziaDa()) ((ItsasontziTile)(this)).bizitzaAldatu(pIndarra,pZer);
+		if(itsasontziaDa()) emaitza=((ItsasontziTile)(this)).bizitzaAldatu(pIndarra,pZer);
+		return emaitza;
 	}
 	public String erakutsi(String pNork){
 		if(ikusiAhalDu(pNork)){
@@ -63,5 +65,4 @@ public abstract class Tile {
 	public boolean bizirikDago(){
 		return false;
 	}
-
 }

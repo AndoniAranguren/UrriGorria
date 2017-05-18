@@ -11,7 +11,6 @@ public abstract class Jokalariak {
 	protected Inbentarioa inb;
 	private Denda denda;
 	private int dirua;
-	private ArrayList<Itsasontzia> nireItsasontziak;
 	
 	public Jokalariak(String pIzena){
 		izena=pIzena;
@@ -26,7 +25,6 @@ public abstract class Jokalariak {
 		dirua=500;
 		bizirik=true;
 		mapa= new Mapa(izena);
-		nireItsasontziak=new ArrayList<Itsasontzia>();
 		
 		ArrayList<Objektuak> objektuak=new ArrayList<Objektuak>();
 		objektuak=denda.dendakIzakinakDitu(ErosketaFactory.getErosketaFactory()
@@ -39,27 +37,7 @@ public abstract class Jokalariak {
 		return mapa.kokatuDaiteke(pX, pY,  pNorabidea, pLuzeera);
 	}
 	public Itsasontzia itsasontziaJarri(Itsasontzia pOntzi, int pX, int pY, char pNorabidea, boolean pZer) {
-		if(pZer==true){
-			pOntzi = mapa.itsasontziaJarri(izena, pOntzi, pX, pY, pNorabidea,pZer);
-			nireItsasontziak.add(0,pOntzi);
-		}
-		else{
-			for(Itsasontzia its:nireItsasontziak){
-				its.informazioaInprimatu();
-			}
-			boolean aurkituta=false;
-			Itsasontzia itsasontzia;
-			Iterator<Itsasontzia> it=nireItsasontziak.iterator();
-			while(!aurkituta && it.hasNext()){
-				itsasontzia= it.next();
-				if(itsasontzia.equals(pOntzi)){
-					pOntzi = mapa.itsasontziaJarri(izena, itsasontzia, pX, pY, pNorabidea, pZer);
-					aurkituta=true;
-					nireItsasontziak.remove(itsasontzia);
-				}
-			}
-		}
-		return pOntzi;
+		return mapa.itsasontziaJarri(izena, pOntzi, pX, pY, pNorabidea, pZer);
 	}
 	public boolean izenHauDu(String pJ) {
 		return pJ==izena;
@@ -72,7 +50,6 @@ public abstract class Jokalariak {
 		else			dirua-=pPrezioa;
 	}
 	public void dendariObjektuakEman(ArrayList<Objektuak> pObjektuak, boolean pZer) {
-		// TODO Auto-generated method stub
 		denda.objektuakEman(pObjektuak,pZer);
 	}
 	public void jokalariariObjektuakEman(ArrayList<Objektuak> pObjektuak, boolean pZer) {
@@ -114,15 +91,4 @@ public abstract class Jokalariak {
 	}
 
 	public abstract void jokatuCPU(int pFasea);
-
-	public int itsasontziaJo(ItsasontziTile pTile, int pIndarra, boolean pZer) {
-		for(Itsasontzia its:nireItsasontziak){
-			if(its.tileHauDauka(pTile)){
-				return its.jo(pIndarra, pZer);
-			}
-		}
-		return 0;
-	}
-
-
 }

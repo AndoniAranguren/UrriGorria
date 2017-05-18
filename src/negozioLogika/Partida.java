@@ -160,17 +160,18 @@ public class Partida {
 		jokalariLista.get(jokalariarenPosLortu(pJokalaria)).jokalariariObjektuakEman(pObjektuak, pZer);
 	}
 	public void partidaZehaztu(String pInfo) {
+		String jok="1.Jokalaria";
 		maxJok++;
-		jokalariLista.add(new Jokalaria("1.Jokalaria"));
+		jokalariLista.add(new Jokalaria(jok));
 		maxJok++;
 		if(pInfo.equals("BI_JOKALARI")){
 			jokalariLista.add(new Jokalaria("2.Jokalaria"));
 		}else if(pInfo.equals("MAKINAREN_AURKA_ERREZA")){
-			jokalariLista.add(new CPU("1.CPU", 1));
+			jokalariLista.add(new CPU("1.CPU", jok));
 		}else if(pInfo.equals("MAKINAREN_AURKA_ZAILA")){
-			jokalariLista.add(new CPU("1.CPU", 2));
+			jokalariLista.add(new CPU("1.CPU", jok));
 			maxJok++;
-			jokalariLista.add(new CPU("2.CPU", 2));
+			jokalariLista.add(new CPU("2.CPU", jok));
 		}
 	}
 	public void komandoaEgikaritu(String pJokalaria, String pKomandoa, String[] pInfo) {
@@ -220,10 +221,6 @@ public class Partida {
 		}
 		return izenak;
 	}
-	public int itsasontziaJo(String pJokalaria, ItsasontziTile pTile, int pIndarra, boolean pZer) {
-		return jokalariLista.get(jokalariarenPosLortu(pJokalaria)).itsasontziaJo(pTile,pIndarra,pZer);
-	}
 	
-
 	
 }
