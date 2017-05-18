@@ -31,11 +31,15 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	private int monitoreaH=(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 	private static int leihoaW, leihoaH;
 	private JMenuBar menubar = new JMenuBar();
+	private String hizkuntza = "euskera";
+	private MenuBarra mb;
 	
 	public UrriGorriaUI() {
 		this.setTitle(IZENBURUA);
-		oraingoa = new PartidaZehaztuUI();
+		oraingoa = new PartidaZehaztuUI(hizkuntza);
 		this.add(oraingoa);	
+		mb = new MenuBarra();
+		this.setJMenuBar(mb);
 		leihoaW=300;
 		leihoaH=150;
 		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
@@ -187,6 +191,18 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	public int jokalariakZenbatDiru(String pJokalaria) {
 		return Partida.getPartida().jokalariakZenbatDiru(pJokalaria);
 	}
+	
+	public String getHizkuntza() {
+		return this.hizkuntza;
+	}
+	
+	public void setHizkuntza(String hizkuntza) {
+		this.hizkuntza = hizkuntza;
+	}
+	
+	public MenuBarra getMenuBarra() {
+		return this.mb;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -198,4 +214,5 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 			if(((Component) e.getSource()).getName().equals("Berriro hasi"))
 				Partida.getPartida().partidaErreseteatu();
 	}
+
 }

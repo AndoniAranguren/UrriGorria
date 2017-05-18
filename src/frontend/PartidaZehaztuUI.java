@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import negozioLogika.interfaces.UGKonstanteak;
+import properties.Hizkuntza;
 
 public class PartidaZehaztuUI extends JPanel implements UGKonstanteak {
 
@@ -18,12 +19,14 @@ public class PartidaZehaztuUI extends JPanel implements UGKonstanteak {
 	private ButtonGroup norekin, zailtasuna;
 	private JButton sartu;
 	private JPanel pNorekin, pZailtasuna;
+	private Hizkuntza hizkuntza;
 	
-	public PartidaZehaztuUI() {
+	public PartidaZehaztuUI(String hizk) {
+		hizkuntza = new Hizkuntza(hizk);
 		this.setLayout(new BorderLayout());
 		this.norekinZehaztu();
 		this.zailtasunaZehaztu();
-		sartu = new JButton("Partida hasi");
+		sartu = new JButton(hizkuntza.getProperty("hasi"));//	"Partida hasi"
 		sartu.addActionListener(gureAL -> partidaHasi());
 		this.add(pNorekin, BorderLayout.WEST);
 		this.add(pZailtasuna, BorderLayout.CENTER);
@@ -31,10 +34,10 @@ public class PartidaZehaztuUI extends JPanel implements UGKonstanteak {
 	}
 	
 	private void norekinZehaztu() {
-		ia = new JRadioButton("Makinaren aurka", true);
+		ia = new JRadioButton(hizkuntza.getProperty("makina"), true);	//	"Makinaren aurka"
 		ia.setActionCommand("MAKINAREN_AURKA");
 		ia.addActionListener(gureAL -> getZailtasuna());
-		bijokalari = new JRadioButton("Bi jokalari");
+		bijokalari = new JRadioButton(hizkuntza.getProperty("bi"));	//	"Bi jokalari"
 		bijokalari.setActionCommand("BI_JOKALARI");
 		bijokalari.addActionListener(gureAL -> getZailtasuna());
 		norekin = new ButtonGroup();
@@ -43,13 +46,13 @@ public class PartidaZehaztuUI extends JPanel implements UGKonstanteak {
 		pNorekin = new JPanel(new BorderLayout());
 		pNorekin.add(ia, BorderLayout.NORTH);
 		pNorekin.add(bijokalari, BorderLayout.SOUTH);
-		pNorekin.setBorder(BorderFactory.createTitledBorder("Norekin jokatu:"));
+		pNorekin.setBorder(BorderFactory.createTitledBorder(hizkuntza.getProperty("norekin")));	//	"Norekin jokatu:"
 	}
 	
 	private void zailtasunaZehaztu() {
-		erreza = new JRadioButton("Erreza", true);
+		erreza = new JRadioButton(hizkuntza.getProperty("erreza"), true);	//	"Erreza"
 		erreza.setActionCommand("MAKINAREN_AURKA_ERREZA");
-		zaila = new JRadioButton("Zaila");
+		zaila = new JRadioButton(hizkuntza.getProperty("zaila"));	//	"Zaila"
 		zaila.setActionCommand("MAKINAREN_AURKA_ZAILA");
 		zailtasuna = new ButtonGroup();
 		zailtasuna.add(erreza);
@@ -58,7 +61,7 @@ public class PartidaZehaztuUI extends JPanel implements UGKonstanteak {
 		pZailtasuna.setLayout(new BorderLayout());	
 		pZailtasuna.add(erreza, BorderLayout.NORTH);
 		pZailtasuna.add(zaila, BorderLayout.SOUTH);
-		pZailtasuna.setBorder(BorderFactory.createTitledBorder("Zailtasuna aukeratu:"));
+		pZailtasuna.setBorder(BorderFactory.createTitledBorder(hizkuntza.getProperty("zailtasuna")));	//	"Zailtasuna aukeratu:"
 	}
 	
 	public void partidaHasi(){
