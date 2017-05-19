@@ -1,30 +1,31 @@
-package frontend;
+package interfazeGrafikoa;
 
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.text.html.parser.Parser;
+import javax.swing.text.html.parser.Parser; //<br> a jartzeko, hau da bi lerroko JButtonak
 
-import properties.Hizkuntza;
+import interfazeGrafikoa.properties.Hizkuntza;
 
-public class LogUI extends JPanel implements ActionListener {
+@SuppressWarnings("unused")
+public class LogUI extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private String jokalaria=null;
 	private JButton[] BattleLoga;
 	private ArrayList<String> loga = new ArrayList<>();
 	private Hizkuntza h;
+	private int komandoKop;
 
 
 	public LogUI(String pIzena, String hizkuntza) {
 		h = new Hizkuntza(hizkuntza);
+		komandoKop=0;
 		jokalaria=pIzena;
 		loga = UrriGorriaUI.getUrriGorriaUI().logaEman(jokalaria);
 		this.setLayout(new GridLayout(16, 1));
@@ -38,7 +39,7 @@ public class LogUI extends JPanel implements ActionListener {
 			BattleLoga[i] = new JButton();
 			BattleLoga[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 			String info=loga.get(i);
-			BattleLoga[i].setName(info.split("#")[0]);
+			BattleLoga[i].setName(i+"");
 			
 			info=info.split("#")[1];
 			String jok=h.getProperty(info.split("'")[1]);
@@ -46,13 +47,16 @@ public class LogUI extends JPanel implements ActionListener {
 			String obj=(!info.split("'")[3].equals("Ezer")?
 					" ("+h.getProperty(info.split("'")[3])+")" :" ");
 			BattleLoga[i].setText("<html>" +info.split("'")[0]+jok+"<br>"+kom+obj +"</html>");
-			BattleLoga[i].addActionListener(this);
+			BattleLoga[i].addActionListener(e->
+				UrriGorriaUI.getUrriGorriaUI().komandoaAtzera(komandoKop-Integer.parseInt((
+							(Component) e.getSource()).getName())));
+			komandoKop++;
 			this.add(BattleLoga[i]);
 		}
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		String info=((Component) e.getSource()).getName();
-		UrriGorriaUI.getUrriGorriaUI().komandoaAtzera(info.split("'"));
-	}
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		int zenbatgarrena=);
+//		
+//	}
 }

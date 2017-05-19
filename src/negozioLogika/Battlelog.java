@@ -35,10 +35,11 @@ public class Battlelog {
 		}
 		return loga;
 	}
-	public void komandoaAtzera(String[] pInfo) {
-		int ind=komandoZerrenda.size()-1;
-		while(komandoZerrenda.get(ind).berdinaDa(pInfo)){
+	public void komandoaAtzera(int pZenbat) {
+		Partida.getPartida().cpuaAktibatu(false);
+		for(int i=0;i<pZenbat;i++){
 			komandoaAtzera();
 		}
+		Partida.getPartida().cpuaAktibatu(true);
 	}
 }

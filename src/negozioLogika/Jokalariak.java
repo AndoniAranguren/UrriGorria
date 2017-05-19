@@ -1,11 +1,12 @@
 package negozioLogika;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Jokalariak {
 	
 	protected String izena;
-	boolean bizirik;
+	private boolean bizirik;
 	protected Mapa mapa;
 	protected Inbentarioa inb;
 	private Denda denda;
@@ -16,12 +17,60 @@ public abstract class Jokalariak {
 		jokalariaErreseteatu();
 	}
 	
-	public abstract void itsasontziakIpini();
+	public void itsasontziakIpini() {
+		ArrayList<Itsasontzia> itsasontziak=inb.itsasontziakLortu();
+		int x=0,y=0,zaiakerak=0,ontziKop=0;
+		final int zaiakeraMax=mapa.getErrenkada();
+		char n='N';
+		Random r = new Random();
+		String nora="NSWENSWE";
+		boolean bilatzen=false;
+		while(itsasontziak.size()>0){
+			x=0;
+			if(!bilatzen){
+				bilatzen=true;
+				r = new Random();
+				x = r.nextInt(mapa.getErrenkada());
+				y = r.nextInt(mapa.getZutabe());
+				zaiakerak=0;
+			}
+			else while(x<mapa.getErrenkada()-1&&bilatzen&&zaiakerak<zaiakeraMax){
+				while(y<mapa.getZutabe()-1&&bilatzen&&zaiakerak<zaiakeraMax){
+					int ind=0, 
+					rNum=r.nextInt(4);
+					
+					while(ind<4&&bilatzen){
+						n=nora.charAt(rNum+ind);
+						
+						if(mapa.kokatuDaiteke(x, y,	n,itsasontziak.get(0).getLuzeera())){
+							itsasontziak.get(0).erabili(izena, x, y, n);
+							ontziKop++;
+							bilatzen=false;
+							
+							if(itsasontziak.get(0).getKopurua()<=0)
+								itsasontziak.remove(0);
+							}
+						ind++;
+					}
+					y++;
+				}
+				x++;
+				y=0;				
+				zaiakerak++;
+			}if(zaiakerak>=zaiakeraMax){
+				Partida.getPartida().komandoaAtzera(ontziKop-1);
+				itsasontziak=inb.itsasontziakLortu();
+				bilatzen=false;
+				zaiakerak=0;
+			}
+		}
+		System.out.println(izena+" bere itsasontziak kokatu ditu.");
+	}
 	
 	public void jokalariaErreseteatu(){
 		denda= new Denda();
 		inb = new Inbentarioa();
-		dirua=500;
+		dirua=0;
 		bizirik=true;
 		mapa= new Mapa(izena);
 		
@@ -62,6 +111,7 @@ public abstract class Jokalariak {
 	}
 	public void jokalariariErasotu(String pNork, Objektuak pObjektua, int pX, int pY,char pNorabide, boolean pZer) {
 		mapa=pObjektua.aktibatu(pNork,mapa, pX, pY, pNorabide, pZer);
+		bizirik=mapa.itsasontziBizirik();
 	}
 	public boolean jokalariaBizirikDago() {
 		return bizirik;
@@ -88,6 +138,8 @@ public abstract class Jokalariak {
 	public void objektuaErabili(String pNori, String[] pInfo) {
 		inb.objektuaErabili(pNori,pInfo);
 	}
-
+	public boolean getBizirik(){
+		return bizirik;
+	}
 	public abstract void jokatuCPU(int pFasea);
 }

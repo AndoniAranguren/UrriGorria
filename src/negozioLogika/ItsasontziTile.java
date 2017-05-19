@@ -17,7 +17,7 @@ public class ItsasontziTile extends Tile {
 		super.identifikadorea="Itsasontzi";
 	}
 	
-	public int bizitzaAldatu(int pIndarra, boolean pZer){
+	protected int bizitzaAldatu(int pIndarra, boolean pZer){
 		bizitza=bizitza+(pZer? -pIndarra:pIndarra);
 		if (bizitzaOsoaDu())bizitza=bizitzaMax;
 		return bizitza;
@@ -28,7 +28,7 @@ public class ItsasontziTile extends Tile {
 
 	protected String identifikadorea(){
 		if(suntsituta){
-			return "Suntsituta";
+			return "Suntzituta";
 		}else if(!bizirikDago()){
 			return "Ukituta";
 		}else if(ezkutua){
@@ -50,9 +50,6 @@ public class ItsasontziTile extends Tile {
 	}	
 	public boolean ezkutuaDu() {
 		return ezkutua;
-	}
-	public boolean berdinak(ItsasontziTile tile) {
-		return (tile.jabeaDa(ikusiAhal.get(0)) && tile.posizioanDago(koordX,koordY));
 	}
 
 	public void suntsitutaDago(boolean pZer) {

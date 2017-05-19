@@ -1,4 +1,4 @@
-package properties;
+package interfazeGrafikoa.properties;
 
 import java.io.IOException;
 import java.util.Properties;

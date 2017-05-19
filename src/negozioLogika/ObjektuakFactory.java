@@ -2,7 +2,7 @@ package negozioLogika;
 
 import java.util.ArrayList;
 
-import strategyak.*;
+import negozioLogika.strategyak.*;
 
 public class ObjektuakFactory {
 

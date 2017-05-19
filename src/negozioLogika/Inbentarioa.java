@@ -2,6 +2,7 @@ package negozioLogika;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango dute
 	
@@ -78,8 +79,16 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 	public int lenght(){
 		return objektuak.size();
 	}
-	public boolean armaDa(int pN){
-		return (pN<objektuak.size()?objektuak.get(pN).armaDa():false);
+	public Armak armaBatEman(){
+		int inbPos=new Random().nextInt(objektuak.size()-1);
+		boolean bilatzen=true;
+		while(bilatzen){
+			inbPos++;
+			if(inbPos>=objektuak.size())inbPos=0;
+			bilatzen=!(objektuak.get(inbPos).armaDa()&&objektuak.get(inbPos).kopuruNahikoa(1));
+
+		}
+		return (Armak) objektuak.get(inbPos);
 	}
 	public Objektuak get(int pX){
 		return objektuak.get(pX);

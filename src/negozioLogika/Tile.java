@@ -1,7 +1,6 @@
 package negozioLogika;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public abstract class Tile {
 	protected int koordX;
@@ -16,15 +15,22 @@ public abstract class Tile {
 		ikusiAhal.add(pJabea); //Jabea 0.posizioan egongo da
 	}
 	
-	public int jo(String pErasotzaile, int pIndarra, boolean pZer){
-		int emaitza=0;
+	public void jo(String pErasotzaile, int pIndarra, boolean pZer){
+		System.out.println("noren txanda: "+pErasotzaile);
 		if(pZer) ikusiAhal.add(pErasotzaile);
-		else ikusiAhal.remove(pErasotzaile);
-		if(itsasontziaDa()) emaitza=((ItsasontziTile)(this)).bizitzaAldatu(pIndarra,pZer);
-		return emaitza;
+		else {
+			int i=ikusiAhal.size()-1;
+			while(i>0&&!ikusiAhal.get(i).equals(pErasotzaile)) i--;
+			ikusiAhal.remove(i);
+		}
+		bizitzaAldatu(pIndarra,pZer);
 	}
+	protected int bizitzaAldatu(int pIndarra, boolean pZer) {
+		return 0;
+	}
+
 	public String erakutsi(String pNork){
-		if(ikusiAhalDu(pNork)) return identifikadorea();
+		if(ikusiAhal.contains(pNork)) return identifikadorea();
 		else return "Ezezaguna";
 	}
 	protected String identifikadorea(){
@@ -32,15 +38,6 @@ public abstract class Tile {
 	}
 
 	//Galderak -------------------------
-	public boolean ikusiAhalDu(String pNork){
-		Iterator<String> it=ikusiAhal.iterator();
-		boolean aurkituta=false;
-		while(!aurkituta && it.hasNext()){
-			aurkituta=(it.next().equals(pNork));
-		}
-		return aurkituta;
-	}
-	
 	public boolean posizioanDago(int pX,int pY){
 		return (koordX==pX && koordY==pY);
 	}
@@ -52,13 +49,6 @@ public abstract class Tile {
 	}
 	public boolean equals(Tile pTile){
 		return (pTile.posizioanDago(koordX, koordY) && pTile.jabeaDa(ikusiAhal.get(0)));
-	}
-	//---------------------------------------
-	public void kokatzekoGaitasunaEman(boolean pZer){
-		if(pZer){
-			if(!kokatuDaiteke())
-				kokatuAhalDa++;}
-		else kokatuAhalDa--;
 	}
 	public boolean itsasontziaDa() {
 		return false;
@@ -72,10 +62,19 @@ public abstract class Tile {
 	public boolean ezkutuaDu() {
 		return false;
 	}
+	public boolean berdinak(ItsasontziTile tile) {
+		return (tile.jabeaDa(ikusiAhal.get(0)) && tile.posizioanDago(koordX,koordY));
+	}
+	//---------------------------------------
+	public void kokatzekoGaitasunaEman(boolean pZer){
+		if(pZer){
+			if(!kokatuDaiteke())
+				kokatuAhalDa++;}
+		else kokatuAhalDa--;
+	}
 	public void ezkutuaJarri(boolean pZer) {
 		System.out.println("Ezin duzu ezkutua hemen jarria \""+identifikadorea+"\" naiz");
 	}
-
 	public int getX() {
 		return koordX;
 	}

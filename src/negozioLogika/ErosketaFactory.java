@@ -43,7 +43,7 @@ public class ErosketaFactory {
 		else if (pMota.equals("MisilZuz.Pro")){
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuz.Pro"); 
 			lista.add(o);
-			prezioa=300;
+			prezioa=500;
 		}
 		else if (pMota.equals("Ezkutua")) {
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Ezkutua"); 

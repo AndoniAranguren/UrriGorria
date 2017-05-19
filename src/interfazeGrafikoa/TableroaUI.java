@@ -1,10 +1,7 @@
-package frontend;
+package interfazeGrafikoa;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,12 +9,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 
-import negozioLogika.Mapa;
-import negozioLogika.Partida;
-import properties.Hizkuntza;
+import interfazeGrafikoa.externals.Irudiak;
+import interfazeGrafikoa.properties.*;
 
 public class TableroaUI extends JPanel implements ActionListener {
 	
@@ -40,7 +35,7 @@ public class TableroaUI extends JPanel implements ActionListener {
 	private void tableroaHasieratu() {
 		for(int i=0; i<mapa.length; i++){
 			for(int j=0; j<mapa[0].length; j++){
-				tableroa[i][j] = new JButton(new ImageIcon(TableroaUI.class.getResource("/externals/ezezaguna.png")));
+				tableroa[i][j] = new JButton(Irudiak.getIrudiak().imaginaLortu("ezezaguna.png"));
 				tableroa[i][j].setBorderPainted(false);
 				tableroa[i][j].setName(i + "-" + j);
 				tableroa[i][j].addActionListener(this);
@@ -51,18 +46,18 @@ public class TableroaUI extends JPanel implements ActionListener {
 	}
 	
 	private void tableroaEguneratu(){
-		Partida.getPartida();
-		String aux="/externals/ura.png";
+		String aux="ezezaguna.png";
 		for(int i=0; i<mapa.length; i++){
 			for(int j=0; j<mapa[1].length; j++){
-				if(mapa[i][j].equals("Itsasontzi")) aux="/externals/ontzia.png";
-				else if(mapa[i][j].equals("Ura")) aux="/externals/ura.png";
-				else if(mapa[i][j].equals("Ezezaguna"))aux="/externals/ezezaguna.png";
-				else if(mapa[i][j].equals("Suntzituta"))aux="/externals/ondoratuta.png";
-				else if(mapa[i][j].equals("Ukituta"))aux="/externals/red.png";
-				else if(mapa[i][j].equals("Ezkutua"))aux="/externals/ezkutua.png";
+				if(mapa[i][j].equals("Itsasontzi")) aux="ontzia.png";
+				else if(mapa[i][j].equals("Ura")) aux="ura.png";
+				else if(mapa[i][j].equals("Ezezaguna"))aux="ezezaguna.png";
+				else if(mapa[i][j].equals("Suntzituta"))aux="ondoratuta.png";
+				else if(mapa[i][j].equals("Ukituta"))aux="red.png";
+				else if(mapa[i][j].equals("Ezkutua"))aux="ezkutua.png";
+				
 				tableroa[i][j].setBorderPainted(false);
-				tableroa[i][j].setIcon((new ImageIcon(TableroaUI.class.getResource(aux))));
+				tableroa[i][j].setIcon((Irudiak.getIrudiak().imaginaLortu(aux)));
 				this.add(tableroa[i][j]);
 			}
 		}

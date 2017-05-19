@@ -1,4 +1,4 @@
-package strategyak;
+package negozioLogika.strategyak;
 
 import negozioLogika.Mapa;
 

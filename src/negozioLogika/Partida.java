@@ -2,7 +2,7 @@ package negozioLogika;
 
 import java.util.ArrayList;
 
-import frontend.UrriGorriaUI;
+import interfazeGrafikoa.*;
 import negozioLogika.commands.*;
 
 public class Partida {
@@ -12,7 +12,7 @@ public class Partida {
 	private static int maxJok=0;
 	private int[] egoera= new int[3];
 	private UrriGorriaUI ui;
-	private boolean jarraitu;
+	private boolean jarraitu,cpuaAktibatuta;
 
 	
 	private Partida(){
@@ -21,6 +21,7 @@ public class Partida {
 		egoera[1]=0;//txanda
 		egoera[0]=0;//fasea
 		jarraitu=true;
+		cpuaAktibatuta=true;
 		ui=UrriGorriaUI.getUrriGorriaUI();
 		ui.urriGorriaUIErreseteatu();
 	}	
@@ -40,8 +41,11 @@ public class Partida {
 		txandaIAKonprobatu();
 	}
 	public void txandaIAKonprobatu(){
-		if(norenTxandaDaIzena().split("\\.")[1].equals("CPU"))
-			norenTxandaDa().jokatuCPU(egoera[0]);
+		if(norenTxandaDaIzena().split("\\.")[1].equals("CPU")){
+			if(cpuaAktibatuta)
+				norenTxandaDa().jokatuCPU(egoera[0]);
+			else System.out.println("CPU-a desaktibatuta");
+		}
 	}
 	private void faseaAtzera() {
 		if(egoera[2]==0)	egoera[1]--; //Hasieraketa turnoan bagaude jokalaria aldatu
@@ -159,6 +163,9 @@ public class Partida {
 	public static void jokalariariObjektuakEman(String pJokalaria, ArrayList<Objektuak> pObjektuak, boolean pZer) {
 		jokalariLista.get(jokalariarenPosLortu(pJokalaria)).jokalariariObjektuakEman(pObjektuak, pZer);
 	}
+	public void itsasontziakIpini(){
+		jokalariLista.get(egoera[1]).itsasontziakIpini();
+	}
 	public void partidaZehaztu(String pInfo) {
 		String jok="1.Jokalaria";
 		maxJok++;
@@ -200,11 +207,8 @@ public class Partida {
 			}
 		}else System.out.println(norenTxandaDaIzena()+"-ren txanda da");
 	}
-	public void komandoaAtzera() {
-		Battlelog.BattlelogaLortu().komandoaAtzera();
-	}
-	public void komandoaAtzera(String[] pInfo) {
-		Battlelog.BattlelogaLortu().komandoaAtzera(pInfo);
+	public void komandoaAtzera(int pZenbat) {
+		Battlelog.BattlelogaLortu().komandoaAtzera(pZenbat);
 	}
 	public void jokalariakObjektuaErabili(String pNori, String[] pInfo) {
 		norenTxandaDa().objektuaErabili(pNori,pInfo);
@@ -220,6 +224,16 @@ public class Partida {
 			}
 		}
 		return izenak;
+	}
+	public void cpuaAktibatu(boolean pZer) {
+		cpuaAktibatuta=pZer;
+	}
+	public String jokalariBiziBatLortu() {
+		for(Jokalariak jok :jokalariLista){
+			if(!norenTxandaDa().getIzena().equals(jok.getIzena())&&jok.getBizirik())
+				return jok.getIzena();
+		}
+		return null;
 	}
 	
 	

@@ -1,4 +1,4 @@
-package frontend;
+package interfazeGrafikoa;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,13 +8,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import properties.Hizkuntza;
+import interfazeGrafikoa.externals.Irudiak;
+import interfazeGrafikoa.properties.Hizkuntza;
 
 public class PantailaUI extends JPanel implements ActionListener {
 
@@ -64,7 +64,7 @@ public class PantailaUI extends JPanel implements ActionListener {
 		}
 		JButton tituluaJ = new JButton(h.getProperty(titulua));
 		top.setBorder(new TitledBorder(new LineBorder(Color.CYAN),h.getProperty("iraupena") + ": ("+egoera[2]+") " + h.getProperty(jokalaria)));
-		JButton nora2 = new JButton(new ImageIcon(TableroaUI.class.getResource(norabideaLortu())));
+		JButton nora2 = new JButton((Irudiak.getIrudiak().norabideaLortu()));
 		JButton atzera = new JButton(h.getProperty("atzera"));
 
 		tituluaJ.setToolTipText("Txanda pasatu");
@@ -78,23 +78,6 @@ public class PantailaUI extends JPanel implements ActionListener {
 		top.add(tituluaJ, BorderLayout.WEST);
 		top.add(nora2);
 		top.add(atzera);
-	}
-
-	private String norabideaLortu() {
-		String irudi;
-		switch (UrriGorriaUI.norabideaLortu()){
-			case 0: irudi="/externals/eki.png";
-				break;
-			case 1: irudi="/externals/hego.png";
-				break;
-			case 2: irudi="/externals/mend.png";
-				break;
-			case 3: irudi="/externals/ipar.png";
-				break;
-			default: irudi="/externals/eki.png";
-				break;
-		}
-		return irudi;
 	}
 
 	private void setDendaInbP(){

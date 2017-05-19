@@ -1,8 +1,8 @@
-package frontend;
+package interfazeGrafikoa;
 
 import javax.swing.JPanel;
 
-import properties.Hizkuntza;
+import interfazeGrafikoa.properties.Hizkuntza;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

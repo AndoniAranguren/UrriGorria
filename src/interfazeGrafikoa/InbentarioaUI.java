@@ -1,4 +1,4 @@
-package frontend;
+package interfazeGrafikoa;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -10,7 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import properties.Hizkuntza;
+import interfazeGrafikoa.properties.Hizkuntza;
 
 public class InbentarioaUI extends JPanel implements ActionListener {
 
@@ -20,6 +20,7 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 	private ArrayList<String> inb = new ArrayList<>();
 	private int fasea;
 	private Hizkuntza h;
+	private boolean itsasontziGuztiakIpinita;
 
 
 	public InbentarioaUI(String pIzena, int pFasea, String hizkuntza) {
@@ -33,6 +34,7 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 	}
 	public void inbentarioaAktualizatu(){
 		inbentarioa = new JButton[inb.size()];
+		itsasontziGuztiakIpinita=true;
 		for(int i=0; i<inb.size(); i++){
 			inbentarioa[i] = new JButton();
 			inbentarioa[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -45,6 +47,8 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 			}else if((UrriGorriaUI.getObjektua().equals(inb.get(i).split(":")[1]))){
 				inbentarioa[i].setBackground(new Color(175, 255, 175));
 			}
+			if(itsasontziGuztiakIpinita&&Integer.parseInt(izena.split(":")[0])==0)//itsasontzia izatea
+				itsasontziGuztiakIpinita=Integer.parseInt(izena.split(": ")[1])<=0;//kop 0 izatea
 			this.add(inbentarioa[i]);
 		}
 	}
@@ -53,5 +57,8 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 		String sourceText=(String)((JButton)e.getSource()).getName();
 		UrriGorriaUI.getUrriGorriaUI().objektuaAldatu((sourceText));
 		UrriGorriaUI.getUrriGorriaUI().panelaAktualizatu();		
+	}
+	public boolean itsasontziGuztiakKokaturik() {
+		return itsasontziGuztiakIpinita;
 	}
 }

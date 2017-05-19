@@ -1,4 +1,4 @@
-package frontend;
+package interfazeGrafikoa;
 
 import java.awt.Color;
 
@@ -6,8 +6,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import interfazeGrafikoa.properties.Hizkuntza;
 import negozioLogika.Partida;
-import properties.Hizkuntza;
 
 public class MenuBarra extends JMenuBar {
 

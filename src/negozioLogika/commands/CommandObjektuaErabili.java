@@ -22,6 +22,7 @@ public class CommandObjektuaErabili extends Commands {
 		koordX=pX;
 		koordY=pY;
 		norabidea=pNorabide;
+		System.out.println(jokalaria);
 		System.out.println("Objektua erabili da: "+pObjektuak.getIzena()+" Kopurua: "+pObjektuak.getKopurua()+" X:"+pX+" Y:"+pY);
 		//----------------------
 		super.exekutatu();
@@ -31,7 +32,7 @@ public class CommandObjektuaErabili extends Commands {
 			if(pZer){
 				new CommandItsasontziaIpini(nori,(Itsasontzia)objektuak.get(0), koordX, koordY, norabidea);
 			}else
-				Partida.getPartida().komandoaAtzera();
+				Partida.getPartida().komandoaAtzera(1);
 		}else{
 			objektuak.get(0).behinErabili(pZer);
 			Partida.getPartida().faseaAldatu(pZer);

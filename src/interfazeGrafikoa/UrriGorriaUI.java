@@ -1,4 +1,4 @@
-package frontend;
+package interfazeGrafikoa;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -127,10 +127,10 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	}
 
 	public void komandoaAtzera() {
-		Partida.getPartida().komandoaAtzera();
+		komandoaAtzera(1);
 	}
-	public void komandoaAtzera(String[] pInfo) {
-		Partida.getPartida().komandoaAtzera(pInfo);
+	public void komandoaAtzera(int pZenbat) {
+		Partida.getPartida().komandoaAtzera(pZenbat);
 	}
 	public static int norabideaLortu() {
 		return norabidea;
@@ -195,5 +195,8 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		if(e.getSource() instanceof JButton)
 			if(((Component) e.getSource()).getName().equals("Berriro hasi"))
 				Partida.getPartida().partidaErreseteatu();
+	}
+	public void itsasontziakIpini() {
+		Partida.getPartida().itsasontziakIpini();		
 	}
 }

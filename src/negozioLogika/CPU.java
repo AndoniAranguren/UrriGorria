@@ -1,6 +1,5 @@
 package negozioLogika;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class CPU extends Jokalariak {
@@ -11,95 +10,86 @@ public class CPU extends Jokalariak {
 		etsaia=jok;
 	}
 	
-	@Override
-	public void itsasontziakIpini() {
-		ArrayList<Itsasontzia> itsasontziak=inb.itsasontziakLortu();
-		int rY=0,x=0,y=0,zaiakerak=0,ontziKop=0;
-		final int zaiakeraMax=mapa.getErrenkada();
-		char n='N';
-		Random r = new Random();
-		String nora="NSWENSWE";
-		boolean bilatzen=false;
-		while(itsasontziak.size()>0){
-			x=0;
-			if(!bilatzen){
-				bilatzen=true;
-				x = r.nextInt(mapa.getZutabe()-2);
-				rY = r.nextInt(mapa.getErrenkada()-2);
-				zaiakerak=0;
+	public void erasotu(){
+		//String pNori, int pX, int pY,char pNorabide
+		if(!Partida.jokalariaBizirikDago(etsaia)) etsaia=Partida.getPartida().jokalariBiziBatLortu();
+		Random r=new Random();
+		if(true/*r.nextInt(10)>8*/){
+			int x=0,y=0;
+			String[][] etsaiMapa= Partida.getPartida().mapaInterpretatu(etsaia);
+			char[][] etsaiMapa2= new char[mapa.getErrenkada()][mapa.getZutabe()];
+			boolean batAurkituta=false;
+			String kasilla;
+			x=1;
+			for( x=0;x<mapa.getErrenkada();x++){
+				for( y=0;y<mapa.getZutabe();y++)
+					etsaiMapa2[x][y]='_';
 			}
-			else while(x<mapa.getErrenkada()-1&&bilatzen&&zaiakerak<zaiakeraMax){
-				zaiakerak++;
-				y=rY;
-				
-				while(y<mapa.getZutabe()-1&&bilatzen&&zaiakerak<zaiakeraMax){
-					int ind=0, 
-					rNum=r.nextInt(4);
-					
-					while(ind<4&&bilatzen){
-						n=nora.charAt(rNum+ind);
-						
-						if(mapa.kokatuDaiteke(x, y,	n,itsasontziak.get(0).getLuzeera())){
-							itsasontziak.get(0).erabili(izena, x, y, n);
-							ontziKop++;
-							bilatzen=false;
-							
-							if(itsasontziak.get(0).getKopurua()<=0)
-								itsasontziak.remove(0);
-							}
-						ind++;
+			x=1;
+			while(x<mapa.getErrenkada()-1){
+				y=1;
+				while(y<mapa.getZutabe()-1){
+					kasilla=etsaiMapa[x][y];
+					if(kasilla.equals("Ura")){
+						etsaiMapa2[x][y]='~';
+					}else if(kasilla.equals("Suntzituta")){
+						etsaiMapa2[x][y]='~';
+						etsaiMapa2[x-1][y]='~';
+						etsaiMapa2[x+1][y]='~';
+						etsaiMapa2[x][y-1]='~';
+						etsaiMapa2[x][y+1]='~';
+					}else if(kasilla.equals("Itsasontzi")||kasilla.equals("Ezkutua")){
+						etsaiMapa2[x][y]='X';
+						batAurkituta=true;
+					}else if(kasilla.equals("Ukituta")){
+						etsaiMapa2[x][y]='~';
+						if(etsaiMapa[x-1][y].equals("Ezezaguna"))etsaiMapa2[x-1][y]='X';
+						if(etsaiMapa[x+1][y].equals("Ezezaguna"))etsaiMapa2[x+1][y]='X';
+						if(etsaiMapa[x][y+1].equals("Ezezaguna"))etsaiMapa2[x][y+1]='X';
+						if(etsaiMapa[x][y-1].equals("Ezezaguna"))etsaiMapa2[x][y-1]='X';
+						batAurkituta=true;
 					}
 					y++;
 				}
 				x++;
-			}if(zaiakerak>=zaiakeraMax){
-				for(int i=0;i<ontziKop;i++){
-					Partida.getPartida().komandoaAtzera();}
-				System.out.println("Berriro hasi");
-				itsasontziak=inb.itsasontziakLortu();
-				bilatzen=false;
 			}
-		}
-		System.out.println("CPU-ak bere itsasontziak kokatu ditu.");
-	}
-	
-	public void erasotu(){
-		//String pNori, int pX, int pY,char pNorabide
-		Random r=new Random();
-		if(true/*r.nextInt(10)>8*/){
-			String[][] etsaiMapa= Partida.getPartida().mapaInterpretatu(etsaia);
-			boolean[][] etsaiMapa2= new boolean[mapa.getErrenkada()][mapa.getZutabe()];
-			String kasilla;
-			for(int x=0;x<mapa.getErrenkada();x++){
-				for(int y=0;y<mapa.getZutabe();y++){
-					kasilla=etsaiMapa[x][y];
-					if(kasilla.equals("Itsasontzia")||kasilla.equals("Ezkutu")||kasilla.equals("Suntzituta")){
-						etsaiMapa2[x-1][y]=true;
-						etsaiMapa2[x+1][y]=true;
-						etsaiMapa2[x][y-1]=true;
-						etsaiMapa2[x][y-1]=true;
+			for( x=0;x<mapa.getErrenkada();x++){
+				for( y=0;y<mapa.getZutabe();y++)
+					System.out.print(etsaiMapa2[x][y]);
+				System.out.println();
+			}
+			int pos=r.nextInt((mapa.getErrenkada()-1)*(mapa.getZutabe()-1));
+
+			while(pos>0){
+				x=1;
+				while(x<mapa.getErrenkada()-1&&pos>0){
+					y=1;
+					while(y<mapa.getZutabe()&&pos>0){
+						if(batAurkituta&&etsaiMapa2[x][y]=='X')
+							pos--;
+						else if(!batAurkituta&&etsaiMapa2[x][y]=='_')
+							pos--;
+						if(pos>0)y++;
 					}
+					if(pos>0)x++;
 				}
 			}
-			int pos=r.nextInt(mapa.getErrenkada()*mapa.getZutabe());
-//			while(erasotu){
-//				for(int x=0;x<mapa.getErrenkada();x++){
-//					for(int y=0;y<mapa.getZutabe();y++){
-//						pos--;
-//						if(pos<=0){
-//							int inbPos=r.nextInt(inb.lenght());
-//							while(!inb.armaDa(inbPos)){
-//								inbPos++;
-//							}
-//							String nora="NSWE";
-//							inb.get(inbPos).erabili(etsaia, x, y, nora.charAt(r.nextInt(4)));
-//						}
-//					}
-//				}
-//			}
+			System.out.println(x+" "+y);
+			for(int px=0;px<mapa.getErrenkada();px++){
+				for(int py=0;py<mapa.getZutabe();py++)
+					System.out.print(x==px&&y==py? "O":etsaiMapa2[px][py]);
+				System.out.println();
+			}
+			
+			String nora="NSWE";
+			String[] info= new String[4];
+			info[0]=inb.armaBatEman().getIzena();
+			info[1]=""+x;
+			info[2]=""+y;
+			info[3]=""+nora.charAt(r.nextInt(4));
+			inb.objektuaErabili(etsaia, info);
 		}
 	}
-
 	@Override
 	public void jokatuCPU(int pFasea) {
 		if(pFasea==0){
@@ -110,9 +100,9 @@ public class CPU extends Jokalariak {
 		else if (pFasea==1){
 			
 		}else{
-//			erasotu();
+			erasotu();
 		}
-//		Partida.getPartida().faseaAldatu(true);
+		Partida.getPartida().faseaAldatu(true);
 	}
 
 }

@@ -1,6 +1,6 @@
 package negozioLogika;
 
-import strategyak.StrategyArmak;
+import negozioLogika.strategyak.StrategyArmak;
 
 public class Armak extends Objektuak {
 	

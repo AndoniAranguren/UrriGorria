@@ -1,4 +1,4 @@
-package frontend;
+package interfazeGrafikoa;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -10,8 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import interfazeGrafikoa.properties.Hizkuntza;
 import negozioLogika.interfaces.UGKonstanteak;
-import properties.Hizkuntza;
 
 public class PartidaZehaztuUI extends JPanel implements UGKonstanteak {
 

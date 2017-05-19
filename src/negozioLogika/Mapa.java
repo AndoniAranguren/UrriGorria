@@ -23,7 +23,7 @@ public class Mapa {
 	private void urezBete(Tile[][] pMap) {
 		for (int Y = 0; Y < zut; Y++) {
 			for (int X = 0; X < erren; X++) {
-				pMap[Y][X] = TileFactory.getTileFactory().createUraTile(jabea, X, Y);
+				pMap[Y][X] = new UraTile(jabea, X, Y);
 			}
 		}
 	}
@@ -68,9 +68,7 @@ public class Mapa {
 		} else {
 			if (nireItsasontziak.remove(pOntzi)) {
 				pOntzi = tilakJarri(pJabea, pOntzi, pX, pY, pNorabidea, pZer);
-				System.out.println(pOntzi.getIzena() + " itsasontzia kendu da " + pJabea + "-tik");
-			} else
-				System.out.println("Ezin izan da " + pOntzi.getIzena() + " itsasontzia  " + pJabea + "-tik kendu");
+			}
 		}
 		return pOntzi;
 	}
@@ -127,18 +125,21 @@ public class Mapa {
 		boolean bilatzen=true;
 		Itsasontzia its=null;
 		Iterator<Itsasontzia> it= nireItsasontziak.iterator();
-		while(it.hasNext()&&bilatzen){
+		
+		while(it.hasNext()&&bilatzen){	//Itsasontzia bilatu
 			its = it.next();
 			if(its.posizioanDago(pX, pY)){
 				bilatzen=false;
+				//Aurkitu bada, erasotu
+				ArrayList<Tile> tileList=its.jo(pNork, pIndarra, pX, pY,pZer);
+				for(Tile tile:tileList){
+					jokalariMapa[tile.getX()][tile.getY()]=tile;//mapa aktualizatu
+				}
+				//itsasontzia berriro gorde
+				nireItsasontziak.set(i,its);
 			}else i++;
 		}
-		if(!bilatzen){
-			for(Tile tile:its.jo(pNork, pIndarra, pX, pY,pZer)){
-				jokalariMapa[tile.getX()][tile.getY()]=tile;
-			}
-			nireItsasontziak.set(i,its);
-		}
+		if(bilatzen)	jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
 	}
 
 	public String[][] mapaInterpretatu(String pNork) {
@@ -195,15 +196,7 @@ public class Mapa {
 					}
 				}
 			}
-		}
-		for (int x = pX - pRadio; x <= pX + pRadio; x++) {
-			for (int y = pY - pRadio; y <= pY + pRadio; y++) {
-				if(y==koord[1]&&x==koord[0]) System.out.print("X");
-				else System.out.print("#");
-			}
-			System.out.println("");
-		}
-			
+		}			
 		return koord;
 	}
 
@@ -217,6 +210,13 @@ public class Mapa {
 
 	public boolean itsasontziaDa(int pX, int pY) {
 		return jokalariMapa[pX][pY].itsasontziaDa();
+	}
+
+	public boolean itsasontziBizirik() {
+		int bizirik=0;
+		for(Itsasontzia ontzi : nireItsasontziak)
+			if(!ontzi.getSuntzituta())bizirik++;
+		return (bizirik>0);
 	}
 
 }
