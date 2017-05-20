@@ -120,7 +120,7 @@ public class PartidaZehaztuUI extends JPanel {
 				if(tryParseInt()&&mugetan()){
 					datuakBidali();
 				}
-			}else if(mugetan()){
+			}else{
 				datuakBidali();
 			}
 		}if(akzioa.contains("MAKINAREN_AURKA")){
@@ -137,9 +137,16 @@ public class PartidaZehaztuUI extends JPanel {
 			if(zailtasuna.getSelection().getActionCommand().equals("MAKINAREN_AURKA_ERREZA")){
 				jokalariak[0]=1;
 				jokalariak[1]=0;
-				JOptionPane.showMessageDialog(
-						   this,
-						   hizkuntza.getProperty("abisua"));
+				Object[] choices = {hizkuntza.getProperty("aurrera")};
+				Object defaultChoice = choices;
+				JOptionPane.showOptionDialog(this,
+						hizkuntza.getProperty("abisua"),
+						hizkuntza.getProperty("kontuz"),
+			            JOptionPane.WARNING_MESSAGE,
+			            JOptionPane.WARNING_MESSAGE,
+			            null,
+			            choices,
+			            defaultChoice);
 			}else if(zailtasuna.getSelection().getActionCommand().equals("MAKINAREN_AURKA_NORMAL")){
 				jokalariak[0]=1;
 				jokalariak[1]=1;

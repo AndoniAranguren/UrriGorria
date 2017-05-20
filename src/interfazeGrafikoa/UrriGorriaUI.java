@@ -90,6 +90,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 
 	public void panelaAktualizatu() {
 		JPanel panela= new JPanel();
+		Hizkuntza hizk=new Hizkuntza(hizkuntza);
 		if(partidaZehaztuDa){
 			int[] egoera=Partida.getPartida().egoeraLortu();
 	        norenTxanda=Partida.getPartida().norenTxandaDaIzena();
@@ -112,9 +113,8 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	        }
 	        else{//Irabazle bat dago AMAITU
 	        	JPanel amaituta=new JPanel();
-	        	amaituta.setName(irabazlea+"-k jokoa irabazi du");
-	        	amaituta.add(new javax.swing.JTextField(irabazlea+"-k jokoa irabazi du"));
-	        	JButton berriro= new JButton("Berriro hasi");
+	        	amaituta.add(new javax.swing.JLabel(hizk.getIzena(irabazlea)+" "+hizk.getProperty("irabazi")));
+	        	JButton berriro= new JButton(hizk.getProperty("Berriro"));
 	        	berriro.setName("Berriro hasi");
 	        	berriro.addActionListener(this);
 	        	amaituta.add(berriro);
@@ -135,7 +135,6 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
 		System.out.println("PanelaAktualizatu");
 		if(partidaZehaztuDa){
-			Hizkuntza hizk=new Hizkuntza(hizkuntza);
 			
 			int[] egoera=Partida.getPartida().egoeraLortu();
 			if(!norenTxanda.equals(txandaLehen)){
@@ -146,8 +145,8 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 				JOptionPane.showOptionDialog(this,
 						hizk.getIzena(norenTxanda),
 						hizk.getProperty("iraupena")+" "+egoera[2],
-			            JOptionPane.WARNING_MESSAGE,
-			            JOptionPane.WARNING_MESSAGE,
+			            JOptionPane.YES_NO_CANCEL_OPTION,
+			            JOptionPane.YES_NO_CANCEL_OPTION,
 			            null,
 			            choices,
 			            defaultChoice);

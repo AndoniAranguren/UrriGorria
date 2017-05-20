@@ -238,6 +238,7 @@ public class Partida {
 	public String jokalariBiziBatLortu(String pNorentzat) {
 		int i=nextInt(jokalariLista.size());
 		String izena=null;
+		if(jokalariLista.size()<2)izena="Andoni";
 		while(izena==null){
 			for(Jokalariak jok :jokalariLista){
 				if(jok.getBizirik()&&!pNorentzat.equals(jok.getIzena())){
