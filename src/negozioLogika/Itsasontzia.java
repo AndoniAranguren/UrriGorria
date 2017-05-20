@@ -46,7 +46,7 @@ public class Itsasontzia extends Objektuak {
 	public int luzeera() {
 		return luzeera;
 	}
-	public ArrayList<ItsasontziTile> erabiliEzkutua(boolean pZer){
+	public ArrayList<ItsasontziTile> setEzkutua(boolean pZer){
 		if(pZer){
 			ezkutuLehen.add(0,ezkutua);
 			ezkutua=ezkutuMax;
@@ -59,10 +59,10 @@ public class Itsasontzia extends Objektuak {
 			tileLista.get(i).setEzkutua(pZer);
 		return tileLista;
 	}
-	public ArrayList<ItsasontziTile> erabiliKonponketa(boolean pZer) {
-		suntsituta=false;
+	public ArrayList<ItsasontziTile> setKonponketa(boolean pZer) {
 		for(int i=0; i<tileLista.size();i++) 
 			tileLista.get(i).setKonponketa(pZer);
+		konprobazioak();
 		return tileLista;
 	}
 	public boolean itsasontziaDa(){
@@ -98,16 +98,16 @@ public class Itsasontzia extends Objektuak {
 		for(ItsasontziTile tile : tileLista)
 			if(tile.getBizirik())bizirik++;
 		
-		suntsituta=(bizirik==0);	
+		suntsituta=!(bizirik>0);	
 		
 		ArrayList<ItsasontziTile> listaT=new ArrayList<ItsasontziTile>();
 		for(int i=0; i<tileLista.size();i++) {
 			ItsasontziTile tile = tileLista.get(i);
 			tile.setEzkutua(ezkutua>0);
 			tile.setSuntsituta(suntsituta);
-			listaT.add(tile);
+			listaT.add(i,tile);
 		}
-		for(ItsasontziTile tile : listaT)tileLista.add(tile);
+		tileLista=listaT;
 			
 		return (lehenSuntsituta!=suntsituta? premioa:0);
 	}

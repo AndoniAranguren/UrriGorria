@@ -164,10 +164,10 @@ public class Mapa {
 			if(its.posizioanDago(pX, pY)){	
 				bilatzen =false;
 				if(pMota.equals("Ezkutua")){
-					for(ItsasontziTile tile:its.erabiliEzkutua(pZer)){
+					for(ItsasontziTile tile:its.setEzkutua(pZer)){
 						jokalariMapa[tile.getX()][tile.getY()]=tile;}
 				}else if(pMota.equals("Konponketa")){
-					for(ItsasontziTile tile:its.erabiliKonponketa(pZer)){
+					for(ItsasontziTile tile:its.setKonponketa(pZer)){
 						jokalariMapa[tile.getX()][tile.getY()]=tile;}
 				}
 			}

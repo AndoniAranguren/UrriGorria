@@ -75,11 +75,10 @@ public class ItsasontziTile extends Tile {
 			bizitzaLehen.add(0,bizitza);
 			bizitza=bizitzaMax;
 		}else{
-			if(bizitzaLehen.size()<=0)bizitza=bizitzaMax;
-			else{
-				bizitza=bizitzaLehen.get(0);
-				bizitzaLehen.remove(0);
-			}
+			System.out.println("orain: " +bizitza);
+			bizitza=bizitzaLehen.get(0);
+			System.out.println("lehen: " +bizitza);
+			bizitzaLehen.remove(0);
 		}
 	}
 }
