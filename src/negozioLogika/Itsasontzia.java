@@ -151,4 +151,16 @@ public class Itsasontzia extends Objektuak {
 	public void setJabea(String jabea) {
 		this.jabea = jabea;
 	}
+	public int[] getKoordenatuak() {
+		int[] koord=new int[2];
+		koord[0]=tileLista.get(0).getX();
+		koord[1]=tileLista.get(0).getY();
+		return koord;
+	}
+	public boolean getBizitzaOsoarekin() {
+		int suntsituta=0;
+		for(ItsasontziTile tile : tileLista)
+			if(!tile.bizitzaOsoaDu())suntsituta++;
+		return suntsituta==0;
+	}
 }

@@ -165,11 +165,9 @@ public class Mapa {
 				bilatzen =false;
 				if(pMota.equals("Ezkutua")){
 					for(ItsasontziTile tile:its.erabiliEzkutua(pZer)){
-						System.out.println("Ezkutu");
 						jokalariMapa[tile.getX()][tile.getY()]=tile;}
 				}else if(pMota.equals("Konponketa")){
 					for(ItsasontziTile tile:its.erabiliKonponketa(pZer)){
-						System.out.println("Konponketa");
 						jokalariMapa[tile.getX()][tile.getY()]=tile;}
 				}
 			}
@@ -225,6 +223,17 @@ public class Mapa {
 		for(Itsasontzia ontzi : nireItsasontziak)
 			if(!ontzi.getSuntzituta())bizirik++;
 		return (bizirik>0);
+	}
+
+	public boolean itsasontziGuztiakBizirik() {
+		int hilda=0;
+		for(Itsasontzia ontzi : nireItsasontziak)
+			if(ontzi.getBizitzaOsoarekin())hilda++;
+		return (hilda==0);
+	}
+
+	public ArrayList<Itsasontzia> getItsasontziak() {
+		return nireItsasontziak;
 	}
 
 

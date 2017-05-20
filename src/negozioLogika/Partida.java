@@ -71,13 +71,16 @@ public class Partida {
 		for(Jokalariak jok : jokalariLista){
 			if(jok.jokalariaBizirikDago())zenbatBizirik++;
 		}
+		
+		//turnoHonetanHilDira aktualizatu. Jakiteko norbait hil den azkeneko turno honetan
 		if(egoera[2]>=turnoraArte[2]){
 			if(egoera[1]>=turnoraArte[1])
 				turnoHonetanHilDira.clear();
 		}
+		
 		jarraitu=(zenbatBizirik>1);
 		if(jarraitu){
-			if(egoera[2]==0)	egoera[1]++; //Hasieraketa turnoan bagaude jokalaria aldatu
+			if(egoera[2]==0){	egoera[1]++;} //Hasieraketa turnoan bagaude jokalaria aldatu
 			else 			egoera[0]++; //Bestela fasea
 			
 			if(egoera[0]>2){//fasea
@@ -210,6 +213,9 @@ public class Partida {
 					break;
 			}
 		}
+	}
+	public void komandoTxandaPasa(String pNork){
+		komandoaEgikaritu(pNork, "CommandTxandaPasa",new String[4]);
 	}
 	public void komandoaAtzera(int pZenbat) {
 		Battlelog.BattlelogaLortu().komandoaAtzera(pZenbat);

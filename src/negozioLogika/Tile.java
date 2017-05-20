@@ -75,7 +75,7 @@ public abstract class Tile {
 		else kokatuAhalDa--;
 	}
 	public void setEzkutua(boolean pZer) {
-		System.out.println("Ezin duzu ezkutua hemen jarria \""+identifikadorea+"\" naiz");
+		System.err.println("Ezin duzu ezkutua hemen jarria \""+identifikadorea+"\" naiz");
 	}
 	
 }

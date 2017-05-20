@@ -79,17 +79,6 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 	public int lenght(){
 		return objektuak.size();
 	}
-	public Armak armaBatEman(){
-		int inbPos=new Random().nextInt(objektuak.size()-1);
-		boolean bilatzen=true;
-		while(bilatzen){
-			inbPos++;
-			if(inbPos>=objektuak.size())inbPos=0;
-			bilatzen=!(objektuak.get(inbPos).armaDa()&&objektuak.get(inbPos).kopuruNahikoa(1));
-
-		}
-		return (Armak) objektuak.get(inbPos);
-	}
 	public Objektuak get(int pX){
 		return objektuak.get(pX);
 	}
@@ -104,5 +93,8 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 			if(its.getKopurua()>0) return false;
 		}
 		return true;
+	}
+	public ArrayList<Objektuak> getObjektuak() {
+		return objektuak;
 	}
 }

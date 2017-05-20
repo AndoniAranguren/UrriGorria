@@ -21,7 +21,7 @@ public class LogUI extends JPanel{
 	private ArrayList<String> loga = new ArrayList<>();
 	private Hizkuntza h;
 	private int komandoKop;
-	private final int zenbatKomandoErakutsi=16;
+	private final int zenbatKomandoErakutsi=14;
 
 
 	public LogUI(String pIzena, String hizkuntza) {
@@ -29,9 +29,9 @@ public class LogUI extends JPanel{
 		jokalaria=pIzena;
 		loga = UrriGorriaUI.getUrriGorriaUI().logaEman(jokalaria);
 		komandoKop=-1;
-		this.setLayout(new GridLayout(16, 1));
+		this.setLayout(new GridLayout(zenbatKomandoErakutsi, 1));
 		this.setBorder(BorderFactory.createTitledBorder("Log:"));
-		this.setPreferredSize(new Dimension(UrriGorriaUI.getLeihoaH()/3, UrriGorriaUI.getLeihoaH()*80/100));
+		this.setPreferredSize(new Dimension(UrriGorriaUI.getLeihoaH()/3, UrriGorriaUI.getLeihoaH()*75/100));
 		this.logaAktualizatu();
 	}
 	public void logaAktualizatu(){

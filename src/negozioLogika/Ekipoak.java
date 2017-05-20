@@ -13,4 +13,7 @@ public class Ekipoak extends Objektuak {
 	public Mapa aktibatu(String pNork, Mapa pMapa, int pX, int pY, char pNorabide, boolean pZer) {
 		return portaera.erabili(pNork, pMapa, pX, pY, pZer);
 	}
+	public boolean isEkipo() {
+		return true;
+	}
 }

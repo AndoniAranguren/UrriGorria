@@ -46,7 +46,10 @@ public abstract class Objektuak {
 	public int getLuzeera() {
 		return 0;
 	}
-	public boolean armaDa(){
+	public boolean isArma(){
+		return false;
+	}
+	public boolean isEkipo() {
 		return false;
 	}
 

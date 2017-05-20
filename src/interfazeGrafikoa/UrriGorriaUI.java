@@ -93,7 +93,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 			//iraupena=egoera[2];
 			setMenua(egoera[2]!=0);
 	        if(irabazlea==null){//Jolasten jarraitu
-	        	if(egoera[2]!=0&&!norenTxanda.split("\\.")[1].equals("CPU")){//Turno normalak
+	        	if(egoera[2]!=0){//Turno normalak
 	    			leihoaW=monitoreaW*55/100;
 	    			leihoaH=monitoreaH*90/100;
 	    			panelaAldatu(new PantailaUI(norenTxanda,getAurkaria(),egoera, hizkuntza));

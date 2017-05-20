@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class Jokalariak {
 	
 	protected String izena,aurkaria;
-	private boolean bizirik;
+	protected boolean bizirik;
 	protected Mapa mapa;
 	protected Inbentarioa inb;
-	private Denda denda;
-	private int dirua;
-	private Color kolorea;
+	protected Denda denda;
+	protected int dirua;
+	protected Color kolorea;
 	
 	public Jokalariak(String pIzena){
 		izena=pIzena;
@@ -24,7 +24,19 @@ public class Jokalariak {
 		
 		jokalariaErreseteatu();
 	}
-	
+	public void jokalariaErreseteatu(){
+		denda= new Denda();
+		inb = new Inbentarioa();
+		dirua=200;
+		bizirik=true;
+		mapa= new Mapa(izena);
+		
+		ArrayList<Objektuak> objektuak=new ArrayList<Objektuak>();
+		objektuak=denda.dendakIzakinakDitu(ErosketaFactory.getErosketaFactory()
+				.createErosketa("DHasteko Objektu Guztiak"));
+		denda.objektuakEman(objektuak, false);
+		inb.objektuakEman(objektuak, true);
+	}
 	public void itsasontziakIpini() {
 		ArrayList<Itsasontzia> itsasontziak=inb.itsasontziakLortu();
 		int x=0,y=0,zaiakerak=0,ontziKop=0;
@@ -71,20 +83,6 @@ public class Jokalariak {
 			}
 		}
 		System.out.println(izena+" bere itsasontziak kokatu ditu.");
-	}
-	
-	public void jokalariaErreseteatu(){
-		denda= new Denda();
-		inb = new Inbentarioa();
-		dirua=0;
-		bizirik=true;
-		mapa= new Mapa(izena);
-		
-		ArrayList<Objektuak> objektuak=new ArrayList<Objektuak>();
-		objektuak=denda.dendakIzakinakDitu(ErosketaFactory.getErosketaFactory()
-				.createErosketa("DHasteko Objektu Guztiak"));
-		denda.objektuakEman(objektuak, false);
-		inb.objektuakEman(objektuak, true);
 	}
 	
 	public boolean kokatuDaiteke( int pX, int pY,  char pNorabidea, int pLuzeera){
@@ -153,7 +151,8 @@ public class Jokalariak {
 		if(!getBizirik()) Partida.getPartida().faseaAldatu(pZer);
 		else {
 			etsaiaBizirikKonprobatu();
-			jokatuCPU(pFasea);
+			if(Partida.getPartida().getCpuAktibatu())
+				jokatuCPU(pFasea);
 		}
 	}
 

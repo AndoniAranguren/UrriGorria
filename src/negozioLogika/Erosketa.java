@@ -5,8 +5,8 @@ import java.util.Iterator;
 public class Erosketa {
 	
 	private ArrayList<Objektuak> erosketak = new ArrayList<Objektuak>();
-	private int prezioa;
-	private String mota;
+	private final int prezioa;
+	private final String mota;
 	
 	public Erosketa(int pPrezioa, String pMota, ArrayList<Objektuak> ob){
 		prezioa=pPrezioa;
@@ -27,5 +27,15 @@ public class Erosketa {
 	}
 	public Iterator<Objektuak> getIterator(){
 		return erosketak.iterator();
+	}
+	public boolean fasekoObjektuBatDu(int pFase) {
+		boolean aurkituta=false;
+		for(Objektuak obj:erosketak){
+			if(!aurkituta)aurkituta=obj.getFasea()==pFase;
+		}
+		return aurkituta;
+	}
+	public boolean diruNahikoaDu(int pDiru) {
+		return pDiru>=prezioa;
 	}
 }

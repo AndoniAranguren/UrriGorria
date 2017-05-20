@@ -21,7 +21,6 @@ public class ItsasontziTile extends Tile {
 	}
 	
 	protected int bizitzaKendu(int pIndarra, boolean pZer){
-		System.out.println("Indarra: "+pIndarra);
 		if(pZer){
 			bizitzaLehen.add(0,bizitza);
 			bizitza-=pIndarra;
@@ -34,7 +33,6 @@ public class ItsasontziTile extends Tile {
 		}
 		if (bizitzaOsoaDu())bizitza=bizitzaMax;
 		suntsituta=!getBizirik();
-		System.out.println("Bizitza: "+bizitza);
 		return bizitza;
 	}
 

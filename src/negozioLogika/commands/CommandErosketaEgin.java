@@ -25,8 +25,8 @@ public class CommandErosketaEgin extends Commands {
 		Partida.jokalariariDiruaEman(jokalaria, prezioa, !pZer);
 		Partida.dendariObjektuakEman(jokalaria, objektuak, !pZer);
 		Partida.jokalariariObjektuakEman(jokalaria, objektuak, pZer);
-		Partida.getPartida().faseaAldatu(pZer);
 		super.komandoaGorde(pZer);
+		Partida.getPartida().faseaAldatu(pZer);
 	}
 	
 	protected boolean konprobatu(){

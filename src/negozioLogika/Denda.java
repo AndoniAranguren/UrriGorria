@@ -46,6 +46,28 @@ public class Denda {
 			}
 		}
 	}
+	public Erosketa erosketaBatLortu(int pFase, int pDiru){
+		boolean aurkituta=false,erosiAhalDa;
+		int ind=0;
+		Erosketa erosketa=null;
+		Iterator<Erosketa> it=listaErosketak.iterator();
+		while(!aurkituta&&it.hasNext()){
+			erosketa=it.next();
+			if(erosketa.fasekoObjektuBatDu(pFase)&&erosketa.diruNahikoaDu(pDiru)){	//erosketa aurkitu da
+				if(dendakIzakinakDitu(erosketa)!=null)aurkituta=true;				//stocka du
+			}
+		}
+		int pos=Partida.getPartida().nextInt(listaErosketak.size());
+		while(pos>0){
+			if(it.hasNext())it=listaErosketak.iterator();
+			erosketa=it.next();
+			if(erosketa.fasekoObjektuBatDu(pFase)&&erosketa.diruNahikoaDu(pDiru)){	//erosketa aurkitu da
+				if(pos>0)pos--;
+			}
+		}
+		if(pos>0)erosketa=null;
+		return erosketa;
+	}
 	private int objektuarenPosLortu(Objektuak pObj){
 		return objektuarenPosLortu(pObj.getIzena());
 	}

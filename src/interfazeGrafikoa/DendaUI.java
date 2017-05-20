@@ -54,7 +54,6 @@ public class DendaUI extends JPanel implements ActionListener {
 			}else{
 				iz=hizkuntza.getProperty(izena[0]);
 			}
-			System.out.println(iz+izena[1]);
 			iz=iz+ den.get(i).split(":")[1]+")";
 			dendaButton[i].setText(iz);
 			dendaButton[i].addActionListener(this);

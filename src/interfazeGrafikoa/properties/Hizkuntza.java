@@ -12,7 +12,15 @@ public class Hizkuntza extends Properties {
 
 	private void getProperties(String hizkuntza) {
 		try {
-			this.load(getClass().getResourceAsStream(hizkuntza));
+			Properties properties = new Properties();
+			Thread currentThread = Thread.currentThread();
+			ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+			java.io.InputStream propertiesStream = getClass().getResourceAsStream(hizkuntza);
+			if (propertiesStream != null) {
+			  this.load(propertiesStream);
+			} else {
+				
+			}
 		} catch (IOException ex) {
 
 		}
