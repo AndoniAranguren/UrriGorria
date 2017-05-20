@@ -26,6 +26,7 @@ public class ObjektuakFactory {
 		//Ekipo--------------------------------
 		else if (pMota.equals("Radarra")) {i = new Ekipoak(			"Radarra",pKop, new ErabiliRadarra());}
 		else if (pMota.equals("Ezkutua")) {i = new Ekipoak(			"Ezkutua",pKop, new ErabiliEzkutua());}
+		else if (pMota.equals("Konponketa")) {i = new Ekipoak(		"Konponketa",pKop, new ErabiliKonponketa());}
 		
 		//Itsasontziak-------------------------
 		else if (pMota.equals("Fragata")){ i = new Itsasontzia(			"Fragata",pKop,1,100);}
@@ -46,9 +47,11 @@ public class ObjektuakFactory {
 		lista.add(o);
 		o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuz.Pro",pZ?	0:2); 
 		lista.add(o);
-		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra",pZ?			4:10);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra",pZ?			4:0);
 		lista.add(o);
 		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Ezkutua",pZ?			3:4);
+		lista.add(o);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Konponketa",pZ?		1:2);
 		lista.add(o);
 		o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia",pZ?	1:0); 
 		lista.add(o);

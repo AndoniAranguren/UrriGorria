@@ -22,6 +22,7 @@ public abstract class Objektuak {
 	public void behinErabili(boolean pZer){
 		if(pZer)kopurua--;
 		else kopurua++;
+		if(kopurua<0)kopurua=0;
 	}
 	public String getIzena(){
 		return izena;

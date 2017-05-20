@@ -44,10 +44,19 @@ public class DendaUI extends JPanel implements ActionListener {
 	private void dendaAktualizatu() {
 		JButton[] dendaButton = new JButton[den.size()];
 		for(int i=0; i<den.size(); i++){
+			String[] izena=den.get(i).split(":");
+			String iz;
 			dendaButton[i] = new JButton();
 			dendaButton[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-			dendaButton[i].setName(den.get(i).split(":")[0]);
-			dendaButton[i].setText(hizkuntza.getProperty(den.get(i).split(":")[0]) + den.get(i).split(":")[1]+")");
+			dendaButton[i].setName(izena[0]);
+			if(izena[0].contains("x")){
+				iz=(hizkuntza.getProperty(izena[0].split("x")[0]).concat("x"+izena[0].split("x")[1]));
+			}else{
+				iz=hizkuntza.getProperty(izena[0]);
+			}
+			System.out.println(iz+izena[1]);
+			iz=iz+ den.get(i).split(":")[1]+")";
+			dendaButton[i].setText(iz);
 			dendaButton[i].addActionListener(this);
 			dendaButton[i].setEnabled(faseZuzenean);
 	        int kopuru=Integer.parseInt(den.get(i).split(": ")[1].split(" \\(")[0]);

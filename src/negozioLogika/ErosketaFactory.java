@@ -55,6 +55,11 @@ public class ErosketaFactory {
 			lista.add(o);
 			prezioa=200;
 		}
+		else if (pMota.equals("Konponketa")) {
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Konponketa"); 
+			lista.add(o);
+			prezioa=400;
+		}
 		else if (pMota.equals("DFragata")){ 
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Fragata"); 
 			lista.add(o);

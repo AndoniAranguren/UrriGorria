@@ -21,6 +21,7 @@ public class Denda {
 		listaErosketak.add(eros.createErosketa("MisilZuz.Pro"));
 		listaErosketak.add(eros.createErosketa("Radarra"));
 		listaErosketak.add(eros.createErosketa("Ezkutua"));
+		listaErosketak.add(eros.createErosketa("Konponketa"));
 	}
 	private void stockaErreseteatu(){
 		listaStock.clear();

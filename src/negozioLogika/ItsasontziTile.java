@@ -1,35 +1,47 @@
 package negozioLogika;
 
+import java.util.ArrayList;
+
 public class ItsasontziTile extends Tile {
 	
-	private static Itsasontzia itsasontzi;
 	private final int bizitzaMax=100;
 	private int bizitza;
+	private ArrayList<Integer> bizitzaLehen;
 	private boolean suntsituta,ezkutua;
 	
-	public ItsasontziTile(String pJabea, int pX, int pY, Itsasontzia pItsasontzia) {
+	public ItsasontziTile(String pJabea, int pX, int pY) {
 		super(pJabea,pX, pY);
+		bizitzaLehen=new ArrayList<Integer>();
 		bizitza=bizitzaMax;
-		itsasontzi = pItsasontzia;
+		bizitzaLehen.add(bizitza);
 		suntsituta=false;
 		ezkutua=false;
 		super.kokatzekoGaitasunaEman(false);
 		super.identifikadorea="Itsasontzi";
 	}
 	
-	protected int bizitzaAldatu(int pIndarra, boolean pZer){
-		bizitza=bizitza+(pZer? -pIndarra:pIndarra);
+	protected int bizitzaKendu(int pIndarra, boolean pZer){
+		System.out.println("Indarra: "+pIndarra);
+		if(pZer){
+			bizitzaLehen.add(0,bizitza);
+			bizitza-=pIndarra;
+		}else{
+			if(bizitzaLehen.size()<=0)bizitza=bizitzaMax;
+			else{
+				bizitza=bizitzaLehen.get(0);
+				bizitzaLehen.remove(0);
+			}
+		}
 		if (bizitzaOsoaDu())bizitza=bizitzaMax;
+		suntsituta=!getBizirik();
+		System.out.println("Bizitza: "+bizitza);
 		return bizitza;
-	}
-	public void ezkutuaJarri(boolean pZer){
-		itsasontzi.ezkutuaJarri(pZer);
 	}
 
 	protected String identifikadorea(){
 		if(suntsituta){
 			return "Suntzituta";
-		}else if(!bizirikDago()){
+		}else if(!getBizirik()){
 			return "Ukituta";
 		}else if(ezkutua){
 			return "Ezkutua";
@@ -39,24 +51,37 @@ public class ItsasontziTile extends Tile {
 	public boolean itsasontziaDa() {
 		return true;
 	}
-	public boolean bizirikDago(){
-		return bizitza>0;
-	}
-	public boolean ondoratuta() {
-		return suntsituta;
-	}
+
 	public boolean bizitzaOsoaDu() {
 		return bizitza>=bizitzaMax;
-	}	
-	public boolean ezkutuaDu() {
-		return ezkutua;
 	}
-
-	public void suntsitutaDago(boolean pZer) {
-		suntsituta=pZer;		
+	public boolean getBizirik(){
+		return bizitza>0;
+	}
+	public void setSuntsituta(boolean pZer) {
+		suntsituta=pZer;	
+	}
+	public boolean getSuntsituta() {
+		return suntsituta;
 	}
 
 	public void setEzkutua(boolean pZer) {
 		ezkutua=pZer;		
+	}
+	public boolean getEzkutua() {
+		return ezkutua;
+	}
+
+	public void setKonponketa(boolean pZer) {
+		if(pZer){
+			bizitzaLehen.add(0,bizitza);
+			bizitza=bizitzaMax;
+		}else{
+			if(bizitzaLehen.size()<=0)bizitza=bizitzaMax;
+			else{
+				bizitza=bizitzaLehen.get(0);
+				bizitzaLehen.remove(0);
+			}
+		}
 	}
 }

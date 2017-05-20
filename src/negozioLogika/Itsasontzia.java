@@ -7,7 +7,8 @@ import negozioLogika.ItsasontziTile;
 
 public class Itsasontzia extends Objektuak {
 	protected final int luzeera,premioa;
-	private int ezkutua,ezkutuLehen;
+	private int ezkutua;
+	private ArrayList<Integer> ezkutuLehen;
 	private final int ezkutuMax=200;
 	
 	private String jabea=null;
@@ -15,7 +16,9 @@ public class Itsasontzia extends Objektuak {
 	private ArrayList<ItsasontziTile> tileLista;
 	public Itsasontzia(String pMota, int pKop, int pLuzeera, int pPremioa){
 		super(pMota, pKop,0);
-		ezkutuLehen=0;ezkutua=0;
+		ezkutuLehen=new ArrayList<Integer>();
+		ezkutua=0;
+		ezkutuLehen.add(ezkutua);
 		luzeera = pLuzeera;
 		premioa = pPremioa;
 		tileLista= new ArrayList<ItsasontziTile>();
@@ -35,7 +38,7 @@ public class Itsasontzia extends Objektuak {
 		for(ItsasontziTile tile: pTileLista){
 			it=tileLista.iterator();
 			while(it.hasNext()&&ezberdinak){
-				ezberdinak= it.next().berdinak(tile);}
+				ezberdinak= it.next().equals(tile);}
 			if(!ezberdinak) break;
 		}
 		return ezberdinak;
@@ -43,16 +46,23 @@ public class Itsasontzia extends Objektuak {
 	public int luzeera() {
 		return luzeera;
 	}
-	public ArrayList<ItsasontziTile> ezkutuaJarri(boolean pZer){
+	public ArrayList<ItsasontziTile> erabiliEzkutua(boolean pZer){
 		if(pZer){
-			ezkutuLehen=ezkutua;
+			ezkutuLehen.add(0,ezkutua);
 			ezkutua=ezkutuMax;
 		}
 		else{
-			ezkutua=ezkutuLehen;
+			ezkutua=ezkutuLehen.get(0);
+			ezkutuLehen.remove(0);
 		}
 		for(int i=0; i<tileLista.size();i++) 
 			tileLista.get(i).setEzkutua(pZer);
+		return tileLista;
+	}
+	public ArrayList<ItsasontziTile> erabiliKonponketa(boolean pZer) {
+		suntsituta=false;
+		for(int i=0; i<tileLista.size();i++) 
+			tileLista.get(i).setKonponketa(pZer);
 		return tileLista;
 	}
 	public boolean itsasontziaDa(){
@@ -86,7 +96,7 @@ public class Itsasontzia extends Objektuak {
 		boolean lehenSuntsituta=suntsituta;
 		
 		for(ItsasontziTile tile : tileLista)
-			if(tile.bizirikDago())bizirik++;
+			if(tile.getBizirik())bizirik++;
 		
 		suntsituta=(bizirik==0);	
 		
@@ -94,7 +104,7 @@ public class Itsasontzia extends Objektuak {
 		for(int i=0; i<tileLista.size();i++) {
 			ItsasontziTile tile = tileLista.get(i);
 			tile.setEzkutua(ezkutua>0);
-			tile.suntsitutaDago(suntsituta);
+			tile.setSuntsituta(suntsituta);
 			listaT.add(tile);
 		}
 		for(ItsasontziTile tile : listaT)tileLista.add(tile);
@@ -108,7 +118,7 @@ public class Itsasontzia extends Objektuak {
 				pIndarra=0;
 			}
 		}else{
-			if(pT.bizirikDago()){
+			if(pT.getBizirik()){
 				ezkutua+=pIndarra;
 				pIndarra=0;
 			}

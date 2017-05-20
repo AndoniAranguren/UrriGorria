@@ -32,8 +32,7 @@ public class Mapa {
 		return jokalariMapa[pX][pY].kokatuDaiteke();
 	}
 
-	public boolean kokatuDaiteke(int pX, int pY, char pNorabidea, int pLuzeera) {// throws
-																					// IndepXOutOfBoundsEpXception{
+	public boolean kokatuDaiteke(int pX, int pY, char pNorabidea, int pLuzeera) {
 		boolean libre = true;
 		int koordX = pX, koordY = pY, i = 0;
 		Tile t;
@@ -84,7 +83,7 @@ public class Mapa {
 
 		for (int i = 0; i < pItsasontzia.luzeera; i++) {
 			if (pZer) {
-				tile = new ItsasontziTile(pJabea, koordX, koordY, pItsasontzia);
+				tile = new ItsasontziTile(pJabea, koordX, koordY);
 				jokalariMapa[koordX][koordY] = tile;
 			} else {
 				tile = ((ItsasontziTile) jokalariMapa[koordX][koordY]);
@@ -153,8 +152,10 @@ public class Mapa {
 		}
 		return mapa;
 	}
-
-	public Mapa ezkutuaJarri(String pNork, int pX, int pY, boolean pZer) {
+	
+//=======================================================================================================================
+//Erabili ekipoa=========================================================================================================
+	public Mapa erabiliEkipo(String pMota,int pX, int pY, boolean pZer) {
 		boolean bilatzen =true;
 		Itsasontzia its=null;
 		Iterator<Itsasontzia> it= nireItsasontziak.iterator();
@@ -162,20 +163,26 @@ public class Mapa {
 			its = it.next();
 			if(its.posizioanDago(pX, pY)){	
 				bilatzen =false;
-				for(Tile tile:its.ezkutuaJarri(pZer)){
-					jokalariMapa[tile.getX()][tile.getY()]=tile;
+				if(pMota.equals("Ezkutua")){
+					for(ItsasontziTile tile:its.erabiliEzkutua(pZer)){
+						System.out.println("Ezkutu");
+						jokalariMapa[tile.getX()][tile.getY()]=tile;}
+				}else if(pMota.equals("Konponketa")){
+					for(ItsasontziTile tile:its.erabiliKonponketa(pZer)){
+						System.out.println("Konponketa");
+						jokalariMapa[tile.getX()][tile.getY()]=tile;}
 				}
 			}
 		}
 		return this;
 	}
-
-	public int[] radarraErabili(String pNork, int pX, int pY, int pRadio, boolean pZer) {
+		
+	public int[] erabiliRadarra(String pNork, int pX, int pY, int pRadio, boolean pZer) {
 		int[] koord = new int[2];
 		koord[0] = -1;
 		koord[1] = -1;
 		double hurbilena = pRadio + 1;
-		if (jokalariMapa[pX][pY].itsasontziaDa() && jokalariMapa[pX][pY].bizirikDago()) {
+		if (jokalariMapa[pX][pY].itsasontziaDa() && jokalariMapa[pX][pY].getBizirik()) {
 			hurbilena = 0;
 			koord[0] = pX;
 			koord[1] = pY;
@@ -187,7 +194,7 @@ public class Mapa {
 
 						if (Math.pow(x - pX, 2) + Math.pow(y - pY, 2) <= Math.pow(pRadio, 2)) {
 
-							if (jokalariMapa[x][y].itsasontziaDa() && jokalariMapa[x][y].bizirikDago()
+							if (jokalariMapa[x][y].itsasontziaDa() && jokalariMapa[x][y].getBizirik()
 									&& Math.pow(x - pX, 2) + Math.pow(y - pY, 2) < Math.pow(hurbilena, 2)) {
 								hurbilena = Math.pow(x - pX, 2) + Math.pow(y - pY, 2);
 								koord[0] = x;
@@ -200,7 +207,7 @@ public class Mapa {
 		}			
 		return koord;
 	}
-
+//=======================================================================================================================
 	public int getErrenkada() {
 		return erren;
 	}
@@ -219,5 +226,6 @@ public class Mapa {
 			if(!ontzi.getSuntzituta())bizirik++;
 		return (bizirik>0);
 	}
+
 
 }

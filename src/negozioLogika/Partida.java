@@ -71,7 +71,6 @@ public class Partida {
 		for(Jokalariak jok : jokalariLista){
 			if(jok.jokalariaBizirikDago())zenbatBizirik++;
 		}
-		System.out.println(egoera[2]+","+egoera[1]+"-an, arte"+turnoraArte[2]+","+turnoraArte[1]);
 		if(egoera[2]>=turnoraArte[2]){
 			if(egoera[1]>=turnoraArte[1])
 				turnoHonetanHilDira.clear();

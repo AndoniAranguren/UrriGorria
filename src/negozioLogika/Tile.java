@@ -22,9 +22,9 @@ public abstract class Tile {
 			while(i>0&&!ikusiAhal.get(i).equals(pErasotzaile)) i--;
 			ikusiAhal.remove(i);
 		}
-		bizitzaAldatu(pIndarra,pZer);
+		bizitzaKendu(pIndarra,pZer);
 	}
-	protected int bizitzaAldatu(int pIndarra, boolean pZer) {
+	protected int bizitzaKendu(int pIndarra, boolean pZer) {
 		return 0;
 	}
 
@@ -52,17 +52,20 @@ public abstract class Tile {
 	public boolean itsasontziaDa() {
 		return false;
 	}
-	public boolean bizirikDago(){
+	public boolean getBizirik(){
 		return false;
 	}
-	public boolean ondoratuta() {
+	public boolean getSuntsituta() {
 		return false;
 	}
-	public boolean ezkutuaDu() {
+	public boolean getEzkutua() {
 		return false;
 	}
-	public boolean berdinak(ItsasontziTile tile) {
-		return (tile.jabeaDa(ikusiAhal.get(0)) && tile.posizioanDago(koordX,koordY));
+	public int getX() {
+		return koordX;
+	}
+	public int getY() {
+		return koordY;
 	}
 	//---------------------------------------
 	public void kokatzekoGaitasunaEman(boolean pZer){
@@ -71,13 +74,8 @@ public abstract class Tile {
 				kokatuAhalDa++;}
 		else kokatuAhalDa--;
 	}
-	public void ezkutuaJarri(boolean pZer) {
+	public void setEzkutua(boolean pZer) {
 		System.out.println("Ezin duzu ezkutua hemen jarria \""+identifikadorea+"\" naiz");
 	}
-	public int getX() {
-		return koordX;
-	}
-	public int getY() {
-		return koordY;
-	}
+	
 }
