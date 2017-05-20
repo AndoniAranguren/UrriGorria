@@ -241,7 +241,7 @@ public class Partida {
 		while(izena==null){
 			for(Jokalariak jok :jokalariLista){
 				if(jok.getBizirik()&&!pNorentzat.equals(jok.getIzena())){
-					if(i<=0)izena=jok.getIzena();
+					if(i<=0&&izena==null)izena=jok.getIzena();
 					else i--;}
 			}
 		}
@@ -266,7 +266,7 @@ public class Partida {
 	public void addTurnoanHilDirenak(String pIzena) {
 		if(!turnoHonetanHilDira.contains(pIzena)){
 			turnoHonetanHilDira.add(pIzena);
-			turnoraArte[0]=egoera[0];
+			turnoraArte[0]=(egoera[0]<1 ? jokalariLista.size()-1:egoera[0]-1);
 			turnoraArte[1]=egoera[1];
 			turnoraArte[2]=egoera[2]+1;
 		}

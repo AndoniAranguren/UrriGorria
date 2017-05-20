@@ -39,42 +39,50 @@ public class Jokalariak {
 	}
 	public void itsasontziakIpini() {
 		ArrayList<Itsasontzia> itsasontziak=inb.itsasontziakLortu();
-		int x=0,y=0,zaiakerak=0,ontziKop=0;
+		int x=0,y=0,zaiakerak=0,ontziKop=0,pos=0;
+		int min=Character.valueOf(izena.charAt(Partida.getPartida().nextInt(izena.length())));
 		final int zaiakeraMax=mapa.getErrenkada();
 		char n='N';
 		String nora="NSWENSWE";
 		boolean bilatzen=false;
 		while(itsasontziak.size()>0){
-			x=0;
+			x=1;
 			if(!bilatzen){
 				bilatzen=true;
-				x = Partida.getPartida().nextInt(mapa.getErrenkada());
+				pos=0;
+				x = Partida.getPartida().nextInt(mapa.getErrenkada())+1;
 				y = Partida.getPartida().nextInt(mapa.getZutabe());
 				zaiakerak=0;
 			}
 			else while(x<mapa.getErrenkada()-1&&bilatzen&&zaiakerak<zaiakeraMax){
+				y=1;		
 				while(y<mapa.getZutabe()-1&&bilatzen&&zaiakerak<zaiakeraMax){
 					int ind=0, 
-					rNum=Partida.getPartida().nextInt(4);
+					rNum=Partida.getPartida().nextInt(nora.length()/2);
 					
-					while(ind<4&&bilatzen){
+					while(ind<nora.length()/2&&bilatzen){
 						n=nora.charAt(rNum+ind);
 						
 						if(mapa.kokatuDaiteke(x, y,	n,itsasontziak.get(0).getLuzeera())){
-							itsasontziak.get(0).erabili(izena, x, y, n);
-							ontziKop++;
-							bilatzen=false;
+							if(pos>min){
+								itsasontziak.get(0).erabili(izena, x, y, n);
+								ontziKop++;
+								bilatzen=false;
+								
+								if(itsasontziak.get(0).getKopurua()<=0)
+									itsasontziak.remove(0);
+								}
+							}else
+								pos++;
 							
-							if(itsasontziak.get(0).getKopurua()<=0)
-								itsasontziak.remove(0);
-							}
-						ind++;
+						if(bilatzen)ind++;
 					}
-					y++;
+					if(bilatzen)y++;
 				}
-				x++;
-				y=0;				
-				zaiakerak++;
+				if(bilatzen){
+					x++;	
+					zaiakerak++;
+				}
 			}if(zaiakerak>=zaiakeraMax){
 				Partida.getPartida().komandoaAtzera(ontziKop-1);
 				itsasontziak=inb.itsasontziakLortu();

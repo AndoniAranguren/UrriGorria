@@ -63,10 +63,8 @@ public class PantailaUI extends JPanel implements ActionListener {
 			break;
 		}
 		JButton tituluaJ = new JButton(h.getProperty(titulua));
-		String zenb,izena;
-		zenb=jokalaria.split("\\.")[0]+".";
-		izena=h.getProperty(jokalaria.split("\\.")[1]);
-		top.setBorder(new TitledBorder(new LineBorder(Color.CYAN),h.getProperty("iraupena") + ": ("+egoera[2]+") " + zenb+ izena));
+		String izena=h.getIzena(jokalaria);
+		top.setBorder(new TitledBorder(new LineBorder(Color.CYAN),h.getProperty("iraupena") + ": ("+egoera[2]+") " + izena));
 		JButton nora2 = new JButton((Irudiak.getIrudiak().norabideaLortu()));
 		JButton atzera = new JButton(h.getProperty("atzera"));
 

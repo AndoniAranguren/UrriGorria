@@ -10,6 +10,10 @@ public class Hizkuntza extends Properties {
 		getProperties(hizkuntza+".properties");
 	}
 
+	public String getIzena(String pJokalari){
+		return (pJokalari.split("\\.")[0]+"."+ getProperty(pJokalari.split("\\.")[1]));
+	}
+	
 	private void getProperties(String hizkuntza) {
 		try {
 			Properties properties = new Properties();

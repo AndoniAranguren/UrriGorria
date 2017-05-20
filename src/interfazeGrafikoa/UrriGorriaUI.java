@@ -1,19 +1,24 @@
 package interfazeGrafikoa;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.*;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import interfazeGrafikoa.properties.Hizkuntza;
+import javafx.scene.text.Font;
 import negozioLogika.Partida;
 import negozioLogika.interfaces.UGKonstanteak;
 
@@ -22,9 +27,9 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	private static final long serialVersionUID = 1L;
 	private JPanel oraingoa;
 	private static UrriGorriaUI ui;
-	private String objektua="Ezer",ikusiDu;
+	private String objektua="Ezer";
 	private static int norabidea;
-	private static String norenTxanda;
+	private static String norenTxanda=null,txandaLehen;
 	private int monitoreaW=(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 	private int monitoreaH=(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 	private static int leihoaW, leihoaH;
@@ -84,6 +89,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	}
 
 	public void panelaAktualizatu() {
+		JPanel panela= new JPanel();
 		if(partidaZehaztuDa){
 			int[] egoera=Partida.getPartida().egoeraLortu();
 	        norenTxanda=Partida.getPartida().norenTxandaDaIzena();
@@ -96,12 +102,12 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	        	if(egoera[2]!=0){//Turno normalak
 	    			leihoaW=monitoreaW*55/100;
 	    			leihoaH=monitoreaH*90/100;
-	    			panelaAldatu(new PantailaUI(norenTxanda,getAurkaria(),egoera, hizkuntza));
+	    			panela=new PantailaUI(norenTxanda,getAurkaria(),egoera, hizkuntza);
 	    		}
 	    		else{//Barkuak jarri
 	    			leihoaW=monitoreaW*50/100;
 	    			leihoaH=monitoreaH*50/100;
-	    			panelaAldatu(new OntziakKokatuUI(norenTxanda, hizkuntza));
+	    			panela=new OntziakKokatuUI(norenTxanda, hizkuntza);
 	    		}
 	        }
 	        else{//Irabazle bat dago AMAITU
@@ -114,33 +120,50 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	        	amaituta.add(berriro);
 	        	leihoaW=300;
 	    		leihoaH=100;
-	        	panelaAldatu(amaituta);
+	    		panela=amaituta;
 	        }
 			this.setMinimumSize(new Dimension(leihoaW,leihoaH));
 			
 		}
 		else{//Jokalariak aukeratu behar dira
-			panelaAldatu(new PartidaZehaztuUI(hizkuntza));
+			panela=new PartidaZehaztuUI(hizkuntza);
 			setMenua(false);
 			leihoaW=320;
 			leihoaH=220;
 		}
-		
+		panelaAldatu(panela);
 		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
 		System.out.println("PanelaAktualizatu");
 		if(partidaZehaztuDa){
+			Hizkuntza hizk=new Hizkuntza(hizkuntza);
+			
 			int[] egoera=Partida.getPartida().egoeraLortu();
-			if(norenTxanda!=ikusiDu&&egoera[0]==0){
+			if(!norenTxanda.equals(txandaLehen)){
+				panela.setVisible(false);
+				
+				Object[] choices = {hizk.getProperty("aurrera")};
+				Object defaultChoice = choices;
+				JOptionPane.showOptionDialog(this,
+						hizk.getIzena(norenTxanda),
+						hizk.getProperty("iraupena")+" "+egoera[2],
+			            JOptionPane.WARNING_MESSAGE,
+			            JOptionPane.WARNING_MESSAGE,
+			            null,
+			            choices,
+			            defaultChoice);
+	    	    txandaLehen=norenTxanda;
+				panela.setVisible(true);
+				
+			}else if(egoera[0]==0){
 				String atera="";
-				Hizkuntza hizk=new Hizkuntza(hizkuntza);
 				ArrayList<String> lista=Partida.getPartida().getTurnoanHilDirenak();
 				for(String izena:lista){
-					String[] iz=izena.split("\\.");
-					atera=iz[0]+"."+hizk.getProperty(iz[1])+", "+atera;
+					if(atera.length()>0) atera=", "+atera;
+					atera=hizk.getIzena(izena)+atera;
 				}
-				ikusiDu=norenTxanda;
-				if(atera.length()>0)JOptionPane.showMessageDialog(this,
-						("("+Partida.getPartida().egoeraLortu()[2]+") "+hizk.getProperty("hilDira")+atera));
+				if(atera.length()>0)
+					JOptionPane.showMessageDialog(this,
+						("("+Partida.getPartida().egoeraLortu()[2]+") "+hizk.getProperty("hilDira")+" "+atera));
 			}
 		}
 	}

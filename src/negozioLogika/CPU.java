@@ -66,7 +66,7 @@ public class CPU extends Jokalariak {
 		while(!denaOndo&&zaiakerak<zaiakeraMaximoak){
 			String obj=faseanErabiliAhalDenObjektua(1);
 			if(obj==null){
-				denaOndo=true;
+				denaOndo=false;
 			}else if(obj.equals("Radarra")&&!batAurkituta){
 				denaOndo=erasotu(obj);
 			}else if(obj.equals("Ezkutua")){

@@ -37,9 +37,12 @@ public class Battlelog {
 	}
 	public void komandoaAtzera(int pZenbat) {
 		Partida.getPartida().setCpuAktibatu(false);
+		String norenTxandaZen=Partida.getPartida().norenTxandaDaIzena();
 		for(int i=0;i<pZenbat;i++){
 			komandoaAtzera();
 		}
+		while(!norenTxandaZen.equals(Partida.getPartida().norenTxandaDaIzena())) 
+			komandoaAtzera();
 		Partida.getPartida().setCpuAktibatu(true);
 	}
 }

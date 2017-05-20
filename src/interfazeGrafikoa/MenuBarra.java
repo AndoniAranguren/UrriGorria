@@ -58,9 +58,7 @@ public class MenuBarra extends JMenuBar {
 				if(!izena.equals(pNorenTxanda)){
 					java.awt.Color c=UrriGorriaUI.getUrriGorriaUI().getKolorea(izena);
 
-		     		String zenb=izena.split("\\.")[0]+".";
-		     		String izena2=h.getProperty(izena.split("\\.")[1]);
-		     		eMenuItem[ind] = new JMenuItem(zenb+izena2);
+		     		eMenuItem[ind] = new JMenuItem(h.getIzena(izena));
 		            eMenuItem[ind].setName(izena);
 		            eMenuItem[ind].addActionListener(e->this.aurkariaAldatu(((JMenuItem)e.getSource()).getName()));
 //		            if(aurkaria!=null)

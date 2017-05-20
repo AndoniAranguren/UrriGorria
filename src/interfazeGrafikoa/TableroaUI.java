@@ -22,17 +22,15 @@ public class TableroaUI extends JPanel implements ActionListener {
 	
 	public TableroaUI(String pIzena, String hizkuntza) {
 		h = new Hizkuntza(hizkuntza);
-		String izena,zenb;
 		jokalaria=pIzena;
-		zenb=jokalaria.split("\\.")[0]+".";
-		izena=h.getProperty(jokalaria.split("\\.")[1]);
+		String izena=h.getIzena(jokalaria);
 		mapa=UrriGorriaUI.mapaInterpretatu(pIzena);
 		this.setLayout(new GridLayout(mapa.length, mapa[0].length));
 		this.setPreferredSize(new java.awt.Dimension(UrriGorriaUI.getLeihoaW()/2,UrriGorriaUI.getLeihoaW()/2));
 
 		java.awt.Color c=UrriGorriaUI.getUrriGorriaUI().getKolorea(pIzena);
 		
-		this.setBorder(new TitledBorder(new LineBorder(c), zenb+izena+h.getProperty("tableroa"), 1, 2, null, c));
+		this.setBorder(new TitledBorder(new LineBorder(c), izena+h.getProperty("tableroa"), 1, 2, null, c));
 		tableroa = new JButton[mapa.length][mapa[0].length];
 		this.tableroaHasieratu();
 	}

@@ -17,6 +17,7 @@ import interfazeGrafikoa.properties.Hizkuntza;
 public class PartidaZehaztuUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private final int jokalariMaximoak=100;
 	private ButtonGroup norekin, zailtasuna;
 	private JButton sartu;
 	private JPanel pNorekin, pZailtasuna,erdia,pAnitza;
@@ -116,10 +117,10 @@ public class PartidaZehaztuUI extends JPanel {
 	public void akzioaBota(String akzioa) {
 		if(akzioa.equals("SARTU")){
 			if(anitz){
-				if(tryParseInt()){
+				if(tryParseInt()&&mugetan()){
 					datuakBidali();
 				}
-			}else{
+			}else if(mugetan()){
 				datuakBidali();
 			}
 		}if(akzioa.contains("MAKINAREN_AURKA")){
@@ -150,6 +151,22 @@ public class PartidaZehaztuUI extends JPanel {
 		anitz=akzioa.equals("ANITZ")||akzioa.equals("SARTU");
 		pAnitza.setVisible(anitz);
 	}
+	private boolean mugetan() {
+		boolean ondo=true;
+		if(jokalariak[0]+jokalariak[1]>jokalariMaximoak){
+			jokKop.setText("MAX 50");
+			cpuKop.setText("MAX 50");
+			ondo= false;
+		}if(jokalariak[0]<=0){
+			jokKop.setText("MIN 1");
+			ondo= false;
+		}if(jokalariak[1]<0){
+			cpuKop.setText("MIN 0");
+			ondo= false;
+		}
+		return ondo;
+	}
+
 	private void datuakBidali() {
 		UrriGorriaUI.getUrriGorriaUI().partidaZehaztu(jokalariak);
 		UrriGorriaUI.getUrriGorriaUI().panelaAktualizatu();
@@ -158,7 +175,7 @@ public class PartidaZehaztuUI extends JPanel {
 	private boolean tryParseInt() {  
 	     try {  
 	         Integer.parseInt(jokKop.getText());  
-	         Integer.parseInt(cpuKop.getText());  
+	         Integer.parseInt(cpuKop.getText());
 	         jokalariak[0]=Integer.parseInt(jokKop.getText());
 		     jokalariak[1]=Integer.parseInt(cpuKop.getText());
 	         return true;  

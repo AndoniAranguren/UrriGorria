@@ -42,9 +42,7 @@ public class LogUI extends JPanel{
 			
 			String[] info=loga.get(i).split("#")[0].split("'");
 			
-			String zenb,izena;
-			zenb=info[1].split("\\.")[0]+".";
-			izena=h.getProperty(info[1].split("\\.")[1]);
+			String izena=h.getIzena(jokalaria);
 			
 			String[] komInfo=loga.get(i).split("#")[1].split("'");
 			String komIzena=h.getProperty(komInfo[0]);
@@ -59,7 +57,7 @@ public class LogUI extends JPanel{
 				BattleLoga[i].setForeground(UrriGorriaUI.getUrriGorriaUI().getKolorKontraste(c));
 				BattleLoga[i].setName(komandoKop+"");
 				BattleLoga[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-				BattleLoga[i].setText("<html>("+info[0]+") "+zenb+izena+"<br>"+komIzena+obj +"</html>");
+				BattleLoga[i].setText("<html>("+info[0]+") "+izena+"<br>"+komIzena+obj +"</html>");
 				BattleLoga[i].addActionListener(e->
 					UrriGorriaUI.getUrriGorriaUI().komandoaAtzera(komandoKop-Integer.parseInt((
 								(Component) e.getSource()).getName())));
