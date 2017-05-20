@@ -36,10 +36,10 @@ public class Battlelog {
 		return loga;
 	}
 	public void komandoaAtzera(int pZenbat) {
-		Partida.getPartida().cpuaAktibatu(false);
+		Partida.getPartida().setCpuAktibatu(false);
 		for(int i=0;i<pZenbat;i++){
 			komandoaAtzera();
 		}
-		Partida.getPartida().cpuaAktibatu(true);
+		Partida.getPartida().setCpuAktibatu(true);
 	}
 }

@@ -1,7 +1,6 @@
 package interfazeGrafikoa;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +22,7 @@ public class OntziakKokatuUI extends JPanel implements ActionListener{
 	public OntziakKokatuUI(String pJokalaria, String hizkuntza) {
 		this.h = new Hizkuntza(hizkuntza);
 		this.setLayout(new BorderLayout());
-		jok_tableroa = new TableroaUI(pJokalaria, Color.BLACK, hizkuntza);
+		jok_tableroa = new TableroaUI(pJokalaria, hizkuntza);
 		this.add(jok_tableroa, BorderLayout.CENTER);
 		top= new JPanel();
 		inb = new InbentarioaUI(pJokalaria,0, hizkuntza);
@@ -58,8 +57,6 @@ public class OntziakKokatuUI extends JPanel implements ActionListener{
 		if(((JButton)e.getSource()).getName().equals("Jarraitu")){
 			if(inb.itsasontziGuztiakKokaturik())
 				UrriGorriaUI.getUrriGorriaUI().faseaAldatu();
-			else
-				System.out.println();;
 		}
 		if(((JButton)e.getSource()).getName().equals("Norabidea")){
 			UrriGorriaUI.getUrriGorriaUI().norabideaAldatu();
@@ -70,6 +67,5 @@ public class OntziakKokatuUI extends JPanel implements ActionListener{
 		if(((JButton) e.getSource()).getName().equals("Atzera")){
 			UrriGorriaUI.getUrriGorriaUI().komandoaAtzera();
 		}
-		UrriGorriaUI.getUrriGorriaUI().panelaAktualizatu();
 	}
 }

@@ -1,25 +1,33 @@
 package negozioLogika;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 
-import interfazeGrafikoa.*;
+import interfazeGrafikoa.UrriGorriaUI;
 import negozioLogika.commands.*;
 
 public class Partida {
 	
 	private static Partida nPartida=null;
 	private static ArrayList<Jokalariak> jokalariLista;
-	private static int maxJok=0;
-	private int[] egoera= new int[3];
+	private ArrayList<String>turnoHonetanHilDira;
+	private int[] turnoraArte= new int[3],egoera= new int[3];
 	private UrriGorriaUI ui;
 	private boolean jarraitu,cpuaAktibatuta;
+	private Random r;
 
 	
 	private Partida(){
+		r= new Random(System.currentTimeMillis());
 		jokalariLista = new ArrayList<Jokalariak>();
+		turnoHonetanHilDira= new ArrayList<String>();
 		egoera[2]=0;//iraupena
 		egoera[1]=0;//txanda
 		egoera[0]=0;//fasea
+		turnoraArte[2]=0;//iraupena
+		turnoraArte[1]=0;//txanda
+		turnoraArte[0]=0;//fasea
 		jarraitu=true;
 		cpuaAktibatuta=true;
 		ui=UrriGorriaUI.getUrriGorriaUI();
@@ -36,16 +44,12 @@ public class Partida {
 		nPartida=new Partida();
 	}
 	public void faseaAldatu(boolean pZer){
-		if(pZer) faseaAhurrera();
-		else faseaAtzera();
-		txandaIAKonprobatu();
-	}
-	public void txandaIAKonprobatu(){
-		if(norenTxandaDaIzena().split("\\.")[1].equals("CPU")){
-			if(cpuaAktibatuta)
-				norenTxandaDa().jokatuCPU(egoera[0]);
-			else System.out.println("CPU-a desaktibatuta");
-		}
+		if(pZer){
+			faseaAhurrera();
+		}else {
+			faseaAtzera();}
+		if(jarraitu)norenTxandaDa().jokatu(egoera[0],pZer);
+		
 	}
 	private void faseaAtzera() {
 		if(egoera[2]==0)	egoera[1]--; //Hasieraketa turnoan bagaude jokalaria aldatu
@@ -57,12 +61,22 @@ public class Partida {
 		}
 		if(egoera[1]<0){
 				egoera[0]=2;
-				egoera[1]=maxJok-1;
+				egoera[1]=jokalariLista.size()-1;
 				egoera[2]--;//turno oso bat pasatu da
 		}
 		jarraitu=true;
 	}
 	private void faseaAhurrera() {
+		int zenbatBizirik=0;
+		for(Jokalariak jok : jokalariLista){
+			if(jok.jokalariaBizirikDago())zenbatBizirik++;
+		}
+		System.out.println(egoera[2]+","+egoera[1]+"-an, arte"+turnoraArte[2]+","+turnoraArte[1]);
+		if(egoera[2]>=turnoraArte[2]){
+			if(egoera[1]>=turnoraArte[1])
+				turnoHonetanHilDira.clear();
+		}
+		jarraitu=(zenbatBizirik>1);
 		if(jarraitu){
 			if(egoera[2]==0)	egoera[1]++; //Hasieraketa turnoan bagaude jokalaria aldatu
 			else 			egoera[0]++; //Bestela fasea
@@ -71,20 +85,15 @@ public class Partida {
 				egoera[0]=0;
 				egoera[1]++;//txanda hurrengo jokalariarena
 			}
-			if(egoera[1]>=maxJok){
+			if(egoera[1]>=jokalariLista.size()){
 					egoera[0]=0;
 					egoera[1]=0;
 					egoera[2]++;//turno oso bat pasatu da
 			}
 		}
-		int zenbatBizirik=0;
-		for(Jokalariak jok : jokalariLista){
-			if(jok.jokalariaBizirikDago())zenbatBizirik++;
-		}
-		jarraitu=(zenbatBizirik>1);
 	}
 	public String norenTxandaDaIzena() {
-		return jokalariLista.get(egoera[1]).izenaLortu();
+		return norenTxandaDa().izenaLortu();
 	}
 	public Jokalariak norenTxandaDa() {
 		return jokalariLista.get(egoera[1]);
@@ -124,7 +133,7 @@ public class Partida {
 	private static int jokalariarenPosLortu(String pJ) {
 		int ind =0;
 		Boolean aurkituta=false;
-		while(!aurkituta && ind<(maxJok-1)){
+		while(!aurkituta && ind<(jokalariLista.size()-1)){
 			if(jokalariLista.get(ind).izenHauDu(pJ)) aurkituta=true;
 			else ind++;
 		}
@@ -166,24 +175,21 @@ public class Partida {
 	public void itsasontziakIpini(){
 		jokalariLista.get(egoera[1]).itsasontziakIpini();
 	}
-	public void partidaZehaztu(String pInfo) {
-		String jok="1.Jokalaria";
-		maxJok++;
-		jokalariLista.add(new Jokalaria(jok));
-		maxJok++;
-		if(pInfo.equals("BI_JOKALARI")){
-			jokalariLista.add(new Jokalaria("2.Jokalaria"));
-		}else if(pInfo.equals("MAKINAREN_AURKA_ERREZA")){
-			jokalariLista.add(new CPU("1.CPU", jok));
-		}else if(pInfo.equals("MAKINAREN_AURKA_ZAILA")){
-			jokalariLista.add(new CPU("1.CPU", jok));
-			maxJok++;
-			jokalariLista.add(new CPU("2.CPU", jok));
+	public void partidaZehaztu(int[] pInfo) {
+		for(int i=0;i<pInfo[0];i++){
+			String izena=(i+1)+".Jokalaria";
+			jokalariLista.add(new Jokalariak(izena));
+		}
+		for(int i=0;i<pInfo[1];i++){
+			String izena=(i+1)+".CPU";
+			jokalariLista.add(new CPU(izena));
+		}
+		for(Jokalariak jok:jokalariLista){
+			jok.setAurkaria(jokalariBiziBatLortu(jok.getIzena()));
 		}
 	}
 	public void komandoaEgikaritu(String pJokalaria, String pKomandoa, String[] pInfo) {
 		if(pJokalaria==norenTxandaDaIzena()){
-			System.out.println("Zure txanda da");
 			switch (pKomandoa){
 				case "CommandErosketaEgin":
 					Erosketa e=ErosketaFactory.getErosketaFactory().createErosketa(pInfo[0]);
@@ -193,7 +199,6 @@ public class Partida {
 					Objektuak ob=ObjektuakFactory.getObjektuakFactory().createObjektua(pInfo[0]);
 					new CommandObjektuaErabili(pJokalaria,ob,Integer.parseInt(pInfo[1]),
 							Integer.parseInt(pInfo[2]),pInfo[3].charAt(0));
-					System.out.print(pInfo[3].charAt(0));
 					break;
 				case "CommandItsasontziaIpini":
 					Itsasontzia its=(Itsasontzia)ObjektuakFactory.getObjektuakFactory().createObjektua(pInfo[0]);
@@ -205,7 +210,7 @@ public class Partida {
 					new CommandTxandaPasa();
 					break;
 			}
-		}else System.out.println(norenTxandaDaIzena()+"-ren txanda da");
+		}
 	}
 	public void komandoaAtzera(int pZenbat) {
 		Battlelog.BattlelogaLortu().komandoaAtzera(pZenbat);
@@ -225,16 +230,46 @@ public class Partida {
 		}
 		return izenak;
 	}
-	public void cpuaAktibatu(boolean pZer) {
+	public String jokalariBiziBatLortu(String pNorentzat) {
+		int i=nextInt(jokalariLista.size());
+		String izena=null;
+		while(izena==null){
+			for(Jokalariak jok :jokalariLista){
+				if(jok.getBizirik()&&!pNorentzat.equals(jok.getIzena())){
+					if(i<=0)izena=jok.getIzena();
+					else i--;}
+			}
+		}
+		return izena;
+	}
+	public int nextInt(int pBalioa) {
+		return r.nextInt(pBalioa);
+	}
+	public Color getKolorea(String pJokalaria) {
+		Color c =jokalariLista.get(jokalariarenPosLortu(pJokalaria)).getKolorea();
+		return c;
+	}
+	public void setCpuAktibatu(boolean pZer) {
 		cpuaAktibatuta=pZer;
 	}
-	public String jokalariBiziBatLortu() {
-		for(Jokalariak jok :jokalariLista){
-			if(!norenTxandaDa().getIzena().equals(jok.getIzena())&&jok.getBizirik())
-				return jok.getIzena();
-		}
-		return null;
+	public boolean getCpuAktibatu() {
+		return cpuaAktibatuta;
 	}
-	
-	
+	public ArrayList<String> getTurnoanHilDirenak(){
+		return turnoHonetanHilDira;
+	}
+	public void addTurnoanHilDirenak(String pIzena) {
+		if(!turnoHonetanHilDira.contains(pIzena)){
+			turnoHonetanHilDira.add(pIzena);
+			turnoraArte[0]=egoera[0];
+			turnoraArte[1]=egoera[1];
+			turnoraArte[2]=egoera[2]+1;
+		}
+	}
+	public String getAurkaria(String pIzena) {
+		return jokalariLista.get(jokalariarenPosLortu(pIzena)).getAurkaria();
+	}
+	public void setAurkaria(String pIzena) {
+		norenTxandaDa().setAurkaria(pIzena);
+	}
 }

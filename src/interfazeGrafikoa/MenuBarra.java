@@ -52,21 +52,29 @@ public class MenuBarra extends JMenuBar {
         JMenuItem[] eMenuItem = new JMenuItem[jokalariak.length];
         String pNorenTxanda=UrriGorriaUI.getUrriGorriaUI().norenTxandaDaIzena();
         
-        int ind=0;
-        for(String izena:jokalariak){
-        	if(!izena.equals(pNorenTxanda)){
-            	eMenuItem[ind] = new JMenuItem(izena);
-                eMenuItem[ind].setName(izena);
-                eMenuItem[ind].addActionListener(e->this.aurkariaAldatu(((JMenuItem)e.getSource()).getName()));
-                if(aurkaria!=null)
-                	if(eMenuItem[ind].getName().equals(aurkaria))
-                		eMenuItem[ind].setBackground(new Color(175, 255, 175));
-                jokalariMenu.add(eMenuItem[ind]);
-        	}
-        }
+        int ind=0;        
+		for(String izena:jokalariak)
+			if(izena!=null)
+				if(!izena.equals(pNorenTxanda)){
+					java.awt.Color c=UrriGorriaUI.getUrriGorriaUI().getKolorea(izena);
+
+		     		String zenb=izena.split("\\.")[0]+".";
+		     		String izena2=h.getProperty(izena.split("\\.")[1]);
+		     		eMenuItem[ind] = new JMenuItem(zenb+izena2);
+		            eMenuItem[ind].setName(izena);
+		            eMenuItem[ind].addActionListener(e->this.aurkariaAldatu(((JMenuItem)e.getSource()).getName()));
+//		            if(aurkaria!=null)
+//		            	if(eMenuItem[ind].getName().equals(aurkaria))
+//		            		eMenuItem[ind].setEnabled(false);
+
+		            eMenuItem[ind].setBackground(c);
+		            eMenuItem[ind].setForeground(UrriGorriaUI.getUrriGorriaUI().getKolorKontraste(c));
+		            jokalariMenu.add(eMenuItem[ind]);
+		     	}
+       
 
         if(aurkaria==null||aurkaria.equals(pNorenTxanda))	
-        	this.aurkariaAldatu(eMenuItem[ind].getName());
+        	if(eMenuItem[ind]!=null)this.aurkariaAldatu(eMenuItem[ind].getName());
         
         this.add(jokalariMenu);
 		

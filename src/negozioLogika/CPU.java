@@ -1,22 +1,16 @@
 package negozioLogika;
 
-import java.util.Random;
-
 public class CPU extends Jokalariak {
-	private String etsaia;
 	
-	public CPU(String pIzena, String jok) {
+	public CPU(String pIzena) {
 		super(pIzena);
-		etsaia=jok;
 	}
 	
 	public void erasotu(){
 		//String pNori, int pX, int pY,char pNorabide
-		if(!Partida.jokalariaBizirikDago(etsaia)) etsaia=Partida.getPartida().jokalariBiziBatLortu();
-		Random r=new Random();
 		if(true/*r.nextInt(10)>8*/){
 			int x=0,y=0;
-			String[][] etsaiMapa= Partida.getPartida().mapaInterpretatu(etsaia);
+			String[][] etsaiMapa= Partida.getPartida().mapaInterpretatu(aurkaria);
 			char[][] etsaiMapa2= new char[mapa.getErrenkada()][mapa.getZutabe()];
 			boolean batAurkituta=false;
 			String kasilla;
@@ -53,13 +47,7 @@ public class CPU extends Jokalariak {
 				}
 				x++;
 			}
-			for( x=0;x<mapa.getErrenkada();x++){
-				for( y=0;y<mapa.getZutabe();y++)
-					System.out.print(etsaiMapa2[x][y]);
-				System.out.println();
-			}
-			int pos=r.nextInt((mapa.getErrenkada()-1)*(mapa.getZutabe()-1));
-
+			int pos=Partida.getPartida().nextInt((mapa.getErrenkada()-1)*(mapa.getZutabe()-1));
 			while(pos>0){
 				x=1;
 				while(x<mapa.getErrenkada()-1&&pos>0){
@@ -74,35 +62,38 @@ public class CPU extends Jokalariak {
 					if(pos>0)x++;
 				}
 			}
-			System.out.println(x+" "+y);
-			for(int px=0;px<mapa.getErrenkada();px++){
-				for(int py=0;py<mapa.getZutabe();py++)
-					System.out.print(x==px&&y==py? "O":etsaiMapa2[px][py]);
-				System.out.println();
-			}
 			
 			String nora="NSWE";
 			String[] info= new String[4];
 			info[0]=inb.armaBatEman().getIzena();
 			info[1]=""+x;
 			info[2]=""+y;
-			info[3]=""+nora.charAt(r.nextInt(4));
-			inb.objektuaErabili(etsaia, info);
+			info[3]=""+nora.charAt(Partida.getPartida().nextInt(4));
+			inb.objektuaErabili(aurkaria, info);
 		}
 	}
-	@Override
-	public void jokatuCPU(int pFasea) {
-		if(pFasea==0){
-			for(Itsasontzia its: (inb.itsasontziakLortu())){
-				if(its.getKopurua()>0) itsasontziakIpini();
+	
+@Override	
+	protected void jokatuCPU(int pFasea) {
+		if(Partida.getPartida().getCpuAktibatu()){
+			if(pFasea==0){
+				if(inb.itsasontziGuztiakIpinita()){
+					Partida.getPartida().komandoaEgikaritu(izena, "CommandTxandaPasa", new String[3]);
+				}else{
+					for(Itsasontzia its: (inb.itsasontziakLortu()))
+						if(its.getKopurua()>0) itsasontziakIpini();
+					Partida.getPartida().faseaAldatu(true);
+				}
+				
+			}
+			else if (pFasea==1){
+				Partida.getPartida().komandoaEgikaritu(izena, "CommandTxandaPasa", new String[3]);
+			}else{
+				erasotu();
 			}
 		}
-		else if (pFasea==1){
-			
-		}else{
-			erasotu();
-		}
-		Partida.getPartida().faseaAldatu(true);
 	}
-
+	public boolean cpuNaiz() {
+		return true;
+	}
 }

@@ -80,7 +80,7 @@ public class Mapa {
 		int koordX = pX, koordY = pY;
 		if (pZer)
 			pItsasontzia = (Itsasontzia) ObjektuakFactory.getObjektuakFactory().createObjektua(pItsasontzia.getIzena());
-		pItsasontzia.jabeaJarri(pJabea);
+		pItsasontzia.setJabea(pJabea);
 
 		for (int i = 0; i < pItsasontzia.luzeera; i++) {
 			if (pZer) {
@@ -125,21 +125,22 @@ public class Mapa {
 		boolean bilatzen=true;
 		Itsasontzia its=null;
 		Iterator<Itsasontzia> it= nireItsasontziak.iterator();
-		
-		while(it.hasNext()&&bilatzen){	//Itsasontzia bilatu
-			its = it.next();
-			if(its.posizioanDago(pX, pY)){
-				bilatzen=false;
-				//Aurkitu bada, erasotu
-				ArrayList<Tile> tileList=its.jo(pNork, pIndarra, pX, pY,pZer);
-				for(Tile tile:tileList){
-					jokalariMapa[tile.getX()][tile.getY()]=tile;//mapa aktualizatu
-				}
-				//itsasontzia berriro gorde
-				nireItsasontziak.set(i,its);
-			}else i++;
+		if(pX>=0&&pX<getErrenkada()&&pY>=0&&pY<getZutabe()){
+			while(it.hasNext()&&bilatzen){	//Itsasontzia bilatu
+				its = it.next();
+				if(its.posizioanDago(pX, pY)){
+					bilatzen=false;
+					//Aurkitu bada, erasotu
+					ArrayList<Tile> tileList=its.jo(pNork, pIndarra, pX, pY,pZer);
+					for(Tile tile:tileList){
+						jokalariMapa[tile.getX()][tile.getY()]=tile;//mapa aktualizatu
+					}
+					//itsasontzia berriro gorde
+					nireItsasontziak.set(i,its);
+				}else i++;
+			}
+			if(bilatzen)	jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
 		}
-		if(bilatzen)	jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
 	}
 
 	public String[][] mapaInterpretatu(String pNork) {

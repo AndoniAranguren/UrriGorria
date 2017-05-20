@@ -99,4 +99,10 @@ public class Inbentarioa {//jokalari bakoitzak eta dendak inbentario bat izango 
 			if(its.itsasontziaDa()&& its.getKopurua()>0) lista.add((Itsasontzia)its);
 		return lista;
 	}
+	public boolean itsasontziGuztiakIpinita(){
+		for(Itsasontzia its: itsasontziakLortu()){
+			if(its.getKopurua()>0) return false;
+		}
+		return true;
+	}
 }

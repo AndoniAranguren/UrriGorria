@@ -63,7 +63,10 @@ public class PantailaUI extends JPanel implements ActionListener {
 			break;
 		}
 		JButton tituluaJ = new JButton(h.getProperty(titulua));
-		top.setBorder(new TitledBorder(new LineBorder(Color.CYAN),h.getProperty("iraupena") + ": ("+egoera[2]+") " + h.getProperty(jokalaria)));
+		String zenb,izena;
+		zenb=jokalaria.split("\\.")[0]+".";
+		izena=h.getProperty(jokalaria.split("\\.")[1]);
+		top.setBorder(new TitledBorder(new LineBorder(Color.CYAN),h.getProperty("iraupena") + ": ("+egoera[2]+") " + zenb+ izena));
 		JButton nora2 = new JButton((Irudiak.getIrudiak().norabideaLortu()));
 		JButton atzera = new JButton(h.getProperty("atzera"));
 
@@ -74,6 +77,9 @@ public class PantailaUI extends JPanel implements ActionListener {
 		tituluaJ.addActionListener(this);
 		nora2.addActionListener(this);
 		atzera.addActionListener(this);
+		if(egoera[0]==0){
+			atzera.setEnabled(false);
+		}
 		top.setPreferredSize(new Dimension(UrriGorriaUI.getLeihoaW(),UrriGorriaUI.getLeihoaH()*12/100));
 		top.add(tituluaJ, BorderLayout.WEST);
 		top.add(nora2);
@@ -103,8 +109,8 @@ public class PantailaUI extends JPanel implements ActionListener {
 	private void setTableroak() {
 		tableroak = new JPanel();
 		tableroak.setLayout(new GridLayout(2, 1));
-		jok_tableroa = new TableroaUI(jokalaria, Color.RED, hizk);
-		aurk_tableroa = new TableroaUI(aurkaria, Color.RED, hizk);
+		jok_tableroa = new TableroaUI(jokalaria, hizk);
+		aurk_tableroa = new TableroaUI(aurkaria, hizk);
 		tableroak.add(aurk_tableroa);
 		tableroak.add(jok_tableroa);
 	}
@@ -127,7 +133,6 @@ public class PantailaUI extends JPanel implements ActionListener {
 		if(((Component) e.getSource()).getName().equals("Txanda pasatu")){
 			UrriGorriaUI.getUrriGorriaUI().komandoaEgikaritu(jokalaria, "CommandTxandaPasa", new String[3]);
 		}
-		UrriGorriaUI.getUrriGorriaUI().panelaAktualizatu();
 	}
 
 }

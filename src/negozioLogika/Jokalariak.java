@@ -1,19 +1,27 @@
 package negozioLogika;
 
+import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Random;
 
-public abstract class Jokalariak {
+public class Jokalariak {
 	
-	protected String izena;
+	protected String izena,aurkaria;
 	private boolean bizirik;
 	protected Mapa mapa;
 	protected Inbentarioa inb;
 	private Denda denda;
 	private int dirua;
+	private Color kolorea;
 	
 	public Jokalariak(String pIzena){
 		izena=pIzena;
+
+		kolorea=new Color(
+				(Partida.getPartida().nextInt(255)),
+				(Partida.getPartida().nextInt(255)),
+				(Partida.getPartida().nextInt(255)),
+				255);
+		
 		jokalariaErreseteatu();
 	}
 	
@@ -22,22 +30,20 @@ public abstract class Jokalariak {
 		int x=0,y=0,zaiakerak=0,ontziKop=0;
 		final int zaiakeraMax=mapa.getErrenkada();
 		char n='N';
-		Random r = new Random();
 		String nora="NSWENSWE";
 		boolean bilatzen=false;
 		while(itsasontziak.size()>0){
 			x=0;
 			if(!bilatzen){
 				bilatzen=true;
-				r = new Random();
-				x = r.nextInt(mapa.getErrenkada());
-				y = r.nextInt(mapa.getZutabe());
+				x = Partida.getPartida().nextInt(mapa.getErrenkada());
+				y = Partida.getPartida().nextInt(mapa.getZutabe());
 				zaiakerak=0;
 			}
 			else while(x<mapa.getErrenkada()-1&&bilatzen&&zaiakerak<zaiakeraMax){
 				while(y<mapa.getZutabe()-1&&bilatzen&&zaiakerak<zaiakeraMax){
 					int ind=0, 
-					rNum=r.nextInt(4);
+					rNum=Partida.getPartida().nextInt(4);
 					
 					while(ind<4&&bilatzen){
 						n=nora.charAt(rNum+ind);
@@ -88,7 +94,7 @@ public abstract class Jokalariak {
 		return mapa.itsasontziaJarri(izena, pOntzi, pX, pY, pNorabidea, pZer);
 	}
 	public boolean izenHauDu(String pJ) {
-		return pJ==izena;
+		return pJ.equals(izena);
 	}
 	public ArrayList<Objektuak> dendakIzakinakDitu(Erosketa pErosketa) {
 		return denda.dendakIzakinakDitu(pErosketa);		//Izakinik ez baldin badu, null bat bueltatuko du
@@ -112,6 +118,7 @@ public abstract class Jokalariak {
 	public void jokalariariErasotu(String pNork, Objektuak pObjektua, int pX, int pY,char pNorabide, boolean pZer) {
 		mapa=pObjektua.aktibatu(pNork,mapa, pX, pY, pNorabide, pZer);
 		bizirik=mapa.itsasontziBizirik();
+		if(!bizirik) Partida.getPartida().addTurnoanHilDirenak(izena);
 	}
 	public boolean jokalariaBizirikDago() {
 		return bizirik;
@@ -141,5 +148,33 @@ public abstract class Jokalariak {
 	public boolean getBizirik(){
 		return bizirik;
 	}
-	public abstract void jokatuCPU(int pFasea);
+
+	public void jokatu(int pFasea,boolean pZer) {
+		if(!getBizirik()) Partida.getPartida().faseaAldatu(pZer);
+		else {
+			etsaiaBizirikKonprobatu();
+			jokatuCPU(pFasea);
+		}
+	}
+
+	protected void etsaiaBizirikKonprobatu(){
+		if(!Partida.jokalariaBizirikDago(aurkaria)) 
+			aurkaria=Partida.getPartida().jokalariBiziBatLortu(izena);
+	}
+	protected void jokatuCPU(int pFasea) {
+	}
+
+	public Color getKolorea() {
+		return kolorea;
+	}
+
+	public boolean cpuNaiz() {
+		return false;
+	}
+	public String getAurkaria() {
+		return aurkaria;
+	}
+	public void setAurkaria(String pIzen) {
+		aurkaria=pIzen;
+	}
 }

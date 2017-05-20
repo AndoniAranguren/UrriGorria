@@ -20,14 +20,6 @@ public class Itsasontzia extends Objektuak {
 		premioa = pPremioa;
 		tileLista= new ArrayList<ItsasontziTile>();
 	}
-	public void informazioaInprimatu() {
-		System.out.println("\nMota: "+izena);
-//		System.out.println("       Kopurua: "	+kopurua);
-		System.out.println("       Jabea: "		+jabea);
-//		System.out.println("       Luzera: "	+luzeera);
-//		System.out.println("       Premioa: "	+premioa);
-//		System.out.println("       Suntsituta: "+suntsituta);
-	}
 	public void tileGehitu(ItsasontziTile pTile, boolean pZer) {
 		if(pZer){
 			tileLista.add(pTile);}
@@ -68,9 +60,6 @@ public class Itsasontzia extends Objektuak {
 	}
 	public int getLuzeera(){
 		return this.luzeera;
-	}
-	public void jabeaJarri(String pIzena) {
-		jabea=pIzena;		
 	}
 	public ArrayList<Tile> jo(String pNork,int pIndarra,int pX,int pY, boolean pZer) {
 		int i=0;
@@ -145,5 +134,11 @@ public class Itsasontzia extends Objektuak {
 	}
 	public boolean getSuntzituta() {
 		return suntsituta;
+	}
+	public String getJabea() {
+		return jabea;
+	}
+	public void setJabea(String jabea) {
+		this.jabea = jabea;
 	}
 }

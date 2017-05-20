@@ -17,7 +17,7 @@ public class ErosketaFactory {
 		if(pMota.equals("Bomba")){ 
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba"); 
 			lista.add(o);
-			prezioa=100;
+			prezioa=0;
 		}
 		else if(pMota.equals("Bombax10")){
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba",10);

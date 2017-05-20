@@ -1,5 +1,6 @@
 package interfazeGrafikoa;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import interfazeGrafikoa.properties.Hizkuntza;
 
@@ -16,7 +18,8 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private String jokalaria=null;
-	private JButton[] inbentarioa;
+	private JScrollPane  scroll;
+	private JPanel inbentarioa;
 	private ArrayList<String> inb = new ArrayList<>();
 	private int fasea;
 	private Hizkuntza h;
@@ -28,29 +31,35 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 		jokalaria=pIzena;
 		fasea=pFasea;
 		inb = UrriGorriaUI.getUrriGorriaUI().inbentarioaEman(jokalaria);
-		this.setLayout(new GridLayout(inb.size(), 1));
+		this.setLayout(new BorderLayout());
+		inbentarioa=new JPanel();
+		inbentarioa.setLayout(new GridLayout(inb.size(), 1));
 		this.setBorder(BorderFactory.createTitledBorder(h.getProperty("inbentarioa")));
-		this.inbentarioaAktualizatu();
+		inbentarioaAktualizatu();
+
+		scroll.setPreferredSize(new java.awt.Dimension(UrriGorriaUI.getLeihoaW()/4,UrriGorriaUI.getLeihoaH()/3));
+		this.add(scroll, BorderLayout.CENTER);
 	}
 	public void inbentarioaAktualizatu(){
-		inbentarioa = new JButton[inb.size()];
+		JButton[] inbButton = new JButton[inb.size()];
 		itsasontziGuztiakIpinita=true;
 		for(int i=0; i<inb.size(); i++){
-			inbentarioa[i] = new JButton();
-			inbentarioa[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+			inbButton[i] = new JButton();
+			inbButton[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 			String izena=inb.get(i);
-			inbentarioa[i].setName(izena.split(":")[1]);
-			inbentarioa[i].setText(h.getProperty(izena.split(":")[1]) + ":"+izena.split(":")[2]);
-			inbentarioa[i].addActionListener(this);
+			inbButton[i].setName(izena.split(":")[1]);
+			inbButton[i].setText(h.getProperty(izena.split(":")[1]) + ":"+izena.split(":")[2]);
+			inbButton[i].addActionListener(this);
 			if(Integer.parseInt(izena.split(":")[0])!=fasea||Integer.parseInt(izena.split(": ")[1])<1){
-				inbentarioa[i].setEnabled(false);
-			}else if((UrriGorriaUI.getObjektua().equals(inb.get(i).split(":")[1]))){
-				inbentarioa[i].setBackground(new Color(175, 255, 175));
+				inbButton[i].setEnabled(false);
+			}else if((UrriGorriaUI.getUrriGorriaUI().getObjektua().equals(inb.get(i).split(":")[1]))){
+				inbButton[i].setBackground(new Color(175, 255, 175));
 			}
 			if(itsasontziGuztiakIpinita&&Integer.parseInt(izena.split(":")[0])==0)//itsasontzia izatea
 				itsasontziGuztiakIpinita=Integer.parseInt(izena.split(": ")[1])<=0;//kop 0 izatea
-			this.add(inbentarioa[i]);
+			inbentarioa.add(inbButton[i]);
 		}
+		scroll=new JScrollPane(inbentarioa);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

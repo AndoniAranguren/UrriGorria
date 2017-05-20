@@ -35,7 +35,7 @@ public abstract class Commands {
 
 	public String info() {
 		String info= new String();
-		info=(turnoa+"'"+jokalaria+"'"+fasea+"#("+turnoa+") '"+jokalaria+"'");
+		info=(turnoa+"'"+jokalaria+"'"+fasea+"#");
 		return info;
 	}
 

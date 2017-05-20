@@ -1,5 +1,6 @@
 package interfazeGrafikoa;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -9,8 +10,10 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import interfazeGrafikoa.properties.Hizkuntza;
 import negozioLogika.Partida;
 import negozioLogika.interfaces.UGKonstanteak;
 
@@ -19,9 +22,9 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	private static final long serialVersionUID = 1L;
 	private JPanel oraingoa;
 	private static UrriGorriaUI ui;
-	private static String objektua="Ezer";
+	private String objektua="Ezer",ikusiDu;
 	private static int norabidea;
-	private static String aurkaria=null,norenTxanda;
+	private static String norenTxanda;
 	private int monitoreaW=(int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 	private int monitoreaH=(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 	private static int leihoaW, leihoaH;
@@ -57,15 +60,15 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	public void objektuaAldatu(String pObj){
 		objektua=pObj;
 	}
-	public static String getObjektua(){
+	public String getObjektua(){
 		return objektua;
 	}
-
 	public void komandoaEgikaritu(String pJokalaria, String pKomandoa, String[] pInfo) {
 		Partida.getPartida().komandoaEgikaritu(pJokalaria, pKomandoa, pInfo);
+		panelaAktualizatu();
 	}
 
-	public void partidaZehaztu(String pInfo) {
+	public void partidaZehaztu(int[] pInfo) {
 		partidaZehaztuDa=true;
 		Partida.getPartida().partidaZehaztu(pInfo);
 	}
@@ -81,7 +84,6 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	}
 
 	public void panelaAktualizatu() {
-		this.setJMenuBar(menubar);
 		if(partidaZehaztuDa){
 			int[] egoera=Partida.getPartida().egoeraLortu();
 	        norenTxanda=Partida.getPartida().norenTxandaDaIzena();
@@ -89,12 +91,12 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 			//fasea=egoera[0];
 			//txanda=egoera[1];
 			//iraupena=egoera[2];
+			setMenua(egoera[2]!=0);
 	        if(irabazlea==null){//Jolasten jarraitu
-				setMenua(egoera[2]!=0);
-	        	if(egoera[2]!=0){//Turno normalak
-	    			leihoaW=monitoreaW*65/100;
+	        	if(egoera[2]!=0&&!norenTxanda.split("\\.")[1].equals("CPU")){//Turno normalak
+	    			leihoaW=monitoreaW*55/100;
 	    			leihoaH=monitoreaH*90/100;
-	    			panelaAldatu(new PantailaUI(norenTxanda,aurkaria,egoera, hizkuntza));
+	    			panelaAldatu(new PantailaUI(norenTxanda,getAurkaria(),egoera, hizkuntza));
 	    		}
 	    		else{//Barkuak jarri
 	    			leihoaW=monitoreaW*50/100;
@@ -111,19 +113,36 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	        	berriro.addActionListener(this);
 	        	amaituta.add(berriro);
 	        	leihoaW=300;
-	    		leihoaH=150;
+	    		leihoaH=100;
 	        	panelaAldatu(amaituta);
 	        }
 			this.setMinimumSize(new Dimension(leihoaW,leihoaH));
+			
 		}
 		else{//Jokalariak aukeratu behar dira
 			panelaAldatu(new PartidaZehaztuUI(hizkuntza));
 			setMenua(false);
-			leihoaW=350;
-			leihoaH=175;
+			leihoaW=320;
+			leihoaH=220;
 		}
+		
 		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
 		System.out.println("PanelaAktualizatu");
+		if(partidaZehaztuDa){
+			int[] egoera=Partida.getPartida().egoeraLortu();
+			if(norenTxanda!=ikusiDu&&egoera[0]==0){
+				String atera="";
+				Hizkuntza hizk=new Hizkuntza(hizkuntza);
+				ArrayList<String> lista=Partida.getPartida().getTurnoanHilDirenak();
+				for(String izena:lista){
+					String[] iz=izena.split("\\.");
+					atera=iz[0]+"."+hizk.getProperty(iz[1])+", "+atera;
+				}
+				ikusiDu=norenTxanda;
+				if(atera.length()>0)JOptionPane.showMessageDialog(this,
+						("("+Partida.getPartida().egoeraLortu()[2]+") "+hizk.getProperty("hilDira")+atera));
+			}
+		}
 	}
 
 	public void komandoaAtzera() {
@@ -131,6 +150,11 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	}
 	public void komandoaAtzera(int pZenbat) {
 		Partida.getPartida().komandoaAtzera(pZenbat);
+		panelaAktualizatu();
+	}
+	public void itsasontziakIpini() {
+		Partida.getPartida().itsasontziakIpini();	
+		UrriGorriaUI.getUrriGorriaUI().panelaAktualizatu();	
 	}
 	public static int norabideaLortu() {
 		return norabidea;
@@ -138,15 +162,17 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	public void norabideaAldatu(){
 		if(norabidea>=3)norabidea=0;
 		else norabidea++;
+		panelaAktualizatu();
 	}
 
 	public void objektuaErabili(String pNori, String[] pInfo) {
-		System.out.println(pInfo[0]+" "+ pInfo[1]+" "+pInfo[2]+" "+pInfo[3]);
+		System.out.println(pInfo[0]+" "+ pInfo[1]+" "+pInfo[2]+" "+pInfo[3]+" "+pNori+"-ri");
 		Partida.getPartida().jokalariakObjektuaErabili(pNori, pInfo);
 	}
 
 	public void faseaAldatu() {
 		Partida.getPartida().faseaAldatu(true);
+		UrriGorriaUI.getUrriGorriaUI().panelaAktualizatu();
 	}
 	private void setMenua(boolean pJokalariakJarri) {
 		menubar.erreseteatu(hizkuntza,pJokalariakJarri);
@@ -166,16 +192,23 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	public static int getLeihoaH() {
 		return leihoaH;
 	}
+	public Color getKolorKontraste(Color c){
+		double y = (299 * c.getRed() + 587 * c.getGreen() + 114 * c.getBlue()) / 1000;
+		return (y >= 128 ? Color.black : Color.white);
+	}
+	public Color getKolorea(String pJokalaria) {
+		return Partida.getPartida().getKolorea(pJokalaria);
+	}
 
 	public int jokalariakZenbatDiru(String pJokalaria) {
 		return Partida.getPartida().jokalariakZenbatDiru(pJokalaria);
 	}
 
 	public String getAurkaria() {
-		return aurkaria;
+		return Partida.getPartida().getAurkaria(norenTxanda);
 	}
 	public void setAurkaria(String pAurkaria) {
-		aurkaria=pAurkaria;
+		Partida.getPartida().setAurkaria(pAurkaria);
 		panelaAktualizatu();
 	}
 	public String getHizkuntza() {
@@ -195,8 +228,5 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		if(e.getSource() instanceof JButton)
 			if(((Component) e.getSource()).getName().equals("Berriro hasi"))
 				Partida.getPartida().partidaErreseteatu();
-	}
-	public void itsasontziakIpini() {
-		Partida.getPartida().itsasontziakIpini();		
 	}
 }

@@ -16,7 +16,6 @@ public abstract class Tile {
 	}
 	
 	public void jo(String pErasotzaile, int pIndarra, boolean pZer){
-		System.out.println("noren txanda: "+pErasotzaile);
 		if(pZer) ikusiAhal.add(pErasotzaile);
 		else {
 			int i=ikusiAhal.size()-1;

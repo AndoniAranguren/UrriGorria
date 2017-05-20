@@ -1,11 +1,9 @@
 package interfazeGrafikoa;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -19,15 +17,22 @@ public class TableroaUI extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private String jokalaria;
 	private JButton[][] tableroa;
-	String[][] mapa;
+	private String[][] mapa;
 	private Hizkuntza h;
 	
-	public TableroaUI(String pIzena, Color c, String hizkuntza) {
+	public TableroaUI(String pIzena, String hizkuntza) {
 		h = new Hizkuntza(hizkuntza);
+		String izena,zenb;
 		jokalaria=pIzena;
+		zenb=jokalaria.split("\\.")[0]+".";
+		izena=h.getProperty(jokalaria.split("\\.")[1]);
 		mapa=UrriGorriaUI.mapaInterpretatu(pIzena);
 		this.setLayout(new GridLayout(mapa.length, mapa[0].length));
-		this.setBorder(new TitledBorder(new LineBorder(c), h.getProperty(pIzena) + " " + h.getProperty("tableroa"), 1, 2, null, c));
+		this.setPreferredSize(new java.awt.Dimension(UrriGorriaUI.getLeihoaW()/2,UrriGorriaUI.getLeihoaW()/2));
+
+		java.awt.Color c=UrriGorriaUI.getUrriGorriaUI().getKolorea(pIzena);
+		
+		this.setBorder(new TitledBorder(new LineBorder(c), zenb+izena+h.getProperty("tableroa"), 1, 2, null, c));
 		tableroa = new JButton[mapa.length][mapa[0].length];
 		this.tableroaHasieratu();
 	}
@@ -69,7 +74,7 @@ public class TableroaUI extends JPanel implements ActionListener {
 		JButton botoia = (JButton) e.getSource();
 		int x = Integer.parseInt(botoia.getName().substring(0,1));
 		int y = Integer.parseInt(botoia.getName().substring(2));
-		if(UrriGorriaUI.getObjektua()!="Ezer"){
+		if(UrriGorriaUI.getUrriGorriaUI().getObjektua()!="Ezer"){
 			char norabidea;
 			switch (UrriGorriaUI.norabideaLortu()){
 				case 0: norabidea='E';
@@ -84,7 +89,7 @@ public class TableroaUI extends JPanel implements ActionListener {
 					break;
 			}
 			String[] info= new String[4];
-			info[0]=UrriGorriaUI.getObjektua();
+			info[0]=UrriGorriaUI.getUrriGorriaUI().getObjektua();
 			info[1]=(""+x);
 			info[2]=(""+y);
 			info[3]=(""+norabidea);
