@@ -42,7 +42,7 @@ public class LogUI extends JPanel{
 			
 			String[] info=loga.get(i).split("#")[0].split("'");
 			
-			String izena=h.getIzena(jokalaria);
+			String izena=h.getIzena(info[1]);
 			
 			String[] komInfo=loga.get(i).split("#")[1].split("'");
 			String komIzena=h.getProperty(komInfo[0]);

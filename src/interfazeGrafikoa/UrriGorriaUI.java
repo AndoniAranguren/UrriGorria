@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.font.*;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ import javafx.scene.text.Font;
 import negozioLogika.Partida;
 import negozioLogika.interfaces.UGKonstanteak;
 
-public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListener {
+public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel oraingoa;
@@ -48,6 +49,8 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		this.setVisible(true);
 	}
 	public void urriGorriaUIErreseteatu(){
+		setVisible(false);
+		dispose();
 		ui=new UrriGorriaUI();
 	}
 	public static UrriGorriaUI getUrriGorriaUI() {
@@ -116,7 +119,7 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 	        	amaituta.add(new javax.swing.JLabel(hizk.getIzena(irabazlea)+" "+hizk.getProperty("irabazi")));
 	        	JButton berriro= new JButton(hizk.getProperty("Berriro"));
 	        	berriro.setName("Berriro hasi");
-	        	berriro.addActionListener(this);
+	        	berriro.addActionListener(e->Partida.getPartida().partidaErreseteatu());
 	        	amaituta.add(berriro);
 	        	leihoaW=300;
 	    		leihoaH=100;
@@ -245,10 +248,4 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak , ActionListen
 		return this.oraingoa;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() instanceof JButton)
-			if(((Component) e.getSource()).getName().equals("Berriro hasi"))
-				Partida.getPartida().partidaErreseteatu();
-	}
 }

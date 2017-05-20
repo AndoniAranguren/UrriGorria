@@ -39,19 +39,19 @@ public class ObjektuakFactory {
 		ArrayList<Objektuak> lista= new ArrayList<Objektuak>();
 		Objektuak o;
 		
-		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba",pZ?			50:100); 
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba",pZ?			20:9999); 
 		lista.add(o);
-		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",pZ?			10:40); 
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",pZ?			10:90); 
 		lista.add(o); 
-		o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuzendua",pZ?	1:4); 
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuzendua",pZ?	1:6); 
 		lista.add(o);
-		o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuz.Pro",pZ?	0:2); 
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuz.Pro",pZ?	0:3); 
 		lista.add(o);
 		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Radarra",pZ?			4:0);
 		lista.add(o);
-		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Ezkutua",pZ?			3:4);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Ezkutua",pZ?			3:10);
 		lista.add(o);
-		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Konponketa",pZ?		1:2);
+		o = ObjektuakFactory.getObjektuakFactory().createObjektua("Konponketa",pZ?		2:3);
 		lista.add(o);
 		o = ObjektuakFactory.getObjektuakFactory().createObjektua("HegazkinOntzia",pZ?	1:0); 
 		lista.add(o);
