@@ -12,7 +12,7 @@ import negozioLogika.Partida;
 public class MenuBarra extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
-	private JMenu hizkuntza,jokalariMenu;
+	private JMenu jokoa,hizkuntza,jokalariMenu;
 	private JMenuItem[] hizkBat;
 	private String[] hizkuntzak;
 	private Hizkuntza h;
@@ -24,19 +24,27 @@ public class MenuBarra extends JMenuBar {
 		erreseteatu("Euskera",false);
 	}
 	public void erreseteatu(String pHizkunta,boolean pJokalariakJarri){
+		h = new Hizkuntza(pHizkunta);
 		this.removeAll();
-		this.hizkuntzaEraiki(pHizkunta);
+		this.jokoa();
+		this.hizkuntzaEraiki();
 		if(pJokalariakJarri)this.jokalariaJarri();
 		this.revalidate();
 	}
-	private void hizkuntzaEraiki(String pHizkunta) {
-		h = new Hizkuntza(pHizkunta);
+	private void jokoa() {
+		jokoa = new JMenu(h.getProperty("jokoa"));
+		JMenuItem erreseteatu = new JMenuItem(h.getProperty("Berriro"));
+		erreseteatu.addActionListener(gureAE -> UrriGorriaUI.getUrriGorriaUI().berriroHasi());
+		jokoa.add(erreseteatu);
+		this.add(jokoa);
+	}
+	private void hizkuntzaEraiki() {
 		hizkuntza = new JMenu(h.getProperty("hizkuntza"));
 		int i=0;
 		for(String hiz:hizkuntzak){
 			hizkBat[i] = new JMenuItem(hiz);
 			hizkBat[i].addActionListener(gureAE -> this.hizkuntzaAldatu(hiz));
-			if(pHizkunta.equals(hiz.toLowerCase()))
+			if(h.equals(hiz.toLowerCase()))
 				hizkBat[i].setBackground(new Color(175, 255, 175));
 			hizkuntza.add(hizkBat[i]);
 			i++;

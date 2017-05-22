@@ -68,7 +68,7 @@ public class PantailaUI extends JPanel implements ActionListener {
 		JButton nora2 = new JButton((Irudiak.getIrudiak().norabideaLortu()));
 		JButton atzera = new JButton(h.getProperty("atzera"));
 
-		tituluaJ.setToolTipText("Txanda pasatu");
+		tituluaJ.setToolTipText(h.getProperty("TxandaPasatu"));
 		tituluaJ.setName("Txanda pasatu");
 		nora2.setName("Norabidea");
 		atzera.setName("Atzera");

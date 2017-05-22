@@ -1,5 +1,6 @@
 package interfazeGrafikoa;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,7 +39,7 @@ public class TableroaUI extends JPanel implements ActionListener {
 	private void tableroaHasieratu() {
 		for(int i=0; i<mapa.length; i++){
 			for(int j=0; j<mapa[0].length; j++){
-				tableroa[i][j] = new JButton(Irudiak.getIrudiak().imaginaLortu("ezezaguna.png"));
+				tableroa[i][j] = new JButton();
 				tableroa[i][j].setBorderPainted(false);
 				tableroa[i][j].setName(i + "-" + j);
 				tableroa[i][j].addActionListener(this);
@@ -49,18 +50,18 @@ public class TableroaUI extends JPanel implements ActionListener {
 	}
 	
 	private void tableroaEguneratu(){
-		String aux="ezezaguna.png";
+		Color c= Color.lightGray;
 		for(int i=0; i<mapa.length; i++){
 			for(int j=0; j<mapa[1].length; j++){
-				if(mapa[i][j].equals("Itsasontzi")) aux="ontzia.png";
-				else if(mapa[i][j].equals("Ura")) aux="ura.png";
-				else if(mapa[i][j].equals("Ezezaguna"))aux="ezezaguna.png";
-				else if(mapa[i][j].equals("Suntzituta"))aux="ondoratuta.png";
-				else if(mapa[i][j].equals("Ukituta"))aux="red.png";
-				else if(mapa[i][j].equals("Ezkutua"))aux="ezkutua.png";
+				if(mapa[i][j].equals("Itsasontzi")) c= Color.GRAY;
+				else if(mapa[i][j].equals("Ura")) c= Color.CYAN;
+				else if(mapa[i][j].equals("Ezezaguna"))c= Color.LIGHT_GRAY;
+				else if(mapa[i][j].equals("Suntzituta"))c= Color.BLACK;
+				else if(mapa[i][j].equals("Ukituta"))c= Color.RED;
+				else if(mapa[i][j].equals("Ezkutua"))c= Color.GREEN;
 				
-				tableroa[i][j].setBorderPainted(false);
-				tableroa[i][j].setIcon((Irudiak.getIrudiak().imaginaLortu(aux)));
+				tableroa[i][j].setBorderPainted(true);
+				tableroa[i][j].setBackground(c);
 				this.add(tableroa[i][j]);
 			}
 		}
