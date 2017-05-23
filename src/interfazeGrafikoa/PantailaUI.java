@@ -94,7 +94,7 @@ public class PantailaUI extends JPanel implements ActionListener {
 		dendaP.add(denda);
 		
 		inbentarioaP = new JPanel();
-		inbentarioa = new InbentarioaUI(jokalaria,egoera[0], hizk);
+		inbentarioa = new InbentarioaUI(jokalaria, hizk);
 		inbentarioaP.add(inbentarioa);
 		
 		if(egoera[0]!=0){

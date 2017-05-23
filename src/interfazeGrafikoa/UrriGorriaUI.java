@@ -140,10 +140,11 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		System.out.println("PanelaAktualizatu");
 		if(partidaZehaztuDa){
 			
-			int[] egoera=Partida.getPartida().egoeraLortu();
+			int[] egoera=egoeraLortu();
 			if(!norenTxanda.equals(txandaLehen)){
 				panela.setVisible(false);
 				
+				objektuaAldatu("Ezer");
 				Object[] choices = {hizk.getProperty("aurrera")};
 				Object defaultChoice = choices;
 				JOptionPane.showOptionDialog(this,
@@ -171,6 +172,9 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		}
 	}
 
+	public int[] egoeraLortu() {
+		return Partida.getPartida().egoeraLortu();
+	}
 	public void berriroHasi() {
 		Partida.getPartida().partidaErreseteatu();
 	}

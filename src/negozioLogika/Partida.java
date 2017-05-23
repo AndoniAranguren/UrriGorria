@@ -60,9 +60,9 @@ public class Partida {
 			egoera[1]--;//txanda hurrengo jokalariarena
 		}
 		if(egoera[1]<0){
-				egoera[0]=2;
-				egoera[1]=jokalariLista.size()-1;
-				egoera[2]--;//turno oso bat pasatu da
+			egoera[0]=2;
+			egoera[1]=jokalariLista.size()-1;
+			egoera[2]--;//turno oso bat pasatu da
 		}
 		jarraitu=true;
 	}
@@ -88,9 +88,9 @@ public class Partida {
 				egoera[1]++;//txanda hurrengo jokalariarena
 			}
 			if(egoera[1]>=jokalariLista.size()){
-					egoera[0]=0;
-					egoera[1]=0;
-					egoera[2]++;//turno oso bat pasatu da
+				egoera[0]=0;
+				egoera[1]=0;
+				egoera[2]++;//turno oso bat pasatu da
 			}
 		}
 	}

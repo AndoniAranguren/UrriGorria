@@ -17,7 +17,7 @@ import interfazeGrafikoa.properties.Hizkuntza;
 public class PartidaZehaztuUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private final int jokalariMaximoak=100;
+	private final int jokalariMaximoak=50;
 	private ButtonGroup norekin, zailtasuna;
 	private JButton sartu;
 	private JPanel pNorekin, pZailtasuna,erdia,pAnitza;

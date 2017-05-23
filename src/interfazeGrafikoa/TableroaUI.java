@@ -62,6 +62,7 @@ public class TableroaUI extends JPanel implements ActionListener {
 				
 				tableroa[i][j].setBorderPainted(true);
 				tableroa[i][j].setBackground(c);
+				tableroa[i][j].setToolTipText(h.getProperty(mapa[i][j]));
 				this.add(tableroa[i][j]);
 			}
 		}
@@ -93,7 +94,6 @@ public class TableroaUI extends JPanel implements ActionListener {
 			info[2]=(""+y);
 			info[3]=(""+norabidea);
 			UrriGorriaUI.getUrriGorriaUI().objektuaErabili(jokalaria,info);
-			UrriGorriaUI.getUrriGorriaUI().objektuaAldatu("Ezer");
 			tableroaEguneratu();
 			UrriGorriaUI.getUrriGorriaUI().panelaAktualizatu();
 		}
