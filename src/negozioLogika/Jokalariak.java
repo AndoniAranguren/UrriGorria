@@ -122,7 +122,7 @@ public class Jokalariak {
 		return inb.objektuakNahikoakDitu(pObjektuak);
 	}
 	public void jokalariariErasotu(String pNork, Objektuak pObjektua, int pX, int pY,char pNorabide, boolean pZer) {
-		mapa=pObjektua.aktibatu(pNork,mapa, pX, pY, pNorabide, pZer);
+		mapa.aktibatu(pNork,pObjektua, pX, pY, pNorabide, pZer);
 		bizirik=mapa.itsasontziBizirik();
 		if(!bizirik) Partida.getPartida().addTurnoanHilDirenak(izena);
 	}

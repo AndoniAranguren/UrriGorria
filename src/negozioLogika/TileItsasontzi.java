@@ -2,28 +2,28 @@ package negozioLogika;
 
 import java.util.ArrayList;
 
-public class ItsasontziTile extends Tile {
+public class TileItsasontzi extends Tile {
 	
 	private final int bizitzaMax=100;
 	private int bizitza;
 	private ArrayList<Integer> bizitzaLehen;
-	private boolean suntsituta,ezkutua;
+	private Itsasontzia itsasontzia;
 	
-	public ItsasontziTile(String pJabea, int pX, int pY) {
+	public TileItsasontzi(String pJabea, Itsasontzia pItsasontzia, int pX, int pY) {
 		super(pJabea,pX, pY);
+		itsasontzia=pItsasontzia;
 		bizitzaLehen=new ArrayList<Integer>();
 		bizitza=bizitzaMax;
 		bizitzaLehen.add(bizitza);
-		suntsituta=false;
-		ezkutua=false;
 		super.kokatzekoGaitasunaEman(false);
 		super.identifikadorea="Itsasontzi";
 	}
 	
-	protected int bizitzaKendu(int pIndarra, boolean pZer){
+	protected void bizitzaKendu(int pIndarra, boolean pZer){
+		int emaitza=itsasontzia.jo(this, pIndarra, pZer);
 		if(pZer){
 			bizitzaLehen.add(0,bizitza);
-			bizitza-=pIndarra;
+			bizitza-=emaitza;
 		}else{
 			if(bizitzaLehen.size()<=0)bizitza=bizitzaMax;
 			else{
@@ -32,16 +32,15 @@ public class ItsasontziTile extends Tile {
 			}
 		}
 		if (bizitzaOsoaDu())bizitza=bizitzaMax;
-		suntsituta=!getBizirik();
-		return bizitza;
+		itsasontzia.konprobazioak(pZer);
 	}
 
 	protected String identifikadorea(){
-		if(suntsituta){
+		if(getSuntsituta()){
 			return "Suntzituta";
 		}else if(!getBizirik()){
 			return "Ukituta";
-		}else if(ezkutua){
+		}else if(getEzkutua()){
 			return "Ezkutua";
 		}else
 			return identifikadorea;
@@ -56,18 +55,18 @@ public class ItsasontziTile extends Tile {
 	public boolean getBizirik(){
 		return bizitza>0;
 	}
-	public void setSuntsituta(boolean pZer) {
-		suntsituta=pZer;	
-	}
 	public boolean getSuntsituta() {
-		return suntsituta;
-	}
-
-	public void setEzkutua(boolean pZer) {
-		ezkutua=pZer;		
+		return itsasontzia.getSuntzituta();
 	}
 	public boolean getEzkutua() {
-		return ezkutua;
+		return itsasontzia.getEzkutua();
+	}
+	public void erabiliEkipo(String pMota, boolean pZer) {
+		if(pMota.equals("Ezkutua")){
+			itsasontzia.setEzkutua(pZer);
+		}else if(pMota.equals("Konponketa")){
+			itsasontzia.setKonponketa(pZer);
+		}
 	}
 
 	public void setKonponketa(boolean pZer) {

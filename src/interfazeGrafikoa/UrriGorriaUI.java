@@ -35,11 +35,13 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	private int monitoreaH=(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 	private static int leihoaW, leihoaH;
 	private MenuBarra menubar;
-	private String hizkuntza = "euskera";
+	private String hizkuntza;
+	private final static String defektuzkoHizkuntza="english";
 	private boolean partidaZehaztuDa;
 	
-	private UrriGorriaUI() {
+	private UrriGorriaUI(String pHizkuntza) {
 		this.setTitle(IZENBURUA);
+		hizkuntza=pHizkuntza;
 		oraingoa=new JPanel();
 		partidaZehaztuDa=false;
 		menubar=new MenuBarra();
@@ -51,10 +53,10 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	public void urriGorriaUIErreseteatu(){
 		setVisible(false);
 		dispose();
-		ui=new UrriGorriaUI();
+		ui=new UrriGorriaUI(hizkuntza);
 	}
 	public static UrriGorriaUI getUrriGorriaUI() {
-		return ui == null ? (ui = new UrriGorriaUI()) : ui;
+		return ui == null ? (ui = new UrriGorriaUI(defektuzkoHizkuntza)) : ui;
 	}
 	
 	
@@ -119,14 +121,12 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 	        	amaituta.add(new javax.swing.JLabel(hizk.getIzena(irabazlea)+" "+hizk.getProperty("irabazi")));
 	        	JButton berriro= new JButton(hizk.getProperty("Berriro"));
 	        	berriro.setName("Berriro hasi");
-	        	berriro.addActionListener(e->Partida.getPartida().partidaErreseteatu());
+	        	berriro.addActionListener(e->berriroHasi());
 	        	amaituta.add(berriro);
 	        	leihoaW=300;
 	    		leihoaH=100;
 	    		panela=amaituta;
-	        }
-			this.setMinimumSize(new Dimension(leihoaW,leihoaH));
-			
+	        }			
 		}
 		else{//Jokalariak aukeratu behar dira
 			panela=new PartidaZehaztuUI(hizkuntza);
@@ -135,14 +135,16 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 			leihoaH=220;
 		}
 		panelaAldatu(panela);
+		
 		setBounds((monitoreaW-leihoaW)/2, (monitoreaH-leihoaH)/2, leihoaW, leihoaH);
 		System.out.println("PanelaAktualizatu");
 		if(partidaZehaztuDa){
 			
-			int[] egoera=Partida.getPartida().egoeraLortu();
+			int[] egoera=egoeraLortu();
 			if(!norenTxanda.equals(txandaLehen)){
 				panela.setVisible(false);
 				
+				objektuaAldatu("Ezer");
 				Object[] choices = {hizk.getProperty("aurrera")};
 				Object defaultChoice = choices;
 				JOptionPane.showOptionDialog(this,
@@ -170,6 +172,12 @@ public class UrriGorriaUI extends JFrame implements UGKonstanteak {
 		}
 	}
 
+	public int[] egoeraLortu() {
+		return Partida.getPartida().egoeraLortu();
+	}
+	public void berriroHasi() {
+		Partida.getPartida().partidaErreseteatu();
+	}
 	public void komandoaAtzera() {
 		komandoaAtzera(1);
 	}

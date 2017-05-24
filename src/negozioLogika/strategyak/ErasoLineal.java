@@ -5,7 +5,7 @@ import negozioLogika.Mapa;
 public class ErasoLineal implements StrategyArmak{
 	public ErasoLineal(){
 	}
-	public Mapa eraso(String pNork,Mapa pMapa, int pX, int pY, char pNorabide, int pIndarra, boolean pZer){
+	public void eraso(String pNork,Mapa pMapa, int pX, int pY, char pNorabide, int pIndarra, boolean pZer){
 		int ind=0;
 		ErasoSinple er=new ErasoSinple();
 		if(pNorabide=='N'||pNorabide=='S'){
@@ -20,7 +20,6 @@ public class ErasoLineal implements StrategyArmak{
 				ind++;
 			}
 		}
-		return pMapa;
 	}
 
 }

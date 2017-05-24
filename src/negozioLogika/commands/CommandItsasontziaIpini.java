@@ -33,7 +33,7 @@ public class CommandItsasontziaIpini extends Commands {
 		super.komandoaGorde(pZer);
 	}
 	protected boolean konprobatu(){
-		return (Partida.kokatuDaiteke(nori, koordX, koordY, norabidea, ((Itsasontzia) ontzia.get(0)).luzeera())
+		return (Partida.kokatuDaiteke(nori, koordX, koordY, norabidea, ((Itsasontzia) ontzia.get(0)).getLuzeera())
 				&& Partida.jokalariakObjektuakNahikoakDitu(jokalaria, ontzia)
 				&& nori.equals(jokalaria));
 	}

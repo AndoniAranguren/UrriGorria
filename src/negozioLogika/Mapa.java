@@ -23,7 +23,7 @@ public class Mapa {
 	private void urezBete(Tile[][] pMap) {
 		for (int Y = 0; Y < zut; Y++) {
 			for (int X = 0; X < erren; X++) {
-				pMap[Y][X] = new UraTile(jabea, X, Y);
+				pMap[Y][X] = new Tile(jabea, X, Y);
 			}
 		}
 	}
@@ -75,21 +75,24 @@ public class Mapa {
 	private Itsasontzia tilakJarri(String pJabea, Itsasontzia pItsasontzia, int pX, int pY, char pNorabidea,
 			boolean pZer) {
 
-		ItsasontziTile tile;
+		TileItsasontzi tile;
 		int koordX = pX, koordY = pY;
 		if (pZer)
 			pItsasontzia = (Itsasontzia) ObjektuakFactory.getObjektuakFactory().createObjektua(pItsasontzia.getIzena());
+		else
+			pItsasontzia.tileGehitu(null, pZer);
 		pItsasontzia.setJabea(pJabea);
 
 		for (int i = 0; i < pItsasontzia.luzeera; i++) {
 			if (pZer) {
-				tile = new ItsasontziTile(pJabea, koordX, koordY);
+				tile = new TileItsasontzi(pJabea, pItsasontzia,koordX, koordY);
 				jokalariMapa[koordX][koordY] = tile;
+				pItsasontzia.tileGehitu(tile, pZer);
 			} else {
-				tile = ((ItsasontziTile) jokalariMapa[koordX][koordY]);
-				jokalariMapa[koordX][koordY] = new UraTile(pJabea, koordX, koordY);
+				tile = ((TileItsasontzi) jokalariMapa[koordX][koordY]);
+				jokalariMapa[koordX][koordY] = new Tile(pJabea, koordX, koordY);
 			}
-
+			
 			if (koordX - 1 >= 0)
 				jokalariMapa[koordX - 1][koordY].kokatzekoGaitasunaEman(!pZer);
 			if (koordX + 1 < zut)
@@ -108,9 +111,6 @@ public class Mapa {
 			} else if (pNorabidea == 'S') {
 				koordX++;
 			}
-
-			pItsasontzia.tileGehitu(tile, pZer);
-
 		}
 		return pItsasontzia;
 	}
@@ -120,26 +120,7 @@ public class Mapa {
 	}
 
 	public void erasoSinpleaJaso(String pNork, int pX, int pY, int pIndarra, boolean pZer) {
-		int i=0;
-		boolean bilatzen=true;
-		Itsasontzia its=null;
-		Iterator<Itsasontzia> it= nireItsasontziak.iterator();
-		if(pX>=0&&pX<getErrenkada()&&pY>=0&&pY<getZutabe()){
-			while(it.hasNext()&&bilatzen){	//Itsasontzia bilatu
-				its = it.next();
-				if(its.posizioanDago(pX, pY)){
-					bilatzen=false;
-					//Aurkitu bada, erasotu
-					ArrayList<Tile> tileList=its.jo(pNork, pIndarra, pX, pY,pZer);
-					for(Tile tile:tileList){
-						jokalariMapa[tile.getX()][tile.getY()]=tile;//mapa aktualizatu
-					}
-					//itsasontzia berriro gorde
-					nireItsasontziak.set(i,its);
-				}else i++;
-			}
-			if(bilatzen)	jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
-		}
+		jokalariMapa[pX][pY].jo(pNork, pIndarra, pZer);
 	}
 
 	public String[][] mapaInterpretatu(String pNork) {
@@ -155,24 +136,8 @@ public class Mapa {
 	
 //=======================================================================================================================
 //Erabili ekipoa=========================================================================================================
-	public Mapa erabiliEkipo(String pMota,int pX, int pY, boolean pZer) {
-		boolean bilatzen =true;
-		Itsasontzia its=null;
-		Iterator<Itsasontzia> it= nireItsasontziak.iterator();
-		while(it.hasNext()&&bilatzen){
-			its = it.next();
-			if(its.posizioanDago(pX, pY)){	
-				bilatzen =false;
-				if(pMota.equals("Ezkutua")){
-					for(ItsasontziTile tile:its.setEzkutua(pZer)){
-						jokalariMapa[tile.getX()][tile.getY()]=tile;}
-				}else if(pMota.equals("Konponketa")){
-					for(ItsasontziTile tile:its.setKonponketa(pZer)){
-						jokalariMapa[tile.getX()][tile.getY()]=tile;}
-				}
-			}
-		}
-		return this;
+	public void erabiliEkipo(String pMota,int pX, int pY, boolean pZer) {
+		jokalariMapa[pX][pY].erabiliEkipo(pMota, pZer);
 	}
 		
 	public int[] erabiliRadarra(String pNork, int pX, int pY, int pRadio, boolean pZer) {
@@ -236,5 +201,7 @@ public class Mapa {
 		return nireItsasontziak;
 	}
 
-
+	public void aktibatu(String pNork, Objektuak pObjektua, int pX, int pY, char pNorabide, boolean pZer) {
+		pObjektua.aktibatu(pNork, this, pX, pY, pNorabide, pZer);
+	}
 }

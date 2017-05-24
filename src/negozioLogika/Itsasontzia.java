@@ -3,17 +3,16 @@ package negozioLogika;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import negozioLogika.ItsasontziTile;
+import negozioLogika.TileItsasontzi;
 
 public class Itsasontzia extends Objektuak {
-	protected final int luzeera,premioa;
+	protected final int luzeera,premioa,ezkutuMax=200;
 	private int ezkutua;
 	private ArrayList<Integer> ezkutuLehen;
-	private final int ezkutuMax=200;
 	
 	private String jabea=null;
 	private boolean suntsituta;
-	private ArrayList<ItsasontziTile> tileLista;
+	private ArrayList<TileItsasontzi> tileLista;
 	public Itsasontzia(String pMota, int pKop, int pLuzeera, int pPremioa){
 		super(pMota, pKop,0);
 		ezkutuLehen=new ArrayList<Integer>();
@@ -21,21 +20,25 @@ public class Itsasontzia extends Objektuak {
 		ezkutuLehen.add(ezkutua);
 		luzeera = pLuzeera;
 		premioa = pPremioa;
-		tileLista= new ArrayList<ItsasontziTile>();
+		tileLista= new ArrayList<TileItsasontzi>();
 	}
-	public void tileGehitu(ItsasontziTile pTile, boolean pZer) {
+	public void tileGehitu(TileItsasontzi pTile, boolean pZer) {
 		if(pZer){
 			tileLista.add(pTile);}
 		else{
-			tileLista.remove(pTile);}
+			if(pTile==null){
+				tileLista.clear();
+			}else
+				tileLista.remove(pTile);
+		}
 	}
 	public boolean equals(Itsasontzia pOntzi) {
 		return (pOntzi.izenBerdina(izena) && pOntzi.tileBerdinakDira(tileLista));
 	}
-	private boolean tileBerdinakDira(ArrayList<ItsasontziTile> pTileLista){
+	private boolean tileBerdinakDira(ArrayList<TileItsasontzi> pTileLista){
 		boolean ezberdinak=true;
-		Iterator<ItsasontziTile> it;
-		for(ItsasontziTile tile: pTileLista){
+		Iterator<TileItsasontzi> it;
+		for(TileItsasontzi tile: pTileLista){
 			it=tileLista.iterator();
 			while(it.hasNext()&&ezberdinak){
 				ezberdinak= it.next().equals(tile);}
@@ -43,10 +46,8 @@ public class Itsasontzia extends Objektuak {
 		}
 		return ezberdinak;
 	}
-	public int luzeera() {
-		return luzeera;
-	}
-	public ArrayList<ItsasontziTile> setEzkutua(boolean pZer){
+
+	public ArrayList<TileItsasontzi> setEzkutua(boolean pZer){
 		if(pZer){
 			ezkutuLehen.add(0,ezkutua);
 			ezkutua=ezkutuMax;
@@ -55,63 +56,18 @@ public class Itsasontzia extends Objektuak {
 			ezkutua=ezkutuLehen.get(0);
 			ezkutuLehen.remove(0);
 		}
-		for(int i=0; i<tileLista.size();i++) 
-			tileLista.get(i).setEzkutua(pZer);
 		return tileLista;
 	}
-	public ArrayList<ItsasontziTile> setKonponketa(boolean pZer) {
+	public ArrayList<TileItsasontzi> setKonponketa(boolean pZer) {
 		for(int i=0; i<tileLista.size();i++) 
 			tileLista.get(i).setKonponketa(pZer);
-		konprobazioak();
+		konprobazioak(pZer);
 		return tileLista;
 	}
 	public boolean itsasontziaDa(){
 		return true;
 	}
-	public int getLuzeera(){
-		return this.luzeera;
-	}
-	public ArrayList<Tile> jo(String pNork,int pIndarra,int pX,int pY, boolean pZer) {
-		int i=0;
-		boolean bilatzen=true;
-		ItsasontziTile itsTile=null;
-		Iterator<ItsasontziTile> it= tileLista.iterator();
-		ArrayList<Tile>tile=new ArrayList<Tile>();
-		
-		while(it.hasNext()&&bilatzen){//tile-a bilatu
-			itsTile = it.next();
-			if(!itsTile.posizioanDago(pX, pY))i++;
-			
-			else{//aurkitu da
-				bilatzen=false;
-				itsTile=tileBatiErasotu(pNork,itsTile,pIndarra,pZer);
-				tileLista.set(i,itsTile);			
-			}
-		}
-		Partida.jokalariariDiruaEman(pNork, konprobazioak(),pZer);
-		return tile;
-	}
-	public int konprobazioak() {
-		int bizirik=0;
-		boolean lehenSuntsituta=suntsituta;
-		
-		for(ItsasontziTile tile : tileLista)
-			if(tile.getBizirik())bizirik++;
-		
-		suntsituta=!(bizirik>0);	
-		
-		ArrayList<ItsasontziTile> listaT=new ArrayList<ItsasontziTile>();
-		for(int i=0; i<tileLista.size();i++) {
-			ItsasontziTile tile = tileLista.get(i);
-			tile.setEzkutua(ezkutua>0);
-			tile.setSuntsituta(suntsituta);
-			listaT.add(i,tile);
-		}
-		tileLista=listaT;
-			
-		return (lehenSuntsituta!=suntsituta? premioa:0);
-	}
-	private ItsasontziTile tileBatiErasotu(String pNork,ItsasontziTile pT,int pIndarra, boolean pZer) {
+	public int jo(TileItsasontzi pT,int pIndarra,boolean pZer) { //Tiletatik jasoko da
 		if(pZer){
 			if(ezkutua>0){
 				ezkutua-=pIndarra;
@@ -123,33 +79,58 @@ public class Itsasontzia extends Objektuak {
 				pIndarra=0;
 			}
 		}
-		pT.jo(pNork, pIndarra, pZer);
 		if (ezkutuOsoaDu())ezkutua=ezkutuMax;
-		return pT;
+		
+		return pIndarra;
+	}
+	public void konprobazioak(boolean pZer) {
+		int bizirik=0;
+		boolean lehenSuntsituta=suntsituta;
+		
+		for(TileItsasontzi tile : tileLista)
+			if(tile.getBizirik())bizirik++;
+		
+		suntsituta=!(bizirik>0);	
+		
+		ArrayList<TileItsasontzi> listaT=new ArrayList<TileItsasontzi>();
+		for(int i=0; i<tileLista.size();i++) {
+			TileItsasontzi tile = tileLista.get(i);
+			listaT.add(i,tile);
+		}
+		tileLista=listaT;
+		
+		if(suntsituta){
+			Partida.jokalariariDiruaEman(Partida.getPartida().norenTxandaDaIzena(), lehenSuntsituta!=suntsituta? premioa:0,pZer);
+		}
 	}
 	public boolean ezkutuOsoaDu() {
 		return ezkutua>=ezkutuMax;
 	}
 	public boolean posizioanDago(int pX,int pY) {
 		boolean hauDa=false;
-		for(ItsasontziTile its : tileLista){
+		for(TileItsasontzi its : tileLista){
 			if(its.posizioanDago(pX, pY))
 				hauDa=true;
 		}
 		return hauDa;
 	}
 	@Override
-	public Mapa aktibatu(String pNork, Mapa pMapa, int pX, int pY, char pNorabide, boolean pZer){
-		return pMapa;
+	public void aktibatu(String pNork, Mapa pMapa, int pX, int pY, char pNorabide, boolean pZer){
 	}
 	public boolean getSuntzituta() {
 		return suntsituta;
+	}
+	public boolean getEzkutua() {
+		return ezkutua>0;
 	}
 	public String getJabea() {
 		return jabea;
 	}
 	public void setJabea(String jabea) {
 		this.jabea = jabea;
+	}	
+	public int getLuzeera() {
+		return luzeera;
 	}
 	public int[] getKoordenatuak() {
 		int[] koord=new int[2];
@@ -159,8 +140,9 @@ public class Itsasontzia extends Objektuak {
 	}
 	public boolean getBizitzaOsoarekin() {
 		int suntsituta=0;
-		for(ItsasontziTile tile : tileLista)
+		for(TileItsasontzi tile : tileLista)
 			if(!tile.bizitzaOsoaDu())suntsituta++;
 		return suntsituta==0;
 	}
+	
 }

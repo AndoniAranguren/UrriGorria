@@ -15,7 +15,7 @@ public abstract class Objektuak {
 	public boolean izenBerdina (String pIzena){
 		return izena.equals(pIzena);
 	}
-	public abstract Mapa aktibatu(String pNork, Mapa pMapa, int pX, int pY,char pNorabide,boolean pZer);
+	public abstract void aktibatu(String pNork, Mapa pMapa, int pX, int pY,char pNorabide,boolean pZer);
 	public void erabili(String pNori, int pX, int pY,char pNorabide) {
 		if(kopurua>0) new CommandObjektuaErabili(pNori, this, pX, pY, pNorabide);
 	}
@@ -42,9 +42,6 @@ public abstract class Objektuak {
 	}
 	public boolean itsasontziaDa() {
 		return false;
-	}
-	public int getLuzeera() {
-		return 0;
 	}
 	public boolean isArma(){
 		return false;

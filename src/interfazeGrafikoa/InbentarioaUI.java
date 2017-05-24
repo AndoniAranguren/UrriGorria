@@ -21,15 +21,15 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 	private JScrollPane  scroll;
 	private JPanel inbentarioa;
 	private ArrayList<String> inb = new ArrayList<>();
-	private int fasea;
+	private int[] egoera;
 	private Hizkuntza h;
 	private boolean itsasontziGuztiakIpinita;
 
 
-	public InbentarioaUI(String pIzena, int pFasea, String hizkuntza) {
+	public InbentarioaUI(String pIzena, String hizkuntza) {
 		h = new Hizkuntza(hizkuntza);
 		jokalaria=pIzena;
-		fasea=pFasea;
+		egoera=UrriGorriaUI.getUrriGorriaUI().egoeraLortu();
 		inb = UrriGorriaUI.getUrriGorriaUI().inbentarioaEman(jokalaria);
 		this.setLayout(new BorderLayout());
 		inbentarioa=new JPanel();
@@ -50,14 +50,17 @@ public class InbentarioaUI extends JPanel implements ActionListener {
 			inbButton[i].setName(izena.split(":")[1]);
 			inbButton[i].setText(h.getProperty(izena.split(":")[1]) + ":"+izena.split(":")[2]);
 			inbButton[i].addActionListener(this);
-			if(Integer.parseInt(izena.split(":")[0])!=fasea||Integer.parseInt(izena.split(": ")[1])<1){
+			if(Integer.parseInt(izena.split(":")[0])!=egoera[0]||Integer.parseInt(izena.split(": ")[1])<1){
 				inbButton[i].setEnabled(false);
 			}else if((UrriGorriaUI.getUrriGorriaUI().getObjektua().equals(inb.get(i).split(":")[1]))){
 				inbButton[i].setBackground(new Color(175, 255, 175));
 			}
 			if(itsasontziGuztiakIpinita&&Integer.parseInt(izena.split(":")[0])==0)//itsasontzia izatea
 				itsasontziGuztiakIpinita=Integer.parseInt(izena.split(": ")[1])<=0;//kop 0 izatea
-			inbentarioa.add(inbButton[i]);
+			if(egoera[2]==0 &&Integer.parseInt(izena.split(":")[0])==0)
+				inbentarioa.add(inbButton[i]);
+			else if(egoera[2]!=0 &&Integer.parseInt(izena.split(":")[0])!=0)
+				inbentarioa.add(inbButton[i]);
 		}
 		scroll=new JScrollPane(inbentarioa);
 	}

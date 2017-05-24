@@ -25,7 +25,7 @@ public class OntziakKokatuUI extends JPanel implements ActionListener{
 		jok_tableroa = new TableroaUI(pJokalaria, hizkuntza);
 		this.add(jok_tableroa, BorderLayout.CENTER);
 		top= new JPanel();
-		inb = new InbentarioaUI(pJokalaria,0, hizkuntza);
+		inb = new InbentarioaUI(pJokalaria, hizkuntza);
 		
 		this.add(inb, BorderLayout.WEST);
 		this.add(top,BorderLayout.PAGE_START);

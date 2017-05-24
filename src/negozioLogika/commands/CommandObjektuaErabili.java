@@ -39,7 +39,8 @@ public class CommandObjektuaErabili extends Commands {
 	}
 	
 	protected boolean konprobatu(){
-		return (Partida.jokalariakObjektuakNahikoakDitu(jokalaria, objektuak) && Partida.jokalariaBizirikDago(nori));
+		return (Partida.jokalariakObjektuakNahikoakDitu(jokalaria, objektuak) && Partida.jokalariaBizirikDago(nori)
+				&&fasea==objektuak.get(0).getFasea());
 	}
 	public String info(){
 		String info=super.info();

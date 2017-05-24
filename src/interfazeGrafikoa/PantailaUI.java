@@ -68,7 +68,7 @@ public class PantailaUI extends JPanel implements ActionListener {
 		JButton nora2 = new JButton((Irudiak.getIrudiak().norabideaLortu()));
 		JButton atzera = new JButton(h.getProperty("atzera"));
 
-		tituluaJ.setToolTipText("Txanda pasatu");
+		tituluaJ.setToolTipText(h.getProperty("TxandaPasatu"));
 		tituluaJ.setName("Txanda pasatu");
 		nora2.setName("Norabidea");
 		atzera.setName("Atzera");
@@ -94,7 +94,7 @@ public class PantailaUI extends JPanel implements ActionListener {
 		dendaP.add(denda);
 		
 		inbentarioaP = new JPanel();
-		inbentarioa = new InbentarioaUI(jokalaria,egoera[0], hizk);
+		inbentarioa = new InbentarioaUI(jokalaria, hizk);
 		inbentarioaP.add(inbentarioa);
 		
 		if(egoera[0]!=0){
