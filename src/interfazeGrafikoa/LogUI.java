@@ -47,16 +47,26 @@ public class LogUI extends JPanel{
 			String[] komInfo=loga.get(i).split("#")[1].split("'");
 			String komIzena=h.getProperty(komInfo[0]);
 			
+
+
+				
+			
 			if(!komInfo[0].equals("CommandItsasontziaIpini")){
 				java.awt.Color c=UrriGorriaUI.getUrriGorriaUI().getKolorea(info[1]);
-				String obj=(!komInfo[1].equals("Ezer")?
-						" ("+h.getProperty(komInfo[1])+")" :" ");
+				String obj=komInfo[1];
+				if(obj.contains("x")){
+						System.out.println("badakuka" +obj);
+						obj=(h.getProperty(obj.split("x")[0]).concat("x"+obj.split("x")[1]));
+				}else
+					obj=h.getProperty(obj);
+				obj=(!komInfo[1].equals("Ezer")?" ("+obj+")" :" ");
 				
 				BattleLoga[i] = new JButton();
 				BattleLoga[i].setBackground(c);
 				BattleLoga[i].setForeground(UrriGorriaUI.getUrriGorriaUI().getKolorKontraste(c));
 				BattleLoga[i].setName(komandoKop+"");
 				BattleLoga[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+				
 				BattleLoga[i].setText("<html>("+info[0]+") "+izena+"<br>"+komIzena+obj +"</html>");
 				BattleLoga[i].addActionListener(e->
 					UrriGorriaUI.getUrriGorriaUI().komandoaAtzera(komandoKop-Integer.parseInt((

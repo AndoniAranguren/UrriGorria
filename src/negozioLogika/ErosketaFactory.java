@@ -17,22 +17,22 @@ public class ErosketaFactory {
 		if(pMota.equals("Bomba")){ 
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba"); 
 			lista.add(o);
-			prezioa=10;
-		}
-		else if(pMota.equals("Bombax10")){
-			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Bomba",10);
-			lista.add(o);
-			prezioa=60;
+			prezioa=0;
 		}
 		else if(pMota.equals("Misil")){
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil"); 
 			lista.add(o);
-			prezioa=40;
+			prezioa=20;
 		}
 		else if(pMota.equals("Misilx5")){
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",5);
 			lista.add(o);
-			prezioa=150;
+			prezioa=80;
+		}
+		else if(pMota.equals("Misilx10")){
+			o = ObjektuakFactory.getObjektuakFactory().createObjektua("Misil",10);
+			lista.add(o);
+			prezioa=120;
 		}
 		else if (pMota.equals("MisilZuzendua")){
 			o = ObjektuakFactory.getObjektuakFactory().createObjektua("MisilZuzendua"); 

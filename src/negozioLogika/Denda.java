@@ -14,9 +14,9 @@ public class Denda {
 		listaErosketak.clear();
 		ErosketaFactory eros=ErosketaFactory.getErosketaFactory();
 		listaErosketak.add(eros.createErosketa("Bomba"));
-		listaErosketak.add(eros.createErosketa("Bombax10"));
 		listaErosketak.add(eros.createErosketa("Misil"));
 		listaErosketak.add(eros.createErosketa("Misilx5"));
+		listaErosketak.add(eros.createErosketa("Misilx10"));
 		listaErosketak.add(eros.createErosketa("MisilZuzendua"));
 		listaErosketak.add(eros.createErosketa("MisilZuz.Pro"));
 		listaErosketak.add(eros.createErosketa("Radarra"));
