@@ -7,7 +7,7 @@ import negozioLogika.commands.Commands;
 public class Battlelog {
 	//Atributuak
 	private static Battlelog neureBurua;
-	ArrayList<Commands> komandoZerrenda= new ArrayList<Commands>(); //GERO DATU BASERA MUGITU
+	private ArrayList<Commands> komandoZerrenda= new ArrayList<Commands>(); //GERO DATU BASERA MUGITU
 	
 	//Eraikitzailea
 	public Battlelog(){
