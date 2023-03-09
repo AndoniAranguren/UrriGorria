@@ -8,4 +8,4 @@ Game loop is:
 5. Check you are the last player standing
 6. Go back to step 2 
 
-![Screenshot of a game against multiple machines](/screenshot.png?raw=true "Screenshot of a game against multiple machines")
+![Screenshot of a game against multiple machines](https://github.com/AndoniAranguren/UrriGorria/blob/master/Screenshot.png?raw=true "Screenshot of a game against multiple machines")
